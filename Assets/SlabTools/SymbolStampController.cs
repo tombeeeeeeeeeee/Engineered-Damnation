@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SymbolStampController : MonoBehaviour
 {
+    public int CircleIndex = 0;
     public int SymbolIndex = 0;
+
     public bool FlippedSymbol;
 
+    [SerializeField] Material[] Circles;
     [SerializeField] Material[] Symbols;
-
 
     // Start is called before the first frame update
     void Start()
@@ -22,14 +24,25 @@ public class SymbolStampController : MonoBehaviour
         
     }
 
-    public void SendSymbol()
+    public void PressStamp()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit, 1))
         {
             SlabManager slab = hit.collider.gameObject.GetComponent<SlabManager>();
-            if ( slab != null)
-                slab.ChangeSymbol(Symbols[SymbolIndex], FlippedSymbol, (uint)SymbolIndex);
+            if ( slab != null )
+            {
+                //Check if there is a symbol stencil
+                if(SymbolIndex != 0)
+                    slab.ChangeSymbol(Symbols[SymbolIndex], FlippedSymbol, (uint)SymbolIndex);
+
+                //Check if there is a circle stencil
+                if (CircleIndex != 0)
+                    slab.ChangeCircle(Circles[CircleIndex], (uint)CircleIndex);
+
+                //Give a faint imprint of the press onto the slab
+                slab.ChangeBlood(new Color(0,0,0,50), 0);
+            }
         }
     }
 }
