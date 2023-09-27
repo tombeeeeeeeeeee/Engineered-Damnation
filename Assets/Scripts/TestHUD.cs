@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TestHUD : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class TestHUD : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             dataManager.money++;
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            SceneManager.LoadScene("PersistenceTest2");
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            SceneManager.LoadScene("PersistenceTest");
         }
     }
 }

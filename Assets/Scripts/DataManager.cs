@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
-    // this gameobject should be added to the first scene that is loaded
-    // and shouldn't be created again at any point after
+    // this gameobject is automatically instantiated by the Initialise GameObject,
+    // which should be added to the first scene of the game.
 
     public static DataManager dataManager;
     public int money;
