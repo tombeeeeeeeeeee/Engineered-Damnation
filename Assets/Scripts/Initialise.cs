@@ -8,6 +8,7 @@ public class Initialise : MonoBehaviour
     void Awake()
     {
         // creates a DataManager if one doesn't already exists
+        // this Initialise object should be put in the first scene (main menu probably)
         if (DataManager.dataManager == null)
         {
             Instantiate(dataManagerPrefab);
