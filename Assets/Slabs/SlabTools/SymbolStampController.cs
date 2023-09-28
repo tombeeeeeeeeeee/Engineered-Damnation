@@ -8,10 +8,10 @@ public class SymbolStampController : MonoBehaviour
     public int SymbolIndex = 0;
 
     public bool FlippedSymbol;
+    [SerializeField] float pressingY;
 
     [SerializeField] Material[] Circles;
     [SerializeField] Material[] Symbols;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,19 +21,22 @@ public class SymbolStampController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (pressingY == transform.position.y)
+            PressStamp();
     }
+
 
     public void PressStamp()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 1))
+        if (Physics.BoxCastAll(transform.position, new Vector3(1, 1.5f, 1), -transform.up, out hit))
         {
+            foreach
             SlabManager slab = hit.collider.gameObject.GetComponent<SlabManager>();
-            if ( slab != null )
+            if (slab != null)
             {
                 //Check if there is a symbol stencil
-                if(SymbolIndex != 0)
+                if (SymbolIndex != 0)
                     slab.ChangeSymbol(Symbols[SymbolIndex], FlippedSymbol, (uint)SymbolIndex);
 
                 //Check if there is a circle stencil
@@ -41,7 +44,7 @@ public class SymbolStampController : MonoBehaviour
                     slab.ChangeCircle(Circles[CircleIndex], (uint)CircleIndex);
 
                 //Give a faint imprint of the press onto the slab
-                slab.ChangeBlood(new Color(0,0,0,50), 0);
+                slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
             }
         }
     }

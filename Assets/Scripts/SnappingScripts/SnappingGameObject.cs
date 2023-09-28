@@ -6,11 +6,11 @@ public class SnappingGameObject : MonoBehaviour
 {
     public bool checkForPlayerGrab;
 
-    [SerializeField] GameObject ExpectedObject;
+    [SerializeField] protected GameObject ExpectedObject;
     public NewPickup pickupScript;
 
 
-    public void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == ExpectedObject)
         {
