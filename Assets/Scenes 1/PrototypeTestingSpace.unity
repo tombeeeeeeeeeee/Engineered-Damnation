@@ -2881,6 +2881,10 @@ PrefabInstance:
       value: SymbolStamp
       objectReference: {fileID: 0}
     - target: {fileID: 7711757698852137948, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
+      propertyPath: pressingY
+      value: 2.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 7711757698852137948, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
       propertyPath: Circles.Array.size
       value: 5
       objectReference: {fileID: 0}

@@ -28,24 +28,30 @@ public class SymbolStampController : MonoBehaviour
 
     public void PressStamp()
     {
-        RaycastHit hit;
-        if (Physics.BoxCastAll(transform.position, new Vector3(1, 1.5f, 1), -transform.up, out hit))
+        SlabManager slab = null;
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 1.5f, 1), -transform.up);
+        Debug.Log(hits.Length);
+        foreach(RaycastHit hit in hits)
         {
-            foreach
-            SlabManager slab = hit.collider.gameObject.GetComponent<SlabManager>();
-            if (slab != null)
+            if (hit.collider.gameObject.GetComponent<SlabManager>())
             {
-                //Check if there is a symbol stencil
-                if (SymbolIndex != 0)
-                    slab.ChangeSymbol(Symbols[SymbolIndex], FlippedSymbol, (uint)SymbolIndex);
-
-                //Check if there is a circle stencil
-                if (CircleIndex != 0)
-                    slab.ChangeCircle(Circles[CircleIndex], (uint)CircleIndex);
-
-                //Give a faint imprint of the press onto the slab
-                slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
+                slab = hit.collider.gameObject.GetComponent<SlabManager>();
+                Debug.Log("SLABBIN");
             }
+        }
+
+        if (slab != null)
+        {
+            //Check if there is a symbol stencil
+            if (SymbolIndex != 0)
+                slab.ChangeSymbol(Symbols[SymbolIndex], FlippedSymbol, (uint)SymbolIndex);
+
+            //Check if there is a circle stencil
+            if (CircleIndex != 0)
+                slab.ChangeCircle(Circles[CircleIndex], (uint)CircleIndex);
+
+            //Give a faint imprint of the press onto the slab
+            slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
         }
     }
 }
