@@ -12,7 +12,7 @@ public class SnappingGameObject : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == ExpectedObject)
+        if (other != null && other.gameObject == ExpectedObject)
         {
             if (checkForPlayerGrab && pickupScript.heldObj == other.gameObject) 
                 pickupScript.DropObject();

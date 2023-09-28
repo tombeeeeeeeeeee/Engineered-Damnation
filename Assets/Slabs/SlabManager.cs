@@ -10,9 +10,10 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeBlood(Color color, uint BloodKey)
     {
-        Material[] SlabArt = GetComponentsInChildren<Material>();
-        foreach (Material art in SlabArt)
-            art.color = color;
+        MeshRenderer[] SlabArt = GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer art in SlabArt)
+            if(art != GetComponent<MeshRenderer>())
+                art.material.color = color;
         DemonKeyUpdate(1, BloodKey);
     }
     public void ChangeStoneMaterial(Material mat, uint StoneKey)
@@ -30,13 +31,12 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeSymbol(Material mat, bool Flipped, uint SymbolKey)
     {
-        GameObject[] SlabArt = GetComponentsInChildren<GameObject>();
-        foreach (GameObject art in SlabArt)
+        foreach (Transform art in transform)
         {
             if(art.name.ToLower() == "inner symbol")
             {
                 art.GetComponent<MeshRenderer>().material = mat;
-                art.transform.localRotation = Quaternion.AngleAxis(180 * (Flipped ? 1 : 0), transform.up);
+                art.transform.localRotation = Quaternion.AngleAxis((Flipped ? 180 : 0), transform.up);
             }
         }
         DemonKeyUpdate(1000, SymbolKey);
@@ -45,8 +45,7 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeCircle(Material mat, uint CircleKey)
     {
-        GameObject[] SlabArt = GetComponentsInChildren<GameObject>();
-        foreach (GameObject art in SlabArt)
+        foreach (Transform art in transform)
         {
             if (art.name.ToLower() == "outer circle")
             {
@@ -72,8 +71,7 @@ public class SlabManager : MonoBehaviour
     public void CleanSlate()
     {
         DemonKey = 0;
-        GameObject[] SlabArt = GetComponentsInChildren<GameObject>();
-        foreach (GameObject art in SlabArt)
+        foreach (Transform art in transform)
         {
             art.GetComponent<MeshRenderer>().material = null;
         }

@@ -1454,6 +1454,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4774ca34b1ffe97449055ce6ea4326e0, type: 2}
+    - target: {fileID: 8544272821846041347, guid: f88e262ad896afe41a39fedf5c417a9d, type: 3}
+      propertyPath: DemonKey
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f88e262ad896afe41a39fedf5c417a9d, type: 3}
 --- !u!1 &643199476
@@ -2932,6 +2936,10 @@ PrefabInstance:
       propertyPath: Symbols.Array.data[4]
       value: 
       objectReference: {fileID: 2100000, guid: 8a6d196d835575844a7af93f85c29c3c, type: 2}
+    - target: {fileID: 9128462124114201792, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
 --- !u!43 &1444744094
@@ -5334,7 +5342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cfuStatus: PSXEffects v1.18 - update available (click to update).
   sections: 01010100
-  customRes: {x: 367, y: 173}
+  customRes: {x: 367, y: 158}
   resolutionFactor: 3
   limitFramerate: 60
   skipFrames: 0
