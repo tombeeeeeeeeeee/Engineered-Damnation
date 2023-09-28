@@ -19701,6 +19701,7 @@ MonoBehaviour:
   moveForce: 250
   holdParent: {fileID: 5613208715132057282}
   heldObj: {fileID: 0}
+  rotateSpeed: 2
 --- !u!1 &5613208715904944296
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,10 @@ public class NewPickup : MonoBehaviour
     public Transform holdParent;        // The transform where the held object will be attached.
     public GameObject heldObj;          // The currently held object.
 
+    public float rotateSpeed = 2.0f;
+    float rotationX = 0;
+    float rotationY = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -53,6 +57,16 @@ public class NewPickup : MonoBehaviour
             // Apply force to move the held object towards the holdParent.
             heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
         }
+
+        // Object rotation with the mouse while R is down
+        if (Input.GetKey(KeyCode.R))
+        {
+            rotationX = Input.GetAxis("Mouse X") * rotateSpeed;
+            rotationY = Input.GetAxis("Mouse Y") * rotateSpeed;
+
+            heldObj.transform.Rotate(transform.up, -rotationX, Space.Self);
+            heldObj.transform.Rotate(Vector3.right, -rotationY, Space.Self);
+        }
     }
 
     void PickupObject(GameObject pickObj)
@@ -63,11 +77,13 @@ public class NewPickup : MonoBehaviour
             // Disable gravity, increase drag, and freeze rotation to simulate holding.
             objRig.useGravity = false;
             objRig.drag = 10;
+            objRig.angularVelocity = Vector3.zero;
             objRig.freezeRotation = true;
 
             // Set the holdParent as the parent of the picked object.
             objRig.transform.parent = holdParent;
             heldObj = pickObj;
+
         }
     }
 
