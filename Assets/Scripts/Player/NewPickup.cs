@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class NewPickup : MonoBehaviour
 {
@@ -64,8 +65,8 @@ public class NewPickup : MonoBehaviour
             rotationX = Input.GetAxis("Mouse X") * rotateSpeed;
             rotationY = Input.GetAxis("Mouse Y") * rotateSpeed;
 
-            heldObj.transform.Rotate(transform.up, -rotationX, Space.Self);
-            heldObj.transform.Rotate(Vector3.right, -rotationY, Space.Self);
+            heldObj.transform.Rotate(transform.up, -rotationX, Space.World);
+            heldObj.transform.Rotate(transform.right, rotationY, Space.World);
         }
     }
 
