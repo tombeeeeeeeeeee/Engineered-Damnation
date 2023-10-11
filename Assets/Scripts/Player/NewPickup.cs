@@ -10,6 +10,7 @@ public class NewPickup : MonoBehaviour
     public float moveForce = 250;       // The force applied to a held object to move it.
     public Transform holdParent;        // The transform where the held object will be attached.
     public GameObject heldObj;          // The currently held object.
+    public GameObject bookUI;
 
     public float rotateSpeed = 2.0f;
     float rotationX = 0;
@@ -23,17 +24,18 @@ public class NewPickup : MonoBehaviour
         Debug.DrawRay(transform.position, forward, Color.red);
 
         // Check for the "E" key press to pick up or drop an object.
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0) /*Input.GetKeyDown(KeyCode.E)*/)
         {
             if (heldObj == null)
             {
                 RaycastHit hit;
-                // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
-                if ((Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange)) && hit.transform.gameObject.tag == "CanPickUp")
-                {
-                    // If an object is hit, pick it up.
+                Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange);
+
+                // If an object is hit, pick it up.
+                if (hit.transform.gameObject.tag == "CanPickUp")
                     PickupObject(hit.transform.gameObject);
-                }
+                else if (hit.transform.gameObject.tag == "DemonBook")
+                    InteractObject(hit.transform.gameObject);
             }
             else
             {
@@ -99,5 +101,13 @@ public class NewPickup : MonoBehaviour
         // Remove the holdParent as the parent of the held object.
         heldObj.transform.parent = null;
         heldObj = null;
+    }
+
+    public void InteractObject(GameObject pickObj)
+    {
+        if (!bookUI.activeInHierarchy)
+        {
+            bookUI.SetActive(true);
+        }
     }
 }
