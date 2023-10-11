@@ -11,19 +11,13 @@ public class SlabManager : MonoBehaviour
     public void ChangeBlood(Color color, uint BloodKey)
     {
         MeshRenderer[] SlabArt = GetComponentsInChildren<MeshRenderer>();
-<<<<<<< Updated upstream
-        foreach (MeshRenderer art in SlabArt)
-            if(art != GetComponent<MeshRenderer>())
-                art.material.color = color;
-        DemonKeyUpdate(1, BloodKey);
-=======
         if(getOuterCirlce() != 0 || getSymbol() != 0)
         {
             foreach (MeshRenderer art in SlabArt)
                 art.material.color = color;
             DemonKeyUpdate(1, BloodKey);
         }
->>>>>>> Stashed changes
+
     }
     public void ChangeStoneMaterial(Material mat, uint StoneKey)
     {

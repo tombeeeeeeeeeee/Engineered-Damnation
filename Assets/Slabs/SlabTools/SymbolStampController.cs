@@ -30,10 +30,6 @@ public class SymbolStampController : MonoBehaviour
     {
         SlabManager slab = null;
         RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 1.5f, 1), -transform.up);
-<<<<<<< Updated upstream
-        
-=======
->>>>>>> Stashed changes
         foreach(RaycastHit hit in hits)
         {
             if (hit.collider.gameObject.GetComponent<SlabManager>())
