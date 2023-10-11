@@ -23,12 +23,21 @@ public class NewPickup : MonoBehaviour
             if (heldObj == null)
             {
                 RaycastHit hit;
+                
+                Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange);
                 // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
-                if ((Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange)) && hit.transform.gameObject.tag == "CanPickUp")
-                {
-                    // If an object is hit, pick it up.
+                if (hit.transform.gameObject.tag == "CanPickUp")
                     PickupObject(hit.transform.gameObject);
+
+                else if (hit.transform.gameObject.tag == "ToolSpawner")
+                {
+                    GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
+                    PickupObject(tool);
                 }
+
+                else if (hit.transform.gameObject.tag == "Button")
+                    hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
+
             }
             else
             {

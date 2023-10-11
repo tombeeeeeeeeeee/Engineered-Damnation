@@ -585,9 +585,11 @@ GameObject:
   - component: {fileID: 195032571}
   - component: {fileID: 195032570}
   - component: {fileID: 195032569}
+  - component: {fileID: 195032572}
+  - component: {fileID: 195032573}
   m_Layer: 0
   m_Name: Player (1)
-  m_TagString: Player
+  m_TagString: ToolSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -630,14 +632,45 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195032568}
   m_LocalRotation: {x: -0, y: 0.9934146, z: -0, w: 0.11457518}
-  m_LocalPosition: {x: -3.1646717, y: 1.25, z: 4.2601657}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3.4, y: 1.25, z: 5.26}
+  m_LocalScale: {x: 1, y: 1.1154, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 999569867}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 166.84201, z: 0}
+--- !u!114 &195032572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195032568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f374e9d416ca742b4d1d004ab20b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolCollection:
+  - {fileID: 6468550003431677498, guid: 9278529c3220c164cb29167a93e772a8, type: 3}
+  - {fileID: 6468550003431677498, guid: 5db7f6eedb3dbd94fb39c03c062129de, type: 3}
+  - {fileID: 6468550003431677498, guid: e1e92f652c2a86e40b396c9d859069c3, type: 3}
+  spawnLocation: {fileID: 0}
+--- !u!136 &195032573
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195032568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &219543929
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,7 +898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkForPlayerGrab: 1
-  ExpectedObject: {fileID: 0}
+  ExpectedObject: {fileID: 1879094932}
   pickupScript: {fileID: 5613208715904944272}
 --- !u!65 &349362414
 BoxCollider:
@@ -1603,7 +1636,7 @@ GameObject:
   m_Component:
   - component: {fileID: 686394170}
   m_Layer: 0
-  m_Name: SnapToPosTest
+  m_Name: BigCubeSnap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2139,7 +2172,7 @@ GameObject:
   - component: {fileID: 999569868}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: ToolSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2883,6 +2916,14 @@ PrefabInstance:
     - target: {fileID: 3130941078838268530, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
       propertyPath: m_Name
       value: SymbolStamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3869642669908160755, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
+      propertyPath: checkForPlayerGrab
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609190666646806200, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
+      propertyPath: checkForPlayerGrab
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7711757698852137948, guid: d642f28ef46c6bc498ae45dd8482fafb, type: 3}
       propertyPath: pressingY
@@ -4296,7 +4337,7 @@ GameObject:
   - component: {fileID: 1879094934}
   - component: {fileID: 1879094933}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: BigCube
   m_TagString: CanPickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5117,8 +5158,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5613208715132057283}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 2.504}
+  m_LocalScale: {x: 1, y: 1, z: 1.197}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5613208715904944303}
@@ -5240,6 +5281,7 @@ MonoBehaviour:
   moveForce: 250
   holdParent: {fileID: 5613208715132057282}
   heldObj: {fileID: 0}
+  rotateSpeed: 2
 --- !u!1 &5613208715904944296
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,10 +11,19 @@ public class SlabManager : MonoBehaviour
     public void ChangeBlood(Color color, uint BloodKey)
     {
         MeshRenderer[] SlabArt = GetComponentsInChildren<MeshRenderer>();
+<<<<<<< Updated upstream
         foreach (MeshRenderer art in SlabArt)
             if(art != GetComponent<MeshRenderer>())
                 art.material.color = color;
         DemonKeyUpdate(1, BloodKey);
+=======
+        if(getOuterCirlce() != 0 || getSymbol() != 0)
+        {
+            foreach (MeshRenderer art in SlabArt)
+                art.material.color = color;
+            DemonKeyUpdate(1, BloodKey);
+        }
+>>>>>>> Stashed changes
     }
     public void ChangeStoneMaterial(Material mat, uint StoneKey)
     {
@@ -25,7 +34,7 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeCandleToggle(bool Candle)
     {
-        transform.Find("Candle").gameObject.SetActive(Candle);
+        transform.Find("Candles").gameObject.SetActive(Candle);
         DemonKeyUpdate(100, (uint)(Candle?1:0));
     }
 
@@ -77,4 +86,15 @@ public class SlabManager : MonoBehaviour
         }
 
     }
+
+    public int getAdjective() { return (int)DemonKey / 10000; }
+    public int getType() { return ((int)DemonKey / 100) % 100; } 
+    public int getLocation() { return (int)DemonKey % 100; }
+
+    public int getOuterCirlce() { return (int)DemonKey / 100000; }
+    public int getFlippedSymbol() { return ((int)DemonKey / 10000) % 10; }
+    public int getSymbol() { return ((int)DemonKey / 1000) % 10; }
+    public int getCandles() { return ((int)DemonKey / 100) % 10; }
+    public int getMaterial() { return ((int)DemonKey / 10) % 10; }
+    public int getBlood() { return ((int)DemonKey / 1) % 10; }
 }
