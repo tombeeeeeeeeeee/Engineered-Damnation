@@ -34,8 +34,10 @@ public class NewPickup : MonoBehaviour
                 // If an object is hit, pick it up.
                 if (hit.transform.gameObject.tag == "CanPickUp")
                     PickupObject(hit.transform.gameObject);
+                // If the object is the book, open it
+                // (a GameObject with the "DemonBook" tag will open the book UI)
                 else if (hit.transform.gameObject.tag == "DemonBook")
-                    InteractObject(hit.transform.gameObject);
+                    OpenBook(hit.transform.gameObject);
             }
             else
             {
@@ -103,8 +105,11 @@ public class NewPickup : MonoBehaviour
         heldObj = null;
     }
 
-    public void InteractObject(GameObject pickObj)
+    public void OpenBook(GameObject pickObj)
     {
+        // the GameObject with tag "DemonBook" is passed in
+        // but currently isn't used for anything
+
         if (!bookUI.activeInHierarchy)
         {
             bookUI.SetActive(true);

@@ -19,14 +19,14 @@ public class DemonBookUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             pageNumber++;
-            if (pageNumber >= pages.Count) pageNumber = 0;
+            if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
             page.sprite = pages[pageNumber];
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             pageNumber--;
-            if (pageNumber < 0) pageNumber = pages.Count - 1;
+            if (pageNumber < 0) pageNumber = 0;
             page.sprite = pages[pageNumber];
         }
     }
