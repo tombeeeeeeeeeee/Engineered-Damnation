@@ -29,15 +29,11 @@ public class SymbolStampController : MonoBehaviour
     public void PressStamp()
     {
         SlabManager slab = null;
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 1.5f, 1), -transform.up);
-        Debug.Log(hits.Length);
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 0.5f, 1), -transform.up);
         foreach(RaycastHit hit in hits)
         {
             if (hit.collider.gameObject.GetComponent<SlabManager>())
-            {
                 slab = hit.collider.gameObject.GetComponent<SlabManager>();
-                Debug.Log("SLABBIN");
-            }
         }
 
         if (slab != null)
@@ -46,12 +42,14 @@ public class SymbolStampController : MonoBehaviour
             if (SymbolIndex != 0)
                 slab.ChangeSymbol(Symbols[SymbolIndex], FlippedSymbol, (uint)SymbolIndex);
 
+
             //Check if there is a circle stencil
             if (CircleIndex != 0)
                 slab.ChangeCircle(Circles[CircleIndex], (uint)CircleIndex);
 
             //Give a faint imprint of the press onto the slab
-            slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
+            //if(SymbolIndex != 0 || CircleIndex != 0)
+                slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
         }
     }
 }

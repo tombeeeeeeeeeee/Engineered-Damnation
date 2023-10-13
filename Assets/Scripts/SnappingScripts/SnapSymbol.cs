@@ -13,4 +13,11 @@ public class SnapSymbol : SnappingGameObject
         if(GetComponentInParent<SymbolStampController>())
             GetComponentInParent<SymbolStampController>().SymbolIndex = other.GetComponent<SymbolStencil>().SymbolIndex;
     }
+
+    public override void Update()
+    {
+        base.Update();
+        if (!snapped)
+            GetComponentInParent<SymbolStampController>().SymbolIndex = 0;
+    }
 }

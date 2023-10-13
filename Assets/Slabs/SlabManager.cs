@@ -10,10 +10,17 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeBlood(Color color, uint BloodKey)
     {
-        Material[] SlabArt = GetComponentsInChildren<Material>();
-        foreach (Material art in SlabArt)
-            art.color = color;
-        DemonKeyUpdate(1, BloodKey);
+        MeshRenderer[] SlabArt = GetComponentsInChildren<MeshRenderer>();
+        if(getOuterCirlce() != 0 || getSymbol() != 0)
+        {
+            foreach (MeshRenderer art in SlabArt)
+            {
+                if (art.transform.name.ToLower().Contains("symbol"))
+                    art.material.color = color;
+            }
+            DemonKeyUpdate(1, BloodKey);
+        }
+
     }
     public void ChangeStoneMaterial(Material mat, uint StoneKey)
     {
@@ -24,19 +31,18 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeCandleToggle(bool Candle)
     {
-        transform.Find("Candle").gameObject.SetActive(Candle);
+        transform.Find("Candles").gameObject.SetActive(Candle);
         DemonKeyUpdate(100, (uint)(Candle?1:0));
     }
 
     public void ChangeSymbol(Material mat, bool Flipped, uint SymbolKey)
     {
-        GameObject[] SlabArt = GetComponentsInChildren<GameObject>();
-        foreach (GameObject art in SlabArt)
+        foreach (Transform art in transform)
         {
             if(art.name.ToLower() == "inner symbol")
             {
                 art.GetComponent<MeshRenderer>().material = mat;
-                art.transform.localRotation = Quaternion.AngleAxis(180 * (Flipped ? 1 : 0), transform.up);
+                art.transform.localRotation = Quaternion.AngleAxis((Flipped ? 180 : 0), transform.up);
             }
         }
         DemonKeyUpdate(1000, SymbolKey);
@@ -45,10 +51,9 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeCircle(Material mat, uint CircleKey)
     {
-        GameObject[] SlabArt = GetComponentsInChildren<GameObject>();
-        foreach (GameObject art in SlabArt)
+        foreach (Transform art in transform)
         {
-            if (art.name.ToLower() == "outer circle")
+            if (art.name.ToLower() == "outer symbol")
             {
                 art.GetComponent<MeshRenderer>().material = mat;
             }
@@ -72,11 +77,21 @@ public class SlabManager : MonoBehaviour
     public void CleanSlate()
     {
         DemonKey = 0;
-        GameObject[] SlabArt = GetComponentsInChildren<GameObject>();
-        foreach (GameObject art in SlabArt)
+        foreach (Transform art in transform)
         {
             art.GetComponent<MeshRenderer>().material = null;
         }
 
     }
+
+    public int getAdjective() { return (int)DemonKey / 10000; }
+    public int getType() { return ((int)DemonKey / 100) % 100; } 
+    public int getLocation() { return (int)DemonKey % 100; }
+
+    public int getOuterCirlce() { return (int)DemonKey / 100000; }
+    public int getFlippedSymbol() { return ((int)DemonKey / 10000) % 10; }
+    public int getSymbol() { return ((int)DemonKey / 1000) % 10; }
+    public int getCandles() { return ((int)DemonKey / 100) % 10; }
+    public int getMaterial() { return ((int)DemonKey / 10) % 10; }
+    public int getBlood() { return ((int)DemonKey / 1) % 10; }
 }

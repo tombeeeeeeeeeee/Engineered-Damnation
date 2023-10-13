@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 8621142371304100906}
   - component: {fileID: 1361376007243549705}
   m_Layer: 0
-  m_Name: Outer Circle
+  m_Name: Outer Symbol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

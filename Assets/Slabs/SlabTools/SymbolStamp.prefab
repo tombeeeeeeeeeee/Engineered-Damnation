@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4024790009442118684}
   - component: {fileID: 419659855954651855}
   - component: {fileID: 70079054220595912}
-  - component: {fileID: 6859128179348746439}
+  - component: {fileID: 2436308101941898469}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6859128179348746439
+--- !u!65 &2436308101941898469
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,7 +96,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.0000019073486, z: 0}
 --- !u!1 &195797549004355991
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 1305520385212251070}
   - component: {fileID: 2804457072004427444}
   - component: {fileID: 5711743160792573177}
-  - component: {fileID: 9128462124114201792}
   - component: {fileID: 7711757698852137948}
   m_Layer: 0
   m_Name: SymbolStamp
@@ -319,19 +318,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9128462124114201792
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3130941078838268530}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.1, z: 1}
-  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!114 &7711757698852137948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +333,7 @@ MonoBehaviour:
   CircleIndex: 0
   SymbolIndex: 0
   FlippedSymbol: 0
+  pressingY: 0
   Circles: []
   Symbols: []
 --- !u!1 &4489840631625015864
@@ -653,7 +640,7 @@ GameObject:
   - component: {fileID: 5774953378292446603}
   - component: {fileID: 4745489087726241253}
   - component: {fileID: 3869642669908160755}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Symbol Stencil Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -668,7 +655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6476831888268345218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.574, z: 0.006}
+  m_LocalPosition: {x: 0, y: 1.574, z: -0.202}
   m_LocalScale: {x: 0.46653795, y: 0.3731285, z: 0.68415534}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -849,7 +836,7 @@ GameObject:
   - component: {fileID: 3168131556226599645}
   - component: {fileID: 6804019396959206899}
   - component: {fileID: 7609190666646806200}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Circle Stencil Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8575985008089903177}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.972, z: 0.006}
+  m_LocalPosition: {x: 0, y: 0.972, z: -0.138}
   m_LocalScale: {x: 0.46653795, y: 0.3731285, z: 0.68415534}
   m_ConstrainProportionsScale: 0
   m_Children: []
