@@ -15,6 +15,7 @@ public class NewPickup : MonoBehaviour
     private Vector3 moveVelocity = Vector3.zero;    // The force applied to a held object to move it.
 
 
+
     [SerializeReference] FPSController controller;
 
     private void Start()
@@ -80,12 +81,14 @@ public class NewPickup : MonoBehaviour
             // Disable gravity, increase drag, and freeze rotation to simulate holding.
             objRig.useGravity = false;
             objRig.drag = 10;
+            objRig.angularVelocity = Vector3.zero;
             objRig.freezeRotation = true;
 
             // Set the holdParent as the parent of the picked object.
             objRig.transform.position = holdParent.position;
             objRig.transform.parent = holdParent;
             heldObj = pickObj;
+
         }
     }
 
