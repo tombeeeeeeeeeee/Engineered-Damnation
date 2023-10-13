@@ -14,7 +14,10 @@ public class SlabManager : MonoBehaviour
         if(getOuterCirlce() != 0 || getSymbol() != 0)
         {
             foreach (MeshRenderer art in SlabArt)
-                art.material.color = color;
+            {
+                if (art.transform.name.ToLower().Contains("symbol"))
+                    art.material.color = color;
+            }
             DemonKeyUpdate(1, BloodKey);
         }
 
@@ -50,7 +53,7 @@ public class SlabManager : MonoBehaviour
     {
         foreach (Transform art in transform)
         {
-            if (art.name.ToLower() == "outer circle")
+            if (art.name.ToLower() == "outer symbol")
             {
                 art.GetComponent<MeshRenderer>().material = mat;
             }

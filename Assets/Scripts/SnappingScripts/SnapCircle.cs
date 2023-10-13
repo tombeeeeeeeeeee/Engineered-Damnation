@@ -13,4 +13,10 @@ public class SnapCircle:SnappingGameObject
         if (GetComponentInParent<SymbolStampController>())
             GetComponentInParent<SymbolStampController>().CircleIndex = other.GetComponent<CircleStencil>().CircleIndex;
     }
+    public override void Update()
+    {
+        base.Update();
+        if (!snapped)
+            GetComponentInParent<SymbolStampController>().CircleIndex = 0;
+    }
 }  

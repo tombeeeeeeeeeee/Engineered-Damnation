@@ -29,7 +29,7 @@ public class SymbolStampController : MonoBehaviour
     public void PressStamp()
     {
         SlabManager slab = null;
-        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 1.5f, 1), -transform.up);
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 0.5f, 1), -transform.up);
         foreach(RaycastHit hit in hits)
         {
             if (hit.collider.gameObject.GetComponent<SlabManager>())
