@@ -1,73 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NewPickup : MonoBehaviour
 {
     [Header("Game Settings")]
     public float pickUpRange = 5;       // The range within which objects can be picked up.
-    public float moveForce = 250;       // The force applied to a held object to move it.
+    public float smoothTime = 0.1f;     // the time it takes for the object to move
     public Transform holdParent;        // The transform where the held object will be attached.
     public GameObject heldObj;          // The currently held object.
-
     public float rotateSpeed = 2.0f;
-    float rotationX = 0;
-    float rotationY = 0;
+    private Vector2 rotation = Vector2.zero;
+    private Vector3 moveVelocity = Vector3.zero;    // The force applied to a held object to move it.
 
-    // Update is called once per frame
-    void Update()
+
+
+    [SerializeReference] FPSController controller;
+
+    private void Start()
+    {
+        controller.controls.Player.Interact.performed += NewPickUp;
+    }
+
+
+    void NewPickUp(InputAction.CallbackContext context)
     {
         // Debug Raycast to visualize the pickup range.
         Vector3 forward = transform.TransformDirection(Vector3.forward) * pickUpRange;
-        Debug.DrawRay(transform.position, forward, Color.red);
 
         // Check for the "E" key press to pick up or drop an object.
-        if (Input.GetKeyDown(KeyCode.E))
+        if (heldObj == null)
         {
-            if (heldObj == null)
-            {
-                RaycastHit hit;
-                // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
-                if ((Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpRange)) && hit.transform.gameObject.tag == "CanPickUp")
-                {
-                    // If an object is hit, pick it up.
-                    PickupObject(hit.transform.gameObject);
-                }
-            }
-            else
-            {
-                // If an object is already held, drop it.
-                DropObject();
-            }
-        }
+            RaycastHit hit;
+            
+            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange);
+            // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
+            if (hit.transform.gameObject.tag == "CanPickUp")
+                PickupObject(hit.transform.gameObject);
 
-        if (heldObj != null)
-        {
-            // If an object is held, move it.
-            MoveObject();
+            else if (hit.transform.gameObject.tag == "ToolSpawner")
+            {
+                GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
+                PickupObject(tool);
+            }
+
+            else if (hit.transform.gameObject.tag == "Button")
+                hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
+
         }
+        else
+        {
+            // If an object is already held, drop it.
+            DropObject();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (heldObj)
+            MoveObject();
+        controller.rotationLocked = controller.controls.Player.Rotate.IsPressed();
+
+        if(controller.rotationLocked)
+            RotateObject();
     }
 
     void MoveObject()
     {
-        // Calculate the distance between the held object and the holdParent.
-        if (Vector3.Distance(heldObj.transform.position, holdParent.position) > 0.1f)
-        {
-            Vector3 moveDirection = (holdParent.position - heldObj.transform.position);
-            // Apply force to move the held object towards the holdParent.
-            heldObj.GetComponent<Rigidbody>().AddForce(moveDirection * moveForce);
-        }
-
-        // Object rotation with the mouse while R is down
-        if (Input.GetKey(KeyCode.R))
-        {
-            rotationX = Input.GetAxis("Mouse X") * rotateSpeed;
-            rotationY = Input.GetAxis("Mouse Y") * rotateSpeed;
-
-            heldObj.transform.Rotate(transform.up, -rotationX, Space.Self);
-            heldObj.transform.Rotate(Vector3.right, -rotationY, Space.Self);
-        }
+        // Apply force to move the held object towards the holdParent.
+        heldObj.transform.position = Vector3.SmoothDamp(heldObj.transform.position, holdParent.position, ref moveVelocity, smoothTime);
     }
+
 
     void PickupObject(GameObject pickObj)
     {
@@ -81,6 +85,7 @@ public class NewPickup : MonoBehaviour
             objRig.freezeRotation = true;
 
             // Set the holdParent as the parent of the picked object.
+            objRig.transform.position = holdParent.position;
             objRig.transform.parent = holdParent;
             heldObj = pickObj;
 
@@ -98,5 +103,16 @@ public class NewPickup : MonoBehaviour
         // Remove the holdParent as the parent of the held object.
         heldObj.transform.parent = null;
         heldObj = null;
+    }
+
+    public void RotateObject()
+    {
+        if(heldObj != null)
+        {
+            rotation = controller.controls.Player.Camera.ReadValue<Vector2>() * rotateSpeed * Time.deltaTime;
+
+            heldObj.transform.Rotate(transform.up, -rotation.x, Space.World);
+            heldObj.transform.Rotate(transform.right, rotation.y, Space.World);
+        }
     }
 }
