@@ -65,6 +65,7 @@ public class NewPickup : MonoBehaviour
     {
         if (heldObj)
             MoveObject();
+
         controller.rotationLocked = controller.controls.Player.Rotate.IsPressed();
 
         if(controller.rotationLocked)
