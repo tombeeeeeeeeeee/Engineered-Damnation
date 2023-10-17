@@ -8,20 +8,20 @@ public class SymbolStampController : MonoBehaviour
     public int SymbolIndex = 0;
 
     public bool FlippedSymbol;
-    [SerializeField] float pressingY;
-
+    [SerializeField] float pressingY = 0;
+    private float startingY;
     [SerializeField] Material[] Circles;
     [SerializeField] Material[] Symbols;
     // Start is called before the first frame update
     void Start()
     {
-        
+        startingY = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pressingY == transform.position.y)
+        if (pressingY + startingY == transform.position.y)
             PressStamp();
     }
 

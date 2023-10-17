@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CharacterController))]
 
 public class FPSController : MonoBehaviour
 {
@@ -20,26 +20,27 @@ public class FPSController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
     public Controls controls;
-    private Rigidbody rb;
+    private CharacterController cc;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CharacterController>();
 
         playerCamera.fieldOfView = CameraDefaultFOV;
-
-        controls = new Controls();
-        controls.Enable();
+        if (controls == null)
+            controls = new Controls();
         controls.Player.Zoom.performed += CameraZoom;
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        controls.Enable();
     }
 
     void FixedUpdate()
     {
-        moveDirection = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
-        rb.velocity = (transform.forward * moveDirection.y + transform.right * moveDirection.x);
+        Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
+        moveDirection = transform.forward * moveInput.y +  transform.right * moveInput.x;
+        cc.Move(moveDirection);
 
         Vector2 mouseDelta = rotationLocked ? Vector2.zero : controls.Player.Camera.ReadValue<Vector2>() * lookSpeed * Time.deltaTime;
 

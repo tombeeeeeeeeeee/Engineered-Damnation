@@ -23,36 +23,39 @@ public class NewPickup : MonoBehaviour
 
     private void Start()
     {
+        if(controller.controls == null)
+            controller.controls = new Controls();
+
         controller.controls.Player.Interact.performed += NewPickUp;
     }
 
 
     void NewPickUp(InputAction.CallbackContext context)
     {
-        // Debug Raycast to visualize the pickup range.
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * pickUpRange;
 
-        // Check for the "E" key press to pick up or drop an object.
         if (heldObj == null)
         {
             RaycastHit hit;
             
             Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange);
             // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
-            if (hit.transform.gameObject.tag == "CanPickUp")
-                PickupObject(hit.transform.gameObject);
-
-            else if (hit.transform.gameObject.tag == "ToolSpawner")
+            if(hit.collider != null)
             {
-                GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
-                PickupObject(tool);
-            }
+                if (hit.transform.gameObject.tag == "CanPickUp")
+                    PickupObject(hit.transform.gameObject);
 
-            else if (hit.transform.gameObject.tag == "Button")
-                hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
+                else if (hit.transform.gameObject.tag == "ToolSpawner")
+                {
+                    GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
+                    PickupObject(tool);
+                }
 
-            else if (hit.transform.gameObject.tag == "DemonBook")
+                else if (hit.transform.gameObject.tag == "Button")
+                    hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
+
+                else if (hit.transform.gameObject.tag == "DemonBook")
                     OpenBook(hit.transform.gameObject);
+            }
         }
         else
         {
@@ -63,6 +66,8 @@ public class NewPickup : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
+
         if (heldObj)
             MoveObject();
 
