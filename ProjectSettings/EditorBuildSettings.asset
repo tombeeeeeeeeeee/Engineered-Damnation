@@ -11,4 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes 1/PersistenceTest.unity
     guid: f5737e542a1981141b99cb26ae1b4f64
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 8dd6def7cc14bad4581afbd4916b40db, type: 2}

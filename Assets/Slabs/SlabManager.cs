@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class SlabManager : MonoBehaviour
@@ -10,22 +11,27 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeBlood(Color color, uint BloodKey)
     {
+        Material[] materials = GetComponent<MeshRenderer>().materials;
+
         MeshRenderer[] SlabArt = GetComponentsInChildren<MeshRenderer>();
-        if(getOuterCirlce() != 0 || getSymbol() != 0)
-        {
-            foreach (MeshRenderer art in SlabArt)
-            {
-                if (art.transform.name.ToLower().Contains("symbol"))
-                    art.material.color = color;
-            }
+        if (getOuterCirlce() != 0)
+            materials[2].color = color;
+
+        if(getSymbol() != 0)
+            materials[1].color = color;
+
+        GetComponent<MeshRenderer>().materials = materials;
+
+        if (getOuterCirlce() != 0 || getSymbol() != 0)
             DemonKeyUpdate(1, BloodKey);
-        }
 
     }
     public void ChangeStoneMaterial(Material mat, uint StoneKey)
     {
         //Change with new material
-        GetComponent<MeshRenderer>().material = mat;
+        Material[] materials = GetComponent<MeshRenderer>().materials;
+        materials[0] = mat;
+        GetComponent<MeshRenderer>().materials = materials;
         DemonKeyUpdate(10, StoneKey);
     }
 
@@ -37,27 +43,19 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeSymbol(Material mat, bool Flipped, uint SymbolKey)
     {
-        foreach (Transform art in transform)
-        {
-            if(art.name.ToLower() == "inner symbol")
-            {
-                art.GetComponent<MeshRenderer>().material = mat;
-                art.transform.localRotation = Quaternion.AngleAxis((Flipped ? 180 : 0), transform.up);
-            }
-        }
+        Material[] materials = GetComponent<MeshRenderer>().materials;
+        materials[1] = mat;
+        GetComponent<MeshRenderer>().materials = materials;
+
         DemonKeyUpdate(1000, SymbolKey);
         DemonKeyUpdate(10000, (uint)(Flipped ? 1 : 0));
     }
 
     public void ChangeCircle(Material mat, uint CircleKey)
     {
-        foreach (Transform art in transform)
-        {
-            if (art.name.ToLower() == "outer symbol")
-            {
-                art.GetComponent<MeshRenderer>().material = mat;
-            }
-        }
+        Material[] materials = GetComponent<MeshRenderer>().materials;
+        materials[2] = mat;
+        GetComponent<MeshRenderer>().materials = materials;
         DemonKeyUpdate(100000, CircleKey);
     }
 
