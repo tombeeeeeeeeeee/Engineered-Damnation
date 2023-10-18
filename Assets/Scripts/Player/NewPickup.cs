@@ -8,14 +8,14 @@ using UnityEngine.InputSystem;
 public class NewPickup : MonoBehaviour
 {
     [Header("Game Settings")]
-    public float pickUpRange = 5;       // The range within which objects can be picked up.
-    public float smoothTime = 0.1f;     // the time it takes for the object to move
-    public Transform holdParent;        // The transform where the held object will be attached.
-    public GameObject heldObj;          // The currently held object.
-    public GameObject bookUI;
-    public float rotateSpeed = 2.0f;
+    public float pickUpRange = 5;                    // The range within which objects can be picked up.
+    public float smoothTime = 0.1f;                  // the time it takes for the object to move
+    public Transform holdParent;                     // The transform where the held object will be attached.
+    public GameObject heldObj;                       // The currently held object.
+    public GameObject bookUI;                        // The UI the gets enabled when interacting with the "DemonBook"
+    public float rotateSpeed = 2.0f;                 
     private Vector2 rotation = Vector2.zero;
-    private Vector3 moveVelocity = Vector3.zero;    // The force applied to a held object to move it.
+    private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
 
 
 
@@ -122,7 +122,10 @@ public class NewPickup : MonoBehaviour
         // but currently isn't used for anything
         if (!bookUI.activeInHierarchy)
         {
+            transform.parent.GetComponent<FPSController>().controls.Book.Enable();
+            transform.parent.GetComponent<FPSController>().controls.Player.Disable();
             bookUI.SetActive(true);
+            
         }
     }
 

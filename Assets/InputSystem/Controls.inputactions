@@ -251,6 +251,78 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Book",
+            "id": "a35f6c7c-22ad-458e-8074-12073dfb09ca",
+            "actions": [
+                {
+                    "name": "PageTurn",
+                    "type": "PassThrough",
+                    "id": "654a3bd1-308f-46e3-bbbb-48f2acab3b0b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "c4d9ef93-d78c-46c2-beef-f2e5d49a2683",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PageTurn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "7f6fbfc8-6269-4d97-8258-ea95a0a0ca66",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PageTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "083bac55-5bcf-4f9a-b1d2-84456122d181",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PageTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "a1112238-db3b-4e67-a223-be36fa301b1c",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PageTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "045b60d8-7e41-4538-9be2-4a1773019444",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PageTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
         }
     ],
     "controlSchemes": []

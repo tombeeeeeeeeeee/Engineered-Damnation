@@ -273,6 +273,78 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Book"",
+            ""id"": ""a35f6c7c-22ad-458e-8074-12073dfb09ca"",
+            ""actions"": [
+                {
+                    ""name"": ""PageTurn"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""654a3bd1-308f-46e3-bbbb-48f2acab3b0b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""c4d9ef93-d78c-46c2-beef-f2e5d49a2683"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PageTurn"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7f6fbfc8-6269-4d97-8258-ea95a0a0ca66"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PageTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""083bac55-5bcf-4f9a-b1d2-84456122d181"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PageTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a1112238-db3b-4e67-a223-be36fa301b1c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PageTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""045b60d8-7e41-4538-9be2-4a1773019444"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PageTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -284,6 +356,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        // Book
+        m_Book = asset.FindActionMap("Book", throwIfNotFound: true);
+        m_Book_PageTurn = m_Book.FindAction("PageTurn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -404,6 +479,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Book
+    private readonly InputActionMap m_Book;
+    private IBookActions m_BookActionsCallbackInterface;
+    private readonly InputAction m_Book_PageTurn;
+    public struct BookActions
+    {
+        private @Controls m_Wrapper;
+        public BookActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PageTurn => m_Wrapper.m_Book_PageTurn;
+        public InputActionMap Get() { return m_Wrapper.m_Book; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BookActions set) { return set.Get(); }
+        public void SetCallbacks(IBookActions instance)
+        {
+            if (m_Wrapper.m_BookActionsCallbackInterface != null)
+            {
+                @PageTurn.started -= m_Wrapper.m_BookActionsCallbackInterface.OnPageTurn;
+                @PageTurn.performed -= m_Wrapper.m_BookActionsCallbackInterface.OnPageTurn;
+                @PageTurn.canceled -= m_Wrapper.m_BookActionsCallbackInterface.OnPageTurn;
+            }
+            m_Wrapper.m_BookActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @PageTurn.started += instance.OnPageTurn;
+                @PageTurn.performed += instance.OnPageTurn;
+                @PageTurn.canceled += instance.OnPageTurn;
+            }
+        }
+    }
+    public BookActions @Book => new BookActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -411,5 +519,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+    }
+    public interface IBookActions
+    {
+        void OnPageTurn(InputAction.CallbackContext context);
     }
 }

@@ -33,7 +33,7 @@ public class FPSController : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        controls.Enable();
+        controls.Player.Enable();
     }
 
     void FixedUpdate()
