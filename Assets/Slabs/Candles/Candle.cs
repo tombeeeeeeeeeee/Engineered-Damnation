@@ -21,9 +21,9 @@ public class Candle : MonoBehaviour
 
             RaycastHit hit;
             Physics.Raycast(transform.position, -Vector3.up, out hit, 0.5f);
-            if(hit.collider != null && hit.transform.gameObject.GetComponent<SlabManager>())
+            if(hit.collider != null && hit.transform.gameObject.GetComponentInChildren<SlabManager>())
             {
-                hit.transform.gameObject.GetComponent<SlabManager>().ChangeCandleToggle(true);
+                hit.transform.gameObject.GetComponentInChildren<SlabManager>().ChangeCandleToggle(true);
                 Destroy(this.gameObject);
             }
         }

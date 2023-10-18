@@ -64,7 +64,7 @@ public class NewPickup : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Debug.DrawRay(transform.position, transform.forward, Color.red);
 

@@ -36,7 +36,7 @@ public class FPSController : MonoBehaviour
         controls.Enable();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
         moveDirection = transform.forward * moveInput.y +  transform.right * moveInput.x;
