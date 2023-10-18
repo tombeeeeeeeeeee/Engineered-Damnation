@@ -710,6 +710,10 @@ PrefabInstance:
       propertyPath: bookUI
       value: 
       objectReference: {fileID: 1270012852}
+    - target: {fileID: 2319770245778000097, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
+      propertyPath: rotateSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3235140159900309844, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1

@@ -36,7 +36,8 @@ public class FPSController : MonoBehaviour
         controls.Player.Enable();
     }
 
-    void FixedUpdate()
+    void Update() // changing from FixedUpdate to Update makes the camera smooth,
+        // but 
     {
         Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
         moveDirection = transform.forward * moveInput.y +  transform.right * moveInput.x;
