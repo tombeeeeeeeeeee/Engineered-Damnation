@@ -120,11 +120,7 @@ public class NewPickup : MonoBehaviour
     {
         // the GameObject with tag "DemonBook" is passed in
         // but currently isn't used for anything
-        if (!bookUI.activeInHierarchy)
-        {
-            transform.parent.GetComponent<FPSController>().Focus();
-            transform.parent.GetComponent<FPSController>().controls.Player.Disable();            
-        }
+        transform.parent.GetComponent<FPSController>().Focus();
     }
 
     public void RotateObject()

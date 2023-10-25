@@ -14,7 +14,7 @@ public class FPSController : MonoBehaviour
     public float CameraDefaultFOV = 60;
     public float CameraZoomFOV = 15;
     public bool rotationLocked = false;
-    public GameObject bookUI;
+    public GameObject bookObject;
 
 
     Vector3 moveDirection = Vector3.zero;
@@ -24,7 +24,7 @@ public class FPSController : MonoBehaviour
     public Controls controls;
     private CharacterController cc;
 
-    void Start()
+    void Awake()
     {
         cc = GetComponent<CharacterController>();
 
@@ -65,7 +65,7 @@ public class FPSController : MonoBehaviour
     public void Focus()
     {
         // camera animation will be started here
+        controls.Player.Disable();
         controls.Focused.Enable();
-        bookUI.SetActive(true);
     }
 }
