@@ -77,5 +77,6 @@ public class FPSController : MonoBehaviour
 
         controls.Focused.Enable();
         bookCamera.enabled = true;
+        bookCamera.GetComponent<CameraTransition>().StartMoving();
     }
 }

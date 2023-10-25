@@ -8,6 +8,7 @@ public class DemonBook : MonoBehaviour
 {
     public FPSController player;
     public Camera bookCamera;
+    public Canvas prompt;
     public List<Material> pages;
 
     MeshRenderer page;
