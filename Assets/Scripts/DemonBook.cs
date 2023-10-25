@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DemonBook : MonoBehaviour
 {
     public FPSController player;
-    public Transform cameraTargetPos;
+    public Camera bookCamera;
     public List<Material> pages;
 
     MeshRenderer page;
@@ -54,8 +54,11 @@ public class DemonBook : MonoBehaviour
 
     public void Close()
     {
-        player.locked = false;
         player.controls.Focused.Disable();
+        player.bookCamera.enabled = false;
+
+        player.locked = false;
+        player.playerCamera.enabled = true;
         player.controls.Player.Enable();
     }
 }

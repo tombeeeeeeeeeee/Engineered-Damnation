@@ -15,8 +15,7 @@ public class FPSController : MonoBehaviour
     public float CameraZoomFOV = 15;
     public bool rotationLocked = false;
     public GameObject bookObject;
-    public bool locked = false;
-
+    public Camera bookCamera;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -24,6 +23,7 @@ public class FPSController : MonoBehaviour
     public bool canMove = true;
     public Controls controls;
     private CharacterController cc;
+    public bool locked = false;
 
     void Awake()
     {
@@ -71,10 +71,11 @@ public class FPSController : MonoBehaviour
     {
         locked = true;
         // camera animation will be started here
-        playerCamera.transform.position = bookObject.GetComponent<DemonBook>().cameraTargetPos.position;
-        playerCamera.transform.rotation = bookObject.GetComponent<DemonBook>().cameraTargetPos.rotation;
 
         controls.Player.Disable();
+        playerCamera.enabled = false;
+
         controls.Focused.Enable();
+        bookCamera.enabled = true;
     }
 }
