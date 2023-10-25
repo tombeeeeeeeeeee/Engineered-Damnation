@@ -27,23 +27,37 @@ public class DemonBookUI : MonoBehaviour
         // page turned next
         if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == 1f)
         {
-            pageNumber++;
-            if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
-            page.sprite = pages[pageNumber];
+            NextPage();
         }
         // page turned previous
         else if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == -1f)
         {
-            pageNumber--;
-            if (pageNumber < 0) pageNumber = 0;
-            page.sprite = pages[pageNumber];
+            PreviousPage();
         }
 
         // book closed
         if (player.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
         {
-            player.controls.Player.Enable();
-            gameObject.SetActive(false);
+            Close();
         }
+    }
+
+    public void NextPage()
+    {
+        pageNumber++;
+        if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
+        page.sprite = pages[pageNumber];
+    }
+    public void PreviousPage()
+    {
+        pageNumber--;
+        if (pageNumber < 0) pageNumber = 0;
+        page.sprite = pages[pageNumber];
+    }
+
+    public void Close()
+    {
+        player.controls.Player.Enable();
+        gameObject.SetActive(false);
     }
 }
