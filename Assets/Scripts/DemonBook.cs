@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class DemonBook : MonoBehaviour
 {
-    public List<Material> pages;
     public FPSController player;
+    public Transform cameraTargetPos;
+    public List<Material> pages;
 
     MeshRenderer page;
     int pageNumber = 0;
@@ -53,6 +54,7 @@ public class DemonBook : MonoBehaviour
 
     public void Close()
     {
+        player.locked = false;
         player.controls.Focused.Disable();
         player.controls.Player.Enable();
     }
