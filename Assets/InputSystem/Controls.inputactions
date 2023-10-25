@@ -253,14 +253,23 @@
             ]
         },
         {
-            "name": "Book",
-            "id": "a35f6c7c-22ad-458e-8074-12073dfb09ca",
+            "name": "Focused",
+            "id": "8ee4a064-a7e1-4679-9a99-700eacd08f86",
             "actions": [
                 {
-                    "name": "PageTurn",
+                    "name": "Cycle",
                     "type": "PassThrough",
-                    "id": "654a3bd1-308f-46e3-bbbb-48f2acab3b0b",
+                    "id": "c3fa4b22-fc43-41d7-92cc-92960418a102",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "7286eedf-9f81-4611-b424-71855b524fc5",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -269,58 +278,69 @@
             "bindings": [
                 {
                     "name": "2D Vector",
-                    "id": "c4d9ef93-d78c-46c2-beef-f2e5d49a2683",
+                    "id": "3fa49007-262e-47e6-8366-24edddd3c751",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PageTurn",
+                    "action": "Cycle",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
-                    "id": "7f6fbfc8-6269-4d97-8258-ea95a0a0ca66",
+                    "id": "822c2d89-d89b-4a9e-a2e6-115cb5f37768",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PageTurn",
+                    "action": "Cycle",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
-                    "id": "083bac55-5bcf-4f9a-b1d2-84456122d181",
+                    "id": "fe869e2f-4bd7-438a-88e7-d174f0f49d3a",
                     "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PageTurn",
+                    "action": "Cycle",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
-                    "id": "a1112238-db3b-4e67-a223-be36fa301b1c",
+                    "id": "9984710a-52b0-4ce1-84a4-8086841163f1",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PageTurn",
+                    "action": "Cycle",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "045b60d8-7e41-4538-9be2-4a1773019444",
+                    "id": "565cf0b1-e81f-4d37-a521-c2751709bd8a",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PageTurn",
+                    "action": "Cycle",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "02dde031-e269-4042-b29f-1da331fc6818",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

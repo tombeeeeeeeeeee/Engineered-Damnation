@@ -122,10 +122,8 @@ public class NewPickup : MonoBehaviour
         // but currently isn't used for anything
         if (!bookUI.activeInHierarchy)
         {
-            transform.parent.GetComponent<FPSController>().controls.Book.Enable();
-            transform.parent.GetComponent<FPSController>().controls.Player.Disable();
-            bookUI.SetActive(true);
-            
+            transform.parent.GetComponent<FPSController>().Focus();
+            transform.parent.GetComponent<FPSController>().controls.Player.Disable();            
         }
     }
 

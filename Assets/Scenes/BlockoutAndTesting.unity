@@ -719,6 +719,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
+      propertyPath: bookUI
+      value: 
+      objectReference: {fileID: 1270012852}
+    - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: gravity
       value: 0
       objectReference: {fileID: 0}
@@ -935,6 +939,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 723579947}
     m_Modifications:
+    - target: {fileID: 52254340110404119, guid: b3a30267e428f324ba879a3208cbe558, type: 3}
+      propertyPath: m_text
+      value: esc to close
+      objectReference: {fileID: 0}
     - target: {fileID: 52254341598538116, guid: b3a30267e428f324ba879a3208cbe558, type: 3}
       propertyPath: player
       value: 

@@ -13,7 +13,7 @@ public class DemonBookUI : MonoBehaviour
 
     private void Start()
     {
-        player.controls.Book.PageTurn.performed += TurnPage;
+        player.controls.Focused.Cycle.performed += TurnPage;
     }
 
     private void TurnPage(InputAction.CallbackContext context)
@@ -25,14 +25,14 @@ public class DemonBookUI : MonoBehaviour
 
 
         // page turned next
-        if (player.controls.Book.PageTurn.ReadValue<Vector2>().x == 1f)
+        if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == 1f)
         {
             pageNumber++;
             if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
             page.sprite = pages[pageNumber];
         }
         // page turned previous
-        else if (player.controls.Book.PageTurn.ReadValue<Vector2>().x == -1f)
+        else if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == -1f)
         {
             pageNumber--;
             if (pageNumber < 0) pageNumber = 0;
@@ -40,7 +40,7 @@ public class DemonBookUI : MonoBehaviour
         }
 
         // book closed
-        if (player.controls.Book.PageTurn.ReadValue<Vector2>().y == 1f)
+        if (player.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
         {
             player.controls.Player.Enable();
             gameObject.SetActive(false);

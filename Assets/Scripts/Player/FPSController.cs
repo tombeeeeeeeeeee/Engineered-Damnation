@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class FPSController : MonoBehaviour
     public float CameraDefaultFOV = 60;
     public float CameraZoomFOV = 15;
     public bool rotationLocked = false;
+    public GameObject bookUI;
 
 
     Vector3 moveDirection = Vector3.zero;
@@ -56,5 +58,11 @@ public class FPSController : MonoBehaviour
     public void CameraZoom(InputAction.CallbackContext context)
     {
         playerCamera.fieldOfView = playerCamera.fieldOfView == CameraDefaultFOV ? CameraZoomFOV : CameraDefaultFOV;
+    }
+
+    public void Focus()
+    {
+        controls.Focused.Enable();
+        bookUI.SetActive(true);
     }
 }
