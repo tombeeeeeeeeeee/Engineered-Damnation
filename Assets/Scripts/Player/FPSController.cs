@@ -72,9 +72,8 @@ public class FPSController : MonoBehaviour
         locked = true;
         // camera animation will be started here
 
-        controls.Player.Disable();
-
-        controls.Focused.Enable();
+        //controls.Player.Disable();
+        //controls.Focused.Enable();
         bookCamera.GetComponent<CameraTransition>().MoveToTarget();
     }
 }

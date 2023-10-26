@@ -6,8 +6,8 @@ using UnityEngine.Rendering;
 public class CameraTransition : MonoBehaviour
 {
     public FPSController playerController;
-
-    Transform playerTransform;
+    public Transform playerCameraTransform;
+    public float duration;
 
     Vector3 initialPosition;
     Quaternion initialRotation;
@@ -15,14 +15,14 @@ public class CameraTransition : MonoBehaviour
     Vector3 targetPosition;
     Quaternion targetRotation;
 
+    Vector3 fromPosition;
+    Quaternion fromRotation;
+
     float elapsed;
-    public float duration;
     bool moving = false;
 
     public void Start()
     {
-        playerTransform = playerController.gameObject.transform;
-
         // camera should already be in the target position in editor
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -35,19 +35,28 @@ public class CameraTransition : MonoBehaviour
         targetPosition = initialPosition;
         targetRotation = initialRotation;
 
-        transform.position = playerTransform.position;
-        transform.rotation = playerTransform.rotation;
+        fromPosition = playerCameraTransform.position;
+        fromRotation = playerCameraTransform.rotation;
+
+        transform.position = playerCameraTransform.position;
+        transform.rotation = playerCameraTransform.rotation;
 
         elapsed = 0;
         moving = true;
     }
 
-    public void MoveFromTarget()
+    public void MoveToPlayer()
     {
-        Invoke("SetCameraPlayer", duration / 100);
+        // cursed way of accounting for the difference between FixedUpdate fps (50) and actual fps (60)
+        float t = (float)((duration + (duration * 0.17)) / 60);
+        Invoke("SetCameraPlayer", t);
+        Debug.Log(t);
 
-        targetPosition = playerTransform.position;
-        targetRotation = playerTransform.rotation;
+        targetPosition = playerCameraTransform.position;
+        targetRotation = playerCameraTransform.rotation;
+
+        fromPosition = initialPosition;
+        fromRotation = initialRotation;
 
         transform.position = initialPosition;
         transform.rotation = initialRotation;
@@ -56,26 +65,14 @@ public class CameraTransition : MonoBehaviour
         moving = true;
     }
 
-    public void SetCameraPlayer()
-    {
-        playerController.playerCamera.enabled = true;
-        playerController.bookCamera.enabled = false;
-    }
-
-    public void SetCameraBook()
-    {
-        playerController.playerCamera.enabled = false;
-        playerController.bookCamera.enabled = true;
-    }
-
     void FixedUpdate()
     {
         if (moving)
         {
             float interpolationRatio = elapsed / duration;
 
-            Vector3 interpolatedPosition = Vector3.Lerp(playerTransform.position, targetPosition, interpolationRatio);
-            Quaternion interpolatedRotation = Quaternion.Lerp(playerTransform.rotation, targetRotation, interpolationRatio);
+            Vector3 interpolatedPosition = Vector3.Lerp(fromPosition, targetPosition, interpolationRatio);
+            Quaternion interpolatedRotation = Quaternion.Lerp(fromRotation, targetRotation, interpolationRatio);
 
             transform.position = interpolatedPosition;
             transform.rotation = interpolatedRotation;
@@ -91,5 +88,26 @@ public class CameraTransition : MonoBehaviour
                 moving = false;
             }
         }
+    }
+
+    public void SetCameraPlayer()
+    {
+        playerController.playerCamera.enabled = true;
+        playerController.bookCamera.enabled = false;
+
+        playerController.controls.Player.Enable();
+        playerController.controls.Focused.Disable();
+        Debug.Log("back to player");
+    }
+
+    public void SetCameraBook()
+    {
+        playerController.playerCamera.enabled = false;
+        playerController.bookCamera.enabled = true;
+
+        playerController.controls.Player.Disable();
+        playerController.controls.Focused.Enable();
+        Debug.Log("go to book");
+
     }
 }
