@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class SymbolStampController : MonoBehaviour
 {
-    public int CircleIndex = 0;
-    public int SymbolIndex = 0;
+    [SerializeField] RingManager innerSymbol;
+    [SerializeField] RingManager outerSymbol;
 
+<<<<<<< Updated upstream
     public bool FlippedSymbol;
     [SerializeField] float pressingY;
 
     [SerializeField] Material[] Circles;
     [SerializeField] Material[] Symbols;
+=======
+>>>>>>> Stashed changes
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +32,14 @@ public class SymbolStampController : MonoBehaviour
     public void PressStamp()
     {
         SlabManager slab = null;
+<<<<<<< Updated upstream
         RaycastHit[] hits = Physics.BoxCastAll(transform.position, new Vector3(1, 0.5f, 1), -transform.up);
         foreach(RaycastHit hit in hits)
+=======
+        RaycastHit hit;
+
+        if(Physics.Raycast(transform.position, -transform.up, out hit, 1))
+>>>>>>> Stashed changes
         {
             if (hit.collider.gameObject.GetComponent<SlabManager>())
                 slab = hit.collider.gameObject.GetComponent<SlabManager>();
@@ -38,6 +47,7 @@ public class SymbolStampController : MonoBehaviour
 
         if (slab != null)
         {
+<<<<<<< Updated upstream
             //Check if there is a symbol stencil
             if (SymbolIndex != 0)
                 slab.ChangeSymbol(Symbols[SymbolIndex], FlippedSymbol, (uint)SymbolIndex);
@@ -46,6 +56,11 @@ public class SymbolStampController : MonoBehaviour
             //Check if there is a circle stencil
             if (CircleIndex != 0)
                 slab.ChangeCircle(Circles[CircleIndex], (uint)CircleIndex);
+=======
+            slab.ChangeInner(innerSymbol.symbol, (uint)innerSymbol.symbolIndex);
+
+            slab.ChangeOuter(outerSymbol.symbol, (uint)outerSymbol.symbolIndex);
+>>>>>>> Stashed changes
 
             //Give a faint imprint of the press onto the slab
             //if(SymbolIndex != 0 || CircleIndex != 0)
