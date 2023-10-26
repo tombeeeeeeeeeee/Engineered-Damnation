@@ -3,22 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Descriptor
-{
-    Horned = 10,
-    Wings = 20,
-    Headless = 30,
-    NonPlanar = 40,
-    Cloaked = 11,
-    Chained = 21,
-    Feral = 31,
-    Engulfed = 41
-}
-
 public class DataManager : MonoBehaviour
 {
     // this gameobject is automatically instantiated by the Initialise GameObject,
     // which should be added to the first scene of the game.
+
+    System.Random rand = new System.Random();
 
     public static DataManager dataManager;
     public int money;
@@ -36,7 +26,25 @@ public class DataManager : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < 10; i++)
+        {
+            orders.Add(RandomDemon());
+        }
 
+    }
+
+    uint RandomDemon()
+    {
+        uint demonKey = 0;
+
+        demonKey += (uint)rand.Next(1, 4);              // outer circle
+        demonKey += (uint)rand.Next(0, 1) * 10;         // flipped
+        demonKey += (uint)rand.Next(1, 4) * 100;        // symbol
+        demonKey += (uint)rand.Next(0, 1) * 1000;       // candles
+        demonKey += (uint)rand.Next(1, 4) * 10000;      // slab
+        demonKey += (uint)rand.Next(1, 4) * 100000;     // blood
+
+        return demonKey;
     }
 
     void SubmitOrder(uint demonKey)

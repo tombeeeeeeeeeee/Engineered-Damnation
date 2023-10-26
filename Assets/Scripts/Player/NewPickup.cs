@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
+
 
 public class NewPickup : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class NewPickup : MonoBehaviour
     public float smoothTime = 0.1f;     // the time it takes for the object to move
     public Transform holdParent;        // The transform where the held object will be attached.
     public GameObject heldObj;          // The currently held object.
+    public GameObject bookUI;
     public float rotateSpeed = 2.0f;
     private Vector2 rotation = Vector2.zero;
     private Vector3 moveVelocity = Vector3.zero;    // The force applied to a held object to move it.
@@ -20,34 +23,39 @@ public class NewPickup : MonoBehaviour
 
     private void Start()
     {
+        if(controller.controls == null)
+            controller.controls = new Controls();
+
         controller.controls.Player.Interact.performed += NewPickUp;
     }
 
 
     void NewPickUp(InputAction.CallbackContext context)
     {
-        // Debug Raycast to visualize the pickup range.
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * pickUpRange;
 
-        // Check for the "E" key press to pick up or drop an object.
         if (heldObj == null)
         {
             RaycastHit hit;
             
             Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange);
             // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
-            if (hit.transform.gameObject.tag == "CanPickUp")
-                PickupObject(hit.transform.gameObject);
-
-            else if (hit.transform.gameObject.tag == "ToolSpawner")
+            if(hit.collider != null)
             {
-                GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
-                PickupObject(tool);
+                if (hit.transform.gameObject.tag == "CanPickUp")
+                    PickupObject(hit.transform.gameObject);
+
+                else if (hit.transform.gameObject.tag == "ToolSpawner")
+                {
+                    GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
+                    PickupObject(tool);
+                }
+
+                else if (hit.transform.gameObject.tag == "Button")
+                    hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
+
+                else if (hit.transform.gameObject.tag == "DemonBook")
+                    OpenBook(hit.transform.gameObject);
             }
-
-            else if (hit.transform.gameObject.tag == "Button")
-                hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
-
         }
         else
         {
@@ -56,10 +64,13 @@ public class NewPickup : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
+
         if (heldObj)
             MoveObject();
+
         controller.rotationLocked = controller.controls.Player.Rotate.IsPressed();
 
         if(controller.rotationLocked)
@@ -103,6 +114,16 @@ public class NewPickup : MonoBehaviour
         // Remove the holdParent as the parent of the held object.
         heldObj.transform.parent = null;
         heldObj = null;
+    }
+
+    public void OpenBook(GameObject pickObj)
+    {
+        // the GameObject with tag "DemonBook" is passed in
+        // but currently isn't used for anything
+        if (!bookUI.activeInHierarchy)
+        {
+            bookUI.SetActive(true);
+        }
     }
 
     public void RotateObject()

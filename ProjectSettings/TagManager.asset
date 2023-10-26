@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - CanPickUp
+  - CanInteract
+  - DemonBook
   - ToolSpawner
+  - Button
   layers:
   - Default
   - TransparentFX
