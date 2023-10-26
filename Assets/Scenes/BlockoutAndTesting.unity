@@ -584,10 +584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20397df5bb4ec544193bfbac2d42f059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CircleIndex: 1
-  SymbolIndex: 1
-  OuterSymbols: []
-  InnerSymbols: []
+  innerSymbol: {fileID: 0}
+  outerSymbol: {fileID: 0}
 --- !u!1 &1244717038 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7824128036929741958, guid: 01db6cf2b73020f47aaa557cf1e31bac, type: 3}
@@ -1055,6 +1053,35 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 01db6cf2b73020f47aaa557cf1e31bac, type: 3}
   m_PrefabInstance: {fileID: 1527066346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1527066348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2069316882782816716, guid: 01db6cf2b73020f47aaa557cf1e31bac, type: 3}
+  m_PrefabInstance: {fileID: 1527066346}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1527066349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527066348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097b5a2bc971be54893c93576d00bb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnBreak: 0
+  gameplayTimeMinutes: 0
+  ExpectedDemonCount:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  demonListSpawner: {fileID: 0}
+  TotalDemons: 100
+  AwaitingSummon: 
+  DemonsSummoned: 0
 --- !u!1 &1604306301 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9070352099657077446, guid: 01db6cf2b73020f47aaa557cf1e31bac, type: 3}
