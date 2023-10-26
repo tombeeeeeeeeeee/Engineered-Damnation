@@ -55,11 +55,11 @@ public class DemonBook : MonoBehaviour
 
     public void Close()
     {
+
+        player.bookCamera.GetComponent<CameraTransition>().MoveFromTarget();
         player.controls.Focused.Disable();
-        player.bookCamera.enabled = false;
 
         player.locked = false;
-        player.playerCamera.enabled = true;
         player.controls.Player.Enable();
     }
 }

@@ -73,10 +73,8 @@ public class FPSController : MonoBehaviour
         // camera animation will be started here
 
         controls.Player.Disable();
-        playerCamera.enabled = false;
 
         controls.Focused.Enable();
-        bookCamera.enabled = true;
-        bookCamera.GetComponent<CameraTransition>().StartMoving();
+        bookCamera.GetComponent<CameraTransition>().MoveToTarget();
     }
 }
