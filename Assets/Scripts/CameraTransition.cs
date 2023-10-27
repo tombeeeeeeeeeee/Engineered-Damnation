@@ -53,7 +53,6 @@ public class CameraTransition : MonoBehaviour
         // cursed way of accounting for the difference between FixedUpdate fps (50) and actual fps (60)
         Invoke("SetCameraPlayer", (float)((duration + (duration * 0.177)) / 60));
 
-
         targetPosition = playerCameraTransform.position;
         targetRotation = playerCameraTransform.rotation;
 
@@ -65,8 +64,6 @@ public class CameraTransition : MonoBehaviour
 
         elapsed = 0;
         moving = true;
-
-        Debug.Log("move to player");
     }
 
     void FixedUpdate()

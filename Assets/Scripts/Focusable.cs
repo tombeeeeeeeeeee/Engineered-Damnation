@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,40 +8,50 @@ using UnityEngine.InputSystem;
 public class Focusable : MonoBehaviour
 {
     public Camera targetCamera;
-
     public FPSController player;
-    public List<Material> pages;
-
-    MeshRenderer page;
-    int pageNumber = 0;
-
 
     private void Start()
     {
-        page = GetComponent<MeshRenderer>();
-        player.controls.Focused.Cycle.performed += Exit;
+        player.controls.Focused.Cycle.performed += TurnPage;
     }
 
-    private void Exit(InputAction.CallbackContext context)
+    // handling input
+    // the only one that does anything in thsi base class is exit
+    // other classes can inherit this and override the virtual methods
+    private void TurnPage(InputAction.CallbackContext context)
     {
+        // page turned next
+        if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == 1f)
+        {
+            NextPage();
+        }
+        // page turned previous
+        else if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == -1f)
+        {
+            PreviousPage();
+        }
+
         // book closed
         if (player.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
         {
-            targetCamera.GetComponent<CameraTransition>().MoveToPlayer();
-            player.locked = false;
+            Exit();
         }
     }
 
-    public void NextPage()
+    virtual public void NextPage()
     {
-        pageNumber++;
-        if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
-        page.material = pages[pageNumber];
+        Debug.Log("base next page");
     }
-    public void PreviousPage()
+
+    public virtual void PreviousPage()
     {
-        pageNumber--;
-        if (pageNumber < 0) pageNumber = 0;
-        page.material = pages[pageNumber];
+        Debug.Log("base previous page");
+    }
+
+    private void Exit()
+    {
+        Debug.Log(targetCamera.gameObject.name);
+        targetCamera.GetComponent<CameraTransition>().MoveToPlayer();
+        player.locked = false;
     }
 }
