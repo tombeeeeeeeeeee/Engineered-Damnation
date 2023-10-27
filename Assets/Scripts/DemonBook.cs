@@ -12,9 +12,10 @@ public class DemonBook : Focusable
     MeshRenderer page;
     int pageNumber = 0;
 
-    private void Start()
+    override protected void Start()
     {
         page = GetComponent<MeshRenderer>();
+        base.Start();
     }
 
     public override void NextPage()
@@ -24,9 +25,9 @@ public class DemonBook : Focusable
         if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
         page.material = pages[pageNumber];
     }
+
     public override void PreviousPage()
     {
-        Debug.Log("previous");
         pageNumber--;
         if (pageNumber < 0) pageNumber = 0;
         page.material = pages[pageNumber];

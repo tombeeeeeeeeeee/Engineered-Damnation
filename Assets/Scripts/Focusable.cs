@@ -10,7 +10,7 @@ public class Focusable : MonoBehaviour
     public Camera targetCamera;
     public FPSController player;
 
-    private void Start()
+    virtual protected void Start()
     {
         player.controls.Focused.Cycle.performed += TurnPage;
     }
@@ -40,12 +40,12 @@ public class Focusable : MonoBehaviour
 
     virtual public void NextPage()
     {
-        Debug.Log("base next page");
+        Debug.Log("next");
     }
 
-    public virtual void PreviousPage()
+    virtual public void PreviousPage()
     {
-        Debug.Log("base previous page");
+        Debug.Log("prev");
     }
 
     private void Exit()
