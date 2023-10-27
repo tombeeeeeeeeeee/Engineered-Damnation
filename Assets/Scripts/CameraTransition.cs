@@ -25,8 +25,6 @@ public class CameraTransition : MonoBehaviour
 
     public void Start()
     {
-        playerController.controls.Focused.Cycle.performed += Exit;
-
         // camera should already be in the target position in editor
         initialPosition = transform.position;
         initialRotation = transform.rotation;
@@ -93,15 +91,6 @@ public class CameraTransition : MonoBehaviour
                 elapsed = 0;
                 moving = false;
             }
-        }
-    }
-
-    private void Exit(InputAction.CallbackContext context)
-    {
-        if (playerController.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
-        {
-            MoveToPlayer();
-            playerController.locked = false;
         }
     }
 

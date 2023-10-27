@@ -6,58 +6,7 @@ using UnityEngine.UI;
 
 public class DemonBook : MonoBehaviour
 {
-    public FPSController player;
-    public Camera bookCamera;
-    public Canvas prompt;
-    public List<Material> pages;
 
-    MeshRenderer page;
-    int pageNumber = 0;
 
-    private void Start()
-    {
-        page = GetComponent<MeshRenderer>();
-        player.controls.Focused.Cycle.performed += TurnPage;
-    }
 
-    private void TurnPage(InputAction.CallbackContext context)
-    {
-        // page turned next
-        if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == 1f)
-        {
-            NextPage();
-        }
-        // page turned previous
-        else if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == -1f)
-        {
-            PreviousPage();
-        }
-
-        // book closed
-        if (player.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
-        {
-            Close();
-        }
-    }
-
-    public void NextPage()
-    {
-        pageNumber++;
-        if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
-        page.material = pages[pageNumber];
-    }
-    public void PreviousPage()
-    {
-        pageNumber--;
-        if (pageNumber < 0) pageNumber = 0;
-        page.material = pages[pageNumber];
-    }
-
-    public void Close()
-    {
-
-        //player.bookCamera.GetComponent<CameraTransition>().MoveToPlayer();
-        //player.locked = false;
-        //Debug.Log("closed via demon book script");
-    }
 }
