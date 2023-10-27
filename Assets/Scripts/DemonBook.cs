@@ -56,10 +56,8 @@ public class DemonBook : MonoBehaviour
     public void Close()
     {
 
-        player.bookCamera.GetComponent<CameraTransition>().MoveToPlayer();
-        player.locked = false;
-
-        //player.controls.Focused.Disable();
-        //player.controls.Player.Enable();
+        //player.bookCamera.GetComponent<CameraTransition>().MoveToPlayer();
+        //player.locked = false;
+        //Debug.Log("closed via demon book script");
     }
 }

@@ -14,7 +14,6 @@ public class FPSController : MonoBehaviour
     public float CameraDefaultFOV = 60;
     public float CameraZoomFOV = 15;
     public bool rotationLocked = false;
-    public GameObject bookObject;
     public Camera bookCamera;
 
     Vector3 moveDirection = Vector3.zero;
@@ -75,5 +74,11 @@ public class FPSController : MonoBehaviour
         //controls.Player.Disable();
         //controls.Focused.Enable();
         bookCamera.GetComponent<CameraTransition>().MoveToTarget();
+    }
+
+    public void FocusCamera(Camera cam)
+    {
+        //locked = true;
+        //cam.GetComponent<CameraTransition>().MoveToTarget();
     }
 }

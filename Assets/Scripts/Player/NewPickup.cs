@@ -12,7 +12,6 @@ public class NewPickup : MonoBehaviour
     public float smoothTime = 0.1f;                  // the time it takes for the object to move
     public Transform holdParent;                     // The transform where the held object will be attached.
     public GameObject heldObj;                       // The currently held object.
-    public GameObject bookUI;                        // The UI the gets enabled when interacting with the "DemonBook"
     public float rotateSpeed = 20.0f;                 
     private Vector2 rotation = Vector2.zero;
     private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
@@ -55,6 +54,9 @@ public class NewPickup : MonoBehaviour
 
                 else if (hit.transform.gameObject.tag == "DemonBook")
                     OpenBook(hit.transform.gameObject);
+
+                else if (hit.transform.gameObject.tag == "Focus")
+                    Focus(hit.transform.gameObject);
             }
         }
         else
@@ -121,6 +123,13 @@ public class NewPickup : MonoBehaviour
         // the GameObject with tag "DemonBook" is passed in
         // but currently isn't used for anything
         transform.parent.GetComponent<FPSController>().Focus();
+    }
+
+    public void Focus(GameObject pickObj)
+    {
+        //transform.parent.GetComponent<FPSController>().FocusCamera(pickObj.GetComponent<Focusable>().targetCamera);
+        transform.parent.GetComponent<FPSController>().locked = true;
+        pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget();
     }
 
     public void RotateObject()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 public class CameraTransition : MonoBehaviour
@@ -20,12 +21,16 @@ public class CameraTransition : MonoBehaviour
 
     float elapsed;
     bool moving = false;
+    Camera thisCamera;
 
     public void Start()
     {
+        playerController.controls.Focused.Cycle.performed += Exit;
+
         // camera should already be in the target position in editor
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+        thisCamera = GetComponent<Camera>();
     }
 
     public void MoveToTarget()
@@ -48,9 +53,8 @@ public class CameraTransition : MonoBehaviour
     public void MoveToPlayer()
     {
         // cursed way of accounting for the difference between FixedUpdate fps (50) and actual fps (60)
-        float t = (float)((duration + (duration * 0.17)) / 60);
-        Invoke("SetCameraPlayer", t);
-        Debug.Log(t);
+        Invoke("SetCameraPlayer", (float)((duration + (duration * 0.177)) / 60));
+
 
         targetPosition = playerCameraTransform.position;
         targetRotation = playerCameraTransform.rotation;
@@ -63,6 +67,8 @@ public class CameraTransition : MonoBehaviour
 
         elapsed = 0;
         moving = true;
+
+        Debug.Log("move to player");
     }
 
     void FixedUpdate()
@@ -90,24 +96,30 @@ public class CameraTransition : MonoBehaviour
         }
     }
 
+    private void Exit(InputAction.CallbackContext context)
+    {
+        if (playerController.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
+        {
+            MoveToPlayer();
+            playerController.locked = false;
+        }
+    }
+
     public void SetCameraPlayer()
     {
         playerController.playerCamera.enabled = true;
-        playerController.bookCamera.enabled = false;
+        thisCamera.enabled = false;
 
         playerController.controls.Player.Enable();
         playerController.controls.Focused.Disable();
-        Debug.Log("back to player");
     }
 
     public void SetCameraBook()
     {
         playerController.playerCamera.enabled = false;
-        playerController.bookCamera.enabled = true;
+        thisCamera.enabled = true;
 
         playerController.controls.Player.Disable();
         playerController.controls.Focused.Enable();
-        Debug.Log("go to book");
-
     }
 }
