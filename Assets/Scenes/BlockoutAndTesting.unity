@@ -542,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5405737316074807307, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.053
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7775050711131565877, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: m_Radius
@@ -1074,7 +1074,52 @@ MonoBehaviour:
   gameplayTimeMinutes: 0
   ExpectedDemonCount:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.40833178
+      outSlope: 0.40833178
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.28252155
+      value: 0.115362525
+      inSlope: 0.9687694
+      outSlope: 0.9687694
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.40211344
+      value: 0.29824328
+      inSlope: 1.7584903
+      outSlope: 1.7584903
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.63230824
+      value: 0.7558185
+      inSlope: 1.3259333
+      outSlope: 1.3259333
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.66409296
+      outSlope: 0.66409296
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

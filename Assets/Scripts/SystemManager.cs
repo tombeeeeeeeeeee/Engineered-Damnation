@@ -34,13 +34,9 @@ public class SystemManager : MonoBehaviour
             float DemonsExpected = TotalDemons * ExpectedDemonCount.Evaluate(gameplayTimeMinutes * 60 / Time.time);
             if (DemonsSummoned + AwaitingSummon.Count < DemonsExpected)
             {
-                int demonsToAdd = Random.Range(0, 1);
-                for (int i = 0; i < demonsToAdd; i++)
-                {
-                    uint newDemon = GetDemonKey();
-                    //demonListSpawner.AddToList(newDemon);
-                    //AwaitingSummon.add(newDemon);
-                }
+                uint newDemon = GetDemonKey();
+                //demonListSpawner.AddToList(newDemon);
+                //AwaitingSummon.add(newDemon);
             }
         }
     }
