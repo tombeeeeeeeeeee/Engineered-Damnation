@@ -33,7 +33,7 @@ public class CameraTransition : MonoBehaviour
 
     public void MoveToTarget()
     {
-        SetCameraBook();
+        SetCameraTarget();
 
         targetPosition = initialPosition;
         targetRotation = initialRotation;
@@ -100,12 +100,14 @@ public class CameraTransition : MonoBehaviour
         playerController.controls.Focused.Disable();
     }
 
-    public void SetCameraBook()
+    public void SetCameraTarget()
     {
         playerController.playerCamera.enabled = false;
         thisCamera.enabled = true;
 
         playerController.controls.Player.Disable();
         playerController.controls.Focused.Enable();
+
+        //playerController.controls.Focused.Cycle.performed += TurnPage;
     }
 }

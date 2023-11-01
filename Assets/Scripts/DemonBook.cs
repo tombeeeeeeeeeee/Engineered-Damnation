@@ -12,10 +12,10 @@ public class DemonBook : Focusable
     MeshRenderer page;
     int pageNumber = 0;
 
-    override protected void Start()
+    override public void Init()
     {
         page = GetComponent<MeshRenderer>();
-        base.Start();
+        base.Init(); // base class adds the turnpage function with init so this will too
     }
 
     public override void NextPage()

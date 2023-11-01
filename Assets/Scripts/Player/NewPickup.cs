@@ -129,7 +129,10 @@ public class NewPickup : MonoBehaviour
     {
         //transform.parent.GetComponent<FPSController>().FocusCamera(pickObj.GetComponent<Focusable>().targetCamera);
         transform.parent.GetComponent<FPSController>().locked = true;
+        // trigger camera movemenent to the target object
+        // and controls stuff
         pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget();
+        pickObj.GetComponent<Focusable>().Init();
     }
 
     public void RotateObject()

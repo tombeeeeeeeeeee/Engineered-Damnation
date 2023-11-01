@@ -10,7 +10,9 @@ public class Focusable : MonoBehaviour
     public Camera targetCamera;
     public FPSController player;
 
-    virtual protected void Start()
+    // this is called when the object is clicked on by player
+    // inhertiing class demonbook calls back to base for this too
+    public virtual void Init()
     {
         player.controls.Focused.Cycle.performed += TurnPage;
     }
@@ -31,7 +33,7 @@ public class Focusable : MonoBehaviour
             PreviousPage();
         }
 
-        // book closed
+        // closed
         if (player.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
         {
             Exit();
@@ -51,6 +53,7 @@ public class Focusable : MonoBehaviour
     private void Exit()
     {
         Debug.Log(targetCamera.gameObject.name);
+        player.controls.Focused.Cycle.performed -= TurnPage;
         targetCamera.GetComponent<CameraTransition>().MoveToPlayer();
         player.locked = false;
     }
