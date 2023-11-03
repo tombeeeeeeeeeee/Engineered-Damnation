@@ -30,6 +30,7 @@ public class FPSController : MonoBehaviour
         if (controls == null)
             controls = new Controls();
         controls.Player.Zoom.performed += CameraZoom;
+
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

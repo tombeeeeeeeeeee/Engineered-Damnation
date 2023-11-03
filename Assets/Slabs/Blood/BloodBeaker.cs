@@ -8,9 +8,7 @@ public class BloodBeaker : BloodVial
     [SerializeField] Color[] colors;
     [SerializeField] int liquidLevel = 0;
     [SerializeField] GameObject[] liquidLevels;
-    [SerializeField] float cooldown = 0.2f;
-
-    private float CooldownDone = 0f;
+    private int OldLiquidLevel = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -23,20 +21,29 @@ public class BloodBeaker : BloodVial
     {
         if(liquidLevel > 0 && Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
 
-        if (liquidLevel == 0) foreach (GameObject level in liquidLevels) level.SetActive(false);
+        if(OldLiquidLevel != liquidLevel)
+        {
+            for (int i = 0; i < liquidLevels.Length; i++)
+            {
+                if (i < liquidLevel)
+                {
+                    liquidLevels[i].SetActive(true);
+                    liquidLevels[i].GetComponent<MeshRenderer>().material.color = BloodColour;
+                }
+                else liquidLevels[i].SetActive(false);
+            }
 
-        else if (liquidLevel == 1) liquidLevels[0].SetActive(true);
-        else if (liquidLevel == 2) liquidLevels[2].SetActive(true);
-
+            OldLiquidLevel = liquidLevel;
+        }
     }
 
     public void AddBlood(uint bloodKey)
     {
-        if (liquidLevel < 2 && Time.time > CooldownDone)
+        if (liquidLevel < 2 && bloodKey != BloodKey)
         {
             BloodKey += bloodKey;
-            BloodColour = colors[bloodKey];
-            CooldownDone = Time.time + cooldown;
+            BloodColour = colors[BloodKey];
+            liquidLevel++;
         }
     }
 

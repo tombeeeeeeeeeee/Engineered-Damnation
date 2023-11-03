@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -31,12 +32,14 @@ public class SystemManager : MonoBehaviour
     {
         if (!OnBreak)
         {
-            float DemonsExpected = TotalDemons * ExpectedDemonCount.Evaluate(gameplayTimeMinutes * 60 / Time.time);
+            float DemonsExpected = TotalDemons * ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60));
+
             if (DemonsSummoned + AwaitingSummon.Count < DemonsExpected)
             {
+                Debug.Log("Printing Ticket");
                 uint newDemon = GetDemonKey();
-                //demonListSpawner.AddToList(newDemon);
-                //AwaitingSummon.add(newDemon);
+                demonListSpawner.AddToList(newDemon);
+                AwaitingSummon.Add(newDemon);
             }
         }
     }
@@ -47,10 +50,11 @@ public class SystemManager : MonoBehaviour
         int DemonTypeLengthIndex = DemonTypes.Length;
         int LiquidTypeLengthIndex = LiquidTypes.Length; 
 
+        //Get a demontype for this part of the game.
         bool DemonType = false; do 
         {
-            int index = Random.Range(0, DemonTypeLengthIndex);
-            if (DemonTypes[index].TimePercentage < gameplayTimeMinutes * 60 / Time.time)
+            int index = UnityEngine.Random.Range(0, DemonTypeLengthIndex);
+            if (DemonTypes[index].TimePercentage < Time.time / (gameplayTimeMinutes * 60))
             {
                 demonKey += DemonTypes[index].KeyIndex * 10;
                 DemonType = true;
@@ -59,10 +63,11 @@ public class SystemManager : MonoBehaviour
 
         } while (!DemonType);
 
+        //Get a demon adjective for this part of the game
         bool DemonBlood = false; do
         {
-            int index = Random.Range(0, LiquidTypeLengthIndex);
-            if (LiquidTypes[index].TimePercentage < gameplayTimeMinutes * 60 / Time.time)
+            int index = UnityEngine.Random.Range(0, LiquidTypeLengthIndex);
+            if (LiquidTypes[index].TimePercentage < Time.time / (gameplayTimeMinutes * 60))
             {
                 demonKey += LiquidTypes[index].KeyIndex;
                 DemonBlood = true;
@@ -76,10 +81,25 @@ public class SystemManager : MonoBehaviour
 
     public float ExpectedCompletionPercentage()
     {
-        return DemonsSummoned / (TotalDemons * ExpectedDemonCount.Evaluate((gameplayTimeMinutes * 60 / Time.time)));
+        return DemonsSummoned / (TotalDemons * ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60)));
+    }
+
+    public void SummonedDemon(uint demonKey)
+    {
+        foreach(uint demon in AwaitingSummon)
+        {
+            if(demon == demonKey)
+            {
+                AwaitingSummon.Remove(demon);
+                demonListSpawner.CheckOffDemon(demon);
+                DemonsSummoned++;
+                break;
+            }
+        }
     }
 }
 
+[Serializable]
 public struct TimeUnlocked
 {
     public uint KeyIndex;
