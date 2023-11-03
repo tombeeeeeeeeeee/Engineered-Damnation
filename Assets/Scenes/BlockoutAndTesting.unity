@@ -395,8 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3749d9ea423a9b94c903444f81123fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructibleObjects:
-  - {fileID: 686914210683803510, guid: f88e262ad896afe41a39fedf5c417a9d, type: 3}
+  destructibleObjects: []
 --- !u!1 &316782849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2319770245778000097, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: pickUpRange
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2319770245778000097, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: rotateSpeed

@@ -7,6 +7,7 @@ public class SlabSpawner : MonoBehaviour
     public int cooldown;
     public float counter = 0;
     ToolSpawner spawner;
+    bool queued = false;
 
     private void Start()
     {
@@ -23,8 +24,17 @@ public class SlabSpawner : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<SlabManager>() && counter >= cooldown)
         {
-            spawner.spawnTool();
-            counter = 0;
+            if (!queued)
+            {
+                queued = true;
+                Invoke("Spawn", 2);
+            }
         }
+    }
+
+    public void Spawn()
+    {
+        spawner.spawnTool();
+        queued = false;
     }
 }
