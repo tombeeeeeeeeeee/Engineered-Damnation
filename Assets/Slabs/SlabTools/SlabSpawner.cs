@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlabSpawner : MonoBehaviour
 {
     public int cooldown;
-    int counter = 0;
+    public float counter = 0;
     ToolSpawner spawner;
 
     private void Start()
@@ -14,20 +14,17 @@ public class SlabSpawner : MonoBehaviour
         spawner.spawnTool();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (counter > 0)
-        {
-            counter--;
-        }
+        counter += Time.deltaTime;
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.GetComponent<SlabManager>() /*&& counter <= 0*/)
+        if (collision.gameObject.GetComponent<SlabManager>() && counter >= cooldown)
         {
             spawner.spawnTool();
-            counter = cooldown;
+            counter = 0;
         }
     }
 }
