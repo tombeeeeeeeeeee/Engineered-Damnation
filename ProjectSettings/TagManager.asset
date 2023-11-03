@@ -8,7 +8,7 @@ TagManager:
   - CanInteract
   - DemonBook
   - ToolSpawner
-  - Button
+  - Focus
   layers:
   - Default
   - TransparentFX

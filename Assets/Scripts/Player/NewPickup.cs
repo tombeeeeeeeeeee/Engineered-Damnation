@@ -8,14 +8,13 @@ using UnityEngine.InputSystem;
 public class NewPickup : MonoBehaviour
 {
     [Header("Game Settings")]
-    public float pickUpRange = 5;       // The range within which objects can be picked up.
-    public float smoothTime = 0.1f;     // the time it takes for the object to move
-    public Transform holdParent;        // The transform where the held object will be attached.
-    public GameObject heldObj;          // The currently held object.
-    public GameObject bookUI;
-    public float rotateSpeed = 2.0f;
+    public float pickUpRange = 5;                    // The range within which objects can be picked up.
+    public float smoothTime = 0.1f;                  // the time it takes for the object to move
+    public Transform holdParent;                     // The transform where the held object will be attached.
+    public GameObject heldObj;                       // The currently held object.
+    public float rotateSpeed = 20.0f;                 
     private Vector2 rotation = Vector2.zero;
-    private Vector3 moveVelocity = Vector3.zero;    // The force applied to a held object to move it.
+    private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
 
 
 
@@ -55,6 +54,9 @@ public class NewPickup : MonoBehaviour
 
                 else if (hit.transform.gameObject.tag == "DemonBook")
                     OpenBook(hit.transform.gameObject);
+
+                else if (hit.transform.gameObject.tag == "Focus")
+                    Focus(hit.transform.gameObject);
             }
         }
         else
@@ -64,7 +66,7 @@ public class NewPickup : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Update() // not sure if this needs to be Update or should be FixedUpdate (or if it matters at all)
     {
         Debug.DrawRay(transform.position, transform.forward, Color.red);
 
@@ -120,10 +122,17 @@ public class NewPickup : MonoBehaviour
     {
         // the GameObject with tag "DemonBook" is passed in
         // but currently isn't used for anything
-        if (!bookUI.activeInHierarchy)
-        {
-            bookUI.SetActive(true);
-        }
+        transform.parent.GetComponent<FPSController>().Focus();
+    }
+
+    public void Focus(GameObject pickObj)
+    {
+        //transform.parent.GetComponent<FPSController>().FocusCamera(pickObj.GetComponent<Focusable>().targetCamera);
+        transform.parent.GetComponent<FPSController>().locked = true;
+        // trigger camera movemenent to the target object
+        // and controls stuff
+        pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget();
+        pickObj.GetComponent<Focusable>().Init();
     }
 
     public void RotateObject()

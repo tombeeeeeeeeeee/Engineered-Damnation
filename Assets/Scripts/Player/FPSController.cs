@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,7 @@ public class FPSController : MonoBehaviour
     public float CameraDefaultFOV = 60;
     public float CameraZoomFOV = 15;
     public bool rotationLocked = false;
-
+    public Camera bookCamera;
 
     Vector3 moveDirection = Vector3.zero;
 
@@ -21,8 +22,9 @@ public class FPSController : MonoBehaviour
     public bool canMove = true;
     public Controls controls;
     private CharacterController cc;
+    public bool locked = false;
 
-    void Start()
+    void Awake()
     {
         cc = GetComponent<CharacterController>();
 
@@ -34,27 +36,50 @@ public class FPSController : MonoBehaviour
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        controls.Enable();
+        controls.Player.Enable();
     }
 
-    void Update()
+    void Update() // changing from FixedUpdate to Update makes the camera smooth,
+                  // not sure if this causes any unintended consequences
     {
-        Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
-        moveDirection = transform.forward * moveInput.y +  transform.right * moveInput.x;
-        cc.Move(moveDirection);
+        if (!locked)
+        {
+            // PLAYER MOVEMENT
+            Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
+            moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
+            cc.Move(moveDirection);
 
-        Vector2 mouseDelta = rotationLocked ? Vector2.zero : controls.Player.Camera.ReadValue<Vector2>() * lookSpeed * Time.deltaTime;
 
-        transform.Rotate(new Vector3(0,mouseDelta.x,0));
+            // CAMERA MOVEMENT
+            Vector2 mouseDelta = rotationLocked ? Vector2.zero : controls.Player.Camera.ReadValue<Vector2>() * lookSpeed * Time.deltaTime;
 
-        playerCamera.transform.Rotate(new Vector3(-mouseDelta.y,0,0));
-        if (playerCamera.transform.localRotation.x > 0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(285, 0,0));
-        else if (playerCamera.transform.localRotation.x < -0.6)  playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(-285, 0,0));
+            transform.Rotate(new Vector3(0, mouseDelta.x, 0));
+
+            playerCamera.transform.Rotate(new Vector3(-mouseDelta.y, 0, 0));
+            if (playerCamera.transform.localRotation.x > 0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(285, 0, 0));
+            else if (playerCamera.transform.localRotation.x < -0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(-285, 0, 0));
+        }
     }
 
 
     public void CameraZoom(InputAction.CallbackContext context)
     {
         playerCamera.fieldOfView = playerCamera.fieldOfView == CameraDefaultFOV ? CameraZoomFOV : CameraDefaultFOV;
+    }
+
+    public void Focus()
+    {
+        locked = true;
+        // camera animation will be started here
+
+        //controls.Player.Disable();
+        //controls.Focused.Enable();
+        bookCamera.GetComponent<CameraTransition>().MoveToTarget();
+    }
+
+    public void FocusCamera(Camera cam)
+    {
+        //locked = true;
+        //cam.GetComponent<CameraTransition>().MoveToTarget();
     }
 }
