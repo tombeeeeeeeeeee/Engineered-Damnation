@@ -42,12 +42,12 @@ public class Focusable : MonoBehaviour
 
     virtual public void NextPage()
     {
-        Debug.Log("next");
+        // override if you want this to do something
     }
 
     virtual public void PreviousPage()
     {
-        Debug.Log("prev");
+        // override if you want this to do something
     }
 
     private void Exit()
