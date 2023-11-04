@@ -2,39 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlabSpawner : MonoBehaviour
+public class SlabSpawner : ToolSpawner
 {
-    public int cooldown;
-    public float counter = 0;
-    ToolSpawner spawner;
-    bool queued = false;
+    [SerializeField] float cooldownDuration = 0.2f;
+    private bool queued = false;
 
     private void Start()
     {
-        spawner = GetComponent<ToolSpawner>();
-        spawner.spawnTool();
+       SpawnTool();
     }
 
     private void Update()
     {
-        counter += Time.deltaTime;
+
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.GetComponent<SlabManager>() && counter >= cooldown)
+        if (other.gameObject.GetComponent<SlabManager>() != null)
         {
             if (!queued)
             {
                 queued = true;
-                Invoke("Spawn", 2);
+                Invoke("SpawnTool", cooldownDuration);
             }
         }
     }
 
-    public void Spawn()
+
+    public override void SpawnTool()
     {
-        spawner.spawnTool();
         queued = false;
+        base.SpawnTool();
     }
 }

@@ -13,7 +13,7 @@ public class SlabButton : WorldSpaceButton
         if(LastPressedTime + PressCooldown < Time.time)
         {
             LastPressedTime = Time.time;
-            toolSpawner.spawnTool();
+            toolSpawner.SpawnTool();
         }
     }
 }

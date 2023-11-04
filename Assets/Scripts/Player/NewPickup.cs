@@ -43,17 +43,17 @@ public class NewPickup : MonoBehaviour
                 if (hit.transform.gameObject.tag == "CanPickUp")
                     PickupObject(hit.transform.gameObject);
 
-                else if (hit.transform.gameObject.tag == "ToolSpawner")
-                {
-                    GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
-                    PickupObject(tool);
-                }
+                //else if (hit.transform.gameObject.tag == "ToolSpawner")
+                //{
+                //    GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().GetToolFromCollection(), holdParent);
+                //    PickupObject(tool);
+                //}
 
                 else if (hit.transform.gameObject.tag == "Button")
                     hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
 
-                else if (hit.transform.gameObject.tag == "DemonBook")
-                    OpenBook(hit.transform.gameObject);
+                //else if (hit.transform.gameObject.tag == "DemonBook")
+                //    OpenBook(hit.transform.gameObject);
 
                 else if (hit.transform.gameObject.tag == "Focus")
                     Focus(hit.transform.gameObject);
