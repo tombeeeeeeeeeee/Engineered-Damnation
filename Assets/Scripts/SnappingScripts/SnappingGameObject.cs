@@ -5,7 +5,7 @@ using UnityEngine;
 public class SnappingGameObject : MonoBehaviour
 {
 
-    public bool snapped = false;
+    public bool moving = false;
     [SerializeField] protected GameObject ExpectedObject;
     public NewPickup pickupScript;
 
@@ -13,8 +13,9 @@ public class SnappingGameObject : MonoBehaviour
     {
         if (ExpectedObject != null)
         {
-            snapped = ExpectedObject.transform.parent == this.transform;
-            if (snapped)
+            if(moving)
+                ExpectedObject.transform.position = Vector3.Lerp(ExpectedObject.transform.position, transform.position, 0.2f);
+            else
             {
                 ExpectedObject.transform.rotation = transform.rotation;
                 ExpectedObject.transform.position = transform.position;
@@ -27,6 +28,8 @@ public class SnappingGameObject : MonoBehaviour
     {
         if (other != null && other.gameObject == ExpectedObject)
         {
+            moving = false;
+
             if (pickupScript.heldObj == other.gameObject) 
                 pickupScript.DropObject();
             
@@ -34,5 +37,10 @@ public class SnappingGameObject : MonoBehaviour
             other.transform.position = transform.position;
             other.transform.SetParent(transform);
         }
+    }
+
+    public virtual bool SnapType(GameObject obj)
+    {
+       return obj == ExpectedObject;
     }
 }

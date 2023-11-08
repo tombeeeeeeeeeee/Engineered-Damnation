@@ -43,17 +43,9 @@ public class NewPickup : MonoBehaviour
                 if (hit.transform.gameObject.tag == "CanPickUp")
                     PickupObject(hit.transform.gameObject);
 
-                //else if (hit.transform.gameObject.tag == "ToolSpawner")
-                //{
-                //    GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().GetToolFromCollection(), holdParent);
-                //    PickupObject(tool);
-                //}
-
                 else if (hit.transform.gameObject.tag == "Button")
                     hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
 
-                //else if (hit.transform.gameObject.tag == "DemonBook")
-                //    OpenBook(hit.transform.gameObject);
 
                 else if (hit.transform.gameObject.tag == "Focus")
                     Focus(hit.transform.gameObject);
@@ -86,32 +78,37 @@ public class NewPickup : MonoBehaviour
     }
 
 
-    void PickupObject(GameObject pickObj)
+    void PickupObject(GameObject obj)
     {
-        if (pickObj.GetComponent<Rigidbody>())
+        PickUp pickUpObj = obj.GetComponent<PickUp>();
+        if (pickUpObj)
         {
-            Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
-            // Disable gravity, increase drag, and freeze rotation to simulate holding.
-            objRig.useGravity = false;
-            objRig.drag = 10;
-            objRig.angularVelocity = Vector3.zero;
-            objRig.freezeRotation = true;
-
+            pickUpObj.PickedUp();
+            
             // Set the holdParent as the parent of the picked object.
-            objRig.transform.position = holdParent.position;
-            objRig.transform.parent = holdParent;
-            heldObj = pickObj;
-
+            pickUpObj.transform.position = holdParent.position;
+            pickUpObj.transform.parent = holdParent;
+            heldObj = obj;
         }
     }
 
     public void DropObject()
     {
-        Rigidbody heldRig = heldObj.GetComponent<Rigidbody>();
-        // Enable gravity, reset drag, and unfreeze rotation to drop the object.
-        heldRig.useGravity = true;
-        heldRig.drag = 1;
-        heldRig.freezeRotation = false;
+        PickUp obj = heldObj.GetComponent<PickUp>();
+        obj.Dropped();
+
+        RaycastHit[] hits;
+        hits = Physics.SphereCastAll(holdParent.position, 0.1f, holdParent.forward, 0.5f);
+        foreach (RaycastHit hit in hits) 
+        {
+            SnappingGameObject snapSpot = hit.collider.gameObject.GetComponent<SnappingGameObject>();
+            if (snapSpot != null && snapSpot.SnapType(heldObj))
+            {
+                snapSpot.moving = true;
+                heldObj = null;
+                return;
+            }
+        }
 
         // Remove the holdParent as the parent of the held object.
         heldObj.transform.parent = null;
