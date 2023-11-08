@@ -39,8 +39,7 @@ public class FPSController : MonoBehaviour
         controls.Player.Enable();
     }
 
-    void Update() // changing from FixedUpdate to Update makes the camera smooth,
-                  // not sure if this causes any unintended consequences
+    void Update() 
     {
         if (!locked)
         {

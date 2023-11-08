@@ -8,13 +8,8 @@ public class BloodBeaker : BloodVial
     [SerializeField] Color[] colors;
     [SerializeField] int liquidLevel = 0;
     [SerializeField] GameObject[] liquidLevels;
-    private int OldLiquidLevel = 0;
+    private int OldLiquidLevel = -1;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -60,5 +55,15 @@ public class BloodBeaker : BloodVial
                 BloodKey = 0;
             }
         }
+    }
+
+    public override void PickedUp()
+    {
+        base.PickedUp();
+    }
+
+    public override void Dropped()
+    {
+        base.Dropped();
     }
 }

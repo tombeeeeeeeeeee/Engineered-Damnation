@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1499059389155532994}
   - component: {fileID: 4285041720073589021}
   - component: {fileID: 4456094348866850619}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,10 +198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358dad79f758eb447b6a5096d142b606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreRaycast: 0
   BloodKey: 0
   BloodColour: {r: 0, g: 0, b: 0, a: 0}
   pourPosition: {fileID: 7408700837416086860}
   pourRadius: 0.5
+  pourAngle: 0
   colors:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 1, g: 0, b: 0, a: 0}
@@ -287,7 +289,7 @@ GameObject:
   - component: {fileID: 2123588701243474898}
   - component: {fileID: 7783779157725468821}
   - component: {fileID: 284939072337802540}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

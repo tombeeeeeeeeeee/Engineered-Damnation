@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BloodVial : MonoBehaviour
+public class BloodVial : PickUp
 {
     public uint BloodKey = 0;
     public Color BloodColour;
     [SerializeReference] protected Transform pourPosition;
     [SerializeField] protected float pourRadius;
+    [SerializeField] protected float pourAngle;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -34,6 +29,18 @@ public class BloodVial : MonoBehaviour
             else if (hit.rigidbody.gameObject.GetComponent<BloodBeaker>() != null)
                 hit.rigidbody.gameObject.GetComponent<BloodBeaker>().AddBlood(BloodKey);
         }
+    }
+
+    public override void PickedUp()
+    {
+        base.PickedUp();
+        transform.rotation = Quaternion.AngleAxis(pourAngle, transform.right);
+    }
+
+    public override void Dropped()
+    {
+        transform.rotation = Quaternion.identity;
+        base.Dropped();
     }
 
 }

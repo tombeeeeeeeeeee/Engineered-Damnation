@@ -7,9 +7,9 @@ public class PickUp : MonoBehaviour
 {
     [SerializeField] int ignoreRaycast;
 
-    private Rigidbody rb;
 
     //Rigidbody properties:
+    private Rigidbody rb;
     private bool usesGravity;
     private float drag;
     private Vector3 angularVelocity;
@@ -17,7 +17,7 @@ public class PickUp : MonoBehaviour
     private int defaultLayer;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
         usesGravity = rb.useGravity;
@@ -27,11 +27,6 @@ public class PickUp : MonoBehaviour
         defaultLayer = gameObject.layer;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public virtual void PickedUp()
     {
