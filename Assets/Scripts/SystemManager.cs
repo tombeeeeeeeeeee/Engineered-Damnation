@@ -36,7 +36,6 @@ public class SystemManager : MonoBehaviour
 
             if (DemonsSummoned + AwaitingSummon.Count < DemonsExpected)
             {
-                Debug.Log("Printing Ticket");
                 uint newDemon = GetDemonKey();
                 demonListSpawner.AddToList(newDemon);
                 AwaitingSummon.Add(newDemon);

@@ -29,7 +29,7 @@ public class NewPickup : MonoBehaviour
     }
 
 
-    void NewPickUp(InputAction.CallbackContext context)
+    private void NewPickUp(InputAction.CallbackContext context)
     {
 
         if (heldObj == null)
@@ -60,15 +60,8 @@ public class NewPickup : MonoBehaviour
 
     private void Update() // not sure if this needs to be Update or should be FixedUpdate (or if it matters at all)
     {
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
-
         if (heldObj)
             MoveObject();
-
-        controller.rotationLocked = controller.controls.Player.Rotate.IsPressed();
-
-        if(controller.rotationLocked)
-            RotateObject();
     }
 
     void MoveObject()
@@ -83,6 +76,13 @@ public class NewPickup : MonoBehaviour
         PickUp pickUpObj = obj.GetComponent<PickUp>();
         if (pickUpObj)
         {
+            //if the object is attached to something, break it FREEE!!
+            if(obj.transform.parent != null)
+            {
+                SnappingGameObject snappingParent = obj.transform.parent.GetComponent<SnappingGameObject>();
+                if (snappingParent != null)
+                    snappingParent.ExpectedObject = null;
+            }
             pickUpObj.PickedUp();
             
             // Set the holdParent as the parent of the picked object.
@@ -94,24 +94,28 @@ public class NewPickup : MonoBehaviour
 
     public void DropObject()
     {
+        //Grab the object and run its dropping code
         PickUp obj = heldObj.GetComponent<PickUp>();
         obj.Dropped();
 
+        //detattch the object from the player
+        heldObj.transform.parent = null;
+
+        //Look for snapping points the object might be able to move to
         RaycastHit[] hits;
-        hits = Physics.SphereCastAll(holdParent.position, 0.1f, holdParent.forward, 0.5f);
+        hits = Physics.SphereCastAll(holdParent.position, 0.2f, holdParent.forward, 1f);
         foreach (RaycastHit hit in hits) 
         {
+            //Check that the object can snap, and that there already isn't an object in the spot.
             SnappingGameObject snapSpot = hit.collider.gameObject.GetComponent<SnappingGameObject>();
-            if (snapSpot != null && snapSpot.SnapType(heldObj))
+            if (snapSpot != null && snapSpot.SnapType(heldObj) && snapSpot.ExpectedObject == null)
             {
                 snapSpot.moving = true;
                 heldObj = null;
                 return;
             }
         }
-
         // Remove the holdParent as the parent of the held object.
-        heldObj.transform.parent = null;
         heldObj = null;
     }
 
@@ -132,14 +136,4 @@ public class NewPickup : MonoBehaviour
         pickObj.GetComponent<Focusable>().Init();
     }
 
-    public void RotateObject()
-    {
-        if(heldObj != null)
-        {
-            rotation = controller.controls.Player.Camera.ReadValue<Vector2>() * rotateSpeed * Time.deltaTime;
-
-            heldObj.transform.Rotate(transform.up, -rotation.x, Space.World);
-            heldObj.transform.Rotate(transform.right, rotation.y, Space.World);
-        }
-    }
 }
