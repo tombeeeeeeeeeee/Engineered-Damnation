@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class SymbolStampController : MonoBehaviour
+public class SymbolStampController : Focusable
 {
-    [SerializeField] RingManager innerSymbol;
-    [SerializeField] RingManager outerSymbol;
+    [SerializeField] SymbolRing innerSymbol;
+    [SerializeField] SymbolRing outerSymbol;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void NextPage()
     {
-
+        outerSymbol.TurnDial(1);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void PreviousPage()
     {
-
+        outerSymbol.TurnDial(-1);
     }
 
 
