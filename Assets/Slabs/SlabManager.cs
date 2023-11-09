@@ -33,7 +33,6 @@ public class SlabManager : MonoBehaviour
         Material[] materials = GetComponent<MeshRenderer>().materials;
         materials[1] = mat;
         GetComponent<MeshRenderer>().materials = materials;
-
         DemonKeyUpdate(10, SymbolKey);
     }
 
@@ -49,7 +48,7 @@ public class SlabManager : MonoBehaviour
     {
         //Determine the value of the current key in the slot.
         uint KeySlotCurrentValue = (DemonKey/KeySlotIndex) % 10;
-        
+
         //If the value in the keyslot is not 0, then delete it.
         if (KeySlotCurrentValue > 0) 
             DemonKey -= KeySlotCurrentValue * KeySlotIndex;

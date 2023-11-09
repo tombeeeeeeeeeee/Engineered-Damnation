@@ -83,7 +83,7 @@ public class SystemManager : MonoBehaviour
         return DemonsSummoned / (TotalDemons * ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60)));
     }
 
-    public void SummonedDemon(uint demonKey)
+    public bool SummonedDemon(uint demonKey)
     {
         foreach(uint demon in AwaitingSummon)
         {
@@ -92,9 +92,11 @@ public class SystemManager : MonoBehaviour
                 AwaitingSummon.Remove(demon);
                 demonListSpawner.CheckOffDemon(demon);
                 DemonsSummoned++;
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 }
 
