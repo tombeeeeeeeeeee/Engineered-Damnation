@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreRaycast: 2
+  destructable: 1
+  respawns: 0
 --- !u!1001 &5583412768093754602
 PrefabInstance:
   m_ObjectHideFlags: 0

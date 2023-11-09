@@ -16,8 +16,6 @@ public class NewPickup : MonoBehaviour
     private Vector2 rotation = Vector2.zero;
     private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
 
-
-
     [SerializeReference] FPSController controller;
 
     private void Start()

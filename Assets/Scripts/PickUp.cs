@@ -8,6 +8,11 @@ public class PickUp : MonoBehaviour
     [SerializeField] int ignoreRaycast;
 
 
+    public bool respawns;
+    Vector3 spawnPosition;
+    Quaternion spawnRotation;
+
+
     //Rigidbody properties:
     private Rigidbody rb;
     private bool usesGravity;
@@ -19,6 +24,9 @@ public class PickUp : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation;
+
         rb = GetComponent<Rigidbody>();
         usesGravity = rb.useGravity;
         drag = rb.drag;
@@ -49,5 +57,11 @@ public class PickUp : MonoBehaviour
         rb.freezeRotation = freezeRotation;
 
         gameObject.layer = defaultLayer;
+    }
+
+    public void Respawn()
+    {
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
     }
 }
