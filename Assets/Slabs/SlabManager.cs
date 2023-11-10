@@ -30,18 +30,20 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeInner(Material mat, uint SymbolKey)
     {
-        Material[] materials = GetComponent<MeshRenderer>().materials;
-        materials[1] = mat;
-        GetComponent<MeshRenderer>().materials = materials;
+        Debug.Log("inner: " + SymbolKey);
+        //Material[] materials = GetComponent<MeshRenderer>().materials;
+        //materials[1] = mat;
+        //GetComponent<MeshRenderer>().materials = materials;
 
         DemonKeyUpdate(10, SymbolKey);
     }
 
     public void ChangeOuter(Material mat, uint CircleKey)
     {
-        Material[] materials = GetComponent<MeshRenderer>().materials;
-        materials[2] = mat;
-        GetComponent<MeshRenderer>().materials = materials;
+        Debug.Log("outer: " + CircleKey);
+        //Material[] materials = GetComponent<MeshRenderer>().materials;
+        //materials[2] = mat;
+        //GetComponent<MeshRenderer>().materials = materials;
         DemonKeyUpdate(100, CircleKey);
     }
 

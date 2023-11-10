@@ -14,13 +14,15 @@ public class Focusable : MonoBehaviour
     // inhertiing class demonbook calls back to base for this too
     public virtual void Init()
     {
-        player.controls.Focused.Cycle.performed += TurnPage;
+        player.controls.Focused.Cycle.performed += Cycle;
+        player.controls.Focused.Action1.performed += Action1;
+        player.controls.Focused.Action2.performed += Action2;
     }
 
     // handling input
     // the only one that does anything in thsi base class is exit
     // other classes can inherit this and override the virtual methods
-    private void TurnPage(InputAction.CallbackContext context)
+    private void Cycle(InputAction.CallbackContext context)
     {
         // page turned next
         if (player.controls.Focused.Cycle.ReadValue<Vector2>().x == 1f)
@@ -32,7 +34,6 @@ public class Focusable : MonoBehaviour
         {
             PreviousPage();
         }
-
         // closed
         if (player.controls.Focused.Cycle.ReadValue<Vector2>().y == 1f)
         {
@@ -50,10 +51,19 @@ public class Focusable : MonoBehaviour
         // override if you want this to do something
     }
 
-    private void Exit()
+    virtual public void Action1(InputAction.CallbackContext context)
     {
-        Debug.Log(targetCamera.gameObject.name);
-        player.controls.Focused.Cycle.performed -= TurnPage;
+        // override if you want this to do something
+    }
+
+    virtual public void Action2(InputAction.CallbackContext context)
+    {
+        // override if you want this to do something
+    }
+
+    public void Exit()
+    {
+        player.controls.Focused.Cycle.performed -= Cycle;
         targetCamera.GetComponent<CameraTransition>().MoveToPlayer();
         player.locked = false;
     }
