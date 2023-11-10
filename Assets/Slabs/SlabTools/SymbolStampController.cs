@@ -29,7 +29,7 @@ public class SymbolStampController : Focusable
     {
         if (currentRing == 0)
         {
-            outerRing.TurnDial(-1);
+            outerRing.TurnDial(1);
             plane1.GetComponent<MeshRenderer>().material = outerRing.symbol;
         }
         else
@@ -44,7 +44,7 @@ public class SymbolStampController : Focusable
     {
         if (currentRing == 0)
         {
-            outerRing.TurnDial(1);
+            outerRing.TurnDial(-1);
             plane1.GetComponent<MeshRenderer>().material = outerRing.symbol;
         }
         else
