@@ -28,12 +28,11 @@ public class SymbolRing : MonoBehaviour
         //symbolIndex = (symbolIndex + direction % symbols.Length);
 
 
-
         if (symbolIndex > symbols.Length)
             symbolIndex = 1;
         else if (symbolIndex < 1)
             symbolIndex = symbols.Length;
 
-        Debug.Log("symbol index: " + symbolIndex + " of " + symbols.Length);
+        //Debug.Log("symbol index: " + symbolIndex + " of " + symbols.Length);
     }
 }

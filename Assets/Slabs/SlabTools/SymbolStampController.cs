@@ -37,7 +37,6 @@ public class SymbolStampController : Focusable
             innerRing.TurnDial(1);
             plane2.GetComponent<MeshRenderer>().material = innerRing.symbol;
         }
-
     }
 
     public override void PreviousPage()
@@ -70,7 +69,6 @@ public class SymbolStampController : Focusable
         Exit();
     }
 
-
     public void PressStamp()
     {
         SlabManager slab = null;
@@ -86,9 +84,6 @@ public class SymbolStampController : Focusable
 
         if (slab != null)
         {
-            Debug.Log("slab hit");
-
-
             slab.ChangeInner(innerRing.symbol, (uint)innerRing.symbolIndex);
 
             slab.ChangeOuter(outerRing.symbol, (uint)outerRing.symbolIndex);
@@ -96,6 +91,5 @@ public class SymbolStampController : Focusable
             //Give a faint imprint of the press onto the slab
             //slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
         }
-        else Debug.Log("no slab");
     }
 }
