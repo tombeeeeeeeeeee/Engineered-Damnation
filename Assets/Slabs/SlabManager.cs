@@ -7,6 +7,7 @@ using UnityEngine;
 public class SlabManager : MonoBehaviour
 {
     //This key catalogues the type of demon the slab will summon
+    public MeshRenderer meshRenderer;
     public uint DemonKey = 000;
 
     public void ChangeBlood(Color color, uint BloodKey)
@@ -41,9 +42,9 @@ public class SlabManager : MonoBehaviour
     public void ChangeOuter(Material mat, uint CircleKey)
     {
         Debug.Log("outer: " + CircleKey);
-        //Material[] materials = GetComponent<MeshRenderer>().materials;
-        //materials[2] = mat;
-        //GetComponent<MeshRenderer>().materials = materials;
+        Material[] materials = meshRenderer.materials;
+        materials[2] = mat;
+        meshRenderer.materials = materials;
         DemonKeyUpdate(100, CircleKey);
     }
 
