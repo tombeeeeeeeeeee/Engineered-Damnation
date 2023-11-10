@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d1f1ad949e4e14b813dd34389c2e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreRaycast: 0
   attachPosition: {fileID: 3425762073263885275}
 --- !u!54 &4638853978253167628
 Rigidbody:

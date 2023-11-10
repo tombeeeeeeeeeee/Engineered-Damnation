@@ -19,17 +19,17 @@ public class DataManager : MonoBehaviour
 
     void Awake()
     {
-        day = 1;
-        DontDestroyOnLoad(this);
-        dataManager = this; // other objects access this with DataManager.dataManager
+        //day = 1;
+        //DontDestroyOnLoad(this);
+        //dataManager = this; // other objects access this with DataManager.dataManager
     }
 
     private void Start()
     {
-        for (int i = 0; i < 10; i++)
-        {
-            orders.Add(RandomDemon());
-        }
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    orders.Add(RandomDemon());
+        //}
 
     }
 
