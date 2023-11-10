@@ -9,7 +9,7 @@ public class SnappingGameObject : MonoBehaviour
     public GameObject ExpectedObject;
     public NewPickup pickupScript;
 
-    public virtual void Update()
+    protected virtual void Update()
     {
         //If we have an object we are expecting to collide with
         if (ExpectedObject != null)
@@ -20,13 +20,12 @@ public class SnappingGameObject : MonoBehaviour
                 //move it to correct spot ignoring gravity
                 ExpectedObject.GetComponent<Rigidbody>().useGravity = false;
                 ExpectedObject.transform.position = Vector3.Lerp(ExpectedObject.transform.position, transform.position, 0.01f);
-            }
-                
+            }     
         }
     }
 
 
-    public virtual void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerStay(Collider other)
     {
         if (other != null && other.gameObject == ExpectedObject)
         {

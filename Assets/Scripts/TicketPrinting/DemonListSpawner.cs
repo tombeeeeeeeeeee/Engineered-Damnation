@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class DemonListSpawner : MonoBehaviour
 {
-    public WordKeyCombo[] DemonTypes;
-    public WordKeyCombo[] DemonAdjectives;
 
     public float ticketSpeed = 1;
 
@@ -17,7 +15,6 @@ public class DemonListSpawner : MonoBehaviour
     
     private OrderList curChildList = null;
     private int ticketsOnList = 0;
-    [SerializeField] float ticketMoveDistance = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +27,8 @@ public class DemonListSpawner : MonoBehaviour
     {
         if (curChildList != null)
         {
-            if(ticketMoveDistance * ticketsOnList > curChildList.transform.position.y - OrderSpawnTransform.position.y)
-                curChildList.MoveUp(ticketSpeed);
+            if(curChildList.transform.localScale.y * ticketsOnList + 0.1f > curChildList.transform.localPosition.y)
+                curChildList.MoveUp(ticketSpeed * Time.deltaTime);
         }
 
         if(OrderSpawnTransform.GetComponentInChildren<OrderList>() == null)
@@ -41,7 +38,7 @@ public class DemonListSpawner : MonoBehaviour
         }
     }
 
-    public void AddToList(uint demonKey)
+    public void AddToList(uint demonKey, string demonDescription)
     {
         if(curChildList == null)
         {
@@ -49,25 +46,10 @@ public class DemonListSpawner : MonoBehaviour
             ticketsOnList++;
         }
 
-        string demonDescription = "";
-
-        foreach (WordKeyCombo adjective in DemonAdjectives)
-        {
-            if (adjective.Key == demonKey % 10)
-                demonDescription += adjective.Descriptor;
-        }
-
-        demonDescription += " ";
-
-        foreach (WordKeyCombo demon in DemonTypes)
-        {
-            if (demon.Key == demonKey / 10)
-                demonDescription += demon.Descriptor;
-        }
-       
-
         curChildList.AddToList(demonKey, demonDescription, childOrderPrefab);
         ticketsOnList++;
+
+        curChildList.ExpandGrabArea();
 
     }
 
@@ -85,9 +67,4 @@ public class DemonListSpawner : MonoBehaviour
     }
 
 }
-[Serializable]
-public struct WordKeyCombo
-{
-    public uint Key;
-    public string Descriptor;
-}
+

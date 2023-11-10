@@ -6,10 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PlaceholderTitle.unity
+    guid: 661810902a50e6546bb0178d4f283d48
+  - enabled: 1
     path: Assets/Scenes 1/PersistenceTest2.unity
     guid: 4506663690734914e9b2fc0388689836
   - enabled: 1
     path: Assets/Scenes 1/PersistenceTest.unity
     guid: f5737e542a1981141b99cb26ae1b4f64
+  - enabled: 1
+    path: Assets/Scenes/BlockoutAndTesting.unity
+    guid: d822c3b1ec847644aa4948e9b5f0cab4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8dd6def7cc14bad4581afbd4916b40db, type: 2}

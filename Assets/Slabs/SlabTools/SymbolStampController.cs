@@ -73,6 +73,7 @@ public class SymbolStampController : Focusable
     {
         SlabManager slab = null;
 
+        Debug.Log(gameObject.name);
 
         RaycastHit hit;
 

@@ -2,21 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrderList : MonoBehaviour
+public class OrderList : PickUp
 {
     [SerializeField] protected Transform attachPosition;
     protected Order childOrder;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public OrderList AddToList(uint demonKey, string demonDescription, Order childOrderPrefab)
     {
@@ -46,7 +35,23 @@ public class OrderList : MonoBehaviour
             if (transform.parent.GetComponent<OrderList>() != null)
                 transform.parent.GetComponent<OrderList>().MoveUp(speed);
             else
-                transform.position += transform.up * speed * Time.deltaTime;
+                transform.localPosition += Vector3.up * speed * Time.deltaTime;
         }
+    }
+
+    public void ExpandGrabArea()
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        if(collider != null)
+        {
+            collider.center -= new Vector3(0, 0.5f, 0);
+            collider.size += new Vector3(0, 1, 0);
+        }
+    }
+
+    public override void PickedUp()
+    {
+        base.PickedUp();
+        transform.rotation = Quaternion.identity;
     }
 }
