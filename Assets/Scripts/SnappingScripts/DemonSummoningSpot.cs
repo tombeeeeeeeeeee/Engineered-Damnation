@@ -7,12 +7,10 @@ public class DemonSummoningSpot : SnapSlab
 {
     [SerializeField] SystemManager sysManager;
     [SerializeField] Transform DemonSummonTransform;
-    [SerializeField] DemonPrefabKeyCombo[] demonPrefabs;
-    [SerializeField] PotionPrefabKeyCombo[] potionPrefabs;
     [SerializeField] float slabToSpotPercentageOfTravel;
     [SerializeField] float SummonDuration;
     private float SummonFinishTime = 0;
-    private bool movingtoSummonSpot;
+    [SerializeField] bool movingtoSummonSpot = false;
     private GameObject currDemon = null;
 
     protected override void Update()
@@ -23,7 +21,7 @@ public class DemonSummoningSpot : SnapSlab
 
         if(movingtoSummonSpot)
         {
-            ExpectedObject.transform.position = Vector3.Lerp(ExpectedObject.transform.position, DemonSummonTransform.position, slabToSpotPercentageOfTravel);
+            ExpectedObject.transform.position = Vector3.Lerp(ExpectedObject.transform.position, DemonSummonTransform.position, slabToSpotPercentageOfTravel * Time.deltaTime);
             if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.01f)
             {
                 movingtoSummonSpot = false;
@@ -31,28 +29,38 @@ public class DemonSummoningSpot : SnapSlab
                 SummonDemon();
             }
         }
-        else if (Time.time < SummonFinishTime)
+        else if (Time.time > SummonFinishTime)
         {
             FinishSummon();
         }
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnTriggerStay(Collider other)
     {
-        if (other != null && other.gameObject == ExpectedObject)
+        if(!movingtoSummonSpot)
         {
-            //Stop moving the object to the correct spot
-            moving = false;
-            movingtoSummonSpot = true;
+            if (SnapType(other.gameObject) && ExpectedObject == null)
+            {
+                ExpectedObject = other.gameObject;
+            }
 
-            //if the object came from a player, take it away from them.
-            if (pickupScript.heldObj == other.gameObject)
-                pickupScript.DropObject();
+            if (other.gameObject == ExpectedObject)
+            {
+                //Stop moving the object to the correct spot
+                moving = false;
+                movingtoSummonSpot = true;
 
-            //put the object in the right spot.
-            other.transform.rotation = transform.rotation;
-            other.transform.position = transform.position;
-            other.transform.SetParent(transform);
+                other.GetComponent<Rigidbody>().isKinematic = true;
+
+                //if the object came from a player, take it away from them.
+                if (pickupScript.heldObj == other.gameObject)
+                    pickupScript.DropObject();
+
+                //put the object in the right spot.
+                other.transform.rotation = transform.rotation;
+                other.transform.position = transform.position;
+                other.transform.SetParent(transform);
+            }
         }
     }
 
@@ -65,20 +73,23 @@ public class DemonSummoningSpot : SnapSlab
         if(slab && slab.getBlood() != 0)
         {
             sysManager.SummonedDemon(slab.DemonKey);
-            for(int i = 0; i < demonPrefabs.Length; i++)
+            for(int i = 0; i < sysManager.DemonTypes.Length; i++)
             {
-                if (demonPrefabs[i].Key == slab.getType())
+                if (sysManager.DemonTypes[i].KeyIndex == slab.getType())
                     demonIndex = i;
             }
-            for (int i = 0; i < potionPrefabs.Length; i++)
+            for (int i = 0; i < sysManager.LiquidTypes.Length; i++)
             {
-                if (potionPrefabs[i].Key == slab.getBlood())
+                if (sysManager.LiquidTypes[i].KeyIndex == slab.getBlood())
                     colourIndex = i;
             }
         }
 
-        currDemon = Instantiate(demonPrefabs[demonIndex].Demon, DemonSummonTransform, false);
-        currDemon.gameObject.GetComponent<MeshRenderer>().material.color = potionPrefabs[colourIndex].color;
+        currDemon = Instantiate(sysManager.DemonTypes[demonIndex].Demon, DemonSummonTransform, false);
+        currDemon.transform.position += Vector3.up *0.1f;
+        Demon demon = currDemon.gameObject.GetComponent<Demon>(); 
+        if(demon)
+            demon.Colour(sysManager.LiquidTypes[colourIndex].color);
     }
 
     
@@ -88,19 +99,5 @@ public class DemonSummoningSpot : SnapSlab
         Destroy(ExpectedObject);
     }
 
-}
-
-[Serializable]
-public struct DemonPrefabKeyCombo
-{
-    public GameObject Demon;
-    public uint Key;
-}
-
-[Serializable]
-public struct PotionPrefabKeyCombo
-{
-    public Color color;
-    public uint Key;
 }
 

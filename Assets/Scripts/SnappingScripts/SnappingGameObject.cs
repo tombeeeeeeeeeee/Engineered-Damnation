@@ -25,7 +25,7 @@ public class SnappingGameObject : MonoBehaviour
     }
 
 
-    public virtual void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerStay(Collider other)
     {
         if (other != null && other.gameObject == ExpectedObject)
         {

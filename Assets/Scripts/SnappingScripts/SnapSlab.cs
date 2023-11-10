@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SnapSlab : SnappingGameObject
 {
-    public override void OnTriggerEnter(Collider other)
+    public override void OnTriggerStay(Collider other)
     {
         //If the object is the expected type.
-        if (SnapType(other.gameObject))
+        if (SnapType(other.gameObject) && ExpectedObject == null)
             ExpectedObject = other.gameObject;
-        base.OnTriggerEnter(other);
+        base.OnTriggerStay(other);
     }
 
     /// <summary>
