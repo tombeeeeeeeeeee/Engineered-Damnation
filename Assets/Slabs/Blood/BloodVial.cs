@@ -23,18 +23,18 @@ public class BloodVial : PickUp
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
         foreach(RaycastHit hit in pouredOn)
         {
-            if (hit.rigidbody.gameObject.GetComponent<SlabManager>() != null)
-                hit.rigidbody.gameObject.GetComponent<SlabManager>().ChangeBlood(BloodColour, BloodKey);
+            if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
+                hit.transform.gameObject.GetComponent<SlabManager>().ChangeBlood(BloodColour, BloodKey);
 
-            else if (hit.rigidbody.gameObject.GetComponent<BloodBeaker>() != null)
-                hit.rigidbody.gameObject.GetComponent<BloodBeaker>().AddBlood(BloodKey);
+            else if (hit.transform.gameObject.GetComponent<BloodBeaker>() != null)
+                hit.transform.gameObject.GetComponent<BloodBeaker>().AddBlood(BloodKey);
         }
     }
 
     public override void PickedUp()
     {
         base.PickedUp();
-        transform.rotation = Quaternion.AngleAxis(pourAngle, transform.right);
+        transform.rotation = Quaternion.AngleAxis(pourAngle, Vector3.one - transform.parent.up);
     }
 
     public override void Dropped()

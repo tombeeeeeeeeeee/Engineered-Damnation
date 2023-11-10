@@ -7,34 +7,35 @@ using UnityEngine;
 public class SlabManager : MonoBehaviour
 {
     //This key catalogues the type of demon the slab will summon
-    public MeshRenderer meshRenderer;
     public uint DemonKey = 000;
+    private MeshRenderer[] meshRenderers;
+
+    private void Start()
+    {
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            Debug.Log(renderer, renderer.gameObject);
+        }
+    }
 
     public void ChangeBlood(Color color, uint BloodKey)
     {
-        Material[] materials = GetComponent<MeshRenderer>().materials;
-
-        MeshRenderer[] SlabArt = GetComponentsInChildren<MeshRenderer>();
         if (getOuter() != 0)
-            materials[2].color = color;
+            meshRenderers[2].material.color = color;
 
         if(getInner() != 0)
-            materials[1].color = color;
-
-        GetComponent<MeshRenderer>().materials = materials;
+            meshRenderers[1].material.color = color;
 
         if (getOuter() != 0 || getInner() != 0)
             DemonKeyUpdate(1, BloodKey);
-
     }
 
 
     public void ChangeInner(Material mat, uint SymbolKey)
     {
         Debug.Log("inner: " + SymbolKey);
-        //Material[] materials = GetComponent<MeshRenderer>().materials;
-        //materials[1] = mat;
-        //GetComponent<MeshRenderer>().materials = materials;
+        meshRenderers[1].material = mat;
 
         DemonKeyUpdate(10, SymbolKey);
     }
@@ -42,9 +43,7 @@ public class SlabManager : MonoBehaviour
     public void ChangeOuter(Material mat, uint CircleKey)
     {
         Debug.Log("outer: " + CircleKey);
-        Material[] materials = meshRenderer.materials;
-        materials[2] = mat;
-        meshRenderer.materials = materials;
+        meshRenderers[2].material = mat;
         DemonKeyUpdate(100, CircleKey);
     }
 
@@ -59,15 +58,6 @@ public class SlabManager : MonoBehaviour
 
         //Make value at the Keyslot Index equal to the new value.
         DemonKey += KeyValue * KeySlotIndex;
-    }
-
-    public void CleanSlate()
-    {
-        DemonKey = 0;
-        foreach (Transform art in transform)
-        {
-            art.GetComponent<MeshRenderer>().material = null;
-        }
     }
 
     public int getType() { return (int)DemonKey / 10; } 

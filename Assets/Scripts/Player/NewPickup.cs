@@ -69,7 +69,7 @@ public class NewPickup : MonoBehaviour
     }
 
 
-    void PickupObject(GameObject obj)
+    public void PickupObject(GameObject obj)
     {
         PickUp pickUpObj = obj.GetComponent<PickUp>();
         if (pickUpObj)
@@ -81,12 +81,13 @@ public class NewPickup : MonoBehaviour
                 if (snappingParent != null)
                     snappingParent.ExpectedObject = null;
             }
-            pickUpObj.PickedUp();
             
             // Set the holdParent as the parent of the picked object.
             pickUpObj.transform.position = holdParent.position;
             pickUpObj.transform.parent = holdParent;
             heldObj = obj;
+
+            pickUpObj.PickedUp();
         }
     }
 

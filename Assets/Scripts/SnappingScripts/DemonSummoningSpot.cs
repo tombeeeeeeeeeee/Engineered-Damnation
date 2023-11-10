@@ -35,7 +35,12 @@ public class DemonSummoningSpot : SnapSlab
         }
     }
 
-    public override void OnTriggerStay(Collider other)
+    public override void OnTriggerEnter(Collider other)
+    {
+        OnTriggerStay(other);
+    }
+
+    public void OnTriggerStay(Collider other)
     {
         if(!movingtoSummonSpot)
         {
@@ -87,6 +92,7 @@ public class DemonSummoningSpot : SnapSlab
 
         currDemon = Instantiate(sysManager.DemonTypes[demonIndex].Demon, DemonSummonTransform, false);
         currDemon.transform.position += Vector3.up *0.1f;
+
         Demon demon = currDemon.gameObject.GetComponent<Demon>(); 
         if(demon)
             demon.Colour(sysManager.LiquidTypes[colourIndex].color);
@@ -98,6 +104,5 @@ public class DemonSummoningSpot : SnapSlab
         Destroy(currDemon);
         Destroy(ExpectedObject);
     }
-
 }
 
