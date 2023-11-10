@@ -71,6 +71,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ba021fe-ad9c-451f-a454-e35755da2922"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d758b77-318d-4a54-a313-9c154e982385"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -291,24 +311,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""name"": ""Exit"",
                     ""type"": ""Button"",
                     ""id"": ""7286eedf-9f81-4611-b424-71855b524fc5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Action1"",
-                    ""type"": ""Button"",
-                    ""id"": ""6faed14a-fdc1-4f04-9880-2ff8e43f7d30"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Action2"",
-                    ""type"": ""Button"",
-                    ""id"": ""214300a8-f9ba-4f58-83d0-c3f65bfce3ea"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -381,26 +383,32 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
+                }
+            ]
+        },
+        {
+            ""name"": ""Pause"",
+            ""id"": ""f6a56f5d-30b2-43fb-b826-8a51951d79bf"",
+            ""actions"": [
+                {
+                    ""name"": ""Unpause"",
+                    ""type"": ""Button"",
+                    ""id"": ""29605ca5-4b00-4122-876a-2cc79d0979f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""664d63ed-4e5a-4f39-8eb8-74359969e109"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""c51bb63f-b9a1-47a8-961a-49fc6f01f220"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Action1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2fce2780-6910-4695-9beb-34f63c1ebd31"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Action2"",
+                    ""action"": ""Unpause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -416,12 +424,14 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // Focused
         m_Focused = asset.FindActionMap("Focused", throwIfNotFound: true);
         m_Focused_Cycle = m_Focused.FindAction("Cycle", throwIfNotFound: true);
         m_Focused_Exit = m_Focused.FindAction("Exit", throwIfNotFound: true);
-        m_Focused_Action1 = m_Focused.FindAction("Action1", throwIfNotFound: true);
-        m_Focused_Action2 = m_Focused.FindAction("Action2", throwIfNotFound: true);
+        // Pause
+        m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
+        m_Pause_Unpause = m_Pause.FindAction("Unpause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -486,6 +496,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -495,6 +506,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -519,6 +531,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -538,6 +553,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -548,16 +566,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private IFocusedActions m_FocusedActionsCallbackInterface;
     private readonly InputAction m_Focused_Cycle;
     private readonly InputAction m_Focused_Exit;
-    private readonly InputAction m_Focused_Action1;
-    private readonly InputAction m_Focused_Action2;
     public struct FocusedActions
     {
         private @Controls m_Wrapper;
         public FocusedActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Cycle => m_Wrapper.m_Focused_Cycle;
         public InputAction @Exit => m_Wrapper.m_Focused_Exit;
-        public InputAction @Action1 => m_Wrapper.m_Focused_Action1;
-        public InputAction @Action2 => m_Wrapper.m_Focused_Action2;
         public InputActionMap Get() { return m_Wrapper.m_Focused; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -573,12 +587,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Exit.started -= m_Wrapper.m_FocusedActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_FocusedActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_FocusedActionsCallbackInterface.OnExit;
-                @Action1.started -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction1;
-                @Action1.performed -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction1;
-                @Action1.canceled -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction1;
-                @Action2.started -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction2;
-                @Action2.performed -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction2;
-                @Action2.canceled -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction2;
             }
             m_Wrapper.m_FocusedActionsCallbackInterface = instance;
             if (instance != null)
@@ -589,16 +597,43 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
-                @Action1.started += instance.OnAction1;
-                @Action1.performed += instance.OnAction1;
-                @Action1.canceled += instance.OnAction1;
-                @Action2.started += instance.OnAction2;
-                @Action2.performed += instance.OnAction2;
-                @Action2.canceled += instance.OnAction2;
             }
         }
     }
     public FocusedActions @Focused => new FocusedActions(this);
+
+    // Pause
+    private readonly InputActionMap m_Pause;
+    private IPauseActions m_PauseActionsCallbackInterface;
+    private readonly InputAction m_Pause_Unpause;
+    public struct PauseActions
+    {
+        private @Controls m_Wrapper;
+        public PauseActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Unpause => m_Wrapper.m_Pause_Unpause;
+        public InputActionMap Get() { return m_Wrapper.m_Pause; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseActions instance)
+        {
+            if (m_Wrapper.m_PauseActionsCallbackInterface != null)
+            {
+                @Unpause.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnUnpause;
+                @Unpause.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnUnpause;
+                @Unpause.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnUnpause;
+            }
+            m_Wrapper.m_PauseActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Unpause.started += instance.OnUnpause;
+                @Unpause.performed += instance.OnUnpause;
+                @Unpause.canceled += instance.OnUnpause;
+            }
+        }
+    }
+    public PauseActions @Pause => new PauseActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -606,12 +641,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IFocusedActions
     {
         void OnCycle(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
-        void OnAction1(InputAction.CallbackContext context);
-        void OnAction2(InputAction.CallbackContext context);
+    }
+    public interface IPauseActions
+    {
+        void OnUnpause(InputAction.CallbackContext context);
     }
 }

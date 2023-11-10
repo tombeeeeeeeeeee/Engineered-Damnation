@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "2ba021fe-ad9c-451f-a454-e35755da2922",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -249,6 +258,17 @@
                     "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d758b77-318d-4a54-a313-9c154e982385",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -269,24 +289,6 @@
                     "name": "Exit",
                     "type": "Button",
                     "id": "7286eedf-9f81-4611-b424-71855b524fc5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Action1",
-                    "type": "Button",
-                    "id": "6faed14a-fdc1-4f04-9880-2ff8e43f7d30",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Action2",
-                    "type": "Button",
-                    "id": "214300a8-f9ba-4f58-83d0-c3f65bfce3ea",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -359,26 +361,32 @@
                     "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "Pause",
+            "id": "f6a56f5d-30b2-43fb-b826-8a51951d79bf",
+            "actions": [
+                {
+                    "name": "Unpause",
+                    "type": "Button",
+                    "id": "29605ca5-4b00-4122-876a-2cc79d0979f9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "664d63ed-4e5a-4f39-8eb8-74359969e109",
-                    "path": "<Keyboard>/e",
+                    "id": "c51bb63f-b9a1-47a8-961a-49fc6f01f220",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Action1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2fce2780-6910-4695-9beb-34f63c1ebd31",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Action2",
+                    "action": "Unpause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

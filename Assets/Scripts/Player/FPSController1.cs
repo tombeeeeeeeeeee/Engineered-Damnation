@@ -16,6 +16,7 @@ public class FPSController : MonoBehaviour
     public bool rotationLocked = false;
     public Camera bookCamera;
 
+
     Vector3 moveDirection = Vector3.zero;
 
     [HideInInspector]
@@ -23,10 +24,23 @@ public class FPSController : MonoBehaviour
     public Controls controls;
     private CharacterController cc;
     public bool locked = false;
+    public static bool gamePaused;
+    private Canvas Canvas;
+    private Canvas PauseCanvas;
+
+    void Start()
+    {
+        controls.Pause.Unpause.performed += UnpauseGame;
+        controls.Player.Pause.performed += PauseGame;
+        controls.Pause.Disable();
+    }
 
     void Awake()
     {
         cc = GetComponent<CharacterController>();
+        Canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        PauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
+        PauseCanvas.enabled = false;
 
         playerCamera.fieldOfView = CameraDefaultFOV;
         if (controls == null)
@@ -80,5 +94,33 @@ public class FPSController : MonoBehaviour
     {
         //locked = true;
         //cam.GetComponent<CameraTransition>().MoveToTarget();
+    }
+
+    void PauseGame(InputAction.CallbackContext context)
+    {
+        if (!gamePaused)
+        {
+            Debug.Log("Game paused " + context);
+            controls.Player.Disable();
+            controls.Pause.Enable();
+            Canvas.GetComponentInChildren<TMPro.TextMeshProUGUI>().enabled = gamePaused;
+            PauseCanvas.enabled = true;
+            Time.timeScale = 0f;
+            gamePaused = true;
+        }
+    }
+
+    void UnpauseGame(InputAction.CallbackContext context)
+    {
+        if (gamePaused)
+        {
+            Debug.Log("Game unpaused " + context);
+            controls.Player.Enable();
+            controls.Pause.Disable();
+            Canvas.GetComponentInChildren<TMPro.TextMeshProUGUI>().enabled = gamePaused;
+            PauseCanvas.enabled = false;
+            Time.timeScale = 1;
+            gamePaused = false;
+        }
     }
 }
