@@ -126,11 +126,9 @@ public class InteractionController : MonoBehaviour
 
     public void Focus(GameObject pickObj)
     {
-        //transform.parent.GetComponent<FPSController>().FocusCamera(pickObj.GetComponent<Focusable>().targetCamera);
-        transform.parent.GetComponent<FPSController>().locked = true;
         // trigger camera movemenent to the target object
         // and controls stuff
-        pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget();
+        pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget(controller.controls.Focused);
         pickObj.GetComponent<Focusable>().Init();
     }
 

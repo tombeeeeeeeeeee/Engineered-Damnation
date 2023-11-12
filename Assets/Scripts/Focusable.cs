@@ -61,6 +61,5 @@ public class Focusable : MonoBehaviour
     {
         player.controls.Focused.Cycle.performed -= Cycle;
         targetCamera.GetComponent<CameraTransition>().MoveToPlayer();
-        player.locked = false;
     }
 }

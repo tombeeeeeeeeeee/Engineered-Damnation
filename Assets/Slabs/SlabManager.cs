@@ -26,15 +26,12 @@ public class SlabManager : MonoBehaviour
 
     public void ChangeInner(Material mat, uint SymbolKey)
     {
-        Debug.Log("inner: " + SymbolKey);
         meshRenderers[1].material = mat;
-
         DemonKeyUpdate(10, SymbolKey);
     }
 
     public void ChangeOuter(Material mat, uint CircleKey)
     {
-        Debug.Log("outer: " + CircleKey);
         meshRenderers[2].material = mat;
         DemonKeyUpdate(100, CircleKey);
     }

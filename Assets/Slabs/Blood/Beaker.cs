@@ -46,9 +46,9 @@ public class Beaker : Potion
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
         foreach (RaycastHit hit in pouredOn)
         {
-            if (hit.rigidbody.gameObject.GetComponent<SlabManager>() != null)
+            if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
             {
-                hit.rigidbody.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
+                hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
                 liquidLevel = 0;
                 LiquidKey = 0;
             }
