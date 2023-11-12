@@ -21,8 +21,8 @@ public class DemonSummoningSpot : SnapSlab
 
         if(movingtoSummonSpot)
         {
-            ExpectedObject.transform.position = Vector3.Lerp(ExpectedObject.transform.position, DemonSummonTransform.position, slabToSpotPercentageOfTravel * Time.deltaTime);
-            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.01f)
+            ExpectedObject.transform.position += (DemonSummonTransform.position - ExpectedObject.transform.position) * slabToSpotPercentageOfTravel * Time.deltaTime;
+            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.05f)
             {
                 movingtoSummonSpot = false;
                 SummonFinishTime = Time.time + SummonDuration; 
@@ -75,7 +75,7 @@ public class DemonSummoningSpot : SnapSlab
         SlabManager slab = ExpectedObject.GetComponent<SlabManager>();
         int demonIndex = 0;
         int colourIndex = 0;
-        if(slab && slab.getBlood() != 0)
+        if(slab && slab.getLiquid() != 0)
         {
             sysManager.SummonedDemon(slab.DemonKey);
             for(int i = 0; i < sysManager.DemonTypes.Length; i++)
@@ -85,7 +85,7 @@ public class DemonSummoningSpot : SnapSlab
             }
             for (int i = 0; i < sysManager.LiquidTypes.Length; i++)
             {
-                if (sysManager.LiquidTypes[i].KeyIndex == slab.getBlood())
+                if (sysManager.LiquidTypes[i].KeyIndex == slab.getLiquid())
                     colourIndex = i;
             }
         }

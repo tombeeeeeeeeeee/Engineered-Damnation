@@ -7,7 +7,7 @@ public class SnappingGameObject : MonoBehaviour
 
     public bool moving = false;
     public GameObject ExpectedObject;
-    public NewPickup pickupScript;
+    public InteractionController pickupScript;
 
     protected virtual void Update()
     {

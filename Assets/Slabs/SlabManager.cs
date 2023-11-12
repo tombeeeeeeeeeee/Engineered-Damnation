@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class SlabManager : MonoBehaviour
@@ -13,13 +9,9 @@ public class SlabManager : MonoBehaviour
     private void Start()
     {
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer renderer in meshRenderers)
-        {
-            Debug.Log(renderer, renderer.gameObject);
-        }
     }
 
-    public void ChangeBlood(Color color, uint BloodKey)
+    public void ChangeLiquid(Color color, uint liquidKey)
     {
         if (getOuter() != 0)
             meshRenderers[2].material.color = color;
@@ -28,7 +20,7 @@ public class SlabManager : MonoBehaviour
             meshRenderers[1].material.color = color;
 
         if (getOuter() != 0 || getInner() != 0)
-            DemonKeyUpdate(1, BloodKey);
+            DemonKeyUpdate(1, liquidKey);
     }
 
 
@@ -65,5 +57,5 @@ public class SlabManager : MonoBehaviour
 
     public int getOuter() { return (int)DemonKey / 100; }
     public int getInner() { return ((int)DemonKey / 10) % 10; }
-    public int getBlood() { return (int)DemonKey % 10; }
+    public int getLiquid() { return (int)DemonKey % 10; }
 }

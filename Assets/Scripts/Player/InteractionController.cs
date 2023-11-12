@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
 
-public class NewPickup : MonoBehaviour
+public class InteractionController : MonoBehaviour
 {
     [Header("Game Settings")]
     public float pickUpRange = 5;                    // The range within which objects can be picked up.
@@ -13,7 +13,6 @@ public class NewPickup : MonoBehaviour
     public Transform holdParent;                     // The transform where the held object will be attached.
     public GameObject heldObj;                       // The currently held object.
     public float rotateSpeed = 20.0f;                 
-    private Vector2 rotation = Vector2.zero;
     private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
 
     [SerializeReference] FPSController controller;
@@ -23,11 +22,11 @@ public class NewPickup : MonoBehaviour
         if(controller.controls == null)
             controller.controls = new Controls();
 
-        controller.controls.Player.Interact.performed += NewPickUp;
+        controller.controls.Player.Interact.performed += Interaction;
     }
 
 
-    private void NewPickUp(InputAction.CallbackContext context)
+    private void Interaction(InputAction.CallbackContext context)
     {
 
         if (heldObj == null)

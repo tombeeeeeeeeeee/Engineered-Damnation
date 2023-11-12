@@ -6,7 +6,6 @@ TagManager:
   tags:
   - CanPickUp
   - CanInteract
-  - DemonBook
   - ToolSpawner
   - Focus
   layers:

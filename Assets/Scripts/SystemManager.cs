@@ -37,7 +37,7 @@ public class SystemManager : MonoBehaviour
     {
         if (!OnBreak)
         {
-            float DemonsExpected = TotalDemons * ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60));
+            int DemonsExpected = TotalDemons * (int) ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60));
 
             if(Time.time / (gameplayTimeMinutes * 60) >= 1 && !FinishUI.gameObject.activeSelf)
             {
@@ -50,7 +50,7 @@ public class SystemManager : MonoBehaviour
 
             else if (DemonsSummoned + AwaitingSummon.Count < DemonsExpected)
             {
-                string newDemonDescription = "";
+                string newDemonDescription;
                 uint newDemon = GetDemonKey(out newDemonDescription);
                 demonListSpawner.AddToList(newDemon, newDemonDescription);
                 AwaitingSummon.Add(newDemon);
@@ -58,6 +58,8 @@ public class SystemManager : MonoBehaviour
 
             else if(FinishUI.gameObject.activeSelf && FinishTime < Time.time)
             {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(mainMenuScene);
             }
         }

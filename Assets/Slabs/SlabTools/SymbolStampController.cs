@@ -6,7 +6,7 @@ public class SymbolStampController : Focusable
     [SerializeField] SymbolRing[] rings;
     [SerializeField] Transform raycastPos;
     [SerializeField] MeshRenderer[] planes;
-    [SerializeField] NewPickup playerPickUpScript;
+    [SerializeField] InteractionController playerPickUpScript;
     int currentRing = 0; // 0=outer 1=inner
 
     //   cycle input : turn left and right
@@ -70,7 +70,7 @@ public class SymbolStampController : Focusable
             slab.ChangeOuter(rings[1].symbol, (uint)rings[1].symbolIndex);
 
             //Give a faint imprint of the press onto the slab
-            slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
+            slab.ChangeLiquid(new Color(0, 0, 0, 50), 0);
 
             playerPickUpScript.PickupObject(slab.gameObject);
         }

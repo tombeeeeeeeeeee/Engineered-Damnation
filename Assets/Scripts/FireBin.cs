@@ -6,25 +6,21 @@ using UnityEngine;
 public class FireBin : MonoBehaviour
 {
 
-    [SerializeField] NewPickup pickupScript;
+    [SerializeField] InteractionController pickupScript;
 
     private void OnTriggerEnter(Collider other)
     {
         GameObject go = other.gameObject;
-        // assumes that any object with the CanPickUp tag also has the NewPickup script
-        if (go.tag == "CanPickUp")
+        // assumes that any object with the CanPickUp tag also has the InteractionController script
+        if (go.GetComponent<PickUp>())
         {
             if (pickupScript.heldObj == go)
                 pickupScript.DropObject();
 
-            if (!go.GetComponent<PickUp>().respawns)
-            {
-                Destroy(go);
-            }
+            if (go.GetComponent<Potion>())
+                go.GetComponent<Potion>().Respawn();
             else
-            {
-                go.GetComponent<PickUp>().Respawn();
-            }
+                Destroy(go);
         }
     }
 }

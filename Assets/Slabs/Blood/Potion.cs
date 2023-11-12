@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BloodVial : PickUp
+public class Potion : PickUp
 {
-    public uint BloodKey = 0;
-    public Color BloodColour;
+    public uint LiquidKey = 0;
+    public Color LiquidColour;
     [SerializeReference] protected Transform pourPosition;
     [SerializeField] protected float pourRadius;
     [SerializeField] protected float pourAngle;
 
+    Vector3 spawnPosition;
+    Quaternion spawnRotation;
+
+    protected override void Start()
+    {
+        base.Start();
+        spawnPosition = transform.position;
+        spawnRotation = transform.rotation;
+    }
+
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if (Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
     }
 
@@ -24,10 +34,10 @@ public class BloodVial : PickUp
         foreach(RaycastHit hit in pouredOn)
         {
             if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
-                hit.transform.gameObject.GetComponent<SlabManager>().ChangeBlood(BloodColour, BloodKey);
+                hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
 
-            else if (hit.transform.gameObject.GetComponent<BloodBeaker>() != null)
-                hit.transform.gameObject.GetComponent<BloodBeaker>().AddBlood(BloodKey);
+            else if (hit.transform.gameObject.GetComponent<Beaker>() != null)
+                hit.transform.gameObject.GetComponent<Beaker>().AddLiquid(LiquidKey);
         }
     }
 
@@ -41,6 +51,12 @@ public class BloodVial : PickUp
     {
         transform.rotation = Quaternion.identity;
         base.Dropped();
+    }
+
+    public void Respawn()
+    {
+        transform.position = spawnPosition;
+        transform.rotation = spawnRotation;
     }
 
 }

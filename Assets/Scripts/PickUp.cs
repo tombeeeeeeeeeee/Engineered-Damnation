@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PickUp : MonoBehaviour
 {
-    [SerializeField] int ignoreRaycast;
-
-
-    public bool respawns;
-    Vector3 spawnPosition;
-    Quaternion spawnRotation;
-
-
+    
     //Rigidbody properties:
     private Rigidbody rb;
     private bool usesGravity;
@@ -22,11 +16,8 @@ public class PickUp : MonoBehaviour
     private int defaultLayer;
 
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
-        spawnPosition = transform.position;
-        spawnRotation = transform.rotation;
-
         rb = GetComponent<Rigidbody>();
         usesGravity = rb.useGravity;
         drag = rb.drag;
@@ -45,7 +36,7 @@ public class PickUp : MonoBehaviour
         rb.freezeRotation = true;
 
         //ignore raycast so that the player can raycast through it.
-        gameObject.layer = ignoreRaycast;
+        gameObject.layer = 2;
     }
 
     public virtual void Dropped()
@@ -59,9 +50,5 @@ public class PickUp : MonoBehaviour
         gameObject.layer = defaultLayer;
     }
 
-    public void Respawn()
-    {
-        transform.position = spawnPosition;
-        transform.rotation = spawnRotation;
-    }
+
 }
