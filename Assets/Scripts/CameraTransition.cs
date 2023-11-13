@@ -94,18 +94,12 @@ public class CameraTransition : MonoBehaviour
                     controls.Enable();
                 else
                 {
-                    Debug.Log("Camera Arrived at Player");
                     playerController.controls.Player.Enable();
-                    SetCameraPlayer();
+                    playerController.playerCamera.enabled = true;
+                    GetComponent<Camera>().enabled = false;
                 }
             }
         }
-    }
-
-    public void SetCameraPlayer()
-    {
-        playerController.playerCamera.enabled = true;
-        GetComponent<Camera>().enabled = false;
     }
 
     public void SetCameraTarget()

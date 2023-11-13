@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class SystemManager : MonoBehaviour
 {
     public bool OnBreak = false;
-    public float gameplayTimeMinutes;
     [SerializeField] AnimationCurve ExpectedDemonCount;
     [SerializeField] DemonListSpawner demonListSpawner;
     [SerializeField] int TotalDemons = 100;
@@ -18,7 +17,7 @@ public class SystemManager : MonoBehaviour
     public PotionTypeInfo[] LiquidTypes;
     [SerializeField] float CompletetionPercentageForWin = 0.5f;
     [SerializeField] string mainMenuScene;
-
+    [SerializeField] Clock clock;
     [HideInInspector]
     public List<uint> AwaitingSummon;
     public int DemonsSummoned = 0;
@@ -37,9 +36,9 @@ public class SystemManager : MonoBehaviour
     {
         if (!OnBreak)
         {
-            int DemonsExpected = TotalDemons * (int) ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60));
+            int DemonsExpected = (int)(TotalDemons * ExpectedDemonCount.Evaluate(clock.playthroughPercentage));
 
-            if(Time.time / (gameplayTimeMinutes * 60) >= 1 && !FinishUI.gameObject.activeSelf)
+            if(clock.playthroughPercentage >= 1 && !FinishUI.gameObject.activeSelf)
             {
                 controls.Player.Disable();
                 string winOrLose = ((float)DemonsSummoned / (float)TotalDemons) > CompletetionPercentageForWin ? "you win" : "you lose";
@@ -76,7 +75,7 @@ public class SystemManager : MonoBehaviour
         bool DemonType = false; do 
         {
             int index = UnityEngine.Random.Range(1, DemonTypeLengthIndex);
-            if (DemonTypes[index].TimePercentageUnlocked < Time.time / (gameplayTimeMinutes * 60))
+            if (DemonTypes[index].TimePercentageUnlocked < clock.playthroughPercentage)
             {
                 demonKey += DemonTypes[index].KeyIndex * 10;
                 DemonDescription += DemonTypes[index].DemonDescription;
@@ -90,7 +89,7 @@ public class SystemManager : MonoBehaviour
         bool DemonBlood = false; do
         {
             int index = UnityEngine.Random.Range(0, LiquidTypeLengthIndex);
-            if (LiquidTypes[index].TimePercentageUnlocked < Time.time / (gameplayTimeMinutes * 60))
+            if (LiquidTypes[index].TimePercentageUnlocked < clock.playthroughPercentage)
             {
                 demonKey += LiquidTypes[index].KeyIndex;
                 DemonDescription = LiquidTypes[index].PotionDescription + " " + DemonDescription; 
@@ -101,11 +100,6 @@ public class SystemManager : MonoBehaviour
         } while (!DemonBlood);
 
         return demonKey;
-    }
-
-    public float ExpectedCompletionPercentage()
-    {
-        return DemonsSummoned / (TotalDemons * ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60)));
     }
 
     public bool SummonedDemon(uint demonKey)

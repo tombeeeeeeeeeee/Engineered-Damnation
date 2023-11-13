@@ -27,7 +27,7 @@ public class DemonListSpawner : MonoBehaviour
     {
         if (curChildList != null)
         {
-            if(curChildList.transform.localScale.y * ticketsOnList > curChildList.transform.localPosition.y)
+            if(curChildList.transform.lossyScale.y * ticketsOnList > (OrderSpawnTransform.position - curChildList.transform.position).magnitude)
                 curChildList.MoveUp(ticketSpeed);
         }
 
