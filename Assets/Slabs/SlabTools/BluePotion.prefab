@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2934770004354033367}
   - component: {fileID: 2934770004354033360}
   - component: {fileID: 2934770004354033361}
-  - component: {fileID: 2934770004354033362}
+  - component: {fileID: 7740310031863698025}
   m_Layer: 0
   m_Name: BluePotion
   m_TagString: CanPickUp
@@ -116,7 +116,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7027842360567560738, guid: 01db6cf2b73020f47aaa557cf1e31bac, type: 3}
---- !u!114 &2934770004354033362
+--- !u!114 &7740310031863698025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,13 +125,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2934770004354033372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475c18299235b694ead3d1ee639d61e9, type: 3}
+  m_Script: {fileID: 11500000, guid: f642d226f1d100f44a41686b0d237670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreRaycast: 0
-  respawns: 0
-  BloodKey: 2
-  BloodColour: {r: 0, g: 0.06795311, b: 1, a: 0}
+  LiquidKey: 2
+  LiquidColour: {r: 0, g: 0.24060774, b: 1, a: 1}
   pourPosition: {fileID: 2934770004354033363}
-  pourRadius: 0.1
-  pourAngle: 120
+  pourRadius: 1
+  pourAngle: 150

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4285041720073589021}
   - component: {fileID: 4456094348866850619}
   m_Layer: 2
-  m_Name: Cube (1)
+  m_Name: LiquidLevel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,9 +108,9 @@ GameObject:
   - component: {fileID: 5473119821160247805}
   - component: {fileID: 5473119821160247804}
   - component: {fileID: 5473119821160247807}
-  - component: {fileID: 7376923321053564233}
   - component: {fileID: 971096664421801433}
   - component: {fileID: 5844539815803100065}
+  - component: {fileID: 8269369541818027076}
   m_Layer: 0
   m_Name: Beaker
   m_TagString: CanPickUp
@@ -186,37 +186,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7376923321053564233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5473119821160247681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 358dad79f758eb447b6a5096d142b606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreRaycast: 2
-  respawns: 0
-  BloodKey: 0
-  BloodColour: {r: 0, g: 0, b: 0, a: 0}
-  pourPosition: {fileID: 7408700837416086860}
-  pourRadius: 0.5
-  pourAngle: 120
-  colors:
-  - {r: 0, g: 0, b: 0, a: 0}
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 0, g: 0.04080534, b: 1, a: 0}
-  - {r: 0.6698113, g: 0, b: 0.59839934, a: 0}
-  - {r: 1, g: 0.7861753, b: 0, a: 0}
-  - {r: 1, g: 0.48377472, b: 0, a: 0}
-  - {r: 0, g: 0.764151, b: 0.015248025, a: 0}
-  liquidLevel: 0
-  liquidLevels:
-  - {fileID: 8117237304136837432}
-  - {fileID: 1382518782690188911}
 --- !u!54 &971096664421801433
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -247,6 +216,35 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8269369541818027076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473119821160247681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a318dd1267c4140bccf29e086205e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LiquidKey: 0
+  LiquidColour: {r: 0, g: 0, b: 0, a: 0}
+  pourPosition: {fileID: 0}
+  pourRadius: 1
+  pourAngle: 150
+  colors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.21920633, b: 1, a: 1}
+  - {r: 0.66767836, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.92855227, b: 0, a: 1}
+  - {r: 1, g: 0.4136189, b: 0, a: 1}
+  - {r: 0.030838378, g: 0.5943396, b: 0.06199113, a: 1}
+  liquidLevel: 0
+  liquidLevels:
+  - {fileID: 8117237304136837432}
+  - {fileID: 1382518782690188911}
 --- !u!1 &7949147770301243568
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +289,7 @@ GameObject:
   - component: {fileID: 7783779157725468821}
   - component: {fileID: 284939072337802540}
   m_Layer: 2
-  m_Name: Cube
+  m_Name: LiquidLevel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
