@@ -58,7 +58,7 @@ public class FPSController : MonoBehaviour
 
     public void CameraZoom(InputAction.CallbackContext context)
     {
-        playerCamera.fieldOfView = playerCamera.fieldOfView == CameraDefaultFOV ? CameraZoomFOV : CameraDefaultFOV;
+        playerCamera.fieldOfView = context.ReadValueAsButton() ? CameraZoomFOV : CameraDefaultFOV;
     }
 
     public void Focus()

@@ -5,6 +5,7 @@ public class Focusable : MonoBehaviour
 {
     public Camera targetCamera;
     public FPSController player;
+    public GameObject ui;
 
     // this is called when the object is clicked on by player
     // inhertiing class demonbook calls back to base for this too
@@ -13,6 +14,8 @@ public class Focusable : MonoBehaviour
         player.controls.Focused.Cycle.performed += Cycle;
         player.controls.Focused.Action2.performed += Action2;
         player.controls.Focused.Exit.performed += Exit;
+
+        Invoke("ShowUI", targetCamera.gameObject.GetComponent<CameraTransition>().duration);
     }
 
     // handling input
@@ -36,7 +39,7 @@ public class Focusable : MonoBehaviour
             UpDown(player.controls.Focused.Cycle.ReadValue<Vector2>().y);
         }
     }
-
+    
     virtual public void Right()
     {
         // override if you want this to do something
@@ -61,5 +64,11 @@ public class Focusable : MonoBehaviour
     {
         player.controls.Focused.Cycle.performed -= Cycle;
         targetCamera.GetComponent<CameraTransition>().MoveToPlayer();
+        ui.SetActive(false);
+    }
+
+    void ShowUI()
+    {
+        ui.SetActive(true);
     }
 }
