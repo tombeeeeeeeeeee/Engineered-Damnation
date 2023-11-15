@@ -21,8 +21,8 @@ public class DemonSummoningSpot : SnapSlab
 
         if(movingtoSummonSpot)
         {
-            ExpectedObject.transform.position = Vector3.Lerp(ExpectedObject.transform.position, DemonSummonTransform.position, slabToSpotPercentageOfTravel * Time.deltaTime);
-            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.01f)
+            ExpectedObject.transform.position += (DemonSummonTransform.position - ExpectedObject.transform.position) * slabToSpotPercentageOfTravel * Time.deltaTime;
+            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.05f)
             {
                 movingtoSummonSpot = false;
                 SummonFinishTime = Time.time + SummonDuration; 
@@ -35,7 +35,12 @@ public class DemonSummoningSpot : SnapSlab
         }
     }
 
-    public override void OnTriggerStay(Collider other)
+    public override void OnTriggerEnter(Collider other)
+    {
+        OnTriggerStay(other);
+    }
+
+    public void OnTriggerStay(Collider other)
     {
         if(!movingtoSummonSpot)
         {
@@ -70,7 +75,7 @@ public class DemonSummoningSpot : SnapSlab
         SlabManager slab = ExpectedObject.GetComponent<SlabManager>();
         int demonIndex = 0;
         int colourIndex = 0;
-        if(slab && slab.getBlood() != 0)
+        if(slab && slab.getLiquid() != 0)
         {
             sysManager.SummonedDemon(slab.DemonKey);
             for(int i = 0; i < sysManager.DemonTypes.Length; i++)
@@ -80,13 +85,14 @@ public class DemonSummoningSpot : SnapSlab
             }
             for (int i = 0; i < sysManager.LiquidTypes.Length; i++)
             {
-                if (sysManager.LiquidTypes[i].KeyIndex == slab.getBlood())
+                if (sysManager.LiquidTypes[i].KeyIndex == slab.getLiquid())
                     colourIndex = i;
             }
         }
 
         currDemon = Instantiate(sysManager.DemonTypes[demonIndex].Demon, DemonSummonTransform, false);
         currDemon.transform.position += Vector3.up *0.1f;
+
         Demon demon = currDemon.gameObject.GetComponent<Demon>(); 
         if(demon)
             demon.Colour(sysManager.LiquidTypes[colourIndex].color);
@@ -98,6 +104,5 @@ public class DemonSummoningSpot : SnapSlab
         Destroy(currDemon);
         Destroy(ExpectedObject);
     }
-
 }
 

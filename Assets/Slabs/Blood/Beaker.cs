@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
-public class BloodBeaker : BloodVial
+public class Beaker : Potion
 {
     [SerializeField] Color[] colors;
     [SerializeField] int liquidLevel = 0;
@@ -23,7 +21,7 @@ public class BloodBeaker : BloodVial
                 if (i < liquidLevel)
                 {
                     liquidLevels[i].SetActive(true);
-                    liquidLevels[i].GetComponent<MeshRenderer>().material.color = BloodColour;
+                    liquidLevels[i].GetComponent<MeshRenderer>().material.color = LiquidColour;
                 }
                 else liquidLevels[i].SetActive(false);
             }
@@ -32,12 +30,12 @@ public class BloodBeaker : BloodVial
         }
     }
 
-    public void AddBlood(uint bloodKey)
+    public void AddLiquid(uint liquidKey)
     {
-        if (liquidLevel < 2 && bloodKey != BloodKey)
+        if (liquidLevel < 2 && liquidKey != LiquidKey)
         {
-            BloodKey += bloodKey;
-            BloodColour = colors[BloodKey];
+            LiquidKey += liquidKey;
+            LiquidColour = colors[LiquidKey];
             liquidLevel++;
         }
     }
@@ -48,11 +46,11 @@ public class BloodBeaker : BloodVial
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
         foreach (RaycastHit hit in pouredOn)
         {
-            if (hit.rigidbody.gameObject.GetComponent<SlabManager>() != null)
+            if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
             {
-                hit.rigidbody.gameObject.GetComponent<SlabManager>().ChangeBlood(BloodColour, BloodKey);
+                hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
                 liquidLevel = 0;
-                BloodKey = 0;
+                LiquidKey = 0;
             }
         }
     }

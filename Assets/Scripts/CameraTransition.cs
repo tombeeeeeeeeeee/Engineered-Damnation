@@ -21,19 +21,21 @@ public class CameraTransition : MonoBehaviour
 
     float elapsed;
     bool moving = false;
-    Camera thisCamera;
+
+    InputActionMap controls; 
 
     public void Start()
     {
         // camera should already be in the target position in editor
         initialPosition = transform.position;
         initialRotation = transform.rotation;
-        thisCamera = GetComponent<Camera>();
     }
 
-    public void MoveToTarget()
+    public void MoveToTarget(InputActionMap controlsForFocus)
     {
         SetCameraTarget();
+        
+        controls = controlsForFocus;
 
         targetPosition = initialPosition;
         targetRotation = initialRotation;
@@ -50,8 +52,7 @@ public class CameraTransition : MonoBehaviour
 
     public void MoveToPlayer()
     {
-        // cursed way of accounting for the difference between FixedUpdate fps (50) and actual fps (60)
-        Invoke("SetCameraPlayer", (float)((duration + (duration * 0.177)) / 60));
+        controls.Disable();
 
         targetPosition = playerCameraTransform.position;
         targetRotation = playerCameraTransform.rotation;
@@ -62,11 +63,12 @@ public class CameraTransition : MonoBehaviour
         transform.position = initialPosition;
         transform.rotation = initialRotation;
 
+
         elapsed = 0;
         moving = true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (moving)
         {
@@ -80,34 +82,33 @@ public class CameraTransition : MonoBehaviour
 
 
             if (elapsed < duration)
-            {
-                elapsed++;
-            }
+                elapsed += Time.deltaTime;
+
             else
             {
                 elapsed = 0;
                 moving = false;
+
+                //If the camera has finished moving, enable controlls of the new focus
+                if (targetPosition == initialPosition)
+                    controls.Enable();
+                else
+                {
+                    playerController.controls.Player.Enable();
+                    playerController.playerCamera.enabled = true;
+                    GetComponent<Camera>().enabled = false;
+                }
             }
         }
-    }
-
-    public void SetCameraPlayer()
-    {
-        playerController.playerCamera.enabled = true;
-        thisCamera.enabled = false;
-
-        playerController.controls.Player.Enable();
-        playerController.controls.Focused.Disable();
     }
 
     public void SetCameraTarget()
     {
         playerController.playerCamera.enabled = false;
-        thisCamera.enabled = true;
+        GetComponent<Camera>().enabled = true;
 
         playerController.controls.Player.Disable();
-        playerController.controls.Focused.Enable();
-
-        //playerController.controls.Focused.Cycle.performed += TurnPage;
+        //Breaks zoom so that zoom doesnt break
+        playerController.playerCamera.fieldOfView = playerController.CameraDefaultFOV;
     }
 }

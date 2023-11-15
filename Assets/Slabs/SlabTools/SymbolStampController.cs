@@ -1,17 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SymbolStampController : Focusable
 {
-    [SerializeField] SymbolRing innerRing;
-    [SerializeField] SymbolRing outerRing;
+    [SerializeField] SymbolRing[] rings;
     [SerializeField] Transform raycastPos;
-    [SerializeField] GameObject plane1;
-    [SerializeField] GameObject plane2;
+    [SerializeField] MeshRenderer[] planes;
+    [SerializeField] InteractionController playerPickUpScript;
     int currentRing = 0; // 0=outer 1=inner
 
     //   cycle input : turn left and right
@@ -21,76 +16,63 @@ public class SymbolStampController : Focusable
 
     private void Start()
     {
-        plane1.GetComponent<MeshRenderer>().material = outerRing.symbol;
-        plane2.GetComponent<MeshRenderer>().material = innerRing.symbol;
+        planes[0].material = rings[0].symbol;
+        planes[1].material = rings[1].symbol;
     }
 
-    public override void NextPage()
+    public override void Right()
     {
-        if (currentRing == 0)
-        {
-            outerRing.TurnDial(1);
-            plane1.GetComponent<MeshRenderer>().material = outerRing.symbol;
-        }
-        else
-        {
-            innerRing.TurnDial(1);
-            plane2.GetComponent<MeshRenderer>().material = innerRing.symbol;
-        }
+        rings[currentRing].TurnDial(1);
+        planes[currentRing].material = rings[currentRing].symbol;
     }
 
-    public override void PreviousPage()
+    public override void Left()
     {
-        if (currentRing == 0)
-        {
-            outerRing.TurnDial(-1);
-            plane1.GetComponent<MeshRenderer>().material = outerRing.symbol;
-        }
-        else
-        {
-            innerRing.TurnDial(-1);
-            plane2.GetComponent<MeshRenderer>().material = innerRing.symbol;
-        }
+        rings[currentRing].TurnDial(-1);
+        planes[currentRing].material = rings[currentRing].symbol;
     }
 
-    public override void Action1(InputAction.CallbackContext context)
+    public override void UpDown(float userInput)
     {
-        // switch rings
-        if (currentRing == 0)
-            currentRing = 1;
-        else
-            currentRing = 0;
+        currentRing = (int)(userInput + 1) / (int) 2;
     }
 
     public override void Action2(InputAction.CallbackContext context)
     {
         // stamp
+        Exit(context);
+    }
+
+    public override void Exit(InputAction.CallbackContext context)
+    {
         PressStamp();
-        Exit();
+        base.Exit(context);
     }
 
     public void PressStamp()
     {
         SlabManager slab = null;
 
-        Debug.Log(gameObject.name);
+        RaycastHit[] hits = Physics.RaycastAll(raycastPos.position, -transform.up, 1);
 
-        RaycastHit hit;
-
-        if(Physics.Raycast(raycastPos.position, -transform.up, out hit, 1))
+        foreach (RaycastHit hit in hits)
         {
-            if (hit.collider.gameObject.GetComponentInChildren<SlabManager>())
-                slab = hit.collider.gameObject.GetComponentInChildren<SlabManager>();
+            slab = hit.collider.gameObject.GetComponentInChildren<SlabManager>();
+            if (slab != null)
+                break;
         }
 
         if (slab != null)
         {
-            slab.ChangeInner(innerRing.symbol, (uint)innerRing.symbolIndex);
 
-            slab.ChangeOuter(outerRing.symbol, (uint)outerRing.symbolIndex);
+            slab.ChangeInner(rings[0].symbol, (uint)rings[0].symbolIndex);
+
+            slab.ChangeOuter(rings[1].symbol, (uint)rings[1].symbolIndex);
 
             //Give a faint imprint of the press onto the slab
-            //slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
+            slab.ChangeLiquid(new Color(0, 0, 0, 50), 0);
+
+            playerPickUpScript.PickupObject(slab.gameObject);
         }
     }
 }

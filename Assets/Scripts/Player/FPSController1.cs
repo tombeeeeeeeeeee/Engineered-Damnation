@@ -23,6 +23,7 @@ public class FPSController : MonoBehaviour
     public bool canMove = true;
     public Controls controls;
     private CharacterController cc;
+<<<<<<< HEAD:Assets/Scripts/Player/FPSController1.cs
     public bool locked = false;
     public static bool gamePaused;
     private Canvas Canvas;
@@ -34,6 +35,8 @@ public class FPSController : MonoBehaviour
         controls.Player.Pause.performed += PauseGame;
         controls.Pause.Disable();
     }
+=======
+>>>>>>> main:Assets/Scripts/Player/FPSController.cs
 
     void Awake()
     {
@@ -55,23 +58,19 @@ public class FPSController : MonoBehaviour
 
     void Update() 
     {
-        if (!locked)
-        {
-            // PLAYER MOVEMENT
-            Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
-            moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
-            cc.Move(moveDirection);
+        // PLAYER MOVEMENT
+        Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
+        moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
+        cc.Move(moveDirection);
 
+        // CAMERA MOVEMENT
+        Vector2 mouseDelta = rotationLocked ? Vector2.zero : controls.Player.Camera.ReadValue<Vector2>() * lookSpeed * Time.deltaTime;
 
-            // CAMERA MOVEMENT
-            Vector2 mouseDelta = rotationLocked ? Vector2.zero : controls.Player.Camera.ReadValue<Vector2>() * lookSpeed * Time.deltaTime;
+        transform.Rotate(new Vector3(0, mouseDelta.x, 0));
 
-            transform.Rotate(new Vector3(0, mouseDelta.x, 0));
-
-            playerCamera.transform.Rotate(new Vector3(-mouseDelta.y, 0, 0));
-            if (playerCamera.transform.localRotation.x > 0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(285, 0, 0));
-            else if (playerCamera.transform.localRotation.x < -0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(-285, 0, 0));
-        }
+        playerCamera.transform.Rotate(new Vector3(-mouseDelta.y, 0, 0));
+        if (playerCamera.transform.localRotation.x > 0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(285, 0, 0));
+        else if (playerCamera.transform.localRotation.x < -0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(-285, 0, 0));
     }
 
 
@@ -82,18 +81,7 @@ public class FPSController : MonoBehaviour
 
     public void Focus()
     {
-        locked = true;
-        // camera animation will be started here
-
-        //controls.Player.Disable();
-        //controls.Focused.Enable();
-        bookCamera.GetComponent<CameraTransition>().MoveToTarget();
-    }
-
-    public void FocusCamera(Camera cam)
-    {
-        //locked = true;
-        //cam.GetComponent<CameraTransition>().MoveToTarget();
+        bookCamera.GetComponent<CameraTransition>().MoveToTarget(controls.Focused);
     }
 
     void PauseGame(InputAction.CallbackContext context)

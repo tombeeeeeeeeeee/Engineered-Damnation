@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
 
-public class NewPickup : MonoBehaviour
+public class InteractionController : MonoBehaviour
 {
     [Header("Game Settings")]
     public float pickUpRange = 5;                    // The range within which objects can be picked up.
@@ -13,10 +13,7 @@ public class NewPickup : MonoBehaviour
     public Transform holdParent;                     // The transform where the held object will be attached.
     public GameObject heldObj;                       // The currently held object.
     public float rotateSpeed = 20.0f;                 
-    private Vector2 rotation = Vector2.zero;
     private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
-
-
 
     [SerializeReference] FPSController controller;
 
@@ -25,11 +22,11 @@ public class NewPickup : MonoBehaviour
         if(controller.controls == null)
             controller.controls = new Controls();
 
-        controller.controls.Player.Interact.performed += NewPickUp;
+        controller.controls.Player.Interact.performed += Interaction;
     }
 
 
-    void NewPickUp(InputAction.CallbackContext context)
+    private void Interaction(InputAction.CallbackContext context)
     {
 
         if (heldObj == null)
@@ -43,17 +40,9 @@ public class NewPickup : MonoBehaviour
                 if (hit.transform.gameObject.tag == "CanPickUp")
                     PickupObject(hit.transform.gameObject);
 
-                else if (hit.transform.gameObject.tag == "ToolSpawner")
-                {
-                    GameObject tool = Instantiate(hit.transform.gameObject.GetComponent<ToolSpawner>().getToolFromCollection(), holdParent);
-                    PickupObject(tool);
-                }
-
                 else if (hit.transform.gameObject.tag == "Button")
                     hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
 
-                else if (hit.transform.gameObject.tag == "DemonBook")
-                    OpenBook(hit.transform.gameObject);
 
                 else if (hit.transform.gameObject.tag == "Focus")
                     Focus(hit.transform.gameObject);
@@ -66,21 +55,10 @@ public class NewPickup : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-    private void Update()
-=======
     private void Update() // not sure if this needs to be Update or should be FixedUpdate (or if it matters at all)
->>>>>>> origin/dex
     {
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
-
         if (heldObj)
             MoveObject();
-
-        controller.rotationLocked = controller.controls.Player.Rotate.IsPressed();
-
-        if(controller.rotationLocked)
-            RotateObject();
     }
 
     void MoveObject()
@@ -90,35 +68,52 @@ public class NewPickup : MonoBehaviour
     }
 
 
-    void PickupObject(GameObject pickObj)
+    public void PickupObject(GameObject obj)
     {
-        if (pickObj.GetComponent<Rigidbody>())
+        PickUp pickUpObj = obj.GetComponent<PickUp>();
+        if (pickUpObj)
         {
-            Rigidbody objRig = pickObj.GetComponent<Rigidbody>();
-            // Disable gravity, increase drag, and freeze rotation to simulate holding.
-            objRig.useGravity = false;
-            objRig.drag = 10;
-            objRig.angularVelocity = Vector3.zero;
-            objRig.freezeRotation = true;
-
+            //if the object is attached to something, break it FREEE!!
+            if(obj.transform.parent != null)
+            {
+                SnappingGameObject snappingParent = obj.transform.parent.GetComponent<SnappingGameObject>();
+                if (snappingParent != null)
+                    snappingParent.ExpectedObject = null;
+            }
+            
             // Set the holdParent as the parent of the picked object.
-            objRig.transform.position = holdParent.position;
-            objRig.transform.parent = holdParent;
-            heldObj = pickObj;
+            pickUpObj.transform.position = holdParent.position;
+            pickUpObj.transform.parent = holdParent;
+            heldObj = obj;
 
+            pickUpObj.PickedUp();
         }
     }
 
     public void DropObject()
     {
-        Rigidbody heldRig = heldObj.GetComponent<Rigidbody>();
-        // Enable gravity, reset drag, and unfreeze rotation to drop the object.
-        heldRig.useGravity = true;
-        heldRig.drag = 1;
-        heldRig.freezeRotation = false;
+        //Grab the object and run its dropping code
+        PickUp obj = heldObj.GetComponent<PickUp>();
+        obj.Dropped();
 
-        // Remove the holdParent as the parent of the held object.
+        //detattch the object from the player
         heldObj.transform.parent = null;
+
+        //Look for snapping points the object might be able to move to
+        RaycastHit[] hits;
+        hits = Physics.SphereCastAll(holdParent.position, 0.2f, holdParent.forward, 1f);
+        foreach (RaycastHit hit in hits) 
+        {
+            //Check that the object can snap, and that there already isn't an object in the spot.
+            SnappingGameObject snapSpot = hit.collider.gameObject.GetComponent<SnappingGameObject>();
+            if (snapSpot != null && snapSpot.SnapType(heldObj) && snapSpot.ExpectedObject == null)
+            {
+                snapSpot.moving = true;
+                heldObj = null;
+                return;
+            }
+        }
+        // Remove the holdParent as the parent of the held object.
         heldObj = null;
     }
 
@@ -131,22 +126,10 @@ public class NewPickup : MonoBehaviour
 
     public void Focus(GameObject pickObj)
     {
-        //transform.parent.GetComponent<FPSController>().FocusCamera(pickObj.GetComponent<Focusable>().targetCamera);
-        transform.parent.GetComponent<FPSController>().locked = true;
         // trigger camera movemenent to the target object
         // and controls stuff
-        pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget();
+        pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget(controller.controls.Focused);
         pickObj.GetComponent<Focusable>().Init();
     }
 
-    public void RotateObject()
-    {
-        if(heldObj != null)
-        {
-            rotation = controller.controls.Player.Camera.ReadValue<Vector2>() * rotateSpeed * Time.deltaTime;
-
-            heldObj.transform.Rotate(transform.up, -rotation.x, Space.World);
-            heldObj.transform.Rotate(transform.right, rotation.y, Space.World);
-        }
-    }
 }

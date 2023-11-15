@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class SystemManager : MonoBehaviour
 {
     public bool OnBreak = false;
-    public float gameplayTimeMinutes;
     [SerializeField] AnimationCurve ExpectedDemonCount;
     [SerializeField] DemonListSpawner demonListSpawner;
     [SerializeField] int TotalDemons = 100;
@@ -18,7 +17,7 @@ public class SystemManager : MonoBehaviour
     public PotionTypeInfo[] LiquidTypes;
     [SerializeField] float CompletetionPercentageForWin = 0.5f;
     [SerializeField] string mainMenuScene;
-
+    [SerializeField] Clock clock;
     [HideInInspector]
     public List<uint> AwaitingSummon;
     public int DemonsSummoned = 0;
@@ -37,9 +36,9 @@ public class SystemManager : MonoBehaviour
     {
         if (!OnBreak)
         {
-            float DemonsExpected = TotalDemons * ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60));
+            int DemonsExpected = (int)(TotalDemons * ExpectedDemonCount.Evaluate(clock.playthroughPercentage));
 
-            if(Time.time / (gameplayTimeMinutes * 60) >= 1 && !FinishUI.gameObject.activeSelf)
+            if(clock.playthroughPercentage >= 1 && !FinishUI.gameObject.activeSelf)
             {
                 controls.Player.Disable();
                 string winOrLose = ((float)DemonsSummoned / (float)TotalDemons) > CompletetionPercentageForWin ? "you win" : "you lose";
@@ -50,7 +49,7 @@ public class SystemManager : MonoBehaviour
 
             else if (DemonsSummoned + AwaitingSummon.Count < DemonsExpected)
             {
-                string newDemonDescription = "";
+                string newDemonDescription;
                 uint newDemon = GetDemonKey(out newDemonDescription);
                 demonListSpawner.AddToList(newDemon, newDemonDescription);
                 AwaitingSummon.Add(newDemon);
@@ -58,6 +57,8 @@ public class SystemManager : MonoBehaviour
 
             else if(FinishUI.gameObject.activeSelf && FinishTime < Time.time)
             {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(mainMenuScene);
             }
         }
@@ -74,7 +75,7 @@ public class SystemManager : MonoBehaviour
         bool DemonType = false; do 
         {
             int index = UnityEngine.Random.Range(1, DemonTypeLengthIndex);
-            if (DemonTypes[index].TimePercentageUnlocked < Time.time / (gameplayTimeMinutes * 60))
+            if (DemonTypes[index].TimePercentageUnlocked < clock.playthroughPercentage)
             {
                 demonKey += DemonTypes[index].KeyIndex * 10;
                 DemonDescription += DemonTypes[index].DemonDescription;
@@ -88,7 +89,7 @@ public class SystemManager : MonoBehaviour
         bool DemonBlood = false; do
         {
             int index = UnityEngine.Random.Range(0, LiquidTypeLengthIndex);
-            if (LiquidTypes[index].TimePercentageUnlocked < Time.time / (gameplayTimeMinutes * 60))
+            if (LiquidTypes[index].TimePercentageUnlocked < clock.playthroughPercentage)
             {
                 demonKey += LiquidTypes[index].KeyIndex;
                 DemonDescription = LiquidTypes[index].PotionDescription + " " + DemonDescription; 
@@ -99,11 +100,6 @@ public class SystemManager : MonoBehaviour
         } while (!DemonBlood);
 
         return demonKey;
-    }
-
-    public float ExpectedCompletionPercentage()
-    {
-        return DemonsSummoned / (TotalDemons * ExpectedDemonCount.Evaluate(Time.time / (gameplayTimeMinutes * 60)));
     }
 
     public bool SummonedDemon(uint demonKey)
