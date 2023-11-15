@@ -87,10 +87,10 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DistortionStrength: 1.24
+    - _DistortionStrength: 1.15
     - _DstBlend: 10
     - _EnvironmentReflections: 1
-    - _FireBottomOffset: 0.19
+    - _FireBottomOffset: 0.3
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -106,11 +106,11 @@ Material:
     - _SrcBlend: 5
     - _Surface: 1
     - _WorkflowMode: 1
-    - _YStretch: 1.55
+    - _YStretch: 2.12
     - _ZWrite: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.009433985, g: 0.009433985, b: 0.009433985, a: 1}
+    - _Color: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 0.90588236}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NoiseScale: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

@@ -117,13 +117,6 @@ public class InteractionController : MonoBehaviour
         heldObj = null;
     }
 
-    public void OpenBook(GameObject pickObj)
-    {
-        // the GameObject with tag "DemonBook" is passed in
-        // but currently isn't used for anything
-        transform.parent.GetComponent<FPSController>().Focus();
-    }
-
     public void Focus(GameObject pickObj)
     {
         // trigger camera movemenent to the target object
