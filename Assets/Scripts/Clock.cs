@@ -12,16 +12,14 @@ public class Clock : MonoBehaviour
     private int breakTimesIndex = 0;
     public float gameLengthInMinutes;
 
+    [SerializeField] int startingTime;
+    [SerializeField] int shiftLength;
+    [SerializeField] SequenceObject endingSequenceStarter;
+
     private int hours;
     private int minutes;
 
     [SerializeField] TextMeshProUGUI clockDisplay;
-
-    // Start is called before the first frame update
-    void Start()
-    { 
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -29,9 +27,9 @@ public class Clock : MonoBehaviour
         breakTimesIndex %= breakTimes.Length;  
 
         //Calculate the hours and minutes for the clock
-        hours = (int)(Time.timeSinceLevelLoad / (gameLengthInMinutes * 60) * 8) + (militaryTime ? 9 : 8);
+        hours = (int)(Time.timeSinceLevelLoad / (gameLengthInMinutes * 60) * shiftLength) + (militaryTime ? startingTime : startingTime - 1);
         hours = militaryTime ? hours%24 : hours%12 + 1;
-        minutes = (int)(Time.timeSinceLevelLoad / (gameLengthInMinutes * 60) * 8 * 60);
+        minutes = (int)(Time.timeSinceLevelLoad / (gameLengthInMinutes * 60) * shiftLength * 60);
         minutes %= 60;
 
         //change the clocks text
@@ -45,6 +43,10 @@ public class Clock : MonoBehaviour
             breakTimesIndex++;
         }
 
+        else if(hours == shiftLength + startingTime)
+        {
+           endingSequenceStarter.Begin(manager.winState);
+        }
 
     }
 
@@ -52,4 +54,6 @@ public class Clock : MonoBehaviour
     {
         get { return Time.timeSinceLevelLoad / (gameLengthInMinutes * 60); }
     }
+
+
 }
