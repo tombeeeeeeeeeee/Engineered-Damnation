@@ -6,7 +6,12 @@ public class FireBallSequence : SequenceObject
 {
     public override void Begin(bool decision)
     {
-        throw new System.NotImplementedException();
+        this.decision = decision;
+
+        if (!inSequence)
+        {
+
+        }
     }
 
     public override void End()
