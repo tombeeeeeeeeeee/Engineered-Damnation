@@ -56,13 +56,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7df0f5ad04f844ca3f3878e077f510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 7.5
-  playerCamera: {fileID: 0}
-  lookSpeed: 2
+  walkingSpeed: 5
+  playerCamera: {fileID: 2031173083566962053}
+  lookSpeed: 50
   CameraDefaultFOV: 60
   CameraZoomFOV: 15
   rotationLocked: 0
+  bookCamera: {fileID: 0}
   canMove: 1
+  locked: 0
 --- !u!136 &7775050711131565877
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -72,8 +74,8 @@ CapsuleCollider:
   m_GameObject: {fileID: 252751700111850580}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
+  m_Enabled: 0
+  m_Radius: 0.25
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: -0.5, z: 0}
@@ -222,7 +224,6 @@ MonoBehaviour:
   smoothTime: 0.1
   holdParent: {fileID: 5405737316074807307}
   heldObj: {fileID: 0}
-  bookUI: {fileID: 0}
   rotateSpeed: 2
   controller: {fileID: 4278455459969372492}
 --- !u!1 &1782825043819594980

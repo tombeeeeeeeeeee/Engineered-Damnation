@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,7 +17,7 @@ public class DemonBook : Focusable
         base.Init(); // base class adds the turnpage function with init so this will too
     }
 
-    public override void NextPage()
+    public override void Right()
     {
         Debug.Log("next");
         pageNumber++;
@@ -26,7 +25,7 @@ public class DemonBook : Focusable
         page.material = pages[pageNumber];
     }
 
-    public override void PreviousPage()
+    public override void Left()
     {
         pageNumber--;
         if (pageNumber < 0) pageNumber = 0;

@@ -27,7 +27,6 @@ public class PlaceholderUi : MonoBehaviour
         else if (buttonType == 1) 
         {
             Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
         }
     }
 }

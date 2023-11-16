@@ -11,17 +11,6 @@ public class Order : OrderList
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] Image checkedOffArt;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
     public void Initialise(uint demonKey, string demonDescription)
     {
         this.demonKey = demonKey;
@@ -29,15 +18,21 @@ public class Order : OrderList
         checkedOffArt.enabled = false ;
     }
 
-
+    /// <summary>
+    /// Check Off a Demon from a todo list
+    /// </summary>
+    /// <param name="demonKey"></param>
+    /// <returns>True when the key has been found.</returns>
     public override bool CheckOffDemon(uint demonKey)
     {
-        if(demonKey == this.demonKey)
+        //If the keys match, and this demon hasn't been checked off
+        if(demonKey == this.demonKey && !checkedOffArt.enabled)
         {
+            //check off the demon, and stop the recursion
             checkedOffArt.enabled = true;
             return true;
         }
-        else 
+        else  //continue down the list
            return base.CheckOffDemon(demonKey);
     }
 }

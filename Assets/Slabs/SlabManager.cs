@@ -1,46 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class SlabManager : MonoBehaviour
 {
     //This key catalogues the type of demon the slab will summon
     public uint DemonKey = 000;
+    private MeshRenderer[] meshRenderers;
 
-    public void ChangeBlood(Color color, uint BloodKey)
+    private void Start()
     {
-        Material[] materials = GetComponent<MeshRenderer>().materials;
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+    }
 
-        MeshRenderer[] SlabArt = GetComponentsInChildren<MeshRenderer>();
+    public void ChangeLiquid(Color color, uint liquidKey)
+    {
         if (getOuter() != 0)
-            materials[2].color = color;
+            meshRenderers[2].material.color = color;
 
         if(getInner() != 0)
-            materials[1].color = color;
-
-        GetComponent<MeshRenderer>().materials = materials;
+            meshRenderers[1].material.color = color;
 
         if (getOuter() != 0 || getInner() != 0)
-            DemonKeyUpdate(1, BloodKey);
-
+            DemonKeyUpdate(1, liquidKey);
     }
 
 
     public void ChangeInner(Material mat, uint SymbolKey)
     {
-        Material[] materials = GetComponent<MeshRenderer>().materials;
-        materials[1] = mat;
-        GetComponent<MeshRenderer>().materials = materials;
+        meshRenderers[1].material = mat;
         DemonKeyUpdate(10, SymbolKey);
     }
 
     public void ChangeOuter(Material mat, uint CircleKey)
     {
-        Material[] materials = GetComponent<MeshRenderer>().materials;
-        materials[2] = mat;
-        GetComponent<MeshRenderer>().materials = materials;
+        meshRenderers[2].material = mat;
         DemonKeyUpdate(100, CircleKey);
     }
 
@@ -48,7 +40,7 @@ public class SlabManager : MonoBehaviour
     {
         //Determine the value of the current key in the slot.
         uint KeySlotCurrentValue = (DemonKey/KeySlotIndex) % 10;
-
+        
         //If the value in the keyslot is not 0, then delete it.
         if (KeySlotCurrentValue > 0) 
             DemonKey -= KeySlotCurrentValue * KeySlotIndex;
@@ -57,19 +49,10 @@ public class SlabManager : MonoBehaviour
         DemonKey += KeyValue * KeySlotIndex;
     }
 
-    public void CleanSlate()
-    {
-        DemonKey = 0;
-        foreach (Transform art in transform)
-        {
-            art.GetComponent<MeshRenderer>().material = null;
-        }
-    }
-
     public int getType() { return (int)DemonKey / 10; } 
     public int getLocation() { return (int)DemonKey % 10; }
 
     public int getOuter() { return (int)DemonKey / 100; }
     public int getInner() { return ((int)DemonKey / 10) % 10; }
-    public int getBlood() { return (int)DemonKey % 10; }
+    public int getLiquid() { return (int)DemonKey % 10; }
 }

@@ -1,48 +1,78 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class SymbolStampController : MonoBehaviour
+public class SymbolStampController : Focusable
 {
-    [SerializeField] RingManager innerSymbol;
-    [SerializeField] RingManager outerSymbol;
+    [SerializeField] SymbolRing[] rings;
+    [SerializeField] Transform raycastPos;
+    [SerializeField] MeshRenderer[] planes;
+    [SerializeField] InteractionController playerPickUpScript;
+    int currentRing = 0; // 0=outer 1=inner
 
-    // Start is called before the first frame update
-    void Start()
+    //   cycle input : turn left and right
+    //    exit input : exit
+    // action1 input : switch ring
+    // action2 input : stamp
+
+    private void Start()
     {
-
+        planes[0].material = rings[0].symbol;
+        planes[1].material = rings[1].symbol;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Right()
     {
-
+        rings[currentRing].TurnDial(1);
+        planes[currentRing].material = rings[currentRing].symbol;
     }
 
+    public override void Left()
+    {
+        rings[currentRing].TurnDial(-1);
+        planes[currentRing].material = rings[currentRing].symbol;
+    }
+
+    public override void UpDown(float userInput)
+    {
+        currentRing = (int)(userInput + 1) / (int) 2;
+    }
+
+    public override void Action2(InputAction.CallbackContext context)
+    {
+        // stamp
+        Exit(context);
+    }
+
+    public override void Exit(InputAction.CallbackContext context)
+    {
+        PressStamp();
+        base.Exit(context);
+    }
 
     public void PressStamp()
     {
         SlabManager slab = null;
 
-        Debug.Log(gameObject.name);
+        RaycastHit[] hits = Physics.RaycastAll(raycastPos.position, -transform.up, 1);
 
-        RaycastHit hit;
-
-        if(Physics.Raycast(transform.position, -transform.up, out hit, 1))
+        foreach (RaycastHit hit in hits)
         {
-            if (hit.collider.gameObject.GetComponentInChildren<SlabManager>())
-                slab = hit.collider.gameObject.GetComponentInChildren<SlabManager>();
+            slab = hit.collider.gameObject.GetComponentInChildren<SlabManager>();
+            if (slab != null)
+                break;
         }
 
         if (slab != null)
         {
-            slab.ChangeInner(innerSymbol.symbol, (uint)innerSymbol.symbolIndex);
 
-            slab.ChangeOuter(outerSymbol.symbol, (uint)outerSymbol.symbolIndex);
+            slab.ChangeInner(rings[0].symbol, (uint)rings[0].symbolIndex);
+
+            slab.ChangeOuter(rings[1].symbol, (uint)rings[1].symbolIndex);
 
             //Give a faint imprint of the press onto the slab
-            slab.ChangeBlood(new Color(0, 0, 0, 50), 0);
+            slab.ChangeLiquid(new Color(0, 0, 0, 50), 0);
+
+            playerPickUpScript.PickupObject(slab.gameObject);
         }
     }
 }

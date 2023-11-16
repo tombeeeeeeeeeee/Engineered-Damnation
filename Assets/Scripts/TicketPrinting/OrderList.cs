@@ -7,6 +7,13 @@ public class OrderList : PickUp
     [SerializeField] protected Transform attachPosition;
     protected Order childOrder;
 
+    /// <summary>
+    /// Adds Demon to a todo list
+    /// </summary>
+    /// <param name="demonKey"></param>
+    /// <param name="demonDescription"></param>
+    /// <param name="childOrderPrefab"></param>
+    /// <returns></returns>
     public OrderList AddToList(uint demonKey, string demonDescription, Order childOrderPrefab)
     {
         if(childOrder == null)
@@ -20,6 +27,11 @@ public class OrderList : PickUp
             return childOrder.AddToList(demonKey, demonDescription,childOrderPrefab);
     }
 
+    /// <summary>
+    /// Check off a completed demon from the the todo list
+    /// </summary>
+    /// <param name="demonKey"></param>
+    /// <returns>True if a demon is found, and false if not.</returns>
     public virtual bool CheckOffDemon(uint demonKey)
     {
         if(childOrder != null)
@@ -28,6 +40,10 @@ public class OrderList : PickUp
             return false;
     }
 
+    /// <summary>
+    /// Move tickets up out of the machine
+    /// </summary>
+    /// <param name="speed"></param>
     public void MoveUp(float speed)
     {
         if(transform.parent != null)

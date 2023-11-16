@@ -5,13 +5,22 @@ using UnityEngine;
 
 public class FireBin : MonoBehaviour
 {
-    public List<GameObject> destructibleObjects;
+
+    [SerializeField] InteractionController pickupScript;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Destructable>())
+        GameObject go = other.gameObject;
+        // assumes that any object with the CanPickUp tag also has the InteractionController script
+        if (go.GetComponent<PickUp>())
         {
-            Destroy(other.gameObject);
+            if (pickupScript.heldObj == go)
+                pickupScript.DropObject();
+
+            if (go.GetComponent<Potion>())
+                go.GetComponent<Potion>().Respawn();
+            else
+                Destroy(go);
         }
     }
 }

@@ -295,13 +295,31 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action1"",
+                    ""type"": ""Button"",
+                    ""id"": ""6faed14a-fdc1-4f04-9880-2ff8e43f7d30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action2"",
+                    ""type"": ""Button"",
+                    ""id"": ""214300a8-f9ba-4f58-83d0-c3f65bfce3ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""WASD"",
                     ""id"": ""3fa49007-262e-47e6-8366-24edddd3c751"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -312,7 +330,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""822c2d89-d89b-4a9e-a2e6-115cb5f37768"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -323,7 +341,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""fe869e2f-4bd7-438a-88e7-d174f0f49d3a"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -354,6 +372,61 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""ArrowKeys"",
+                    ""id"": ""484276a7-0f6e-40b5-ad0d-ebe42121ebbb"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""835718fd-91ce-44f0-a5cb-767820567a12"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""58dc09d7-c82d-4a9f-9bb3-ce3a7aad204b"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""cc115b96-7053-435a-92da-aad3e2b7d069"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0d693341-3dca-4a90-9349-1d7bb8246555"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""02dde031-e269-4042-b29f-1da331fc6818"",
                     ""path"": ""<Keyboard>/escape"",
@@ -361,6 +434,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73543d27-25f6-4046-8546-623175f507b3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bbd8603-2b30-4adf-b8b3-d5422e0a9531"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fce2780-6910-4695-9beb-34f63c1ebd31"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -380,6 +486,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Focused = asset.FindActionMap("Focused", throwIfNotFound: true);
         m_Focused_Cycle = m_Focused.FindAction("Cycle", throwIfNotFound: true);
         m_Focused_Exit = m_Focused.FindAction("Exit", throwIfNotFound: true);
+        m_Focused_Action1 = m_Focused.FindAction("Action1", throwIfNotFound: true);
+        m_Focused_Action2 = m_Focused.FindAction("Action2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -506,12 +614,16 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private IFocusedActions m_FocusedActionsCallbackInterface;
     private readonly InputAction m_Focused_Cycle;
     private readonly InputAction m_Focused_Exit;
+    private readonly InputAction m_Focused_Action1;
+    private readonly InputAction m_Focused_Action2;
     public struct FocusedActions
     {
         private @Controls m_Wrapper;
         public FocusedActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Cycle => m_Wrapper.m_Focused_Cycle;
         public InputAction @Exit => m_Wrapper.m_Focused_Exit;
+        public InputAction @Action1 => m_Wrapper.m_Focused_Action1;
+        public InputAction @Action2 => m_Wrapper.m_Focused_Action2;
         public InputActionMap Get() { return m_Wrapper.m_Focused; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -527,6 +639,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Exit.started -= m_Wrapper.m_FocusedActionsCallbackInterface.OnExit;
                 @Exit.performed -= m_Wrapper.m_FocusedActionsCallbackInterface.OnExit;
                 @Exit.canceled -= m_Wrapper.m_FocusedActionsCallbackInterface.OnExit;
+                @Action1.started -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction1;
+                @Action1.performed -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction1;
+                @Action1.canceled -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction1;
+                @Action2.started -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction2;
+                @Action2.performed -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction2;
+                @Action2.canceled -= m_Wrapper.m_FocusedActionsCallbackInterface.OnAction2;
             }
             m_Wrapper.m_FocusedActionsCallbackInterface = instance;
             if (instance != null)
@@ -537,6 +655,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Exit.started += instance.OnExit;
                 @Exit.performed += instance.OnExit;
                 @Exit.canceled += instance.OnExit;
+                @Action1.started += instance.OnAction1;
+                @Action1.performed += instance.OnAction1;
+                @Action1.canceled += instance.OnAction1;
+                @Action2.started += instance.OnAction2;
+                @Action2.performed += instance.OnAction2;
+                @Action2.canceled += instance.OnAction2;
             }
         }
     }
@@ -553,5 +677,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnCycle(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+        void OnAction1(InputAction.CallbackContext context);
+        void OnAction2(InputAction.CallbackContext context);
     }
 }
