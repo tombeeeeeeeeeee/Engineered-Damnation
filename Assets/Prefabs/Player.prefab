@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 252751700111850600}
   - component: {fileID: 252751700111850582}
-  - component: {fileID: 4278455459969372492}
   - component: {fileID: 7775050711131565877}
   - component: {fileID: 4300676057830462838}
+  - component: {fileID: 7167117088997535387}
   m_Layer: 0
-  m_Name: PlayerCamera
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,27 +44,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252751700111850580}
   m_Enabled: 1
---- !u!114 &4278455459969372492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252751700111850580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e7df0f5ad04f844ca3f3878e077f510, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkingSpeed: 5
-  playerCamera: {fileID: 2031173083566962053}
-  lookSpeed: 50
-  CameraDefaultFOV: 60
-  CameraZoomFOV: 15
-  rotationLocked: 0
-  bookCamera: {fileID: 0}
-  canMove: 1
-  locked: 0
 --- !u!136 &7775050711131565877
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -91,12 +70,31 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 1
+  m_Radius: 0.25
+  m_SlopeLimit: 0
   m_StepOffset: 10
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: -0.5, z: 0}
+--- !u!114 &7167117088997535387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252751700111850580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55182f56cdf43224a9b0f286f7b186f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cc: {fileID: 4300676057830462838}
+  walkingSpeed: 7.5
+  lookSpeed: 2
+  CameraDefaultFOV: 60
+  CameraZoomFOV: 15
+  bookCamera: {fileID: 0}
+  playerCamera: {fileID: 2031173083566962053}
 --- !u!1 &446208686804959002
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,9 +106,9 @@ GameObject:
   - component: {fileID: 395276932794862950}
   - component: {fileID: 2031173083566962053}
   - component: {fileID: 3235140159900309844}
-  - component: {fileID: 2319770245778000097}
+  - component: {fileID: 3834912412706881172}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +196,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -208,7 +206,7 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &2319770245778000097
+--- !u!114 &3834912412706881172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,15 +215,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 446208686804959002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e57fba986136542b76a4adb20aec97, type: 3}
+  m_Script: {fileID: 11500000, guid: 543ec9fd06ddf024a892c1cbea20a190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpRange: 5
   smoothTime: 0.1
   holdParent: {fileID: 5405737316074807307}
   heldObj: {fileID: 0}
-  rotateSpeed: 2
-  controller: {fileID: 4278455459969372492}
+  rotateSpeed: 20
+  controller: {fileID: 7167117088997535387}
 --- !u!1 &1782825043819594980
 GameObject:
   m_ObjectHideFlags: 0
