@@ -4789,6 +4789,22 @@ MonoBehaviour:
     Demon: {fileID: 6931364613381754943, guid: f81ad712e060e0a45b70e5baac9546a5, type: 3}
     TimePercentageUnlocked: 0
     DemonDescription: Placeholder
+  - KeyIndex: 76
+    Demon: {fileID: 6931364613381754943, guid: f81ad712e060e0a45b70e5baac9546a5, type: 3}
+    TimePercentageUnlocked: 0
+    DemonDescription: Placeholder
+  - KeyIndex: 22
+    Demon: {fileID: 6931364613381754943, guid: f81ad712e060e0a45b70e5baac9546a5, type: 3}
+    TimePercentageUnlocked: 0
+    DemonDescription: D
+  - KeyIndex: 62
+    Demon: {fileID: 6931364613381754943, guid: f81ad712e060e0a45b70e5baac9546a5, type: 3}
+    TimePercentageUnlocked: 0
+    DemonDescription: D
+  - KeyIndex: 63
+    Demon: {fileID: 6931364613381754943, guid: f81ad712e060e0a45b70e5baac9546a5, type: 3}
+    TimePercentageUnlocked: 1
+    DemonDescription: Cat
   LiquidTypes:
   - KeyIndex: 1
     color: {r: 0.9647059, g: 0.06032161, b: 0, a: 0}
