@@ -23,32 +23,21 @@ public class FPSController : MonoBehaviour
     public bool canMove = true;
     public Controls controls;
     private CharacterController cc;
-<<<<<<< HEAD:Assets/Scripts/Player/FPSController1.cs
-    public bool locked = false;
-    public static bool gamePaused;
-    private Canvas Canvas;
-    private Canvas PauseCanvas;
+    [SerializeField] Canvas PauseCanvas;
 
     void Start()
     {
-        controls.Pause.Unpause.performed += UnpauseGame;
-        controls.Player.Pause.performed += PauseGame;
-        controls.Pause.Disable();
-    }
-=======
->>>>>>> main:Assets/Scripts/Player/FPSController.cs
+        
 
-    void Awake()
-    {
         cc = GetComponent<CharacterController>();
-        Canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        PauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
-        PauseCanvas.enabled = false;
 
         playerCamera.fieldOfView = CameraDefaultFOV;
         if (controls == null)
             controls = new Controls();
         controls.Player.Zoom.performed += CameraZoom;
+        controls.Pause.Unpause.performed += UnpauseGame;
+        controls.Player.Pause.performed += PauseGame;
+        controls.Pause.Disable();
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -86,29 +75,23 @@ public class FPSController : MonoBehaviour
 
     void PauseGame(InputAction.CallbackContext context)
     {
-        if (!gamePaused)
-        {
-            Debug.Log("Game paused " + context);
-            controls.Player.Disable();
-            controls.Pause.Enable();
-            Canvas.GetComponentInChildren<TMPro.TextMeshProUGUI>().enabled = gamePaused;
-            PauseCanvas.enabled = true;
-            Time.timeScale = 0f;
-            gamePaused = true;
-        }
+        controls.Player.Disable();
+        controls.Pause.Enable();
+        PauseUnpause(true);
     }
 
     void UnpauseGame(InputAction.CallbackContext context)
     {
-        if (gamePaused)
-        {
-            Debug.Log("Game unpaused " + context);
-            controls.Player.Enable();
-            controls.Pause.Disable();
-            Canvas.GetComponentInChildren<TMPro.TextMeshProUGUI>().enabled = gamePaused;
-            PauseCanvas.enabled = false;
-            Time.timeScale = 1;
-            gamePaused = false;
-        }
+        controls.Player.Enable();
+        controls.Pause.Disable();
+        PauseUnpause(false);
+    }
+
+
+    private void PauseUnpause(bool pause)
+    {
+        PauseCanvas.GetComponentInChildren<TMPro.TextMeshProUGUI>().enabled = pause;
+        PauseCanvas.enabled = pause;
+        Time.timeScale = pause ? 0 : 1;
     }
 }
