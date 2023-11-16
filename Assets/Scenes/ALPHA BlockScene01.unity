@@ -4961,9 +4961,9 @@ MonoBehaviour:
   - {x: 11, y: 30}
   - {x: 12, y: 0}
   manager: {fileID: 1345958532}
-  gameLengthInMinutes: 0.2
-  startingTime: 6
-  shiftLength: 85
+  gameLengthInMinutes: 8
+  startingTime: 9
+  shiftLength: 8
   endingSequenceStarter: {fileID: 523182205}
   clockDisplay: {fileID: 894150582}
 --- !u!1 &1232951363
@@ -5412,7 +5412,7 @@ MonoBehaviour:
     color: {r: 0.9647059, g: 0.06032161, b: 0, a: 0}
     TimePercentageUnlocked: 0
     PotionDescription: Red
-  CompletetionPercentageForWin: -0.1
+  CompletetionPercentageForWin: 0.5
   clock: {fileID: 1213717303}
   DemonsSummoned: 0
   AwaitingSummon: 
