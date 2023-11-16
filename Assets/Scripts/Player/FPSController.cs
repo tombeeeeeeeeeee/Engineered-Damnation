@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
@@ -17,8 +14,8 @@ public class FPSController : MonoBehaviour
     public float lookSpeed = 2.0f;
     public float CameraDefaultFOV = 60;
     public float CameraZoomFOV = 15;
-    public Camera bookCamera;
     public Camera playerCamera;
+    [SerializeField] Canvas pauseMenuCanvas;
 
     //Input System
     private Vector2 lookInput;
@@ -33,7 +30,8 @@ public class FPSController : MonoBehaviour
             controls = new Controls();
 
         controls.Player.Zoom.performed += CameraZoom;
-
+        controls.Player.Pause.performed += Pause;
+        controls.PauseMenu.Unpause.performed += Unpause;
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -67,9 +65,29 @@ public class FPSController : MonoBehaviour
         playerCamera.transform.localEulerAngles = new Vector3(currentRotationX, 0f, 0f);
     }
 
+    private void Pause(InputAction.CallbackContext context)
+    {
+        controls.Player.Disable();
+        controls.PauseMenu.Enable();
+        PauseToggle(true);
+    }
+    private void Unpause(InputAction.CallbackContext context)
+    {
+        controls.Player.Enable();
+        controls.PauseMenu.Disable();
+        PauseToggle(false);
+    } 
+    
+    private void PauseToggle(bool pause)
+    {
+        pauseMenuCanvas.gameObject.SetActive(pause);
+        Time.timeScale = pause ? 0 : 1;
+    }
 
     public void CameraZoom(InputAction.CallbackContext context)
     {
-        playerCamera.fieldOfView = playerCamera.fieldOfView == CameraDefaultFOV ? CameraZoomFOV : CameraDefaultFOV;
+        playerCamera.fieldOfView = context.ReadValueAsButton() ? CameraZoomFOV : CameraDefaultFOV;
     }
+
+
 }
