@@ -12,24 +12,15 @@ public class SystemManager : MonoBehaviour
     [SerializeField] DemonListSpawner demonListSpawner;
     [SerializeField] int TotalDemons = 100;
     [SerializeField] FPSController player;
-    private Controls controls;
     public DemonTypeInfo[] DemonTypes;
     public PotionTypeInfo[] LiquidTypes;
     [SerializeField] float CompletetionPercentageForWin = 0.5f;
-    [SerializeField] string mainMenuScene;
     [SerializeField] Clock clock;
+ 
+    public int DemonsSummoned = 0;
     [HideInInspector]
     public List<uint> AwaitingSummon;
-    public int DemonsSummoned = 0;
 
-    [SerializeField] Canvas FinishUI;
-
-    private float FinishTime;
-
-    private void Start()
-    {
-        controls = player.controls;
-    }
 
     // Update is called once per frame
     void Update()
@@ -38,28 +29,12 @@ public class SystemManager : MonoBehaviour
         {
             int DemonsExpected = (int)(TotalDemons * ExpectedDemonCount.Evaluate(clock.playthroughPercentage));
 
-            if(clock.playthroughPercentage >= 1 && !FinishUI.gameObject.activeSelf)
-            {
-                controls.Player.Disable();
-                string winOrLose = ((float)DemonsSummoned / (float)TotalDemons) > CompletetionPercentageForWin ? "you win" : "you lose";
-                FinishUI.gameObject.SetActive(true);
-                FinishUI.GetComponentInChildren<TextMeshProUGUI>().text = winOrLose;
-                FinishTime = Time.time + 5;
-            }
-
-            else if (DemonsSummoned + AwaitingSummon.Count < DemonsExpected)
+            if (DemonsSummoned + AwaitingSummon.Count < DemonsExpected)
             {
                 string newDemonDescription;
                 uint newDemon = GetDemonKey(out newDemonDescription);
                 demonListSpawner.AddToList(newDemon, newDemonDescription);
                 AwaitingSummon.Add(newDemon);
-            }
-
-            else if(FinishUI.gameObject.activeSelf && FinishTime < Time.time)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                SceneManager.LoadScene(mainMenuScene);
             }
         }
     }
@@ -117,6 +92,13 @@ public class SystemManager : MonoBehaviour
 
         return false;
     }
+
+    public bool winState
+    {
+        get { return CompletetionPercentageForWin * TotalDemons < DemonsSummoned; }
+    }
+
+
 }
 
 [Serializable]
