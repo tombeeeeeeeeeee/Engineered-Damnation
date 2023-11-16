@@ -9,7 +9,7 @@ public class SymbolStampController : Focusable
     [SerializeField] Transform raycastPos;
     [SerializeField] MeshRenderer[] planes;
     [SerializeField] InteractionController playerPickUpScript;
-    [SerializeField] GameObject innerUI;
+    [SerializeField] GameObject outerUI;
     int currentRing = 0; // 0=outer 1=inner
 
     //   cycle input : turn left and right
@@ -21,6 +21,9 @@ public class SymbolStampController : Focusable
     {
         planes[0].material = rings[0].symbol;
         planes[1].material = rings[1].symbol;
+
+        outerUI.SetActive(false);
+        ui.SetActive(false);
     }
 
     public override void Right()
@@ -38,6 +41,17 @@ public class SymbolStampController : Focusable
     public override void UpDown(float userInput)
     {
         currentRing = (int)(userInput + 1) / (int) 2;
+
+        if (currentRing == 0)
+        {
+            outerUI.SetActive(false);
+            ui.SetActive(true);
+        }
+        else
+        {
+            outerUI.SetActive(true);
+            ui.SetActive(false);
+        }
     }
 
     public override void Action2(InputAction.CallbackContext context)
@@ -48,7 +62,7 @@ public class SymbolStampController : Focusable
 
     public override void Exit(InputAction.CallbackContext context)
     {
-        innerUI.SetActive(false);
+        outerUI.SetActive(false);
         PressStamp();
         base.Exit(context);
     }
