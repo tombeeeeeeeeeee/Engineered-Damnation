@@ -1139,6 +1139,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
+      propertyPath: cc
+      value: 
+      objectReference: {fileID: 2092969488}
+    - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: lookSpeed
       value: 20
       objectReference: {fileID: 0}
@@ -6631,6 +6635,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7df0f5ad04f844ca3f3878e077f510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &2092969488 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 4300676057830462838, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
+  m_PrefabInstance: {fileID: 326844714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2096376981 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d907f052e2a84a469ce0768f9808379, type: 3}

@@ -17,7 +17,7 @@ public class InteractionController : MonoBehaviour
 
     [SerializeReference] FPSController controller;
 
-    private void Start()
+    public void Start()
     {
         if(controller.controls == null)
             controller.controls = new Controls();
