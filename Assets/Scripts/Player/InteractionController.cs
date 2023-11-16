@@ -14,16 +14,17 @@ public class InteractionController : MonoBehaviour
     public GameObject heldObj;                       // The currently held object.
     public float rotateSpeed = 20.0f;                 
     private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
-
+    private float startingZ = 1;
     [SerializeReference] FPSController controller;
 
     public void Start()
     {
         if(controller.controls == null)
             controller.controls = new Controls();
-
         controller.controls.Player.Interact.performed += Interaction;
+        startingZ = holdParent.transform.localPosition.z;
     }
+
 
 
     private void Interaction(InputAction.CallbackContext context)
@@ -55,8 +56,14 @@ public class InteractionController : MonoBehaviour
         }
     }
 
-    private void Update() // not sure if this needs to be Update or should be FixedUpdate (or if it matters at all)
+
+    private void Update() 
     {
+        //Move the hold position based off of how far away a collison is.
+        RaycastHit hit;
+        holdParent.transform.localPosition = new Vector3(0, 0, (Physics.Raycast(transform.position, transform.forward, out hit, startingZ) ? hit.distance : startingZ));
+
+        //Update position of the held obj
         if (heldObj)
             MoveObject();
     }
@@ -66,7 +73,6 @@ public class InteractionController : MonoBehaviour
         // Apply force to move the held object towards the holdParent.
         heldObj.transform.position = Vector3.SmoothDamp(heldObj.transform.position, holdParent.position, ref moveVelocity, smoothTime);
     }
-
 
     public void PickupObject(GameObject obj)
     {
@@ -117,17 +123,12 @@ public class InteractionController : MonoBehaviour
         heldObj = null;
     }
 
-    public void OpenBook(GameObject pickObj)
-    {
-        // the GameObject with tag "DemonBook" is passed in
-        // but currently isn't used for anything
-        transform.parent.GetComponent<FPSController>().Focus();
-    }
-
     public void Focus(GameObject pickObj)
     {
+
         // trigger camera movemenent to the target object
         // and controls stuff
+
         pickObj.GetComponent<Focusable>().targetCamera.GetComponent<CameraTransition>().MoveToTarget(controller.controls.Focused);
         pickObj.GetComponent<Focusable>().Init();
     }

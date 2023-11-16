@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class SymbolStampController : Focusable
 {
@@ -7,6 +9,7 @@ public class SymbolStampController : Focusable
     [SerializeField] Transform raycastPos;
     [SerializeField] MeshRenderer[] planes;
     [SerializeField] InteractionController playerPickUpScript;
+    [SerializeField] GameObject innerUI;
     int currentRing = 0; // 0=outer 1=inner
 
     //   cycle input : turn left and right
@@ -45,6 +48,7 @@ public class SymbolStampController : Focusable
 
     public override void Exit(InputAction.CallbackContext context)
     {
+        innerUI.SetActive(false);
         PressStamp();
         base.Exit(context);
     }

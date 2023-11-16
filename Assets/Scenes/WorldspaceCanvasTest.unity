@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 1930076800}
   player: {fileID: 2027070718}
+  ui: {fileID: 0}
   pages:
   - {fileID: 2100000, guid: 2698ea633019b8f4a8c0afd0381a65db, type: 2}
   - {fileID: 2100000, guid: 7ef1816906e76e645b914a2ed22b4dc1, type: 2}
@@ -1279,13 +1280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475c18299235b694ead3d1ee639d61e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreRaycast: 2
-  respawns: 0
-  BloodKey: 4
-  BloodColour: {r: 1, g: 0.94821155, b: 0.1745283, a: 0}
-  pourPosition: {fileID: 2752099617147264965}
-  pourRadius: 0.1
-  pourAngle: 120
 --- !u!1 &277332971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 625455344}
   player: {fileID: 2027070718}
+  ui: {fileID: 0}
 --- !u!1 &318847002
 GameObject:
   m_ObjectHideFlags: 0
@@ -5403,12 +5398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e57fba986136542b76a4adb20aec97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpRange: 5
-  smoothTime: 0.1
-  holdParent: {fileID: 741853778}
-  heldObj: {fileID: 0}
-  rotateSpeed: 20
-  controller: {fileID: 2027070718}
 --- !u!114 &1013866241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6695,10 +6684,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 0}
   player: {fileID: 0}
+  ui: {fileID: 0}
   rings: []
   raycastPos: {fileID: 0}
   planes: []
   playerPickUpScript: {fileID: 0}
+  innerUI: {fileID: 0}
 --- !u!1 &1210056158
 GameObject:
   m_ObjectHideFlags: 0
@@ -7278,13 +7269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475c18299235b694ead3d1ee639d61e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreRaycast: 0
-  respawns: 0
-  BloodKey: 2
-  BloodColour: {r: 0, g: 0.06795311, b: 1, a: 0}
-  pourPosition: {fileID: 4838879875853826884}
-  pourRadius: 0.1
-  pourAngle: 120
 --- !u!64 &1319788713
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7798,13 +7782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475c18299235b694ead3d1ee639d61e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreRaycast: 2
-  respawns: 0
-  BloodKey: 1
-  BloodColour: {r: 1, g: 0, b: 0, a: 0}
-  pourPosition: {fileID: 2819123027050827533}
-  pourRadius: 0.1
-  pourAngle: 120
 --- !u!64 &1379511480
 MeshCollider:
   m_ObjectHideFlags: 0

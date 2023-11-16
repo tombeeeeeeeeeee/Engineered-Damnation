@@ -12,7 +12,8 @@ public class DemonSummoningSpot : SnapSlab
     private float SummonFinishTime = 0;
     [SerializeField] bool movingtoSummonSpot = false;
     private GameObject currDemon = null;
-
+    private Vector3 velocity = Vector3.zero;
+    private bool keepDemon = false;
     protected override void Update()
     {
         SummonFinishTime = (moving || movingtoSummonSpot) ? Time.time + 1 : SummonFinishTime;
@@ -21,15 +22,16 @@ public class DemonSummoningSpot : SnapSlab
 
         if(movingtoSummonSpot)
         {
-            ExpectedObject.transform.position += (DemonSummonTransform.position - ExpectedObject.transform.position) * slabToSpotPercentageOfTravel * Time.deltaTime;
-            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.05f)
+
+            ExpectedObject.transform.position += velocity * Time.deltaTime;
+            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.1f)
             {
                 movingtoSummonSpot = false;
                 SummonFinishTime = Time.time + SummonDuration; 
                 SummonDemon();
             }
         }
-        else if (Time.time > SummonFinishTime)
+        else if (Time.time > SummonFinishTime && !keepDemon)
         {
             FinishSummon();
         }
@@ -54,6 +56,7 @@ public class DemonSummoningSpot : SnapSlab
                 //Stop moving the object to the correct spot
                 moving = false;
                 movingtoSummonSpot = true;
+                velocity = (DemonSummonTransform.position - ExpectedObject.transform.position) * slabToSpotPercentageOfTravel;
 
                 other.GetComponent<Rigidbody>().isKinematic = true;
 

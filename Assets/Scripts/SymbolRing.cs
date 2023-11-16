@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,14 @@ public class SymbolRing : MonoBehaviour
     public float anglePerSymbol = 360f;
     public int symbolIndex = 1;
 
+    public float duration = 0.2f;
+
+    Quaternion targetRotation;
+    Quaternion fromRotation;
+
+    float elapsed;
+    bool moving = false;
+
     private void Start()
     {
         anglePerSymbol = 360 / symbols.Length;
@@ -21,18 +30,48 @@ public class SymbolRing : MonoBehaviour
 
     public void TurnDial(int direction)
     {
-        direction = Math.Sign(direction); // argument should be either -1 or 1, but just to make sure
+        if (!moving)
+        {
+            direction = Math.Sign(direction); // argument should be either -1 or 1, but just to make sure
 
-        transform.Rotate(Vector3.up, direction * anglePerSymbol);
-        symbolIndex -= direction;
-        //symbolIndex = (symbolIndex + direction % symbols.Length);
+            Quaternion initialRotation = transform.rotation;
+            transform.Rotate(Vector3.up, direction * anglePerSymbol);
+            targetRotation = transform.rotation;
+            transform.rotation = initialRotation;
+
+            fromRotation = initialRotation;
+            moving = true;
+            elapsed = 0;
 
 
-        if (symbolIndex > symbols.Length)
-            symbolIndex = 1;
-        else if (symbolIndex < 1)
-            symbolIndex = symbols.Length;
 
-        //Debug.Log("symbol index: " + symbolIndex + " of " + symbols.Length);
+            symbolIndex -= direction;
+            //symbolIndex = (symbolIndex + direction % symbols.Length);
+
+
+            if (symbolIndex > symbols.Length)
+                symbolIndex = 1;
+            else if (symbolIndex < 1)
+                symbolIndex = symbols.Length;
+
+            //Debug.Log("symbol index: " + symbolIndex + " of " + symbols.Length);
+        }
+    }
+
+    private void Update()
+    {
+        if (moving)
+        {
+            float interpolationRatio = elapsed / duration;
+
+            Quaternion interpolatedRotation = Quaternion.Lerp(fromRotation, targetRotation, interpolationRatio);
+
+            transform.rotation = interpolatedRotation;
+
+
+            if (elapsed < duration)
+                elapsed += Time.deltaTime;
+            else moving = false;
+        }
     }
 }

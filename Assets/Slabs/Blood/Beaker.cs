@@ -16,15 +16,16 @@ public class Beaker : Potion
 
         if(OldLiquidLevel != liquidLevel)
         {
-            for (int i = 0; i < liquidLevels.Length; i++)
+            for (int i = 0; i < 2; i++)
             {
                 if (i < liquidLevel)
                 {
                     liquidLevels[i].SetActive(true);
                     liquidLevels[i].GetComponent<MeshRenderer>().material.color = LiquidColour;
                 }
-                else liquidLevels[i].SetActive(false);
-            }
+                else
+                    liquidLevels[i].SetActive(false);
+            }            
 
             OldLiquidLevel = liquidLevel;
         }

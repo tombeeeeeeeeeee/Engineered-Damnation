@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD:Assets/Scripts/Player/InteractionController.cs.meta
-guid: 543ec9fd06ddf024a892c1cbea20a190
-=======
 guid: 0373a2c5f3e727f4b82dc411bde078d4
->>>>>>> main:Assets/Scripts/AlarmSequence.cs.meta
-=======
-guid: 543ec9fd06ddf024a892c1cbea20a190
->>>>>>> main
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
