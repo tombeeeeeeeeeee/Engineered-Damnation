@@ -23,7 +23,7 @@ public class DemonSummoningSpot : SnapSlab
         if(movingtoSummonSpot)
         {
             ExpectedObject.transform.position += velocity * Time.deltaTime;
-            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.05f)
+            if((DemonSummonTransform.position - ExpectedObject.transform.position).magnitude < 0.1f)
             {
                 movingtoSummonSpot = false;
                 SummonFinishTime = Time.time + SummonDuration; 

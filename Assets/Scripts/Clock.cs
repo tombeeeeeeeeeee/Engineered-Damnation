@@ -16,8 +16,10 @@ public class Clock : MonoBehaviour
     [SerializeField] int shiftLength;
     [SerializeField] SequenceObject endingSequenceStarter;
 
-    private int hours;
-    private int minutes;
+    private float hours;
+    private float minutes;
+
+    private bool gameFinished = false;
 
     [SerializeField] TextMeshProUGUI clockDisplay;
 
@@ -27,14 +29,15 @@ public class Clock : MonoBehaviour
         breakTimesIndex %= breakTimes.Length;  
 
         //Calculate the hours and minutes for the clock
-        hours = (int)(Time.timeSinceLevelLoad / (gameLengthInMinutes * 60) * shiftLength) + (militaryTime ? startingTime : startingTime - 1);
+        hours = (Time.timeSinceLevelLoad / (gameLengthInMinutes * 60) * shiftLength) + (militaryTime ? startingTime : startingTime - 1);
         hours = militaryTime ? hours%24 : hours%12 + 1;
-        minutes = (int)(Time.timeSinceLevelLoad / (gameLengthInMinutes * 60) * shiftLength * 60);
+        minutes = (int)(Time.timeSinceLevelLoad / gameLengthInMinutes * shiftLength);
         minutes %= 60;
 
         //change the clocks text
-        clockDisplay.text = hours < 10 ? "0" + hours.ToString() : hours.ToString();
-        clockDisplay.text += ":" + (minutes < 10 ? "0" + minutes.ToString() : minutes.ToString());
+        clockDisplay.text = hours < 10 ? "0" + ((int)hours).ToString() : ((int)hours).ToString();
+        clockDisplay.text += ":" + (minutes < 10 ? "0" + ((int)minutes).ToString() : ((int)minutes).ToString());
+
 
         //check if a break is beginning
         if (breakTimes[breakTimesIndex].x == hours && breakTimes[breakTimesIndex].y == minutes)
@@ -43,12 +46,14 @@ public class Clock : MonoBehaviour
             breakTimesIndex++;
         }
 
-        else if(hours == shiftLength + startingTime)
+        else if(playthroughPercentage >= 1 && !gameFinished)
         {
-           endingSequenceStarter.Begin(manager.winState);
+            gameFinished = true;
+            endingSequenceStarter.Begin(manager.winState);
         }
 
     }
+
 
     public float playthroughPercentage
     {

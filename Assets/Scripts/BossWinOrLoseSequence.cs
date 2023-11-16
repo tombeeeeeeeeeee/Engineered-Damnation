@@ -48,6 +48,6 @@ public class BossWinOrLoseSequence : SequenceObject
 
     public override void End()
     {
-        throw new System.NotImplementedException();
+        nextInSequence.Begin(decision);
     }
 }

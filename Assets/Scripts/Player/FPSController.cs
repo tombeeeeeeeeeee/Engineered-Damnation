@@ -56,12 +56,14 @@ public class FPSController : MonoBehaviour
         playerCamera.transform.Rotate(new Vector3(-mouseDelta.y, 0, 0));
         if (playerCamera.transform.localRotation.x > 0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(285, 0, 0));
         else if (playerCamera.transform.localRotation.x < -0.6) playerCamera.transform.localRotation = Quaternion.Euler(new Vector3(-285, 0, 0));
+
+
     }
 
 
     public void CameraZoom(InputAction.CallbackContext context)
     {
-        playerCamera.fieldOfView = playerCamera.fieldOfView == CameraDefaultFOV ? CameraZoomFOV : CameraDefaultFOV;
+        playerCamera.fieldOfView = context.ReadValueAsButton() ? CameraZoomFOV : CameraDefaultFOV;
     }
 
     private void Pause(InputAction.CallbackContext context)

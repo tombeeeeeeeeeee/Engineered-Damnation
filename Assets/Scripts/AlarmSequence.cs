@@ -12,7 +12,10 @@ public class AlarmSequence : SequenceObject
         if (inSequence)
             timeInOperation += Time.deltaTime;
         if (timeInOperation > lengthOfOperation && inSequence)
+        {
+            inSequence = false;
             End();
+        }
 
         //rotate light
         transform.Rotate(new Vector3(0,rotationSpeed * Time.deltaTime, 0));
