@@ -6,14 +6,14 @@ using UnityEngine;
 public class FireBallSequence : SequenceObject
 {
     [SerializeField] Demon cat;
-    private Vector3 velocity = Vector3.zero;
+    private float speed = 0;
 
     // Update is called once per frame
     protected override void Update()
     {
         if(inSequence)
         {
-            transform.position += velocity * Time.deltaTime;
+            transform.position += (cat.transform.position - transform.position).normalized * Time.deltaTime * speed;
             base.Update();
         }
     }
@@ -22,7 +22,7 @@ public class FireBallSequence : SequenceObject
     {
         base.Begin(decision);
         if (!inSequence)
-            velocity = (cat.transform.position - transform.position)/lengthOfOperation;
+            speed = (cat.transform.position - transform.position).magnitude/lengthOfOperation;
     }
 
     public override void End()
