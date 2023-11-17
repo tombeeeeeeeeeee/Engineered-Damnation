@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class PickUp : MonoBehaviour
 {
-    
+    //Sounds
+    [SerializeField] protected AudioClip[] collisionSounds;
+    protected AudioSource aS;
+
     //Rigidbody properties:
     private Rigidbody rb;
     private bool usesGravity;
@@ -14,10 +19,15 @@ public class PickUp : MonoBehaviour
     private Vector3 angularVelocity;
     private bool freezeRotation;
     private int defaultLayer;
+    protected bool hasBeenAlt = false;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        //Audio
+        aS = GetComponent<AudioSource>();
+
+        //Rigid Body Properties
         rb = GetComponent<Rigidbody>();
         usesGravity = rb.useGravity;
         drag = rb.drag;
@@ -50,5 +60,19 @@ public class PickUp : MonoBehaviour
         gameObject.layer = defaultLayer;
     }
 
+    public virtual void AlternateInteraction(InputAction.CallbackContext context)
+    {
+        if(!hasBeenAlt)
+            transform.rotation = Quaternion.LookRotation(transform.parent.up, -transform.parent.forward);
+        else
+            transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
+        hasBeenAlt = !hasBeenAlt;
+    }
+
+    protected void OnCollisionEnter(Collision collision)
+    {
+        int index = Random.Range(0, collisionSounds.Length);
+        aS.PlayOneShot(collisionSounds[index]);
+    }
 
 }

@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "AltInteract",
+                    "type": "Button",
+                    "id": "3f33ddbb-7d81-4c37-bfe3-6559da07fc41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -280,6 +289,50 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e23385a-68c7-4f7f-ae22-89b54504183b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af7bc00f-14ec-4075-8511-29f1979b2c82",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b070224-a3ed-4400-9c36-6c3502465dd8",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad3be0cf-4583-4493-90a2-b8efe23c52fb",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AltInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -478,8 +531,6 @@
                     "action": "Action2",
                     "isComposite": false,
                     "isPartOfComposite": false
-<<<<<<< HEAD:Assets/InputSystem/Controls.inputactions
-=======
                 }
             ]
         },
@@ -519,7 +570,6 @@
                     "action": "Unpause",
                     "isComposite": false,
                     "isPartOfComposite": false
->>>>>>> main:Assets/InputSystem/Controls 1.inputactions
                 }
             ]
         }

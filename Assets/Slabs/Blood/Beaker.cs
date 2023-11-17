@@ -11,6 +11,7 @@ public class Beaker : Potion
     public MeshRenderer[] liquidMesh;
 
     public GameObject mixPourPart;
+    public AudioClip[] fillSounds;
 
 
     // Update is called once per frame
@@ -54,6 +55,7 @@ public class Beaker : Potion
             LiquidKey += liquidKey;
             LiquidColour = colors[LiquidKey];
             liquidLevel++;
+            aS.PlayOneShot(fillSounds[Random.Range(0, fillSounds.Length)]);
         }
     }
 
@@ -64,9 +66,10 @@ public class Beaker : Potion
         mixPourPart.SetActive(true);
         foreach (RaycastHit hit in pouredOn)
         {
-            if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
+            SlabManager slab = hit.transform.gameObject.GetComponent<SlabManager>();
+            if ( slab != null && slab.getInner() != 0 )
             {
-                hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
+                slab.ChangeLiquid(LiquidColour, LiquidKey);
                 liquidLevel = 0;
                 LiquidKey = 0;
                 mixPourPart.SetActive(false);

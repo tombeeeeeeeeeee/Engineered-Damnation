@@ -3,39 +3,28 @@ using UnityEngine;
 public class FireBallSequence : SequenceObject
 {
     [SerializeField] Demon cat;
-    private Vector3 velocity = Vector3.zero;
+    private float speed = 0;
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if(inSequence)
         {
-            timeInOperation += Time.deltaTime;
-            transform.position += velocity * Time.deltaTime;
-            inSequence = timeInOperation < lengthOfOperation;
-            if (!inSequence)
-                End();
+            transform.position += (cat.transform.position - transform.position).normalized * Time.deltaTime * speed;
+            base.Update();
         }
     }
 
     public override void Begin(bool decision)
     {
-        this.decision = decision;
-
+        base.Begin(decision);
         if (!inSequence)
-        {
-            inSequence = true;
-            gameObject.SetActive(true);
-            timeInOperation = 0;
-            velocity = (cat.transform.position - transform.position)/lengthOfOperation;
-        }
+            speed = (cat.transform.position - transform.position).magnitude/lengthOfOperation;
     }
 
     public override void End()
     {
-        if(nextInSequence)
-            nextInSequence.Begin(decision);
-
+       base.End();
        gameObject.SetActive(false);
     }
 

@@ -9,14 +9,40 @@ public abstract class SequenceObject : MonoBehaviour
     [SerializeField] protected float lengthOfOperation; //Length that the sequence runs for.
     protected float timeInOperation;  //counting the length of the sequence.
     protected bool decision;
+
+    protected virtual void Update()
+    {
+        timeInOperation += Time.deltaTime;
+        inSequence = timeInOperation < lengthOfOperation;
+        if (!inSequence)
+            End();
+    }
+
     /// <summary>
     /// Begin sequence
     /// </summary>
     /// <param name="decision">A bool for decision making</param>
-    public abstract void Begin(bool decision);
+    public virtual void Begin(bool decision)
+    {
+        this.decision = decision;
+
+        if (!inSequence)
+        {
+            inSequence = true;
+            gameObject.SetActive(true);
+            timeInOperation = 0;
+        }
+    }
 
     /// <summary>
     /// End sequence.
     /// </summary>
-    public abstract void End();
+    public virtual void End()
+    { 
+        if(nextInSequence != null)
+        {
+            timeInOperation = 0;
+            nextInSequence.Begin(decision);
+        }
+    }
 }
