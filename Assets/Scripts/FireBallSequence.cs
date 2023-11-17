@@ -9,36 +9,25 @@ public class FireBallSequence : SequenceObject
     private Vector3 velocity = Vector3.zero;
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if(inSequence)
         {
-            timeInOperation += Time.deltaTime;
             transform.position += velocity * Time.deltaTime;
-            inSequence = timeInOperation < lengthOfOperation;
-            if (!inSequence)
-                End();
+            base.Update();
         }
     }
 
     public override void Begin(bool decision)
     {
-        this.decision = decision;
-
+        base.Begin(decision);
         if (!inSequence)
-        {
-            inSequence = true;
-            gameObject.SetActive(true);
-            timeInOperation = 0;
             velocity = (cat.transform.position - transform.position)/lengthOfOperation;
-        }
     }
 
     public override void End()
     {
-        if(nextInSequence)
-            nextInSequence.Begin(decision);
-
+       base.End();
        gameObject.SetActive(false);
     }
 

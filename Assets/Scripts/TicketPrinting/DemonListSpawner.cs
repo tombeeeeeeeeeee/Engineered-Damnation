@@ -8,7 +8,6 @@ public class DemonListSpawner : MonoBehaviour
 
     public float ticketSpeed = 1;
 
-
     [SerializeField] OrderList ListHeaderPrefab;
     [SerializeField] Order childOrderPrefab;
     [SerializeField] Transform OrderSpawnTransform;

@@ -92,6 +92,8 @@ public class InteractionController : MonoBehaviour
             pickUpObj.transform.parent = holdParent;
             heldObj = obj;
 
+            controller.controls.Player.AltInteract.performed += pickUpObj.AlternateInteraction;
+
             pickUpObj.PickedUp();
         }
     }
@@ -101,6 +103,8 @@ public class InteractionController : MonoBehaviour
         //Grab the object and run its dropping code
         PickUp obj = heldObj.GetComponent<PickUp>();
         obj.Dropped();
+
+        controller.controls.Player.AltInteract.performed -= obj.AlternateInteraction;
 
         //detattch the object from the player
         heldObj.transform.parent = null;

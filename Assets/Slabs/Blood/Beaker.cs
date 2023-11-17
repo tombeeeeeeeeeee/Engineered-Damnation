@@ -8,6 +8,7 @@ public class Beaker : Potion
     [SerializeField] GameObject[] liquidLevels;
     private int OldLiquidLevel = -1;
 
+    public AudioClip[] fillSounds;
 
     // Update is called once per frame
     void Update()
@@ -38,6 +39,7 @@ public class Beaker : Potion
             LiquidKey += liquidKey;
             LiquidColour = colors[LiquidKey];
             liquidLevel++;
+            aS.PlayOneShot(fillSounds[Random.Range(0, fillSounds.Length)]);
         }
     }
 
@@ -47,9 +49,10 @@ public class Beaker : Potion
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
         foreach (RaycastHit hit in pouredOn)
         {
-            if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
+            SlabManager slab = hit.transform.gameObject.GetComponent<SlabManager>();
+            if ( slab != null && slab.getInner() != 0 )
             {
-                hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
+                slab.ChangeLiquid(LiquidColour, LiquidKey);
                 liquidLevel = 0;
                 LiquidKey = 0;
             }

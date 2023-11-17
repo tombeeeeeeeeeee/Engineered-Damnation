@@ -80,6 +80,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AltInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f33ddbb-7d81-4c37-bfe3-6559da07fc41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -300,6 +309,50 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e23385a-68c7-4f7f-ae22-89b54504183b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af7bc00f-14ec-4075-8511-29f1979b2c82"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b070224-a3ed-4400-9c36-6c3502465dd8"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad3be0cf-4583-4493-90a2-b8efe23c52fb"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AltInteract"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -553,6 +606,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_AltInteract = m_Player.FindAction("AltInteract", throwIfNotFound: true);
         // Focused
         m_Focused = asset.FindActionMap("Focused", throwIfNotFound: true);
         m_Focused_Cycle = m_Focused.FindAction("Cycle", throwIfNotFound: true);
@@ -627,6 +681,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_AltInteract;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -637,6 +692,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @AltInteract => m_Wrapper.m_Player_AltInteract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -664,6 +720,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @AltInteract.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAltInteract;
+                @AltInteract.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAltInteract;
+                @AltInteract.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAltInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -686,6 +745,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @AltInteract.started += instance.OnAltInteract;
+                @AltInteract.performed += instance.OnAltInteract;
+                @AltInteract.canceled += instance.OnAltInteract;
             }
         }
     }
@@ -788,6 +850,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnAltInteract(InputAction.CallbackContext context);
     }
     public interface IFocusedActions
     {
