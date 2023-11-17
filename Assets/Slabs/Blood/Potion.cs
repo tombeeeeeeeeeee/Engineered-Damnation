@@ -10,12 +10,19 @@ public class Potion : PickUp
     [SerializeField] protected float pourRadius;
     [SerializeField] protected float pourAngle;
 
+    public GameObject cork;
+    public GameObject part1;
+    public GameObject part2;
+
     Vector3 spawnPosition;
     Quaternion spawnRotation;
 
     protected override void Start()
     {
         base.Start();
+        cork.SetActive(true);
+        part1.SetActive(false);
+        part2.SetActive(false);
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
     }
@@ -31,7 +38,12 @@ public class Potion : PickUp
     {
         RaycastHit[] pouredOn;
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
-        foreach(RaycastHit hit in pouredOn)
+
+        cork.SetActive(false);
+        part1.SetActive(true);
+        part2.SetActive(true);
+
+        foreach (RaycastHit hit in pouredOn)
         {
             if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
                 hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
@@ -49,12 +61,19 @@ public class Potion : PickUp
 
     public override void Dropped()
     {
+        cork.SetActive(true);
+        part1.SetActive(false);
+        part2.SetActive(false);
+
         transform.rotation = Quaternion.identity;
         base.Dropped();
     }
 
     public void Respawn()
     {
+        cork.SetActive(true);
+        part1.SetActive(false);
+        part2.SetActive(false);
         transform.position = spawnPosition;
         transform.rotation = spawnRotation;
     }
