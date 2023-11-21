@@ -41,6 +41,7 @@ public abstract class SequenceObject : MonoBehaviour
     { 
         if(nextInSequence != null)
         {
+            inSequence = false;
             timeInOperation = 0;
             nextInSequence.Begin(decision);
         }

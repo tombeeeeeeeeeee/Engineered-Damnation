@@ -227,7 +227,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc49e169133298545b0e04c8abdc2cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionSounds: []
+  collisionSounds:
+  - {fileID: 8300000, guid: ba59365d154c47645a8c436b080a7196, type: 3}
+  - {fileID: 8300000, guid: 9fdebc8d635d9ac438906fc5a90a0b50, type: 3}
+  - {fileID: 8300000, guid: 43b723c731725a24ca63ac220b1ae340, type: 3}
+  - {fileID: 8300000, guid: 5c53387d0bed58640b22f83d07b80e3d, type: 3}
+  - {fileID: 8300000, guid: 7e672d64bddda6f4abbd3cbf10027e52, type: 3}
+  - {fileID: 8300000, guid: 29ebd06ed3cea34429d547ae0711972b, type: 3}
+  - {fileID: 8300000, guid: d7d6709f580a8184dbea75b23e1ec1ad, type: 3}
+  - {fileID: 8300000, guid: 0e7c44e2383f3c640a62cf34bd305066, type: 3}
+  - {fileID: 8300000, guid: c8bf615dfea56c64a866a5e372a840f9, type: 3}
 --- !u!82 &1099222855229056004
 AudioSource:
   m_ObjectHideFlags: 0

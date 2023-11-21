@@ -13,10 +13,11 @@ public class Potion : PickUp
     [SerializeField] protected float pourAngle;
 
     public GameObject cork;
-    public GameObject part1;
-    public GameObject part2;
+    public GameObject particle1;
+    public GameObject particle2;
 
     public AudioClip[] pourSounds;
+    public AudioClip pourEnd;
 
     Vector3 spawnPosition;
     Quaternion spawnRotation;
@@ -25,8 +26,8 @@ public class Potion : PickUp
     {
         base.Start();
         cork.SetActive(true);
-        part1.SetActive(false);
-        part2.SetActive(false);
+        particle1.SetActive(false);
+        particle2.SetActive(false);
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
     }
@@ -36,6 +37,12 @@ public class Potion : PickUp
     void Update()
     { 
         if (Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
+        else
+        {
+            cork.SetActive(true);
+            particle1.SetActive(false);
+            particle2.SetActive(false);
+        }
     }
 
     protected virtual void Pour()
@@ -44,8 +51,8 @@ public class Potion : PickUp
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
 
         cork.SetActive(false);
-        part1.SetActive(true);
-        part2.SetActive(true);
+        particle1.SetActive(true);
+        particle2.SetActive(true);
 
         foreach (RaycastHit hit in pouredOn)
         {
@@ -59,34 +66,36 @@ public class Potion : PickUp
 
     public override void PickedUp()
     {
+        transform.rotation = transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
         base.PickedUp();
-
     }
 
     public override void AlternateInteraction(InputAction.CallbackContext context)
     {
+        hasBeenAlt = !hasBeenAlt;
+
         if(hasBeenAlt)
         {
-            transform.Rotate(transform.parent.forward, 120);
+            transform.Rotate(Vector3.forward, -120);
             aS.loop = true;
             aS.clip = pourSounds[Random.Range(0, pourSounds.Length)];
             aS.Play();
         }
         else
         {
+            transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
             aS.loop = false;
             aS.Stop();
-            transform.rotation = Quaternion.identity;
+            aS.PlayOneShot(pourEnd);
         }
 
-        hasBeenAlt = !hasBeenAlt;
     }
 
     public override void Dropped()
     {
         cork.SetActive(true);
-        part1.SetActive(false);
-        part2.SetActive(false);
+        particle1.SetActive(false);
+        particle2.SetActive(false);
 
         aS.loop = false;
         aS.Stop();
@@ -98,8 +107,8 @@ public class Potion : PickUp
     public void Respawn()
     {
         cork.SetActive(true);
-        part1.SetActive(false);
-        part2.SetActive(false);
+        particle1.SetActive(false);
+        particle2.SetActive(false);
         transform.position = spawnPosition;
         transform.rotation = spawnRotation;
     }

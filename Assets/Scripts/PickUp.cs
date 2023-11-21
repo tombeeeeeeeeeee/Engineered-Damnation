@@ -51,6 +51,8 @@ public class PickUp : MonoBehaviour
 
     public virtual void Dropped()
     {
+        hasBeenAlt = false;
+
         //resets rigidbody to before being picked up.
         rb.useGravity = usesGravity;
         rb.drag = drag;
@@ -62,11 +64,11 @@ public class PickUp : MonoBehaviour
 
     public virtual void AlternateInteraction(InputAction.CallbackContext context)
     {
+        hasBeenAlt = !hasBeenAlt;
         if(!hasBeenAlt)
             transform.rotation = Quaternion.LookRotation(transform.parent.up, -transform.parent.forward);
         else
             transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
-        hasBeenAlt = !hasBeenAlt;
     }
 
     protected void OnCollisionEnter(Collision collision)

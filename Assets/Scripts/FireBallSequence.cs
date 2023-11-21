@@ -3,14 +3,15 @@ using UnityEngine;
 public class FireBallSequence : SequenceObject
 {
     [SerializeField] Demon cat;
-    private float speed = 0;
-
+    [SerializeField] float speed;
     // Update is called once per frame
     protected override void Update()
     {
+        transform.LookAt(cat.transform.position);
         if(inSequence)
         {
-            transform.position += (cat.transform.position - transform.position).normalized * Time.deltaTime * speed;
+            transform.position += transform.forward * Time.deltaTime * speed;
+            lengthOfOperation += Time.deltaTime;
             base.Update();
         }
     }
@@ -18,8 +19,6 @@ public class FireBallSequence : SequenceObject
     public override void Begin(bool decision)
     {
         base.Begin(decision);
-        if (!inSequence)
-            speed = (cat.transform.position - transform.position).magnitude/lengthOfOperation;
     }
 
     public override void End()
@@ -31,7 +30,10 @@ public class FireBallSequence : SequenceObject
     private void OnTriggerStay(Collider other)
     {
         ExplosionChange explodee = other.gameObject.GetComponent<ExplosionChange>();
+
         if (explodee != null)
             explodee.Explode();
+        if (explodee.gameObject.name.ToLower().Contains("cat"))
+            End();
     }
 }

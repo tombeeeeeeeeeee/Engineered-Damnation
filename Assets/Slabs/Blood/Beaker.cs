@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Beaker : Potion
 {
@@ -23,6 +24,12 @@ public class Beaker : Potion
     void Update()
     {
         if(liquidLevel > 0 && Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
+
+        else
+        {
+            particle1.SetActive(false);
+            particle2.SetActive(false);
+        }
 
         if(OldLiquidLevel != liquidLevel)
         {
@@ -77,9 +84,31 @@ public class Beaker : Potion
         }
     }
 
-    public override void PickedUp()
+    public override void AlternateInteraction(InputAction.CallbackContext context)
     {
-        base.PickedUp();
+        hasBeenAlt = !hasBeenAlt;
+
+        if (hasBeenAlt)
+        {
+            transform.Rotate(Vector3.forward, -120);
+            if(liquidLevel > 0)
+            {
+                aS.loop = true;
+                aS.clip = pourSounds[Random.Range(0, pourSounds.Length)];
+                aS.Play();
+            }
+        }
+        else
+        {
+            transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
+            if (liquidLevel > 0)
+            {
+                aS.loop = false;
+                aS.Stop();
+                aS.PlayOneShot(pourEnd);
+            }
+        }
+
     }
 
     public override void Dropped()
