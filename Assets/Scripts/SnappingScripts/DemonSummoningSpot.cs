@@ -9,16 +9,26 @@ public class DemonSummoningSpot : SnapSlab
     [SerializeField] SendToSequence nextInSequence;
     private GameObject demonToSummon;
     private int colourIndex = 0;
-
-    protected override void Update()
-    {
-        base.Update();
-
-    }
+    public bool summoning = false;
 
     public override void OnTriggerEnter(Collider other)
     {
-        OnTriggerStay(other);
+        if (SnapType(other.gameObject) && ExpectedObject == null)
+        {
+            ExpectedObject = other.gameObject;
+        }
+
+        if (other.gameObject == ExpectedObject)
+        {
+            moving = false;
+            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+
+            if (pickupScript.heldObj == other.gameObject)
+                pickupScript.DropObject();
+
+            other.transform.rotation = transform.rotation;
+            other.transform.position = transform.position;
+        }
     }
 
     public void OnTriggerStay(Collider other)
@@ -28,16 +38,12 @@ public class DemonSummoningSpot : SnapSlab
             ExpectedObject = other.gameObject;
         }
 
-        if (other.gameObject == ExpectedObject && !moving)
+        if (other.gameObject == ExpectedObject && !summoning)
         {
             //Stop moving the object to the correct spot
-            moving = true;
+            summoning = true;
 
             other.GetComponent<Rigidbody>().isKinematic = true;
-
-            //if the object came from a player, take it away from them.
-            if (pickupScript.heldObj == other.gameObject)
-                pickupScript.DropObject();
 
             //put the object in the right spot.
             nextInSequence.movingObject = other.gameObject;
@@ -66,12 +72,15 @@ public class DemonSummoningSpot : SnapSlab
             }
         }
 
-        demonToSummon = sysManager.DemonTypes[demonIndex].Demon;
-        Demon demon = demonToSummon.gameObject.GetComponent<Demon>(); 
-        if(demon)
-            demon.Colour(sysManager.LiquidTypes[colourIndex].color);
+        if(demonIndex != 0) 
+        {
+            demonToSummon = sysManager.DemonTypes[demonIndex].Demon;
+            Demon demon = demonToSummon.gameObject.GetComponent<Demon>(); 
+            if(demon)
+                demon.Colour(sysManager.LiquidTypes[colourIndex].color);
+        }
 
-        return demonToSummon.gameObject != null;
+        return demonToSummon != null;
     }
 
 }

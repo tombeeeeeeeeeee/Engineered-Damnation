@@ -10,8 +10,7 @@ public class ConfettiSequence : SequenceObject
     protected override void Update()
     {
         gameObject.SetActive(hasBegun);
-        if(inSequence)
-            base.Update();
+        base.Update();
     }
 
     public override void Begin(bool decision)

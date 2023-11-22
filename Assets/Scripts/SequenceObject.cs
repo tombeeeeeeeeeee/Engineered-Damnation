@@ -12,10 +12,13 @@ public abstract class SequenceObject : MonoBehaviour
 
     protected virtual void Update()
     {
-        timeInOperation += Time.deltaTime;
-        inSequence = timeInOperation < lengthOfOperation;
-        if (!inSequence)
-            End();
+        if(inSequence)
+        {
+            timeInOperation += Time.deltaTime;
+            inSequence = timeInOperation < lengthOfOperation;
+            if (!inSequence)
+                End();
+        }
     }
 
     /// <summary>

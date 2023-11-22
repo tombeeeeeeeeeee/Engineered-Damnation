@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class EndSceneSequence : SequenceObject
 {
-    // Update is called once per frame
-    protected override void Update()
+    [SerializeField] FPSController player;
+
+    public override void Begin(bool decision)
     {
+        base.Begin(decision);
         if(inSequence)
-            base.Update();
+            player.controls.Disable();
     }
 
     public override void End()

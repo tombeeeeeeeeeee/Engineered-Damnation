@@ -14,7 +14,8 @@ public class SendToSequence : SequenceObject
         if(inSequence)
         {
             lengthOfOperation += Time.deltaTime;
-            movingObject.transform.position += Vector3.ClampMagnitude(transform.forward*Time.deltaTime * speed, (destination.position - movingObject.transform.position).magnitude);
+            movingObject.transform.LookAt(destination);
+            movingObject.transform.position += Vector3.ClampMagnitude(movingObject.transform.forward*Time.deltaTime * speed, (destination.position - movingObject.transform.position).magnitude);
             if (movingObject.transform.position == destination.position)
             {
                 inSequence = false;
@@ -27,5 +28,12 @@ public class SendToSequence : SequenceObject
     {
         base.Begin(decision);
         if(inSequence) movingObject.transform.LookAt(destination);
+    }
+
+    public override void End()
+    {
+        if(nextInSequence.GetComponent<SpinSequence>() != null) 
+            nextInSequence.GetComponent<SpinSequence>().spinningObject = movingObject;
+        base.End();
     }
 }
