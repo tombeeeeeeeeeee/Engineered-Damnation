@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-
+    public Camera mainMenuCamera;
     public GameObject mainMenu;
     public GameObject settingsMenu;
     public Button button;
     public Button button2;
+    public Button buttonPlay;
 
     public bool isMainMenu;
 
@@ -19,12 +20,20 @@ public class MainMenu : MonoBehaviour
     {
         button.onClick.AddListener(TaskOnClick);
         button2.onClick.AddListener(TaskOnClick2);
+        buttonPlay.onClick.AddListener(Play);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void Play()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        mainMenuCamera.GetComponent<CameraTransition>().MoveToPlayer();
     }
 
     void TaskOnClick()

@@ -52,7 +52,8 @@ public class CameraTransition : MonoBehaviour
 
     public void MoveToPlayer()
     {
-        controls.Disable();
+        if (controls != null)
+            controls.Disable();
 
         targetPosition = playerCameraTransform.position;
         targetRotation = playerCameraTransform.rotation;
