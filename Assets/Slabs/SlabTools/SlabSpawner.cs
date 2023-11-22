@@ -19,7 +19,7 @@ public class SlabSpawner : ToolSpawner
 
     private void Update()
     {
-        //If no slab spawning sound is playing while a slab is spawning. play it
+        //If no objectToDestroy spawning sound is playing while a objectToDestroy is spawning. play it
         if(queued && !toolSoundSpot.isPlaying) 
         {
             toolSoundSpot.PlayOneShot(SlabDroppingSounds[Random.Range(0,SlabDroppingSounds.Length)]);   

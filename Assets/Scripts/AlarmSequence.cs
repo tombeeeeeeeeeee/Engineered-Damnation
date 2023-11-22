@@ -12,7 +12,7 @@ public class AlarmSequence : SequenceObject
         base.Update();
 
         //rotate light
-        transform.Rotate(new Vector3(0,rotationSpeed * Time.deltaTime, 0));
+        transform.Rotate(new Vector3(0,rotationSpeed * Gameplay.deltaTime, 0));
     }
 
     public override void Begin(bool decision)

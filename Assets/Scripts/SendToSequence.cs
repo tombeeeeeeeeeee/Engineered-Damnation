@@ -13,9 +13,9 @@ public class SendToSequence : SequenceObject
     {
         if(inSequence)
         {
-            lengthOfOperation += Time.deltaTime;
+            lengthOfOperation += Gameplay.deltaTime;
             movingObject.transform.LookAt(destination);
-            movingObject.transform.position += Vector3.ClampMagnitude(movingObject.transform.forward*Time.deltaTime * speed, (destination.position - movingObject.transform.position).magnitude);
+            movingObject.transform.position += Vector3.ClampMagnitude(movingObject.transform.forward * Gameplay.deltaTime * speed, (destination.position - movingObject.transform.position).magnitude);
             if (movingObject.transform.position == destination.position)
             {
                 inSequence = false;

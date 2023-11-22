@@ -15,7 +15,7 @@ public class SpinSequence : SequenceObject
     protected override void Update()
     {
         if(spinningObject != null)
-            spinningObject.transform.Rotate(0, timeInOperation * spinSpeedMultiplier * Time.deltaTime, 0);        
+            spinningObject.transform.Rotate(0, timeInOperation * spinSpeedMultiplier * Gameplay.deltaTime, 0);        
         base.Update();
     }
 
@@ -32,6 +32,8 @@ public class SpinSequence : SequenceObject
     public override void End()
     {
         spinningObject.GetComponent<AudioSource>().Stop();
+        if (nextInSequence.gameObject.GetComponent<FlickerDecisionLight>() != null)
+            nextInSequence.gameObject.GetComponent<FlickerDecisionLight>().objectToDestroy = spinningObject; 
         base.End();
     }
 

@@ -70,7 +70,7 @@ public class SymbolRing : MonoBehaviour
 
 
             if (elapsed < duration)
-                elapsed += Time.deltaTime;
+                elapsed += Gameplay.deltaTime;
             else moving = false;
         }
     }

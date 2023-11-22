@@ -1797,6 +1797,8 @@ GameObject:
   - component: {fileID: 307671092}
   - component: {fileID: 307671091}
   - component: {fileID: 307671094}
+  - component: {fileID: 307671095}
+  - component: {fileID: 307671096}
   m_Layer: 0
   m_Name: Point Light (1)
   m_TagString: Untagged
@@ -1916,9 +1918,127 @@ MonoBehaviour:
   inSequence: 0
   nextInSequence: {fileID: 0}
   lengthOfOperation: 0.1
+  numberOfFlickers: 0
   timeBetweenFlicker: 0.01
-  trueSequence: {fileID: 0}
+  objectToDestroy: {fileID: 0}
+  trueSequence: {fileID: 577744435}
   falseSequence: {fileID: 577744434}
+--- !u!114 &307671095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307671090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f3ccf0192b61140a784f912a8cdfab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inSequence: 0
+  nextInSequence: {fileID: 0}
+  lengthOfOperation: 0.1
+  numberOfFlickers: 0
+  timeBetweenFlicker: 0.01
+  objectToDestroy: {fileID: 0}
+  SuccessfulSummonNoise: {fileID: 8300000, guid: 82f78a6fed9b43a4395d31375a658bf7, type: 3}
+  dSS: {fileID: 897248092}
+--- !u!82 &307671096
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307671090}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4337013507177455561, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.252
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &315750081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3975,6 +4095,7 @@ GameObject:
   - component: {fileID: 577744432}
   - component: {fileID: 577744433}
   - component: {fileID: 577744434}
+  - component: {fileID: 577744435}
   m_Layer: 0
   m_Name: DemonSummonSpot
   m_TagString: Untagged
@@ -4129,9 +4250,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inSequence: 0
   nextInSequence: {fileID: 0}
-  lengthOfOperation: 0
-  dSP: {fileID: 897248092}
+  lengthOfOperation: 2
+  dSS: {fileID: 897248092}
   badSummonSound: {fileID: 8300000, guid: d8b123b7f7cf23f4094a343acee18167, type: 3}
+--- !u!114 &577744435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577744430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c19ba1dc7237e784aab8066892adad10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inSequence: 0
+  nextInSequence: {fileID: 307671095}
+  lengthOfOperation: 3
+  dSS: {fileID: 897248092}
 --- !u!1 &598298867 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 93658acc6d278794089ae79488d0b323, type: 3}
@@ -8059,7 +8196,7 @@ MonoBehaviour:
   - {x: 11, y: 30}
   - {x: 12, y: 0}
   manager: {fileID: 1345958532}
-  gameLengthInMinutes: 1.32132136e+14
+  gameLengthInMinutes: 10
   startingTime: 9
   shiftLength: 8
   endingSequenceStarter: {fileID: 523182205}
@@ -8726,6 +8863,7 @@ MonoBehaviour:
   inSequence: 0
   nextInSequence: {fileID: 1330378248}
   lengthOfOperation: 0
+  numberOfFlickers: 0
   timeBetweenFlicker: 0.1
 --- !u!114 &1330378250
 MonoBehaviour:
@@ -10803,6 +10941,7 @@ MonoBehaviour:
   inSequence: 0
   nextInSequence: {fileID: 1668241294}
   lengthOfOperation: 0
+  numberOfFlickers: 0
   timeBetweenFlicker: 0.05
 --- !u!1 &1694087372
 GameObject:
@@ -11695,6 +11834,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Office_SlabChute01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ef3cb2d58fe12b049b03b804f3197c3c, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef3cb2d58fe12b049b03b804f3197c3c, type: 3}
 --- !u!1 &1860690332 stripped
@@ -11813,8 +11956,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 1.2783912, z: 0.16}
-  m_Center: {x: -0.24, y: 0, z: -0.21}
+  m_Size: {x: 0.02, y: 1.2783912, z: -0.02}
+  m_Center: {x: -0.12, y: 0, z: -0.21}
 --- !u!114 &1876193578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11830,7 +11973,7 @@ MonoBehaviour:
   toolCollection:
   - {fileID: 2844201543809976789, guid: 9c1b61042a431bd4a8bd4e507f155f8b, type: 3}
   spawnLocation: {fileID: 827168965}
-  cooldownDuration: 3
+  cooldownDuration: 1
   SlabSpawnSound: {fileID: 8300000, guid: 34fb1085597a712439817da8ecd597d3, type: 3}
   SlabDroppingSounds:
   - {fileID: 8300000, guid: d1b664515b51be544aead225f97ca038, type: 3}
@@ -12651,6 +12794,7 @@ MonoBehaviour:
   inSequence: 0
   nextInSequence: {fileID: 2003247122}
   lengthOfOperation: 0
+  numberOfFlickers: 0
   timeBetweenFlicker: 0.05
 --- !u!114 &2003247124
 MonoBehaviour:

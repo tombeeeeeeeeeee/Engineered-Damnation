@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BadSummonSequence : SequenceObject
 {
-    [SerializeField] DemonSummoningSpot dSP;
+    [SerializeField] DemonSummoningSpot dSS;
     [SerializeField] AudioClip badSummonSound;
     private AudioSource aS;
 
@@ -20,14 +20,13 @@ public class BadSummonSequence : SequenceObject
         {
             lengthOfOperation = badSummonSound.length;
             aS.PlayOneShot(badSummonSound);
-            Destroy(dSP.ExpectedObject);
         }
     }
 
     public override void End()
     {
-        dSP.ExpectedObject = null;
-        dSP.summoning = false;
+        dSS.ExpectedObject = null;
+        dSS.summoning = false;
         base.End();
     }
 }

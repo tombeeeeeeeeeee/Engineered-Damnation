@@ -14,7 +14,7 @@ public abstract class SequenceObject : MonoBehaviour
     {
         if(inSequence)
         {
-            timeInOperation += Time.deltaTime;
+            timeInOperation += Gameplay.deltaTime;
             inSequence = timeInOperation < lengthOfOperation;
             if (!inSequence)
                 End();

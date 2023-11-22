@@ -7,7 +7,7 @@ public class DemonSummoningSpot : SnapSlab
 {
     [SerializeField] SystemManager sysManager;
     [SerializeField] SendToSequence nextInSequence;
-    private GameObject demonToSummon;
+    public GameObject demonToSummon;
     private int colourIndex = 0;
     public bool summoning = false;
 

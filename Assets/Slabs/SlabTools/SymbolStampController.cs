@@ -87,7 +87,7 @@ public class SymbolStampController : Focusable
 
             slab.ChangeOuter(rings[1].symbol, (uint)rings[1].symbolIndex);
 
-            //Give a faint imprint of the press onto the slab
+            //Give a faint imprint of the press onto the objectToDestroy
             slab.ChangeLiquid(new Color(0, 0, 0, 50), 0);
 
             playerPickUpScript.PickupObject(slab.gameObject);

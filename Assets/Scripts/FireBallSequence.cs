@@ -10,8 +10,8 @@ public class FireBallSequence : SequenceObject
         transform.LookAt(cat.transform.position);
         if(inSequence)
         {
-            transform.position += transform.forward * Time.deltaTime * speed;
-            lengthOfOperation += Time.deltaTime;
+            transform.position += transform.forward * Gameplay.deltaTime * speed;
+            lengthOfOperation += Gameplay.deltaTime;
             base.Update();
         }
     }
