@@ -72,13 +72,14 @@ public class DemonSummoningSpot : SnapSlab
             }
         }
 
-        if(demonIndex != 0) 
+        if (demonIndex != 0)
         {
             demonToSummon = sysManager.DemonTypes[demonIndex].Demon;
-            Demon demon = demonToSummon.gameObject.GetComponent<Demon>(); 
-            if(demon)
+            Demon demon = demonToSummon.gameObject.GetComponent<Demon>();
+            if (demon)
                 demon.Colour(sysManager.LiquidTypes[colourIndex].color);
         }
+        else demonToSummon = null;
 
         return demonToSummon != null;
     }
