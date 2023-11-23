@@ -30,6 +30,7 @@ public class Potion : PickUp
         particle2.SetActive(false);
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
+
     }
 
 
@@ -43,6 +44,9 @@ public class Potion : PickUp
             particle1.SetActive(false);
             particle2.SetActive(false);
         }
+
+        if (!hasBeenAlt && idealParent != null)
+            transform.rotation = Quaternion.LookRotation(-idealParent.forward, idealParent.up);
     }
 
     protected virtual void Pour()
@@ -66,7 +70,7 @@ public class Potion : PickUp
 
     public override void PickedUp()
     {
-        transform.rotation = transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
+        transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
         base.PickedUp();
     }
 
@@ -83,7 +87,6 @@ public class Potion : PickUp
         }
         else
         {
-            transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
             aS.loop = false;
             aS.Stop();
             aS.PlayOneShot(pourEnd);

@@ -100,7 +100,7 @@ public class Beaker : Potion
         }
         else
         {
-            transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
+            transform.rotation = transform.rotation = Quaternion.LookRotation(-idealParent.forward, idealParent.up);
             if (liquidLevel > 0)
             {
                 aS.loop = false;

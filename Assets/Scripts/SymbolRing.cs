@@ -24,7 +24,7 @@ public class SymbolRing : MonoBehaviour
     private void Start()
     {
         anglePerSymbol = 360 / symbols.Length;
-        aS = GetComponent<AudioSource>();
+        aS = transform.parent.GetComponent<AudioSource>();
     }
 
     public Material symbol { get { return symbols[symbolIndex - 1]; } }

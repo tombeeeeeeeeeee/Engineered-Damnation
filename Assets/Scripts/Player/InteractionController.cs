@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
-
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class InteractionController : MonoBehaviour
 {
@@ -16,6 +16,7 @@ public class InteractionController : MonoBehaviour
     private Vector3 moveVelocity = Vector3.zero;     // The force applied to a held object to move it.
     private float startingZ = 1;
     [SerializeReference] FPSController controller;
+    [SerializeField] float throwForce;
 
     public void Start()
     {
@@ -34,7 +35,7 @@ public class InteractionController : MonoBehaviour
         {
             RaycastHit hit;
             
-            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange);
+            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, 123);
             // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
             if(hit.collider != null)
             {
@@ -61,8 +62,7 @@ public class InteractionController : MonoBehaviour
     {
         //Move the hold position based off of how far away a collison is.
         RaycastHit hit;
-        holdParent.transform.localPosition = new Vector3(0, 0, (Physics.Raycast(transform.position, transform.forward, out hit, startingZ) ? hit.distance : startingZ));
-
+        holdParent.transform.localPosition = new Vector3(0, 0, (Physics.Raycast(transform.position, transform.forward, out hit, startingZ, 51) ? hit.distance : startingZ));
         //Update position of the held obj
         if (heldObj)
             MoveObject();
@@ -72,6 +72,8 @@ public class InteractionController : MonoBehaviour
     {
         // Apply force to move the held object towards the holdParent.
         heldObj.transform.position = Vector3.SmoothDamp(heldObj.transform.position, holdParent.position, ref moveVelocity, smoothTime);
+        if (!heldObj.GetComponent<PickUp>().hasBeenAlt)
+            heldObj.transform.rotation = heldObj.GetComponent<PickUp>().idealRotation;
     }
 
     public void PickupObject(GameObject obj)
@@ -89,12 +91,13 @@ public class InteractionController : MonoBehaviour
             
             // Set the holdParent as the parent of the picked object.
             pickUpObj.transform.position = holdParent.position;
-            pickUpObj.transform.parent = holdParent;
+            pickUpObj.idealParent = holdParent;
             heldObj = obj;
 
             controller.controls.Player.AltInteract.performed += pickUpObj.AlternateInteraction;
-
+            pickUpObj.transform.parent = holdParent;
             pickUpObj.PickedUp();
+            pickUpObj.transform.parent = null;
         }
     }
 
@@ -105,9 +108,10 @@ public class InteractionController : MonoBehaviour
         obj.Dropped();
 
         controller.controls.Player.AltInteract.performed -= obj.AlternateInteraction;
+        obj.GetComponent<Rigidbody>().AddForce((holdParent.position - obj.transform.position) * throwForce * Gameplay.deltaTime, ForceMode.Impulse);
 
         //detattch the object from the player
-        heldObj.transform.parent = null;
+        obj.idealParent = null;
 
         //Look for snapping points the object might be able to move to
         RaycastHit[] hits;
