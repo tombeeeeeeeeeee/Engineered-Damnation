@@ -89,12 +89,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cc: {fileID: 4300676057830462838}
-  walkingSpeed: 7.5
+  walkingSpeed: 5
   lookSpeed: 2
   CameraDefaultFOV: 60
   CameraZoomFOV: 15
-  bookCamera: {fileID: 0}
   playerCamera: {fileID: 2031173083566962053}
+  pauseMenuCanvas: {fileID: 0}
 --- !u!1 &446208686804959002
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,13 +6,14 @@ namespace PSX
 {
     [ExecuteInEditMode]
     public class PixelationController : MonoBehaviour
+    
     {
         [SerializeField] protected VolumeProfile volumeProfile;
         [SerializeField] protected bool isEnabled = true;
 
         protected Pixelation pixelation;
-        [SerializeField] protected float widthPixelation = 512;
-        [SerializeField] protected float heightPixelation = 256;
+        [SerializeField] public float widthPixelation = 512;
+        [SerializeField] public float heightPixelation = 256;
         [SerializeField] protected float colorPrecision = 16;
         
         protected void Update()

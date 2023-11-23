@@ -1,3 +1,4 @@
+using PSX;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,10 @@ public class CameraTransition : MonoBehaviour
     public FPSController playerController;
     public Transform playerCameraTransform;
     public float duration;
+    public float depixilationPercentage;
+    [SerializeField] PixelationController pixels;
+    private float startingPixelHeight;
+    private float startingPixelWidth;
 
     Vector3 initialPosition;
     Quaternion initialRotation;
@@ -29,6 +34,10 @@ public class CameraTransition : MonoBehaviour
         // camera should already be in the target position in editor
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+
+        startingPixelHeight = pixels.heightPixelation; 
+        startingPixelWidth = pixels.widthPixelation; 
+        
     }
 
     public void MoveToTarget(InputActionMap controlsForFocus)
@@ -45,6 +54,8 @@ public class CameraTransition : MonoBehaviour
 
         transform.position = playerCameraTransform.position;
         transform.rotation = playerCameraTransform.rotation;
+
+        depixilationPercentage = -depixilationPercentage;
 
         elapsed = 0;
         moving = true;
@@ -63,6 +74,7 @@ public class CameraTransition : MonoBehaviour
         transform.position = initialPosition;
         transform.rotation = initialRotation;
 
+        depixilationPercentage = -depixilationPercentage;
 
         elapsed = 0;
         moving = true;
@@ -80,6 +92,8 @@ public class CameraTransition : MonoBehaviour
             transform.position = interpolatedPosition;
             transform.rotation = interpolatedRotation;
 
+            if(pixels) pixels.heightPixelation += (elapsed / duration) * depixilationPercentage;
+            if(pixels) pixels.widthPixelation += (elapsed / duration) * depixilationPercentage;
 
             if (elapsed < duration)
                 elapsed += Time.deltaTime;
@@ -94,6 +108,8 @@ public class CameraTransition : MonoBehaviour
                     controls.Enable();
                 else
                 {
+                    if(pixels) pixels.heightPixelation = startingPixelHeight;
+                    if(pixels) pixels.widthPixelation = startingPixelWidth;
                     playerController.controls.Player.Enable();
                     playerController.playerCamera.enabled = true;
                     GetComponent<Camera>().enabled = false;
