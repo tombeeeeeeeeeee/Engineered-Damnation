@@ -1436,7 +1436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7262813377428089516, guid: ddae116e2bb62f342a7db0af3da0297c, type: 3}
       propertyPath: field of view
-      value: 60
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 7262813377428089516, guid: ddae116e2bb62f342a7db0af3da0297c, type: 3}
       propertyPath: m_FOVAxisMode
@@ -1456,11 +1456,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7262813377428089517, guid: ddae116e2bb62f342a7db0af3da0297c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.092
+      value: -1.085
       objectReference: {fileID: 0}
     - target: {fileID: 7262813377428089517, guid: ddae116e2bb62f342a7db0af3da0297c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.584
+      value: 1.684
       objectReference: {fileID: 0}
     - target: {fileID: 7262813377428089517, guid: ddae116e2bb62f342a7db0af3da0297c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2523,7 +2523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 252751700111850580, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 252751700111850600, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: m_RootOrder
@@ -3920,7 +3920,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 81cfdf40a27afa443aae7effc2a94ff2, type: 3}
   - {fileID: 8300000, guid: a7eb2fcbe782fd14eb91bfdf6b48f1ba, type: 3}
   hasBeenAlt: 0
-  idealRotation: {x: 0, y: 0, z: 0, w: 0}
   idealParent: {fileID: 0}
   LiquidKey: 1
   LiquidColour: {r: 1, g: 0, b: 0, a: 1}
@@ -3973,7 +3972,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4337013507177455561, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -8371,7 +8370,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionSounds: []
   hasBeenAlt: 0
-  idealRotation: {x: 0, y: 0, z: 0, w: 0}
   idealParent: {fileID: 0}
   LiquidKey: 4
   LiquidColour: {r: 0.9747988, g: 1, b: 0, a: 1}
@@ -8956,7 +8954,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 81cfdf40a27afa443aae7effc2a94ff2, type: 3}
   - {fileID: 8300000, guid: a7eb2fcbe782fd14eb91bfdf6b48f1ba, type: 3}
   hasBeenAlt: 0
-  idealRotation: {x: 0, y: 0, z: 0, w: 0}
   idealParent: {fileID: 0}
   LiquidKey: 4
   LiquidColour: {r: 0.9747988, g: 1, b: 0, a: 1}
@@ -12057,7 +12054,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 81cfdf40a27afa443aae7effc2a94ff2, type: 3}
   - {fileID: 8300000, guid: a7eb2fcbe782fd14eb91bfdf6b48f1ba, type: 3}
   hasBeenAlt: 0
-  idealRotation: {x: 0, y: 0, z: 0, w: 0}
   idealParent: {fileID: 0}
   LiquidKey: 2
   LiquidColour: {r: 0, g: 0.24060774, b: 1, a: 1}
@@ -13345,7 +13341,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 81cfdf40a27afa443aae7effc2a94ff2, type: 3}
   - {fileID: 8300000, guid: a7eb2fcbe782fd14eb91bfdf6b48f1ba, type: 3}
   hasBeenAlt: 0
-  idealRotation: {x: 0, y: 0, z: 0, w: 0}
   idealParent: {fileID: 0}
   LiquidKey: 0
   LiquidColour: {r: 0, g: 0, b: 0, a: 0}
@@ -14539,7 +14534,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionSounds: []
   hasBeenAlt: 0
-  idealRotation: {x: 0, y: 0, z: 0, w: 0}
   idealParent: {fileID: 0}
 --- !u!54 &2121109244
 Rigidbody:

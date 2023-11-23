@@ -72,8 +72,6 @@ public class InteractionController : MonoBehaviour
     {
         // Apply force to move the held object towards the holdParent.
         heldObj.transform.position = Vector3.SmoothDamp(heldObj.transform.position, holdParent.position, ref moveVelocity, smoothTime);
-        if (!heldObj.GetComponent<PickUp>().hasBeenAlt)
-            heldObj.transform.rotation = heldObj.GetComponent<PickUp>().idealRotation;
     }
 
     public void PickupObject(GameObject obj)

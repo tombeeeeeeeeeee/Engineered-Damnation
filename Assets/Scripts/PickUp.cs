@@ -20,7 +20,6 @@ public class PickUp : MonoBehaviour
     private bool freezeRotation;
     private int defaultLayer;
     public bool hasBeenAlt = false;
-    public Quaternion idealRotation;
     [HideInInspector] public Transform idealParent;
 
     // Start is called before the first frame update
