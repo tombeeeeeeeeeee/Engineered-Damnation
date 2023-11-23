@@ -42,11 +42,9 @@ public abstract class SequenceObject : MonoBehaviour
     /// </summary>
     public virtual void End()
     { 
+        inSequence = false;
+        timeInOperation = 0;
         if(nextInSequence != null)
-        {
-            inSequence = false;
-            timeInOperation = 0;
             nextInSequence.Begin(decision);
-        }
     }
 }

@@ -25,8 +25,8 @@ public class BadSummonSequence : SequenceObject
 
     public override void End()
     {
+        base.End();
         dSS.ExpectedObject = null;
         dSS.summoning = false;
-        base.End();
     }
 }

@@ -18,7 +18,7 @@ public class DemonSummoningSpot : SnapSlab
             ExpectedObject = other.gameObject;
         }
 
-        if (other.gameObject == ExpectedObject)
+        if (other.gameObject == ExpectedObject && !summoning)
         {
             moving = false;
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;

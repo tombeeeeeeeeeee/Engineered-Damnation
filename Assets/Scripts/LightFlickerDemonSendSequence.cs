@@ -14,15 +14,20 @@ public class LightFlickerDemonSendSequence:LightFlickerOffSequence
 
     protected override void Update()
     {
+        if (numberOfFlickers == 1 && objectToDestroy) Destroy(objectToDestroy);
         base.Update();
-        if (numberOfFlickers == 1) Destroy(objectToDestroy);
+
     }
 
     public override void End()
     {
-        aS.PlayOneShot(SuccessfulSummonNoise);
-        dSS.ExpectedObject = null;
-        dSS.summoning = false;
+        if (inSequence)
+        {
+            aS.PlayOneShot(SuccessfulSummonNoise);
+            dSS.ExpectedObject = null;
+            Debug.Log("Ending The Sequence");
+            dSS.summoning = false;
+        }
         base.End();
     }
 }

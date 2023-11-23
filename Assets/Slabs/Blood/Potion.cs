@@ -43,8 +43,6 @@ public class Potion : PickUp
             cork.SetActive(true);
             particle1.SetActive(false);
             particle2.SetActive(false);
-            if (idealParent != null)
-                Debug.Log(idealParent.rotation);
             if (!hasBeenAlt && idealParent != null)
                 transform.rotation = Quaternion.LookRotation(idealParent.forward, idealParent.up);
         }
