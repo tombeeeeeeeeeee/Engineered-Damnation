@@ -70,7 +70,11 @@ public class Potion : PickUp
 
     public override void PickedUp()
     {
+<<<<<<< HEAD
         transform.rotation = transform.rotation = transform.rotation = Quaternion.LookRotation(transform.parent.forward, transform.parent.up);
+=======
+        transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
+>>>>>>> main
         base.PickedUp();
     }
 
@@ -87,6 +91,10 @@ public class Potion : PickUp
         }
         else
         {
+<<<<<<< HEAD
+            transform.rotation = transform.rotation = Quaternion.LookRotation(transform.parent.forward, transform.parent.up);
+=======
+>>>>>>> main
             aS.loop = false;
             aS.Stop();
             aS.PlayOneShot(pourEnd);

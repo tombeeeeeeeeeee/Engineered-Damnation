@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(AudioSource))]
 public class SymbolStampController : Focusable
 {
     [SerializeField] SymbolRing[] rings;

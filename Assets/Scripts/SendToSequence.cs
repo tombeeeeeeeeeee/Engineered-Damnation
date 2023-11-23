@@ -27,7 +27,11 @@ public class SendToSequence : SequenceObject
     public override void Begin(bool decision)
     {
         base.Begin(decision);
-        if(inSequence) movingObject.transform.LookAt(destination);
+        if (inSequence)
+        { 
+            movingObject.layer = 2;
+            movingObject.transform.LookAt(destination);
+        }
     }
 
     public override void End()

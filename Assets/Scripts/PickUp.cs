@@ -19,7 +19,9 @@ public class PickUp : MonoBehaviour
     private Vector3 angularVelocity;
     private bool freezeRotation;
     private int defaultLayer;
-    protected bool hasBeenAlt = false;
+    public bool hasBeenAlt = false;
+    public Quaternion idealRotation;
+    [HideInInspector] public Transform idealParent;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -33,9 +35,14 @@ public class PickUp : MonoBehaviour
         drag = rb.drag;
         angularVelocity = rb.angularVelocity;
         freezeRotation = rb.freezeRotation;
-        defaultLayer = gameObject.layer;
+        defaultLayer = gameObject.layer = 6;
     }
 
+    private void Update()
+    {
+        if (!hasBeenAlt && idealParent != null)
+            transform.rotation = Quaternion.LookRotation(idealParent.up, -idealParent.forward);
+    }
 
     public virtual void PickedUp()
     {
@@ -46,7 +53,7 @@ public class PickUp : MonoBehaviour
         rb.freezeRotation = true;
 
         //ignore raycast so that the player can raycast through it.
-        gameObject.layer = 2;
+        Gameplay.ChildrenLayerSet(gameObject, 2);
     }
 
     public virtual void Dropped()
@@ -59,16 +66,14 @@ public class PickUp : MonoBehaviour
         rb.angularVelocity = angularVelocity;
         rb.freezeRotation = freezeRotation;
 
-        gameObject.layer = defaultLayer;
+        Gameplay.ChildrenLayerSet(gameObject, defaultLayer);
     }
 
     public virtual void AlternateInteraction(InputAction.CallbackContext context)
     {
         hasBeenAlt = !hasBeenAlt;
         if(!hasBeenAlt)
-            transform.rotation = Quaternion.LookRotation(transform.parent.up, -transform.parent.forward);
-        else
-            transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
+            transform.rotation = Quaternion.LookRotation(-idealParent.forward, idealParent.up);
     }
 
     protected void OnCollisionEnter(Collision collision)
