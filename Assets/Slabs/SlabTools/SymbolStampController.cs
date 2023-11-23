@@ -10,6 +10,9 @@ public class SymbolStampController : Focusable
     [SerializeField] MeshRenderer[] planes;
     [SerializeField] InteractionController playerPickUpScript;
     [SerializeField] GameObject outerUI;
+    private AudioSource aS;
+    [SerializeField] AudioClip[] slabBurnInSounds;
+
     int currentRing = 0; // 0=outer 1=inner
 
     //   cycle input : turn left and right
@@ -21,9 +24,10 @@ public class SymbolStampController : Focusable
     {
         planes[0].material = rings[0].symbol;
         planes[1].material = rings[1].symbol;
-
         outerUI.SetActive(false);
         ui.SetActive(false);
+
+        aS = GetComponent<AudioSource>();
     }
 
     public override void Right()
@@ -69,6 +73,8 @@ public class SymbolStampController : Focusable
 
     public void PressStamp()
     {
+        //aS.PlayOneShot(slabBurnInSounds[Random.Range(0,slabBurnInSounds.Length)]);
+
         SlabManager slab = null;
 
         RaycastHit[] hits = Physics.RaycastAll(raycastPos.position, -transform.up, 1);
@@ -82,6 +88,7 @@ public class SymbolStampController : Focusable
 
         if (slab != null)
         {
+
 
             slab.ChangeInner(rings[0].symbol, (uint)rings[0].symbolIndex);
 

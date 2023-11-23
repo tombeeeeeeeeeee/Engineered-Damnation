@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +10,9 @@ public class SymbolRing : MonoBehaviour
     public float anglePerSymbol = 360f;
     public int symbolIndex = 1;
 
+    private AudioSource aS;
+    [SerializeField] AudioClip[] dialTurnSound;
+
     public float duration = 0.2f;
 
     Quaternion targetRotation;
@@ -24,6 +24,7 @@ public class SymbolRing : MonoBehaviour
     private void Start()
     {
         anglePerSymbol = 360 / symbols.Length;
+        aS = GetComponent<AudioSource>();
     }
 
     public Material symbol { get { return symbols[symbolIndex - 1]; } }
@@ -32,7 +33,8 @@ public class SymbolRing : MonoBehaviour
     {
         if (!moving)
         {
-            direction = Math.Sign(direction); // argument should be either -1 or 1, but just to make sure
+            aS.PlayOneShot(dialTurnSound[Random.Range(0, dialTurnSound.Length)]);
+            direction = (int)Mathf.Sign(direction); // argument should be either -1 or 1, but just to make sure
 
             Quaternion initialRotation = transform.rotation;
             transform.Rotate(Vector3.up, direction * anglePerSymbol);
@@ -43,10 +45,7 @@ public class SymbolRing : MonoBehaviour
             moving = true;
             elapsed = 0;
 
-
-
             symbolIndex -= direction;
-            //symbolIndex = (symbolIndex + direction % symbols.Length);
 
 
             if (symbolIndex > symbols.Length)
@@ -54,7 +53,6 @@ public class SymbolRing : MonoBehaviour
             else if (symbolIndex < 1)
                 symbolIndex = symbols.Length;
 
-            //Debug.Log("symbol index: " + symbolIndex + " of " + symbols.Length);
         }
     }
 
