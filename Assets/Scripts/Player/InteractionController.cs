@@ -34,8 +34,8 @@ public class InteractionController : MonoBehaviour
         if (heldObj == null)
         {
             RaycastHit hit;
-            
-            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, 123);
+            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, 115);
+            Debug.Log("You Hit Me", hit.transform.gameObject);
             // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
             if(hit.collider != null)
             {
