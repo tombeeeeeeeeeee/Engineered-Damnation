@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// even though this is called MainMenu, it controls the entire computer
+// menu interface, including main menu, in-game menu, settings, credits
+
 public class MainMenu : MonoBehaviour
 {
     public Computer computer;
