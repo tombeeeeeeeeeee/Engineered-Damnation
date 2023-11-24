@@ -18,7 +18,7 @@ public class AlarmSequence : SequenceObject
     public override void Begin(bool decision)
     {
         base.Begin(decision);
-        if(!inSequence)
+        if(inSequence)
         { 
             foreach(Light light in lightsToTurnOff)
                 Destroy(light);
