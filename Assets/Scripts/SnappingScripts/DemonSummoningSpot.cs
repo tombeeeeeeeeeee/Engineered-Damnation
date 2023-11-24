@@ -13,18 +13,15 @@ public class DemonSummoningSpot : SnapSlab
 
     public override void OnTriggerEnter(Collider other)
     {
+        if (pickupScript.heldObj == other.gameObject) return;
+
         if (SnapType(other.gameObject) && ExpectedObject == null)
-        {
             ExpectedObject = other.gameObject;
-        }
 
         if (other.gameObject == ExpectedObject && !summoning)
         {
             moving = false;
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
-
-            if (pickupScript.heldObj == other.gameObject)
-                pickupScript.DropObject();
 
             other.transform.rotation = transform.rotation;
             other.transform.position = transform.position;
@@ -33,10 +30,10 @@ public class DemonSummoningSpot : SnapSlab
 
     public void OnTriggerStay(Collider other)
     {
+        if (pickupScript.heldObj == other.gameObject) return;
+
         if (SnapType(other.gameObject) && ExpectedObject == null)
-        {
             ExpectedObject = other.gameObject;
-        }
 
         if (other.gameObject == ExpectedObject && !summoning)
         {

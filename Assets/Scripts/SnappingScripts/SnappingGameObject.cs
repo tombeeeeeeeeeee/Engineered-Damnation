@@ -29,13 +29,14 @@ public class SnappingGameObject : MonoBehaviour
     {
         if (other != null && other.gameObject == ExpectedObject)
         {
+            //if the object came from a player, take it away from them.
+            if (pickupScript.heldObj == other.gameObject) 
+                pickupScript.DropObject();
+
             //Stop moving the object to the correct spot
             moving = false;
             other.GetComponent<Rigidbody>().useGravity = true;
 
-            //if the object came from a player, take it away from them.
-            if (pickupScript.heldObj == other.gameObject) 
-                pickupScript.DropObject();
 
             //put the object in the right spot.
             other.transform.rotation = transform.rotation;

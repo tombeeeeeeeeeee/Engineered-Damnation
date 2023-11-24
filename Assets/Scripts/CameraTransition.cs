@@ -133,5 +133,8 @@ public class CameraTransition : MonoBehaviour
         GetComponent<Camera>().enabled = true;
 
         playerController.controls.Player.Disable();
+
+        //Breaks zoom so that zoom doesnt break
+        playerController.playerCamera.fieldOfView = playerController.CameraDefaultFOV;
     }
 }

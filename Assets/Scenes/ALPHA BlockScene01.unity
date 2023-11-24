@@ -2133,7 +2133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: throwForce
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: lookSpeed
@@ -3784,6 +3784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Office_Noticeboard01
       objectReference: {fileID: 0}
+    - target: {fileID: 7153681587059671234, guid: 65434eafa5277b646bb202a3c0f198a8, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7497696426684684920, guid: 65434eafa5277b646bb202a3c0f198a8, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5322,6 +5326,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1183686575586985975, guid: e3803172f3d528f4a8e5228506bfc08c, type: 3}
+--- !u!4 &888412196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1967786977018032910, guid: a347e4dd3d74b3648bc83fbb033788d8, type: 3}
+  m_PrefabInstance: {fileID: 881871367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &894150580
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,6 +5861,53 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e7e5f000155acd41954c8656464f8e5, type: 3}
+--- !u!1 &1000058636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7153681587059671234, guid: 65434eafa5277b646bb202a3c0f198a8, type: 3}
+  m_PrefabInstance: {fileID: 619755434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1000058640
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000058636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5526578195520680478, guid: 24797e85072e124469a5902de1faf655, type: 3}
+--- !u!65 &1000058641
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000058636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.84, z: 1.21}
+  m_Center: {x: 0.029725647, y: -0.5468729, z: 0.72571564}
+--- !u!114 &1000058642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000058636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6548df1153c0943aef48f77d67a71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moving: 0
+  ExpectedObject: {fileID: 0}
+  pickupScript: {fileID: 1860690338}
 --- !u!1 &1007610308
 GameObject:
   m_ObjectHideFlags: 0
@@ -6330,7 +6386,7 @@ MonoBehaviour:
   rings:
   - {fileID: 1158377552}
   - {fileID: 1868355863}
-  raycastPos: {fileID: 0}
+  raycastPos: {fileID: 888412196}
   planes:
   - {fileID: 888412191}
   - {fileID: 2126450964}
@@ -7344,7 +7400,7 @@ MonoBehaviour:
   - {x: 11, y: 30}
   - {x: 12, y: 0}
   manager: {fileID: 1345958532}
-  gameLengthInMinutes: 0.1
+  gameLengthInMinutes: 10
   startingTime: 9
   shiftLength: 5
   endingSequenceStarter: {fileID: 523182205}
@@ -8083,6 +8139,15 @@ MonoBehaviour:
       weightedMode: 0
       inWeight: 0
       outWeight: 0
+    - serializedVersion: 3
+      time: 0.017400756
+      value: 0.11206165
+      inSlope: 1.1760671
+      outSlope: 1.1760671
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.2568787
       value: 0.4016101
