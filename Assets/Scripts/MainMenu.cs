@@ -7,22 +7,34 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public Camera mainMenuCamera;
-    public GameObject mainMenu;
-    public GameObject settingsMenu;
-    public Button button;
-    public Button button2;
-    public Button buttonPlay;
     public GameObject titleGraphic;
 
-    public bool isMainMenu;
+    public GameObject mainMenu;
+    public GameObject settingsMenu;
+
+    // main menu
+    public Button buttonPlay;
+    public Button buttonSettings;
+
+    // settings menu
+    public Button buttonBack;
+    public Button buttonAudioSettings;
+    public Button buttonVideoSettings;
+    public GameObject audioSettings;
+    public GameObject videoSettings;
+
     [HideInInspector] public bool hasStartedGame;
+    bool trueForMainFalseForSettings = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        button.onClick.AddListener(TaskOnClick);
-        button2.onClick.AddListener(TaskOnClick2);
         buttonPlay.onClick.AddListener(Play);
+        buttonSettings.onClick.AddListener(Settings);
+        buttonBack.onClick.AddListener(Back);
+        buttonAudioSettings.onClick.AddListener(AudioSettings);
+        buttonVideoSettings.onClick.AddListener(VideoSettings);
+
         hasStartedGame = false;
     }
 
@@ -44,31 +56,27 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    void TaskOnClick()
+    void Settings()
     {
-        Debug.Log("aaaa");
-        updatemenu();
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
     }
 
-    void TaskOnClick2()
+    void Back()
     {
-        updatemenu();
-        Debug.Log("eeee");
+        settingsMenu.SetActive(false);
+        mainMenu.SetActive(true);
     }
 
-    void updatemenu() 
+    void AudioSettings()
     {
-        if (isMainMenu == true)
-        {
-            mainMenu.SetActive(false);
-            settingsMenu.SetActive(true);
-            isMainMenu = false;
-        }
-        else if (isMainMenu == false)
-        {
-            mainMenu.SetActive(true);
-            settingsMenu.SetActive(false);
-            isMainMenu = true;
-        }
+        videoSettings.SetActive(false);
+        audioSettings.SetActive(true);
+    }
+
+    void VideoSettings()
+    {
+        audioSettings.SetActive(false);
+        videoSettings.SetActive(true);
     }
 }
