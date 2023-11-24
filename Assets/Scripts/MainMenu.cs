@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public Computer computer;
+
     public Camera mainMenuCamera;
     public GameObject titleGraphic;
 
@@ -14,7 +17,10 @@ public class MainMenu : MonoBehaviour
 
     // main menu
     public Button buttonPlay;
+    public Button buttonResume;
     public Button buttonSettings;
+    public Button buttonQuit;
+    public Button buttonCredits;
 
     // settings menu
     public Button buttonBack;
@@ -24,24 +30,20 @@ public class MainMenu : MonoBehaviour
     public GameObject videoSettings;
 
     [HideInInspector] public bool hasStartedGame;
-    bool trueForMainFalseForSettings = true;
 
     // Start is called before the first frame update
     void Start()
     {
         buttonPlay.onClick.AddListener(Play);
         buttonSettings.onClick.AddListener(Settings);
+        buttonQuit.onClick.AddListener(Quit);
+        buttonCredits.onClick.AddListener(Credits);
+        buttonResume.onClick.AddListener(Resume);
         buttonBack.onClick.AddListener(Back);
         buttonAudioSettings.onClick.AddListener(AudioSettings);
         buttonVideoSettings.onClick.AddListener(VideoSettings);
 
         hasStartedGame = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void Play()
@@ -52,6 +54,10 @@ public class MainMenu : MonoBehaviour
             Cursor.visible = false;
             titleGraphic.SetActive(false);
             mainMenuCamera.GetComponent<CameraTransition>().MoveToPlayer();
+
+            buttonPlay.gameObject.SetActive(false);
+            buttonResume.gameObject.SetActive(true);
+
             gameObject.SetActive(false);
         }
     }
@@ -66,6 +72,22 @@ public class MainMenu : MonoBehaviour
     {
         settingsMenu.SetActive(false);
         mainMenu.SetActive(true);
+    }
+
+    void Quit()
+    {
+        Application.Quit();
+    }
+
+    void Credits()
+    {
+
+    }
+
+    void Resume()
+    {
+        // create a useless CallbackContext just to get the function to run
+        computer.Exit(new InputAction.CallbackContext());
     }
 
     void AudioSettings()
