@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Demon : MonoBehaviour
-{
-    [SerializeField] GameObject[] colourableComponents;
-    
+{   
     public void Colour(Color colour)
     {
-        foreach(GameObject colourableComponent in colourableComponents)
-            colourableComponent.GetComponent<MeshRenderer>().material.color = colour;
+        Gameplay.ChildrenMaterialColour(gameObject, 0, colour);
     }
 }

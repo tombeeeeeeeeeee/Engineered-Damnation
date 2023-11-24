@@ -21,7 +21,7 @@ public class AlarmSequence : SequenceObject
         if(!inSequence)
         { 
             foreach(Light light in lightsToTurnOff)
-                light.gameObject.SetActive(false);
+                Destroy(light);
         }
     }
 }

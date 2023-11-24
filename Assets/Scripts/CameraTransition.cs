@@ -39,9 +39,11 @@ public class CameraTransition : MonoBehaviour
         initialPosition = transform.position;
         initialRotation = transform.rotation;
         initialFOV = GetComponent<Camera>().fieldOfView;
-
-        startingPixelHeight = pixels.heightPixelation; 
-        startingPixelWidth = pixels.widthPixelation; 
+        if(pixels)
+        {
+            startingPixelHeight = pixels.heightPixelation;
+            startingPixelWidth = pixels.widthPixelation;
+        }  
     }
 
     public void MoveToTarget(InputActionMap controlsForFocus)
