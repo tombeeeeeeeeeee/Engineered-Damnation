@@ -7,6 +7,6 @@ public class Demon : MonoBehaviour
 {   
     public void Colour(Color colour)
     {
-        Gameplay.ChildrenMaterialColour(gameObject, 0, colour);
+        Gameplay.ChildrenMaterialColour(gameObject, colour);
     }
 }

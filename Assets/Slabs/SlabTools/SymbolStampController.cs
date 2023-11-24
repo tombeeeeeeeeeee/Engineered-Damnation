@@ -74,7 +74,7 @@ public class SymbolStampController : Focusable
 
     public void PressStamp()
     {
-        //aS.PlayOneShot(slabBurnInSounds[Random.Range(0,slabBurnInSounds.Length)]);
+        aS.PlayOneShot(slabBurnInSounds[Random.Range(0,slabBurnInSounds.Length)]);
 
         SlabManager slab = null;
 

@@ -6,6 +6,7 @@ public class AlarmSequence : SequenceObject
 {
     [SerializeField] Light[] lightsToTurnOff;
     [SerializeField] float rotationSpeed = 200;
+    [SerializeField] AudioClip alarmSound;
 
     protected override void Update()
     {
@@ -22,6 +23,9 @@ public class AlarmSequence : SequenceObject
         { 
             foreach(Light light in lightsToTurnOff)
                 Destroy(light);
+            GetComponent<AudioSource>().clip = alarmSound;
+            GetComponent<AudioSource>().loop = true;
+            GetComponent<AudioSource>().Play();
         }
     }
 }

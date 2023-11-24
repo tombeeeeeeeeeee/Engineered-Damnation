@@ -9,7 +9,8 @@ public class SpinSequence : SequenceObject
     public GameObject spinningObject;
     public float spinSpeedMultiplier;
 
-    [SerializeField] AudioClip[] Whispers;
+    [SerializeField] AudioClip SummoningSongWin;
+    [SerializeField] AudioClip SummoningSongLose;
 
     // Update is called once per frame
     protected override void Update()
@@ -24,8 +25,8 @@ public class SpinSequence : SequenceObject
         base.Begin(decision);
         if(inSequence)
         {
-            spinningObject.GetComponent<AudioSource>().clip = Whispers[Random.Range(0, Whispers.Length)];
-            spinningObject.GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().clip = (decision ? SummoningSongWin : SummoningSongLose);
+            GetComponent<AudioSource>().Play();
         }
     }
 

@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public static class Gameplay
@@ -13,16 +14,17 @@ public static class Gameplay
             ChildrenLayerSet(obj.transform.GetChild(i).gameObject, layer);
     }
 
-    public static void ChildrenMaterialColour(GameObject obj, int index, Color colour)
+    public static void ChildrenMaterialColour(GameObject obj, Color colour)
     {
-        MeshRenderer meshRenderer = obj.GetComponent<MeshRenderer>();
-        if(meshRenderer)
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if(renderer)
         {
-            Material[] mats = meshRenderer.materials;
-            mats[index].color = colour;
-            meshRenderer.materials = mats;
+            Material[] mats = renderer.materials;
+            mats[0].color = colour;
+            renderer.materials = mats;
         }
+        
         for (int i = 0; i < obj.transform.childCount; i++)
-            ChildrenMaterialColour(obj.transform.GetChild(i).gameObject, index, colour);
+            ChildrenMaterialColour(obj.transform.GetChild(i).gameObject, colour);
     }
 }

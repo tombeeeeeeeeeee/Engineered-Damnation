@@ -1,16 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DemonSummoningSpot : SnapSlab
 {
     [SerializeField] SystemManager sysManager;
     [SerializeField] SendToSequence nextInSequence;
-    public GameObject demonToSummon;
+    [HideInInspector] public GameObject demonToSummon;
+    [HideInInspector] public Color colourToSummon;
+    [HideInInspector] public Color shaderColourToSummon;
     private int colourIndex = 0;
-    public bool summoning = false;
-
+    [HideInInspector] public bool summoning = false;
+    [SerializeField] AudioClip[] Whispers;
     public override void OnTriggerEnter(Collider other)
     {
         if (pickupScript.heldObj == other.gameObject) return;
@@ -72,12 +71,12 @@ public class DemonSummoningSpot : SnapSlab
         if (demonIndex != 0)
         {
             demonToSummon = sysManager.DemonTypes[demonIndex].Demon;
-            Demon demon = demonToSummon.gameObject.GetComponent<Demon>();
-            if (demon)
-                demon.Colour(sysManager.LiquidTypes[colourIndex].color);
+            colourToSummon = sysManager.LiquidTypes[colourIndex].color;
+            shaderColourToSummon = sysManager.LiquidTypes[colourIndex].shaderColor;
         }
         else demonToSummon = null;
 
+        GetComponent<AudioSource>().PlayOneShot(Whispers[Random.Range(0,Whispers.Length)]);
         return demonToSummon != null;
     }
 
