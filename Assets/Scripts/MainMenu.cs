@@ -12,8 +12,10 @@ public class MainMenu : MonoBehaviour
     public Button button;
     public Button button2;
     public Button buttonPlay;
+    public GameObject titleGraphic;
 
     public bool isMainMenu;
+    [HideInInspector] public bool hasStartedGame;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class MainMenu : MonoBehaviour
         button.onClick.AddListener(TaskOnClick);
         button2.onClick.AddListener(TaskOnClick2);
         buttonPlay.onClick.AddListener(Play);
+        hasStartedGame = false;
     }
 
     // Update is called once per frame
@@ -31,9 +34,14 @@ public class MainMenu : MonoBehaviour
 
     void Play()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        mainMenuCamera.GetComponent<CameraTransition>().MoveToPlayer();
+        if (!hasStartedGame)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            titleGraphic.SetActive(false);
+            mainMenuCamera.GetComponent<CameraTransition>().MoveToPlayer();
+            gameObject.SetActive(false);
+        }
     }
 
     void TaskOnClick()
