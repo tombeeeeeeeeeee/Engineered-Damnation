@@ -11,7 +11,8 @@ public class CameraTransition : MonoBehaviour
     public Transform playerCameraTransform;
     public float duration;
     public float depixilationPercentage;
-    [SerializeField] PixelationController pixels;
+
+    [SerializeReference] PixelationController pixels;
     private float startingPixelHeight;
     private float startingPixelWidth;
 
@@ -103,11 +104,10 @@ public class CameraTransition : MonoBehaviour
             GetComponent<Camera>().fieldOfView = fromFOV - interpolationRatio * (fromFOV - targetFOV);
             
             if (elapsed < duration)
-                elapsed += Time.deltaTime;
+                elapsed += Gameplay.deltaTime;
 
             else
             {
-
                 elapsed = 0;
                 moving = false;
 
@@ -133,7 +133,5 @@ public class CameraTransition : MonoBehaviour
         GetComponent<Camera>().enabled = true;
 
         playerController.controls.Player.Disable();
-        //Breaks zoom so that zoom doesnt break
-        playerController.playerCamera.fieldOfView = playerController.CameraDefaultFOV;
     }
 }
