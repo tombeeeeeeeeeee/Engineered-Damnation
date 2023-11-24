@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BloodShader
-  m_Shader: {fileID: -6465566751694194690, guid: 570d9ecb222d4bd48a43b4aa00f22cae,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 570d9ecb222d4bd48a43b4aa00f22cae, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -91,7 +90,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Fill: 0
-    - _FresnelPower: 3
+    - _FresnelPower: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -114,10 +113,10 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.6981132, g: 0.008213097, b: 0, a: 1}
-    - _SideColor: {r: 1, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 0.38679248, g: 0.004345983, b: 0, a: 1}
+    - _SideColor: {r: 0.44520125, g: 0.000607054, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TopColor: {r: 1, g: 0.023584902, b: 0.08397997, a: 1}
+    - _TopColor: {r: 0.028301895, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &44657640029433350
 MonoBehaviour:

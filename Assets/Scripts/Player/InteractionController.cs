@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class InteractionController : MonoBehaviour
 {
