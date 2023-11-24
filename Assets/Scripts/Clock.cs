@@ -38,7 +38,7 @@ public class Clock : MonoBehaviour
 
         //Calculate the hours and minutes for the clock
         hours = playthroughPercentage * shiftLength + (militaryTime ? startingTime : startingTime - 1);
-        hours = militaryTime ? hours%24 : hours%12 + 1;
+        hours = militaryTime ? hours % 24 : hours % 12 + 1;
         minutes = (int)(Gameplay.timeSinceStart / gameLengthInMinutes * shiftLength);
         minutes %= 60;
 
@@ -57,7 +57,8 @@ public class Clock : MonoBehaviour
         else if(playthroughPercentage >= 1 && !gameFinished)
         {
             gameFinished = true;
-            endingSequenceStarter.Begin(manager.winState);
+            endingSequenceStarter.Begin(
+                manager.winState);
         }
 
     }

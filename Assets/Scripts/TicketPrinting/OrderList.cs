@@ -6,6 +6,16 @@ public class OrderList : PickUp
 {
     [SerializeField] protected Transform attachPosition;
     protected Order childOrder;
+    public bool hasBeenPinned = false;
+    public Vector3 pinnedPosition = Vector3.zero;
+
+    private void Update()
+    {
+        if (!hasBeenAlt && idealParent != null)
+            transform.rotation = Quaternion.LookRotation(idealParent.forward, idealParent.up);
+        else if(hasBeenPinned)
+            transform.position = pinnedPosition;
+    }
 
     /// <summary>
     /// Adds Demon to a todo list
@@ -67,7 +77,14 @@ public class OrderList : PickUp
 
     public override void PickedUp()
     {
+        hasBeenPinned = false;
+        pinnedPosition = Vector3.zero;
         base.PickedUp();
-        transform.rotation = Quaternion.identity;
+    }
+
+    public override void Dropped()
+    {
+        base.Dropped();
+        GetComponent<Rigidbody>().useGravity = true;
     }
 }

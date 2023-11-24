@@ -18,10 +18,10 @@ public class AlarmSequence : SequenceObject
     public override void Begin(bool decision)
     {
         base.Begin(decision);
-        if(!inSequence)
+        if(inSequence)
         { 
             foreach(Light light in lightsToTurnOff)
-                light.gameObject.SetActive(false);
+                Destroy(light);
         }
     }
 }

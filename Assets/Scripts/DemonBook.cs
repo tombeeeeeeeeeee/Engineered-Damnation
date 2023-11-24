@@ -14,13 +14,11 @@ public class DemonBook : Focusable
     override public void Init()
     {
         page = GetComponent<MeshRenderer>();
-        Debug.Log(page.material);
         base.Init(); // base class adds the turnpage function with init so this will too
     }
 
     public override void Right()
     {
-        Debug.Log("next");
         pageNumber++;
         if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
         PageTurner();
@@ -36,7 +34,10 @@ public class DemonBook : Focusable
     private void PageTurner()
     {
         Material[] mats = page.materials;
-        mats[1] = pages[pageNumber];
+        if (pages[pageNumber])
+            mats[1] = pages[pageNumber];
+        else
+            Debug.LogError("No pages");
         page.materials = mats;
     }
 

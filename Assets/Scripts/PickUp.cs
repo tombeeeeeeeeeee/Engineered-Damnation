@@ -50,6 +50,7 @@ public class PickUp : MonoBehaviour
         rb.drag = 10;
         rb.angularVelocity = Vector3.zero;
         rb.freezeRotation = true;
+        rb.isKinematic = false;
 
         //ignore raycast so that the player can raycast through it.
         Gameplay.ChildrenLayerSet(gameObject, 2);
@@ -78,7 +79,8 @@ public class PickUp : MonoBehaviour
     protected void OnCollisionEnter(Collision collision)
     {
         int index = Random.Range(0, collisionSounds.Length);
-        aS.PlayOneShot(collisionSounds[index]);
+        if (collisionSounds[index])
+            aS.PlayOneShot(collisionSounds[index]);
     }
 
 }

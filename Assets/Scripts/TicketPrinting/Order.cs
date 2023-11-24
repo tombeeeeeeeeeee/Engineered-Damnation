@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +7,7 @@ public class Order : OrderList
     public uint demonKey;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] Image checkedOffArt;
+    
 
     public void Initialise(uint demonKey, string demonDescription)
     {
