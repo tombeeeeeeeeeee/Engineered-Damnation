@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Beaker : Potion
 {
@@ -8,20 +9,42 @@ public class Beaker : Potion
     [SerializeField] GameObject[] liquidLevels;
     private int OldLiquidLevel = -1;
 
+    public MeshRenderer[] liquidMesh;
+
+    public GameObject mixPourPart;
+    public AudioClip[] fillSounds;
+
 
     // Update is called once per frame
+
+    void Awake() 
+    {
+        mixPourPart.SetActive(false);
+    }
     void Update()
     {
         if(liquidLevel > 0 && Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
 
+        else
+        {
+            particle1.SetActive(false);
+            particle2.SetActive(false);
+        }
+
         if(OldLiquidLevel != liquidLevel)
         {
+            mixPourPart.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = LiquidColour;
             for (int i = 0; i < 2; i++)
             {
                 if (i < liquidLevel)
                 {
                     liquidLevels[i].SetActive(true);
-                    liquidLevels[i].GetComponent<MeshRenderer>().material.color = LiquidColour;
+                    //liquidLevels[i].GetComponent<MeshRenderer>().material.color = LiquidColour;
+                    liquidMesh[i].material.SetColor("_FresnelColor", LiquidColour);
+                    liquidMesh[i].material.SetColor("_TopColor", LiquidColour);
+                    liquidMesh[i].material.SetColor("_SideColor", LiquidColour);
+
+
                 }
                 else
                     liquidLevels[i].SetActive(false);
@@ -35,9 +58,11 @@ public class Beaker : Potion
     {
         if (liquidLevel < 2 && liquidKey != LiquidKey)
         {
+            
             LiquidKey += liquidKey;
             LiquidColour = colors[LiquidKey];
             liquidLevel++;
+            aS.PlayOneShot(fillSounds[Random.Range(0, fillSounds.Length)]);
         }
     }
 
@@ -45,24 +70,50 @@ public class Beaker : Potion
     {
         RaycastHit[] pouredOn;
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
+        mixPourPart.SetActive(true);
         foreach (RaycastHit hit in pouredOn)
         {
-            if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
+            SlabManager slab = hit.transform.gameObject.GetComponent<SlabManager>();
+            if ( slab != null && slab.getInner() != 0 )
             {
-                hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
+                slab.ChangeLiquid(LiquidColour, LiquidKey);
                 liquidLevel = 0;
                 LiquidKey = 0;
+                mixPourPart.SetActive(false);
             }
         }
     }
 
-    public override void PickedUp()
+    public override void AlternateInteraction(InputAction.CallbackContext context)
     {
-        base.PickedUp();
+        hasBeenAlt = !hasBeenAlt;
+
+        if (hasBeenAlt)
+        {
+            transform.Rotate(Vector3.forward, -120);
+            if(liquidLevel > 0)
+            {
+                aS.loop = true;
+                aS.clip = pourSounds[Random.Range(0, pourSounds.Length)];
+                aS.Play();
+            }
+        }
+        else
+        {
+            transform.rotation = transform.rotation = Quaternion.LookRotation(-idealParent.forward, idealParent.up);
+            if (liquidLevel > 0)
+            {
+                aS.loop = false;
+                aS.Stop();
+                aS.PlayOneShot(pourEnd);
+            }
+        }
+
     }
 
     public override void Dropped()
     {
         base.Dropped();
+        mixPourPart.SetActive(false);
     }
 }

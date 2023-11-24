@@ -42,13 +42,13 @@ public class FPSController : MonoBehaviour
     void Update() 
     {
         // PLAYER MOVEMENT
-        Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Time.deltaTime;
+        Vector2 moveInput = controls.Player.Move.ReadValue<Vector2>() * walkingSpeed * Gameplay.deltaTime;
         moveDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
         cc.Move(moveDirection);
 
         // CAMERA MOVEMENT
         // Read input for mouse movement and rotate and camera
-        lookInput = controls.Player.Camera.ReadValue<Vector2>() * lookSpeed * Time.deltaTime;
+        lookInput = controls.Player.Camera.ReadValue<Vector2>() * lookSpeed * Gameplay.deltaTime;
         transform.Rotate(Vector3.up * lookInput.x);
 
         float cameraRotationX = -lookInput.y;
@@ -81,7 +81,7 @@ public class FPSController : MonoBehaviour
     private void PauseToggle(bool pause)
     {
         pauseMenuCanvas.gameObject.SetActive(pause);
-        Time.timeScale = pause ? 0 : 1;
+        Gameplay.gameplayActive = !pause;
     }
 
     public void CameraZoom(InputAction.CallbackContext context)

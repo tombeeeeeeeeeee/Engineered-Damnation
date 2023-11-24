@@ -41,7 +41,7 @@ public class DataManager : MonoBehaviour
         demonKey += (uint)rand.Next(0, 1) * 10;         // flipped
         demonKey += (uint)rand.Next(1, 4) * 100;        // symbol
         demonKey += (uint)rand.Next(0, 1) * 1000;       // candles
-        demonKey += (uint)rand.Next(1, 4) * 10000;      // slab
+        demonKey += (uint)rand.Next(1, 4) * 10000;      // objectToDestroy
         demonKey += (uint)rand.Next(1, 4) * 100000;     // blood
 
         return demonKey;

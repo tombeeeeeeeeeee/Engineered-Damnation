@@ -6,6 +6,6 @@ public class Ascension : MonoBehaviour
 {
     void Update()
     {
-        transform.position += Vector3.up * Time.deltaTime * 0.2f;
+        transform.position += Vector3.up * Gameplay.deltaTime * 0.2f;
     }
 }

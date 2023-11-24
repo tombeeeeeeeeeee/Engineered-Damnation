@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SlabManager : MonoBehaviour
 {
-    //This key catalogues the type of demon the slab will summon
+    //This key catalogues the type of demon the objectToDestroy will summon
     public uint DemonKey = 000;
     private MeshRenderer[] meshRenderers;
 

@@ -51,7 +51,7 @@ public class OrderList : PickUp
             if (transform.parent.GetComponent<OrderList>() != null)
                 transform.parent.GetComponent<OrderList>().MoveUp(speed);
             else
-                transform.localPosition += Vector3.up * speed * Time.deltaTime;
+                transform.localPosition += Vector3.up * speed * Gameplay.deltaTime;
         }
     }
 

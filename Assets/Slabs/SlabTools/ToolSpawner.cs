@@ -5,7 +5,7 @@ using UnityEngine;
 public class ToolSpawner : MonoBehaviour
 {
     public GameObject[] toolCollection;
-    [SerializeReference] Transform spawnLocation;
+    [SerializeReference] protected Transform spawnLocation;
 
     public virtual void SpawnTool() { Instantiate(GetToolFromCollection(), spawnLocation); }
 

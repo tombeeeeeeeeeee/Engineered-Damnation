@@ -1,51 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class FireBallSequence : SequenceObject
 {
     [SerializeField] Demon cat;
-    private Vector3 velocity = Vector3.zero;
-
+    [SerializeField] float speed;
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        transform.LookAt(cat.transform.position);
         if(inSequence)
         {
-            timeInOperation += Time.deltaTime;
-            transform.position += velocity * Time.deltaTime;
-            inSequence = timeInOperation < lengthOfOperation;
-            if (!inSequence)
-                End();
+            transform.position += transform.forward * Gameplay.deltaTime * speed;
+            lengthOfOperation += Gameplay.deltaTime;
+            base.Update();
         }
     }
 
     public override void Begin(bool decision)
     {
-        this.decision = decision;
-
-        if (!inSequence)
-        {
-            inSequence = true;
-            gameObject.SetActive(true);
-            timeInOperation = 0;
-            velocity = (cat.transform.position - transform.position)/lengthOfOperation;
-        }
+        base.Begin(decision);
     }
 
     public override void End()
     {
-        if(nextInSequence)
-            nextInSequence.Begin(decision);
-
+       base.End();
        gameObject.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)
     {
         ExplosionChange explodee = other.gameObject.GetComponent<ExplosionChange>();
+
         if (explodee != null)
             explodee.Explode();
+        if (explodee.gameObject.name.ToLower().Contains("cat"))
+            End();
     }
 }

@@ -5,32 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class EndSceneSequence : SequenceObject
 {
-    // Update is called once per frame
-    void Update()
-    {
-        if(inSequence)
-            timeInOperation += Time.deltaTime;
-        if (timeInOperation > lengthOfOperation)
-            End();
-    }
+    [SerializeField] FPSController player;
 
     public override void Begin(bool decision)
     {
-        this.decision = decision;
-
-        if (!inSequence)
-        {
-            inSequence = true;
-            gameObject.SetActive(true);
-            timeInOperation = 0;
-        }
+        base.Begin(decision);
+        if(inSequence)
+            player.controls.Disable();
     }
-
 
     public override void End()
     {
-        inSequence = false;
-        timeInOperation = 0;
-        SceneManager.LoadScene("WorldspaceCanvasTest");
+        base.End();
+        SceneManager.LoadScene(0);
     }
 }

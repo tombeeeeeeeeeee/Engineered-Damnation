@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2112563954799561880}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0.009133375, z: 0}
-  m_LocalScale: {x: 2.17, y: 2.17, z: 2.17}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3185015327416718191}
@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 3849706412749713310}
   - component: {fileID: 2934798495411274380}
   - component: {fileID: 3650821515291289969}
+  - component: {fileID: 1099222855229056004}
   m_Layer: 0
   m_Name: SlabWithManager
   m_TagString: CanPickUp
@@ -226,8 +227,114 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc49e169133298545b0e04c8abdc2cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreRaycast: 2
-  respawns: 0
+  collisionSounds:
+  - {fileID: 8300000, guid: ba59365d154c47645a8c436b080a7196, type: 3}
+  - {fileID: 8300000, guid: 9fdebc8d635d9ac438906fc5a90a0b50, type: 3}
+  - {fileID: 8300000, guid: 43b723c731725a24ca63ac220b1ae340, type: 3}
+  - {fileID: 8300000, guid: 5c53387d0bed58640b22f83d07b80e3d, type: 3}
+  - {fileID: 8300000, guid: 7e672d64bddda6f4abbd3cbf10027e52, type: 3}
+  - {fileID: 8300000, guid: 29ebd06ed3cea34429d547ae0711972b, type: 3}
+  - {fileID: 8300000, guid: d7d6709f580a8184dbea75b23e1ec1ad, type: 3}
+  - {fileID: 8300000, guid: 0e7c44e2383f3c640a62cf34bd305066, type: 3}
+  - {fileID: 8300000, guid: c8bf615dfea56c64a866a5e372a840f9, type: 3}
+  hasBeenAlt: 0
+  idealParent: {fileID: 0}
+--- !u!82 &1099222855229056004
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844201543809976789}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4337013507177455561, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5952470624741021897
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +362,7 @@ Transform:
   m_GameObject: {fileID: 5952470624741021897}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0.009531027, z: 0}
-  m_LocalScale: {x: 2.17, y: 2.17, z: 2.17}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3185015327416718191}

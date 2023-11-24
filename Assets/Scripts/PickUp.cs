@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class PickUp : MonoBehaviour
 {
-    
+    //Sounds
+    [SerializeField] protected AudioClip[] collisionSounds;
+    protected AudioSource aS;
+
     //Rigidbody properties:
     private Rigidbody rb;
     private bool usesGravity;
@@ -14,18 +19,29 @@ public class PickUp : MonoBehaviour
     private Vector3 angularVelocity;
     private bool freezeRotation;
     private int defaultLayer;
+    public bool hasBeenAlt = false;
+    [HideInInspector] public Transform idealParent;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        //Audio
+        aS = GetComponent<AudioSource>();
+
+        //Rigid Body Properties
         rb = GetComponent<Rigidbody>();
         usesGravity = rb.useGravity;
         drag = rb.drag;
         angularVelocity = rb.angularVelocity;
         freezeRotation = rb.freezeRotation;
-        defaultLayer = gameObject.layer;
+        defaultLayer = gameObject.layer = 6;
     }
 
+    private void Update()
+    {
+        if (!hasBeenAlt && idealParent != null)
+            transform.rotation = Quaternion.LookRotation(idealParent.up, -idealParent.forward);
+    }
 
     public virtual void PickedUp()
     {
@@ -36,19 +52,33 @@ public class PickUp : MonoBehaviour
         rb.freezeRotation = true;
 
         //ignore raycast so that the player can raycast through it.
-        gameObject.layer = 2;
+        Gameplay.ChildrenLayerSet(gameObject, 2);
     }
 
     public virtual void Dropped()
     {
+        hasBeenAlt = false;
+
         //resets rigidbody to before being picked up.
         rb.useGravity = usesGravity;
         rb.drag = drag;
         rb.angularVelocity = angularVelocity;
         rb.freezeRotation = freezeRotation;
 
-        gameObject.layer = defaultLayer;
+        Gameplay.ChildrenLayerSet(gameObject, defaultLayer);
     }
 
+    public virtual void AlternateInteraction(InputAction.CallbackContext context)
+    {
+        hasBeenAlt = !hasBeenAlt;
+        if(!hasBeenAlt)
+            transform.rotation = Quaternion.LookRotation(-idealParent.forward, idealParent.up);
+    }
+
+    protected void OnCollisionEnter(Collision collision)
+    {
+        int index = Random.Range(0, collisionSounds.Length);
+        aS.PlayOneShot(collisionSounds[index]);
+    }
 
 }
