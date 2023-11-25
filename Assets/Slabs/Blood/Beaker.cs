@@ -1,4 +1,4 @@
-
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,6 +35,7 @@ public class Beaker : Potion
             if (!hasBeenAlt && idealParent != null)
                 transform.rotation = Quaternion.LookRotation(idealParent.forward, idealParent.up);
         }
+
     }
 
     public void AddLiquid(uint liquidKey)
@@ -72,11 +73,7 @@ public class Beaker : Potion
         {
             SlabManager slab = hit.transform.gameObject.GetComponent<SlabManager>();
             if ( slab != null && slab.getInner() != 0 )
-            {
-                liquidLevel = 0;
-                LiquidKey = 0;
-                StartCoroutine(SlabColourChange(hit.transform.gameObject.GetComponent<SlabManager>(), LiquidColour, LiquidKey, hit.distance));
-            }
+                StartCoroutine(SlabColourChange(hit.transform.gameObject.GetComponent<SlabManager>(), hit.distance));
         }
     }
 
@@ -86,5 +83,16 @@ public class Beaker : Potion
 
         if (liquidLevel > 0)
             base.AlternateInteraction(context);
+    }
+
+    public override IEnumerator SlabColourChange(SlabManager slab, float distance)
+    {
+        yield return new WaitForSeconds(Mathf.Sqrt(6 * distance / 9.81f));
+        if(LiquidKey != 0) slab.ChangeLiquid(LiquidColour, LiquidKey);
+        liquidLevel = 0;
+        LiquidKey = 0;
+        liquid.SetActive(false);
+        StopAllCoroutines();
+        base.AlternateInteraction(new InputAction.CallbackContext());
     }
 }

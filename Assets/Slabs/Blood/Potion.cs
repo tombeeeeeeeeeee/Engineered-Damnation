@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -63,7 +62,7 @@ public class Potion : PickUp
         foreach (RaycastHit hit in pouredOn)
         {
             if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
-                StartCoroutine(SlabColourChange(hit.transform.gameObject.GetComponent<SlabManager>(), LiquidColour, LiquidKey, hit.distance));
+                StartCoroutine(SlabColourChange(hit.transform.gameObject.GetComponent<SlabManager>(), hit.distance));
 
             else if (hit.transform.gameObject.GetComponent<Beaker>() != null)
                 StartCoroutine(BeakerColourChange(hit.transform.gameObject.GetComponent<Beaker>(), LiquidColour, hit.distance));
@@ -120,10 +119,10 @@ public class Potion : PickUp
         transform.rotation = spawnRotation;
     }
 
-    public IEnumerator SlabColourChange(SlabManager slab, Color color, uint key, float distance)
+    public virtual IEnumerator SlabColourChange(SlabManager slab, float distance)
     {
         yield return new WaitForSeconds(Mathf.Sqrt(6*distance/9.81f));
-        slab.ChangeLiquid(color, key);
+        slab.ChangeLiquid(LiquidColour, LiquidKey);
     }
 
     public IEnumerator BeakerColourChange(Beaker beaker, Color color, float distance)
