@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class DemonBook : Focusable
 {
     public List<Material> pages;
+    [SerializeField] AudioClip PagemoveSound;
+    [SerializeField] Image LeftArrow;
+    [SerializeField] Image RightArrow;
 
     MeshRenderer page;
     int pageNumber = 0;
@@ -17,18 +20,23 @@ public class DemonBook : Focusable
         base.Init(); // base class adds the turnpage function with init so this will too
     }
 
+
     public override void Right()
     {
-        pageNumber++;
-        if (pageNumber >= pages.Count) pageNumber = pages.Count - 1;
-        PageTurner();
+        if(pageNumber < pages.Count - 1)
+        {
+            pageNumber++;
+            PageTurner(); 
+        }
     }
 
     public override void Left()
     {
-        pageNumber--;
-        if (pageNumber < 0) pageNumber = 0;
-        PageTurner();
+        if (pageNumber > 0)
+        {
+            pageNumber--;
+            PageTurner();
+        }
     }
 
     private void PageTurner()
@@ -36,8 +44,10 @@ public class DemonBook : Focusable
         Material[] mats = page.materials;
         if (pages[pageNumber])
             mats[1] = pages[pageNumber];
-        else
-            Debug.LogError("No pages");
+
+        LeftArrow.enabled = !(pageNumber == 0);
+        RightArrow.enabled = !(pageNumber == pages.Count - 1);
+
         page.materials = mats;
     }
 

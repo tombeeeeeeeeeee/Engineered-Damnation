@@ -27,11 +27,11 @@ public class SnappingGameObject : MonoBehaviour
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (other != null && other.gameObject == ExpectedObject)
+        if (other.gameObject == ExpectedObject)
         {
             //if the object came from a player, take it away from them.
-            if (pickupScript.heldObj == other.gameObject) 
-                pickupScript.DropObject();
+            if (pickupScript.heldObj == other.gameObject)
+                pickupScript.DropObject(true);
 
             //Stop moving the object to the correct spot
             moving = false;

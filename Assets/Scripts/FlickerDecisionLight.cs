@@ -11,7 +11,7 @@ public class FlickerDecisionLight : LightFlickerOffSequence
     protected override void Update()
     {
         base.Update();
-        if (numberOfFlickers == 1) Destroy(objectToDestroy);
+        if (numberOfFlickers == 3) Destroy(objectToDestroy);
     }
 
 

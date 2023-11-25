@@ -74,8 +74,6 @@ public class SymbolStampController : Focusable
 
     public void PressStamp()
     {
-        aS.PlayOneShot(slabBurnInSounds[Random.Range(0,slabBurnInSounds.Length)]);
-
         SlabManager slab = null;
 
         RaycastHit[] hits = Physics.RaycastAll(raycastPos.position, -transform.up, 1);
@@ -90,6 +88,7 @@ public class SymbolStampController : Focusable
         if (slab != null)
         {
 
+            aS.PlayOneShot(slabBurnInSounds[Random.Range(0,slabBurnInSounds.Length)]);
 
             slab.ChangeInner(rings[0].symbol, (uint)rings[0].symbolIndex);
 

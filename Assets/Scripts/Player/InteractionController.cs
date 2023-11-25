@@ -47,10 +47,8 @@ public class InteractionController : MonoBehaviour
             }
         }
         else
-        {
             // If an object is already held, drop it.
-            DropObject();
-        }
+            DropObject(false);
     }
 
 
@@ -95,14 +93,14 @@ public class InteractionController : MonoBehaviour
         }
     }
 
-    public void DropObject()
+    public void DropObject(bool snapping)
     {
         //Grab the object and run its dropping code
         PickUp obj = heldObj.GetComponent<PickUp>();
         obj.Dropped();
 
         controller.controls.Player.AltInteract.performed -= obj.AlternateInteraction;
-        obj.GetComponent<Rigidbody>().AddForce((holdParent.position - obj.transform.position) * throwForce * Gameplay.deltaTime, ForceMode.Impulse);
+        if(!snapping) obj.GetComponent<Rigidbody>().AddForce((holdParent.position - obj.transform.position) * throwForce * Gameplay.deltaTime, ForceMode.Impulse);
 
         //detattch the object from the player
         obj.idealParent = null;

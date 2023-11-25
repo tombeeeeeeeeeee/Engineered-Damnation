@@ -31,12 +31,14 @@ public class Potion : PickUp
         spawnPosition = transform.position;
         spawnRotation = transform.rotation;
 
+        gameObject.GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -0.1f, 0);
+
     }
 
 
     // Update is called once per frame
     void Update()
-    { 
+    {
         if (Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
         else
         {
@@ -53,7 +55,7 @@ public class Potion : PickUp
     {
         RaycastHit[] pouredOn;
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
-
+        Debug.DrawRay(pourPosition.position, -Vector3.up);
         cork.SetActive(false);
         particle1.SetActive(true);
         particle2.SetActive(true);
@@ -61,10 +63,10 @@ public class Potion : PickUp
         foreach (RaycastHit hit in pouredOn)
         {
             if (hit.transform.gameObject.GetComponent<SlabManager>() != null)
-                hit.transform.gameObject.GetComponent<SlabManager>().ChangeLiquid(LiquidColour, LiquidKey);
+                StartCoroutine(SlabColourChange(hit.transform.gameObject.GetComponent<SlabManager>(), LiquidColour, LiquidKey, hit.distance));
 
             else if (hit.transform.gameObject.GetComponent<Beaker>() != null)
-                hit.transform.gameObject.GetComponent<Beaker>().AddLiquid(LiquidKey);
+                StartCoroutine(BeakerColourChange(hit.transform.gameObject.GetComponent<Beaker>(), LiquidColour, hit.distance));
         }
     }
 
@@ -78,9 +80,9 @@ public class Potion : PickUp
     {
         hasBeenAlt = !hasBeenAlt;
 
-        if(hasBeenAlt)
+        if (hasBeenAlt)
         {
-            transform.Rotate(Vector3.forward, -120);
+            transform.Rotate(Vector3.forward, -pourAngle);
             aS.loop = true;
             aS.clip = pourSounds[Random.Range(0, pourSounds.Length)];
             aS.Play();
@@ -118,4 +120,15 @@ public class Potion : PickUp
         transform.rotation = spawnRotation;
     }
 
+    public IEnumerator SlabColourChange(SlabManager slab, Color color, uint key, float distance)
+    {
+        yield return new WaitForSeconds(Mathf.Sqrt(6*distance/9.81f));
+        slab.ChangeLiquid(color, key);
+    }
+
+    public IEnumerator BeakerColourChange(Beaker beaker, Color color, float distance)
+    {
+        yield return new WaitForSeconds(Mathf.Sqrt(6 * distance / 9.81f));
+        beaker.AddLiquid(LiquidKey);
+    }
 }

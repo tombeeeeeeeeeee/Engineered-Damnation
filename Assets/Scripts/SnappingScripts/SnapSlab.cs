@@ -12,6 +12,12 @@ public class SnapSlab : SnappingGameObject
         base.OnTriggerEnter(other);
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == ExpectedObject)
+            ExpectedObject = null;
+    }
+
     /// <summary>
     /// Checks if a passed object has a objectToDestroy manager script
     /// </summary>
