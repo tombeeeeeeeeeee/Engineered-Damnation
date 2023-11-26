@@ -9,6 +9,7 @@ public class SlabSpawner : ToolSpawner
     [SerializeField] AudioClip SlabSpawnSound;
     [SerializeField] AudioClip[] SlabDroppingSounds;
     private AudioSource toolSoundSpot;
+    private int slabCount = 0;
 
     private void Start()
     {
@@ -18,18 +19,24 @@ public class SlabSpawner : ToolSpawner
 
     private void Update()
     {
-        //If no slab spawning sound is playing while a slab is spawning. play it
+        //If no objectToDestroy spawning sound is playing while a objectToDestroy is spawning. play it
         if(queued && !toolSoundSpot.isPlaying) 
         {
             toolSoundSpot.PlayOneShot(SlabDroppingSounds[Random.Range(0,SlabDroppingSounds.Length)]);   
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<SlabManager>() != null)
+            slabCount++;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<SlabManager>() != null)
         {
-            if (!queued)
+            slabCount--;
+            if (!queued && slabCount == 0)
             {
                 queued = true;
                 Invoke("SpawnTool", cooldownDuration);

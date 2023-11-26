@@ -15,7 +15,7 @@ public class FireBin : MonoBehaviour
         if (go.GetComponent<PickUp>())
         {
             if (pickupScript.heldObj == go)
-                pickupScript.DropObject();
+                pickupScript.DropObject(false);
 
             if (go.GetComponent<Potion>())
                 go.GetComponent<Potion>().Respawn();

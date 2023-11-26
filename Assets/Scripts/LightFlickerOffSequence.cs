@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Light))]
 
 public class LightFlickerOffSequence : SequenceObject
 {
-    private int numberOfFlickers;
+    public int numberOfFlickers;
     public float timeBetweenFlicker = 0.3f;
     private float timeSinceLastFlicker = 0;
-    private Light lightToFlicker;
+    protected Light lightToFlicker;
 
     private void Start()
     {
@@ -23,7 +21,7 @@ public class LightFlickerOffSequence : SequenceObject
         {
             //Forces sequence to end when we choose.
             lengthOfOperation += 1;
-            timeSinceLastFlicker += Time.deltaTime;
+            timeSinceLastFlicker += Gameplay.deltaTime;
 
             //If finished flickering
             if(numberOfFlickers <= 0 )  End(); 

@@ -24,9 +24,7 @@ public class BossWinOrLoseSequence : SequenceObject
     protected override void Update()
     {
         if (inSequence)
-        {
             base.Update();
-        }
     }
 
     public override void Begin(bool decision)

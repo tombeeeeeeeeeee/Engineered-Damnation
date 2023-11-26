@@ -1,43 +1,39 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DemonSummoningSpot : SnapSlab
 {
     [SerializeField] SystemManager sysManager;
     [SerializeField] SendToSequence nextInSequence;
-    private GameObject demonToSummon;
+    [HideInInspector] public GameObject demonToSummon;
+    [HideInInspector] public Color colourToSummon;
+    [HideInInspector] public Color shaderColourToSummon;
     private int colourIndex = 0;
-
-    protected override void Update()
-    {
-        base.Update();
-
-    }
-
+    [HideInInspector] public bool summoning = false;
+    [SerializeField] AudioClip[] Whispers;
     public override void OnTriggerEnter(Collider other)
     {
-        OnTriggerStay(other);
+        if (pickupScript.heldObj == other.gameObject) return;
+
+        if (SnapType(other.gameObject) && ExpectedObject == null)
+            ExpectedObject = other.gameObject;
+
+        moving = !(other.gameObject == ExpectedObject && !summoning);
+
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (SnapType(other.gameObject) && ExpectedObject == null)
-        {
-            ExpectedObject = other.gameObject;
-        }
+        if (pickupScript.heldObj == other.gameObject) return;
 
-        if (other.gameObject == ExpectedObject && !moving)
+        if (SnapType(other.gameObject) && ExpectedObject == null)
+            ExpectedObject = other.gameObject;
+
+        if (other.gameObject == ExpectedObject && !summoning)
         {
             //Stop moving the object to the correct spot
-            moving = true;
+            summoning = true;
 
-            other.GetComponent<Rigidbody>().isKinematic = true;
-
-            //if the object came from a player, take it away from them.
-            if (pickupScript.heldObj == other.gameObject)
-                pickupScript.DropObject();
+            //other.GetComponent<Rigidbody>().isKinematic = true;
 
             //put the object in the right spot.
             nextInSequence.movingObject = other.gameObject;
@@ -66,12 +62,16 @@ public class DemonSummoningSpot : SnapSlab
             }
         }
 
-        demonToSummon = sysManager.DemonTypes[demonIndex].Demon;
-        Demon demon = demonToSummon.gameObject.GetComponent<Demon>(); 
-        if(demon)
-            demon.Colour(sysManager.LiquidTypes[colourIndex].color);
+        if (demonIndex != 0)
+        {
+            demonToSummon = sysManager.DemonTypes[demonIndex].Demon;
+            colourToSummon = sysManager.LiquidTypes[colourIndex].color;
+            shaderColourToSummon = sysManager.LiquidTypes[colourIndex].shaderColor;
+        }
+        else demonToSummon = null;
 
-        return demonToSummon.gameObject != null;
+        GetComponent<AudioSource>().PlayOneShot(Whispers[Random.Range(0,Whispers.Length)]);
+        return demonToSummon != null;
     }
 
 }

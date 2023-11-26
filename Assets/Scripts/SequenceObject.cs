@@ -12,10 +12,13 @@ public abstract class SequenceObject : MonoBehaviour
 
     protected virtual void Update()
     {
-        timeInOperation += Time.deltaTime;
-        inSequence = timeInOperation < lengthOfOperation;
-        if (!inSequence)
-            End();
+        if(inSequence)
+        {
+            timeInOperation += Gameplay.deltaTime;
+            inSequence = timeInOperation < lengthOfOperation;
+            if (!inSequence)
+                End();
+        }
     }
 
     /// <summary>
@@ -39,11 +42,9 @@ public abstract class SequenceObject : MonoBehaviour
     /// </summary>
     public virtual void End()
     { 
+        inSequence = false;
+        timeInOperation = 0;
         if(nextInSequence != null)
-        {
-            inSequence = false;
-            timeInOperation = 0;
             nextInSequence.Begin(decision);
-        }
     }
 }

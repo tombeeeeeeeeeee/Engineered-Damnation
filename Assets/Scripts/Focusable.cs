@@ -75,6 +75,8 @@ public class Focusable : MonoBehaviour
     {
         OnUnfocus();
         player.controls.Focused.Cycle.performed -= Cycle;
+        player.controls.Focused.Action2.performed -= Action2;
+        player.controls.Focused.Exit.performed -= Exit;
         targetCamera.GetComponent<CameraTransition>().MoveToPlayer();
         ui.SetActive(false);
     }

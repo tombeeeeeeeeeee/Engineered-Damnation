@@ -1,67 +1,63 @@
-
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Beaker : Potion
 {
+    [SerializeField] float shallowPourAngle;
+    [SerializeField] float deepPourAngle;
+    [SerializeField] float shallowDepth;
+    [SerializeField] float deepDepth;
     [SerializeField] Color[] colors;
     [SerializeField] int liquidLevel = 0;
-    [SerializeField] GameObject[] liquidLevels;
-    private int OldLiquidLevel = -1;
+    [SerializeField] GameObject liquid;
+    [SerializeField] MeshRenderer liquidMesh;
 
-    public MeshRenderer[] liquidMesh;
-
-    public GameObject mixPourPart;
     public AudioClip[] fillSounds;
-
+    
 
     // Update is called once per frame
 
     void Awake() 
     {
-        mixPourPart.SetActive(false);
+        liquid.SetActive(false);
     }
+
     void Update()
     {
-        if(liquidLevel > 0 && Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
+        if(hasBeenAlt && liquidLevel > 0) Pour();
 
         else
         {
             particle1.SetActive(false);
             particle2.SetActive(false);
+
+            if (!hasBeenAlt && idealParent != null)
+                transform.rotation = Quaternion.LookRotation(idealParent.forward, idealParent.up);
         }
 
-        if(OldLiquidLevel != liquidLevel)
-        {
-            mixPourPart.GetComponent<ParticleSystemRenderer>().sharedMaterial.color = LiquidColour;
-            for (int i = 0; i < 2; i++)
-            {
-                if (i < liquidLevel)
-                {
-                    liquidLevels[i].SetActive(true);
-                    //liquidLevels[i].GetComponent<MeshRenderer>().material.color = LiquidColour;
-                    liquidMesh[i].material.SetColor("_FresnelColor", LiquidColour);
-                    liquidMesh[i].material.SetColor("_TopColor", LiquidColour);
-                    liquidMesh[i].material.SetColor("_SideColor", LiquidColour);
-
-
-                }
-                else
-                    liquidLevels[i].SetActive(false);
-            }            
-
-            OldLiquidLevel = liquidLevel;
-        }
     }
 
     public void AddLiquid(uint liquidKey)
     {
         if (liquidLevel < 2 && liquidKey != LiquidKey)
         {
-            
             LiquidKey += liquidKey;
             LiquidColour = colors[LiquidKey];
             liquidLevel++;
+
+            liquid.SetActive(true);
+
+            liquidMesh.material.SetColor("_FresnelColor", LiquidColour);
+            liquidMesh.material.SetColor("_TopColor", LiquidColour);
+            liquidMesh.material.SetColor("_SideColor", LiquidColour);
+
+            particle1.GetComponent<Renderer>().material.color = LiquidColour;
+            particle2.GetComponent<Renderer>().material.color = LiquidColour;
+
+            float fill = liquidLevel == 1 ? shallowDepth : deepDepth;
+            liquidMesh.material.SetFloat("_Fill", fill);
+
             aS.PlayOneShot(fillSounds[Random.Range(0, fillSounds.Length)]);
         }
     }
@@ -70,50 +66,33 @@ public class Beaker : Potion
     {
         RaycastHit[] pouredOn;
         pouredOn = Physics.SphereCastAll(pourPosition.position, pourRadius, -Vector3.up, 1);
-        mixPourPart.SetActive(true);
+        particle1.SetActive(true);
+        particle2.SetActive(true);
+
         foreach (RaycastHit hit in pouredOn)
         {
             SlabManager slab = hit.transform.gameObject.GetComponent<SlabManager>();
             if ( slab != null && slab.getInner() != 0 )
-            {
-                slab.ChangeLiquid(LiquidColour, LiquidKey);
-                liquidLevel = 0;
-                LiquidKey = 0;
-                mixPourPart.SetActive(false);
-            }
+                StartCoroutine(SlabColourChange(hit.transform.gameObject.GetComponent<SlabManager>(), hit.distance));
         }
     }
 
     public override void AlternateInteraction(InputAction.CallbackContext context)
     {
-        hasBeenAlt = !hasBeenAlt;
+        pourAngle = liquidLevel > 1 ? deepPourAngle : shallowPourAngle;
 
-        if (hasBeenAlt)
-        {
-            transform.Rotate(Vector3.forward, -120);
-            if(liquidLevel > 0)
-            {
-                aS.loop = true;
-                aS.clip = pourSounds[Random.Range(0, pourSounds.Length)];
-                aS.Play();
-            }
-        }
-        else
-        {
-            transform.rotation = transform.rotation = Quaternion.LookRotation(-transform.parent.forward, transform.parent.up);
-            if (liquidLevel > 0)
-            {
-                aS.loop = false;
-                aS.Stop();
-                aS.PlayOneShot(pourEnd);
-            }
-        }
-
+        if (liquidLevel > 0)
+            base.AlternateInteraction(context);
     }
 
-    public override void Dropped()
+    public override IEnumerator SlabColourChange(SlabManager slab, float distance)
     {
-        base.Dropped();
-        mixPourPart.SetActive(false);
+        yield return new WaitForSeconds(Mathf.Sqrt(6 * distance / 9.81f));
+        if(LiquidKey != 0) slab.ChangeLiquid(LiquidColour, LiquidKey);
+        liquidLevel = 0;
+        LiquidKey = 0;
+        liquid.SetActive(false);
+        StopAllCoroutines();
+        base.AlternateInteraction(new InputAction.CallbackContext());
     }
 }

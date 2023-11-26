@@ -1,3 +1,4 @@
+using PSX;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,24 @@ public class CameraTransition : MonoBehaviour
     public FPSController playerController;
     public Transform playerCameraTransform;
     public float duration;
+    public float depixilationPercentage;
+
+    [SerializeReference] PixelationController pixels;
+    private float startingPixelHeight;
+    private float startingPixelWidth;
 
     Vector3 initialPosition;
     Quaternion initialRotation;
+    float initialFOV;
 
     Vector3 targetPosition;
     Quaternion targetRotation;
+    float targetFOV;
 
     Vector3 fromPosition;
     Quaternion fromRotation;
+    float fromFOV;
+
 
     float elapsed;
     bool moving = false;
@@ -29,6 +39,12 @@ public class CameraTransition : MonoBehaviour
         // camera should already be in the target position in editor
         initialPosition = transform.position;
         initialRotation = transform.rotation;
+        initialFOV = GetComponent<Camera>().fieldOfView;
+        if(pixels)
+        {
+            startingPixelHeight = pixels.heightPixelation;
+            startingPixelWidth = pixels.widthPixelation;
+        }  
     }
 
     public void MoveToTarget(InputActionMap controlsForFocus)
@@ -39,12 +55,13 @@ public class CameraTransition : MonoBehaviour
 
         targetPosition = initialPosition;
         targetRotation = initialRotation;
+        targetFOV = initialFOV;
 
         fromPosition = playerCameraTransform.position;
         fromRotation = playerCameraTransform.rotation;
+        fromFOV = playerController.playerCamera.fieldOfView;
 
-        transform.position = playerCameraTransform.position;
-        transform.rotation = playerCameraTransform.rotation;
+        depixilationPercentage = -depixilationPercentage;
 
         elapsed = 0;
         moving = true;
@@ -57,13 +74,13 @@ public class CameraTransition : MonoBehaviour
 
         targetPosition = playerCameraTransform.position;
         targetRotation = playerCameraTransform.rotation;
+        targetFOV = playerController.playerCamera.fieldOfView;
 
         fromPosition = initialPosition;
         fromRotation = initialRotation;
+        fromFOV = initialFOV;
 
-        transform.position = initialPosition;
-        transform.rotation = initialRotation;
-
+        depixilationPercentage = -depixilationPercentage;
 
         elapsed = 0;
         moving = true;
@@ -81,9 +98,14 @@ public class CameraTransition : MonoBehaviour
             transform.position = interpolatedPosition;
             transform.rotation = interpolatedRotation;
 
+            if(pixels) pixels.heightPixelation += interpolationRatio * depixilationPercentage;
+            if(pixels) pixels.widthPixelation += interpolationRatio * depixilationPercentage;
+            
 
+            GetComponent<Camera>().fieldOfView = fromFOV - interpolationRatio * (fromFOV - targetFOV);
+            
             if (elapsed < duration)
-                elapsed += Time.deltaTime;
+                elapsed += Gameplay.deltaTime;
 
             else
             {
@@ -93,8 +115,11 @@ public class CameraTransition : MonoBehaviour
                 //If the camera has finished moving, enable controlls of the new focus
                 if (targetPosition == initialPosition)
                     controls.Enable();
+                    
                 else
                 {
+                    if(pixels) pixels.heightPixelation = startingPixelHeight;
+                    if(pixels) pixels.widthPixelation = startingPixelWidth;
                     playerController.controls.Player.Enable();
                     playerController.playerCamera.enabled = true;
                     GetComponent<Camera>().enabled = false;
@@ -109,6 +134,7 @@ public class CameraTransition : MonoBehaviour
         GetComponent<Camera>().enabled = true;
 
         playerController.controls.Player.Disable();
+
         //Breaks zoom so that zoom doesnt break
         playerController.playerCamera.fieldOfView = playerController.CameraDefaultFOV;
     }

@@ -115,6 +115,7 @@ public struct PotionTypeInfo
 {
     public uint KeyIndex;
     public Color color;
+    public Color shaderColor;
     public float TimePercentageUnlocked;
     public string PotionDescription;
 }
