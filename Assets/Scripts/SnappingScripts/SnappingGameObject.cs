@@ -18,7 +18,7 @@ public class SnappingGameObject : MonoBehaviour
             if(moving)
             {
                 //move it to correct spot ignoring gravity
-                ExpectedObject.GetComponent<Rigidbody>().useGravity = false;
+                //ExpectedObject.GetComponent<Rigidbody>().useGravity = false;
                 ExpectedObject.transform.position = Vector3.Lerp(ExpectedObject.transform.position, transform.position, 0.01f);
             }     
         }

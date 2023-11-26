@@ -1549,7 +1549,7 @@ MonoBehaviour:
   numberOfFlickers: 0
   timeBetweenFlicker: 0.01
   objectToDestroy: {fileID: 0}
-  dSS: {fileID: 0}
+  dSS: {fileID: 897248102}
 --- !u!82 &307671096
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2557,11 +2557,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 464037168988184971, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
       propertyPath: m_Size.z
-      value: 0.57
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 464037168988184971, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
       propertyPath: m_Center.y
       value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 464037168988184971, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
+      propertyPath: m_Center.z
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 464037168988184974, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
       propertyPath: m_RootOrder
@@ -2573,11 +2577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 464037168988184974, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.985
+      value: 0.979
       objectReference: {fileID: 0}
     - target: {fileID: 464037168988184974, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.7651153
+      value: 2.7378
       objectReference: {fileID: 0}
     - target: {fileID: 464037168988184974, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2609,6 +2613,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
+--- !u!4 &406307228 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 464037168988184974, guid: 2efcccd83a5e97f419fe6378be120396, type: 3}
+  m_PrefabInstance: {fileID: 406307227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &409121258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4008223378355369222, guid: 85a1ce21d9bbf4940b30b290e3f50540, type: 3}
@@ -3521,7 +3530,7 @@ MonoBehaviour:
   inSequence: 0
   nextInSequence: {fileID: 0}
   lengthOfOperation: 2
-  dSS: {fileID: 0}
+  dSS: {fileID: 897248102}
   badSummonSound: {fileID: 8300000, guid: d8b123b7f7cf23f4094a343acee18167, type: 3}
 --- !u!114 &577744435
 MonoBehaviour:
@@ -3538,7 +3547,7 @@ MonoBehaviour:
   inSequence: 0
   nextInSequence: {fileID: 307671095}
   lengthOfOperation: 3
-  dSS: {fileID: 0}
+  dSS: {fileID: 897248102}
   shader: {fileID: 2100000, guid: 2bf067c3f3730be44a2012c51ba68f80, type: 2}
 --- !u!1 &598298867 stripped
 GameObject:
@@ -3735,7 +3744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1971938415363237958, guid: f671fe57a223aa24eafe0b654c682e76, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.007098645
+      value: -0.029
       objectReference: {fileID: 0}
     - target: {fileID: 1971938415363237958, guid: f671fe57a223aa24eafe0b654c682e76, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5329,11 +5338,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inSequence: 0
-  nextInSequence: {fileID: 577744432}
+  nextInSequence: {fileID: 986849925}
   lengthOfOperation: 0
   movingObject: {fileID: 0}
   speed: 1
-  destination: {fileID: 577744431}
+  destination: {fileID: 986849924}
 --- !u!82 &897248097
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5451,7 +5460,11 @@ MonoBehaviour:
   colourToSummon: {r: 0, g: 0, b: 0, a: 0}
   shaderColourToSummon: {r: 0, g: 0, b: 0, a: 0}
   summoning: 0
-  Whispers: []
+  Whispers:
+  - {fileID: 8300000, guid: 35bd8044207113c4ba13b7db3db46a6c, type: 3}
+  - {fileID: 8300000, guid: 3d5721b53a85e384a971394b6183c0e9, type: 3}
+  - {fileID: 8300000, guid: fa173aaf49e0d0942aa1b8888a8f5845, type: 3}
+  - {fileID: 8300000, guid: 49d6ce70752b23e45a8be4367ec7a5f1, type: 3}
 --- !u!1001 &904566366
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5930,6 +5943,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985330010}
   m_CullTransparentMesh: 1
+--- !u!1 &986849923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 986849924}
+  - component: {fileID: 986849925}
+  m_Layer: 0
+  m_Name: Half Way Spot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &986849924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986849923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.023, z: 0.606}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 406307228}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &986849925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986849923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f13470a4a1da1488176e9afd25afd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inSequence: 0
+  nextInSequence: {fileID: 577744432}
+  lengthOfOperation: 0
+  movingObject: {fileID: 0}
+  speed: 1
+  destination: {fileID: 577744431}
 --- !u!1 &1007610308
 GameObject:
   m_ObjectHideFlags: 0
@@ -8129,8 +8192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2843e422d3037b40987b553ec5f766d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SequenceToStart: {fileID: 1330378248}
-  SequenceBool: 1
 --- !u!114 &1342585517 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7167117088997535387, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
@@ -11270,8 +11331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2843e422d3037b40987b553ec5f766d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SequenceToStart: {fileID: 2003247122}
-  SequenceBool: 1
 --- !u!1001 &2009390251
 PrefabInstance:
   m_ObjectHideFlags: 0

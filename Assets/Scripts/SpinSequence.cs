@@ -17,6 +17,8 @@ public class SpinSequence : SequenceObject
     {
         if(spinningObject != null)
             spinningObject.transform.Rotate(0, timeInOperation * spinSpeedMultiplier * Gameplay.deltaTime, 0);        
+        if(inSequence)
+            spinningObject.transform.position = new Vector3(transform.position.x, spinningObject.transform.position.y, transform.position.z);
         base.Update();
     }
 

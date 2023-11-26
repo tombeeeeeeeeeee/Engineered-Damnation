@@ -17,14 +17,8 @@ public class DemonSummoningSpot : SnapSlab
         if (SnapType(other.gameObject) && ExpectedObject == null)
             ExpectedObject = other.gameObject;
 
-        if (other.gameObject == ExpectedObject && !summoning)
-        {
-            moving = false;
-            other.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        moving = !(other.gameObject == ExpectedObject && !summoning);
 
-            other.transform.rotation = transform.rotation;
-            other.transform.position = transform.position;
-        }
     }
 
     public void OnTriggerStay(Collider other)
@@ -39,7 +33,7 @@ public class DemonSummoningSpot : SnapSlab
             //Stop moving the object to the correct spot
             summoning = true;
 
-            other.GetComponent<Rigidbody>().isKinematic = true;
+            //other.GetComponent<Rigidbody>().isKinematic = true;
 
             //put the object in the right spot.
             nextInSequence.movingObject = other.gameObject;

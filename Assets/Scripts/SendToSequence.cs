@@ -31,6 +31,7 @@ public class SendToSequence : SequenceObject
         { 
             movingObject.layer = 2;
             movingObject.transform.LookAt(destination);
+            movingObject.GetComponent<Rigidbody>().useGravity = false;
         }
     }
 
@@ -38,6 +39,8 @@ public class SendToSequence : SequenceObject
     {
         if(nextInSequence.GetComponent<SpinSequence>() != null) 
             nextInSequence.GetComponent<SpinSequence>().spinningObject = movingObject;
+        else if(nextInSequence.GetComponent<SendToSequence>() != null) 
+            nextInSequence.GetComponent<SendToSequence>().movingObject = movingObject;
         base.End();
     }
 }
