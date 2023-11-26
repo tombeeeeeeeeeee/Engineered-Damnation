@@ -6190,7 +6190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 1559414321}
   player: {fileID: 1342585517}
-  ui: {fileID: 0}
+  ui: {fileID: 402187243}
 --- !u!1 &1010555145
 GameObject:
   m_ObjectHideFlags: 0
