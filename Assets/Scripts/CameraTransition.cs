@@ -103,9 +103,11 @@ public class CameraTransition : MonoBehaviour
             
 
             GetComponent<Camera>().fieldOfView = fromFOV - interpolationRatio * (fromFOV - targetFOV);
-            
-            if (elapsed < duration)
+
+            if (elapsed < duration && Gameplay.gameplayActive)
                 elapsed += Gameplay.deltaTime;
+            else if (elapsed < duration && !Gameplay.gameplayActive)
+                elapsed += Time.deltaTime;
 
             else
             {
@@ -115,11 +117,12 @@ public class CameraTransition : MonoBehaviour
                 //If the camera has finished moving, enable controlls of the new focus
                 if (targetPosition == initialPosition)
                     controls.Enable();
-                    
+
                 else
                 {
-                    if(pixels) pixels.heightPixelation = startingPixelHeight;
-                    if(pixels) pixels.widthPixelation = startingPixelWidth;
+                    Gameplay.gameplayActive = true;
+                    if (pixels) pixels.heightPixelation = startingPixelHeight;
+                    if (pixels) pixels.widthPixelation = startingPixelWidth;
                     playerController.controls.Player.Enable();
                     playerController.playerCamera.enabled = true;
                     GetComponent<Camera>().enabled = false;

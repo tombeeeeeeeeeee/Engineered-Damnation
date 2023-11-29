@@ -1756,6 +1756,18 @@ PrefabInstance:
       propertyPath: targetCamera
       value: 
       objectReference: {fileID: 146245144}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: clock
+      value: 
+      objectReference: {fileID: 1213717303}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1342585517}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: demonListSpawner
+      value: 
+      objectReference: {fileID: 1212679548}
     - target: {fileID: 4304153800092461343, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_Name
       value: ComputerWithNewMenu
@@ -3470,8 +3482,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.33, z: 0.12}
-  m_Center: {x: -0.02, y: 0, z: 0}
+  m_Size: {x: 0.15, y: 0.3, z: 0.12}
+  m_Center: {x: -0.02, y: -0.02, z: 0}
 --- !u!82 &469806949
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4157,7 +4169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7497696426684684920, guid: 65434eafa5277b646bb202a3c0f198a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5706606
+      value: 2.381
       objectReference: {fileID: 0}
     - target: {fileID: 7497696426684684920, guid: 65434eafa5277b646bb202a3c0f198a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4209,7 +4221,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.82, z: 1.09}
+  m_Size: {x: 0.43, y: 0.82, z: 1.09}
   m_Center: {x: 0.09, y: -0.5468729, z: 0.72571564}
 --- !u!64 &619755437
 MeshCollider:
@@ -8221,9 +8233,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   militaryTime: 1
   breakTimes:
-  - {x: 11, y: 30}
-  - {x: 12, y: 0}
-  manager: {fileID: 0}
+  - {x: 36, y: 30}
+  - {x: 38, y: 0}
+  manager: {fileID: 1609533226}
   gameLengthInMinutes: 0.2
   startingTime: 9
   shiftLength: 8
@@ -10237,6 +10249,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6799833720321417089, guid: 85a1ce21d9bbf4940b30b290e3f50540, type: 3}
   m_PrefabInstance: {fileID: 315750081}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1609533226 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+  m_PrefabInstance: {fileID: 293951649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097b5a2bc971be54893c93576d00bb52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1612236967 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2018683207768085904, guid: 6b1dd8b1b8fedfe4aadb93c4b319cc66, type: 3}

@@ -18,6 +18,7 @@ public class Computer : Focusable
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Gameplay.gameplayActive = false;
     }
 
     public override void OnUnfocus()

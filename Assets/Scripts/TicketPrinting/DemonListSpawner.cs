@@ -38,8 +38,10 @@ public class DemonListSpawner : MonoBehaviour
 
     public void AddToList(uint demonKey, string demonDescription)
     {
-        if(curList == null)
+        Debug.Log("Summoning Request On Ticket Machine");
+        if (curList == null)
         {
+            Debug.Log("Adding Header to Ticket");
             curList = Instantiate(ListHeaderPrefab, OrderSpawnTransform, false);
             ticketsOnList++;
         }
