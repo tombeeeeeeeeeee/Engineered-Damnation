@@ -67,7 +67,7 @@ public class SystemManager : MonoBehaviour
             if (LiquidTypes[index].TimePercentageUnlocked < clock.playthroughPercentage)
             {
                 demonKey += LiquidTypes[index].KeyIndex;
-                DemonDescription = LiquidTypes[index].PotionDescription + " " + DemonDescription; 
+                DemonDescription = LiquidTypes[index].PotionDescription + "\n" + DemonDescription; 
                 DemonBlood = true;
             }
             else LiquidTypeLengthIndex = index;

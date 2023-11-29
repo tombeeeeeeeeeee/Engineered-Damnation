@@ -12,7 +12,7 @@ public class TicketBoard : SnappingGameObject
             OrderList order = other.gameObject.GetComponent<OrderList>();
             order.hasBeenPinned = true;
             if(order.pinnedPosition == Vector3.zero)
-                other.gameObject.GetComponent<OrderList>().pinnedPosition = new Vector3(transform.position.x + 0.05f, other.transform.position.y, other.transform.position.z);
+                other.gameObject.GetComponent<OrderList>().pinnedPosition = new Vector3( gameObject.GetComponent<BoxCollider>().center.x + transform.position.x, other.transform.position.y, other.transform.position.z);
             other.transform.rotation = Quaternion.LookRotation(-transform.right, transform.up);
         }
     }
