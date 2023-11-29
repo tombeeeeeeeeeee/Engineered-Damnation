@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5348080154098822506}
   - component: {fileID: 3762539467252210976}
+  - component: {fileID: -4830428832399476595}
   m_Layer: 0
   m_Name: Demon_twin_PLACEHOLDER
   m_TagString: Untagged
@@ -215,6 +216,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8811725b3dff1c34da093b25dd8eb1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-4830428832399476595
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716361982344706000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5bfcd07b4f37ee48b85ee55dca8d814, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5773111394930422234
 GameObject:
   m_ObjectHideFlags: 0
