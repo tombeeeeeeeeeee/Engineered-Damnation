@@ -103,6 +103,7 @@ public class MainMenu : MonoBehaviour
 
             buttonPlay.gameObject.SetActive(false);
             buttonResume.gameObject.SetActive(true);
+            PauseScreenReset();
 
             GetComponent<Canvas>().worldCamera = pauseCamera;
 
@@ -124,6 +125,7 @@ public class MainMenu : MonoBehaviour
 
             gameObject.SetActive(false);
 
+            PauseScreenReset();
             mainMenuCamera.enabled = false;
             firstTutorialSequence.Begin(true);
         }
@@ -134,6 +136,11 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         tutorialSkipMenu.SetActive(true);
+    }
+    void PauseScreenReset()
+    {
+        mainMenu.SetActive(true);
+        tutorialSkipMenu.SetActive(false);
     }
 
     void Settings()
