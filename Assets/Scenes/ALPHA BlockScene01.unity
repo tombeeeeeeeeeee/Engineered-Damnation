@@ -1139,7 +1139,7 @@ PrefabInstance:
       objectReference: {fileID: 164836420}
     - target: {fileID: 7262813377428089518, guid: ddae116e2bb62f342a7db0af3da0297c, type: 3}
       propertyPath: duration
-      value: 1.2
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 7262813377428089518, guid: ddae116e2bb62f342a7db0af3da0297c, type: 3}
       propertyPath: playerController
@@ -1869,15 +1869,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: smoothTime
-      value: 0.03
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: throwForce
-      value: 1000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: pickUpRange
-      value: 1.71
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: lookSpeed
