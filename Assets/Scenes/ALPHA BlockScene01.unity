@@ -3273,7 +3273,7 @@ Transform:
   m_GameObject: {fileID: 557330965}
   m_LocalRotation: {x: 0.115153916, y: 0.1894039, z: -0.018243665, w: 0.9749528}
   m_LocalPosition: {x: -0.02311652, y: 0.04439999, z: -0.063524716}
-  m_LocalScale: {x: 0.25000003, y: 0.25, z: 0.24999997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1212679547}
@@ -3695,7 +3695,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.82, z: 1.09}
-  m_Center: {x: 0.029725647, y: -0.5468729, z: 0.72571564}
+  m_Center: {x: 0.09, y: -0.5468729, z: 0.72571564}
 --- !u!64 &619755437
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6457,8 +6457,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.79, y: 0.15, z: 0.78}
-  m_Center: {x: -0.18, y: 0.31, z: 0}
+  m_Size: {x: 0.79, y: -0.07, z: 0.62}
+  m_Center: {x: -0.18, y: 0.22, z: 0}
 --- !u!82 &1047695876
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7577,9 +7577,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ticketSpeed: 6
-  ListHeaderPrefab: {fileID: 1904954203902938929, guid: d16e57eb7364b0d4ea3a6d6dffa256cd, type: 3}
-  childOrderPrefab: {fileID: 4268105408459038466, guid: 88e4a570149fe504a8c89023b745cb10, type: 3}
+  ListHeaderPrefab: {fileID: 2265195416627103830, guid: e82fd8122c1dfec46a44570f98535dbd, type: 3}
+  childOrderPrefab: {fileID: 474584193505642263, guid: 5f33675426fcd4e41890416cf18fdd18, type: 3}
   OrderSpawnTransform: {fileID: 557330966}
+  curList: {fileID: 0}
 --- !u!1 &1213717300 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 16a6768180c7fc84e986e883043699c1, type: 3}
@@ -7602,7 +7603,7 @@ MonoBehaviour:
   - {x: 11, y: 30}
   - {x: 12, y: 0}
   manager: {fileID: 1345958532}
-  gameLengthInMinutes: 12
+  gameLengthInMinutes: 0.2
   startingTime: 9
   shiftLength: 8
   endingSequenceStarter: {fileID: 523182205}

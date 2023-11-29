@@ -13,8 +13,9 @@ public class Order : OrderList
     {
         this.demonKey = demonKey;
         this.text.text = demonDescription;
-        checkedOffArt.enabled = false ;
+        checkedOffArt.enabled = false;
     }
+
 
     /// <summary>
     /// Check Off a Demon from a todo list

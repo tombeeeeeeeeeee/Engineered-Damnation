@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrderList : PickUp
 {
-    [SerializeField] protected Transform attachPosition;
+    public Transform attachPosition;
     protected Order childOrder;
     public bool hasBeenPinned = false;
     public Vector3 pinnedPosition = Vector3.zero;
@@ -29,7 +29,6 @@ public class OrderList : PickUp
         if(childOrder == null)
         {
             childOrder = Instantiate(childOrderPrefab, attachPosition, false);
-            childOrder.transform.localScale = Vector3.one;
             childOrder.Initialise(demonKey, demonDescription);
             return childOrder;
         }
@@ -50,28 +49,14 @@ public class OrderList : PickUp
             return false;
     }
 
-    /// <summary>
-    /// Move tickets up out of the machine
-    /// </summary>
-    /// <param name="speed"></param>
-    public void MoveUp(float speed)
-    {
-        if(transform.parent != null)
-        {
-            if (transform.parent.GetComponent<OrderList>() != null)
-                transform.parent.GetComponent<OrderList>().MoveUp(speed);
-            else
-                transform.localPosition += Vector3.up * speed * Gameplay.deltaTime;
-        }
-    }
 
     public void ExpandGrabArea()
     {
         BoxCollider collider = GetComponent<BoxCollider>();
         if(collider != null)
         {
-            collider.center -= new Vector3(0, 0.5f, 0);
-            collider.size += new Vector3(0, 1, 0);
+            collider.center -= new Vector3(0, 0.033f, 0);
+            collider.size += new Vector3(0, 0.066f, 0);
         }
     }
 
@@ -79,6 +64,12 @@ public class OrderList : PickUp
     {
         hasBeenPinned = false;
         pinnedPosition = Vector3.zero;
+        if(transform.parent && transform.parent.parent && transform.parent.parent.gameObject.GetComponent<DemonListSpawner>())
+        {
+            transform.parent.parent.gameObject.GetComponent<DemonListSpawner>().curList = null;
+            transform.parent = null;
+        }
+
         base.PickedUp();
     }
 
