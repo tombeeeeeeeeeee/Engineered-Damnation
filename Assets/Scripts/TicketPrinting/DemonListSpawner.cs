@@ -12,38 +12,44 @@ public class DemonListSpawner : MonoBehaviour
     [SerializeField] Order childOrderPrefab;
     [SerializeField] Transform OrderSpawnTransform;
     
-    private OrderList curChildList = null;
+    public OrderList curList = null;
     private int ticketsOnList = 0;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (curChildList != null)
+        if (curList != null)
         {
-            if(curChildList.transform.lossyScale.y * ticketsOnList > (OrderSpawnTransform.position - curChildList.transform.position).magnitude)
-                curChildList.MoveUp(ticketSpeed);
+            if((curList.transform.position - curList.attachPosition.position).magnitude * ticketsOnList > (OrderSpawnTransform.position - curList.transform.position).magnitude)
+            {
+                Debug.Log("Printing");
+                curList.transform.position += curList.transform.up * ticketSpeed * Gameplay.deltaTime;
+                    
+            }
         }
 
         if(OrderSpawnTransform.GetComponentInChildren<OrderList>() == null)
         {
-            curChildList = null;
+            curList = null;
             ticketsOnList = 0;
         }
     }
 
     public void AddToList(uint demonKey, string demonDescription)
     {
-        if(curChildList == null)
+        Debug.Log("Summoning Request On Ticket Machine");
+        if (curList == null)
         {
-            curChildList = Instantiate(ListHeaderPrefab, OrderSpawnTransform, false);
+            Debug.Log("Adding Header to Ticket");
+            curList = Instantiate(ListHeaderPrefab, OrderSpawnTransform, false);
             ticketsOnList++;
         }
 
-        curChildList.AddToList(demonKey, demonDescription, childOrderPrefab);
+        curList.AddToList(demonKey, demonDescription, childOrderPrefab);
         ticketsOnList++;
 
-        curChildList.ExpandGrabArea();
+        curList.ExpandGrabArea();
 
     }
 

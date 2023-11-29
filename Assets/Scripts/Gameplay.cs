@@ -5,7 +5,11 @@ public static class Gameplay
 {
     public static float deltaTime;
     public static float timeSinceStart;
-    public static bool gameplayActive = true;
+    public static bool gameplayActive = false;
+    public static float masterVolume;
+    public static float sfxVolume;
+    public static float musicVolume;
+    public static float dialogueVolume;
 
     public static void ChildrenLayerSet(GameObject obj, int layer)
     {

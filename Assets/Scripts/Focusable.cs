@@ -16,6 +16,7 @@ public class Focusable : MonoBehaviour
         player.controls.Focused.Exit.performed += Exit;
 
         Invoke("ShowUI", targetCamera.gameObject.GetComponent<CameraTransition>().duration);
+        Invoke("OnFocus", targetCamera.gameObject.GetComponent<CameraTransition>().duration);
     }
 
     // handling input
@@ -39,7 +40,17 @@ public class Focusable : MonoBehaviour
             UpDown(player.controls.Focused.Cycle.ReadValue<Vector2>().y);
         }
     }
-    
+
+    virtual public void OnFocus()
+    {
+        // override if you want this to do something
+    }
+
+    virtual public void OnUnfocus()
+    {
+        // override if you want this to do something
+    }
+
     virtual public void Right()
     {
         // override if you want this to do something
@@ -62,6 +73,7 @@ public class Focusable : MonoBehaviour
 
     public virtual void Exit(InputAction.CallbackContext context)
     {
+        OnUnfocus();
         player.controls.Focused.Cycle.performed -= Cycle;
         player.controls.Focused.Action2.performed -= Action2;
         player.controls.Focused.Exit.performed -= Exit;

@@ -33,10 +33,6 @@ public class FPSController : MonoBehaviour
         controls.Player.Pause.performed += Pause;
         controls.PauseMenu.Unpause.performed += Unpause;
 
-        // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        controls.Player.Enable();
     }
 
     void Update() 
@@ -89,5 +85,12 @@ public class FPSController : MonoBehaviour
         playerCamera.fieldOfView = context.ReadValueAsButton() ? CameraZoomFOV : CameraDefaultFOV;
     }
 
-
+    public void PlayerEnable()
+    {
+        // Lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        controls.Player.Enable();
+        playerCamera.enabled = true;
+    }
 }
