@@ -126,6 +126,10 @@ public class CameraTransition : MonoBehaviour
                 }
             }
         }
+        else
+        {
+
+        }
     }
 
     public void SetCameraTarget()
