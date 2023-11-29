@@ -594,6 +594,45 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Tutorial"",
+            ""id"": ""4d8e24a4-4661-47f9-9258-b1f785e83167"",
+            ""actions"": [
+                {
+                    ""name"": ""End"",
+                    ""type"": ""Button"",
+                    ""id"": ""84635dad-4191-4b4a-a623-40879be7925f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6fa81911-2421-4da2-87d2-7ea27d3755f0"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""End"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92c577ec-e7dc-48b7-8462-3ce4b540e7f3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""End"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -616,6 +655,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
         m_PauseMenu_Unpause = m_PauseMenu.FindAction("Unpause", throwIfNotFound: true);
+        // Tutorial
+        m_Tutorial = asset.FindActionMap("Tutorial", throwIfNotFound: true);
+        m_Tutorial_End = m_Tutorial.FindAction("End", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -842,6 +884,39 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
+
+    // Tutorial
+    private readonly InputActionMap m_Tutorial;
+    private ITutorialActions m_TutorialActionsCallbackInterface;
+    private readonly InputAction m_Tutorial_End;
+    public struct TutorialActions
+    {
+        private @Controls m_Wrapper;
+        public TutorialActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @End => m_Wrapper.m_Tutorial_End;
+        public InputActionMap Get() { return m_Wrapper.m_Tutorial; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TutorialActions set) { return set.Get(); }
+        public void SetCallbacks(ITutorialActions instance)
+        {
+            if (m_Wrapper.m_TutorialActionsCallbackInterface != null)
+            {
+                @End.started -= m_Wrapper.m_TutorialActionsCallbackInterface.OnEnd;
+                @End.performed -= m_Wrapper.m_TutorialActionsCallbackInterface.OnEnd;
+                @End.canceled -= m_Wrapper.m_TutorialActionsCallbackInterface.OnEnd;
+            }
+            m_Wrapper.m_TutorialActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @End.started += instance.OnEnd;
+                @End.performed += instance.OnEnd;
+                @End.canceled += instance.OnEnd;
+            }
+        }
+    }
+    public TutorialActions @Tutorial => new TutorialActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -862,5 +937,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     public interface IPauseMenuActions
     {
         void OnUnpause(InputAction.CallbackContext context);
+    }
+    public interface ITutorialActions
+    {
+        void OnEnd(InputAction.CallbackContext context);
     }
 }

@@ -24,7 +24,9 @@ public class Crosshair : MonoBehaviour
     private void Update()
     {
         RaycastHit hit;
+        crosshair.enabled = Gameplay.gameplayActive;
         
+
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickUpRange, 115))
         {
             if (hit.transform.gameObject.tag == "CanPickUp")

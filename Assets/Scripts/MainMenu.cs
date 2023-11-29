@@ -21,10 +21,12 @@ public class MainMenu : MonoBehaviour
     public Camera mainMenuCamera;
     public Camera pauseCamera;
     public GameObject titleGraphic;
+    public TutorialSequence firstTutorialSequence;
 
     public GameObject mainMenu;
     public GameObject settingsMenu;
     public GameObject creditsMenu;
+    public GameObject tutorialSkipMenu;
 
     // main menu
     public Button buttonPlay;
@@ -53,20 +55,30 @@ public class MainMenu : MonoBehaviour
     public Slider sliderDialogueVolume;
     public TMP_Text textDialogueVolume;
 
+
+    //TutorialSkip
+    public Button buttonSkipYes;
+    public Button buttonSkipNo;
+
     [HideInInspector] public bool hasStartedGame;
 
     // Start is called before the first frame update
     void Start()
     {
-        buttonPlay.onClick.AddListener(Play);
+        buttonPlay.onClick.AddListener(TutorialSkip);
         buttonSettings.onClick.AddListener(Settings);
         buttonQuit.onClick.AddListener(Quit);
         buttonCredits.onClick.AddListener(Credits);
+
         buttonResume.onClick.AddListener(Resume);
         buttonBack.onClick.AddListener(Back);
+
         buttonAudioSettings.onClick.AddListener(AudioSettings);
         buttonVideoSettings.onClick.AddListener(VideoSettings);
         buttonBack2.onClick.AddListener(Back);
+
+        buttonSkipNo.onClick.AddListener(StartTutorial);
+        buttonSkipYes.onClick.AddListener(Play);
 
         sliderMasterVolume.onValueChanged.AddListener(MasterVolume);
         sliderMusicVolume.onValueChanged.AddListener(MusicVolume);
@@ -78,6 +90,7 @@ public class MainMenu : MonoBehaviour
         pixels.heightPixelation = 500;
         pixels.widthPixelation = 500;
     }
+
 
     void Play()
     {
@@ -95,6 +108,32 @@ public class MainMenu : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+    }
+
+    void StartTutorial()
+    {
+        if(!hasStartedGame)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            titleGraphic.SetActive(false);
+            buttonPlay.gameObject.SetActive(false);
+            buttonResume.gameObject.SetActive(true);
+
+            GetComponent<Canvas>().worldCamera = pauseCamera;
+
+            gameObject.SetActive(false);
+
+            mainMenuCamera.enabled = false;
+            firstTutorialSequence.Begin(true);
+        }
+    }
+
+
+    void TutorialSkip()
+    {
+        mainMenu.SetActive(false);
+        tutorialSkipMenu.SetActive(true);
     }
 
     void Settings()
