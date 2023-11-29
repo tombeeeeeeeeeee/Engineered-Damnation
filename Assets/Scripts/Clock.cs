@@ -7,9 +7,7 @@ using UnityEngine;
 public class Clock : MonoBehaviour
 {
     public bool militaryTime;
-    [SerializeField] Vector2[] breakTimes;
     [SerializeField] SystemManager manager;
-    private int breakTimesIndex = 0;
     public float gameLengthInMinutes;
 
     [SerializeField] int startingTime;
@@ -34,7 +32,7 @@ public class Clock : MonoBehaviour
         Gameplay.deltaTime = Time.deltaTime * (Gameplay.gameplayActive ? 1 : 0);
         Gameplay.timeSinceStart += Gameplay.deltaTime;
 
-        breakTimesIndex %= breakTimes.Length;  
+        //breakTimesIndex %= breakTimes.Length;  
 
         //Calculate the hours and minutes for the clock
         hours = playthroughPercentage * shiftLength + (militaryTime ? startingTime : startingTime - 1);
@@ -47,14 +45,7 @@ public class Clock : MonoBehaviour
         clockDisplay.text += ":" + (minutes < 10 ? "0" + ((int)minutes).ToString() : ((int)minutes).ToString());
 
 
-        //check if a break is beginning
-        if (breakTimes[breakTimesIndex].x == hours && breakTimes[breakTimesIndex].y == minutes)
-        {
-            manager.OnBreak = !manager.OnBreak;
-            breakTimesIndex++;
-        }
-
-        else if(playthroughPercentage >= 1 && !gameFinished)
+        if(playthroughPercentage >= 1 && !gameFinished)
         {
             gameFinished = true;
             endingSequenceStarter.Begin(
