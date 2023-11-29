@@ -11,6 +11,8 @@ using UnityEngine.UI;
 // even though this is called MainMenu, it controls the entire computer
 // menu interface, including main menu, in-game menu, settings, credits
 
+// nothing in the video settings is set up yet
+
 public class MainMenu : MonoBehaviour
 {
     public Computer computer;
