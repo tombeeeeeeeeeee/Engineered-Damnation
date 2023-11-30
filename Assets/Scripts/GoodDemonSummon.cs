@@ -14,8 +14,8 @@ public class GoodDemonSummon : SequenceObject
         {
             shader.SetColor("_shadercolor", dSS.shaderColourToSummon);
             demon = dSS.demonToSummon;
-            demon = Instantiate(demon, transform);
             demon.GetComponent<Demon>().Colour(dSS.colourToSummon);
+            demon.GetComponent<Demon>().Summon(transform.position);
         }
     }
 

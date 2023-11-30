@@ -9,6 +9,8 @@ public class SpinSequence : SequenceObject
     public GameObject spinningObject;
     public float spinSpeedMultiplier;
 
+
+    [SerializeField] ParticleSystem particleEffects;
     [SerializeField] AudioClip SummoningSongWin;
     [SerializeField] AudioClip SummoningSongLose;
 
@@ -16,9 +18,12 @@ public class SpinSequence : SequenceObject
     protected override void Update()
     {
         if(spinningObject != null)
-            spinningObject.transform.Rotate(0, timeInOperation * spinSpeedMultiplier * Gameplay.deltaTime, 0);        
-        if(inSequence)
-            spinningObject.transform.position = new Vector3(transform.position.x, spinningObject.transform.position.y, transform.position.z);
+            spinningObject.transform.Rotate(0, timeInOperation * spinSpeedMultiplier * Gameplay.deltaTime, 0);
+        if (inSequence)
+            spinningObject.transform.position = transform.position;
+
+        particleEffects.startLifetime = timeInOperation * 3.5f /  lengthOfOperation;
+
         base.Update();
     }
 
@@ -29,11 +34,15 @@ public class SpinSequence : SequenceObject
         {
             GetComponent<AudioSource>().clip = (decision ? SummoningSongWin : SummoningSongLose);
             GetComponent<AudioSource>().Play();
+            particleEffects.gameObject.SetActive(true);
+            particleEffects.transform.SetParent(spinningObject.transform);
         }
     }
 
     public override void End()
     {
+        particleEffects.gameObject.SetActive(false);
+        particleEffects.transform.SetParent(transform);
         spinningObject.GetComponent<AudioSource>().Stop();
         if (nextInSequence.gameObject.GetComponent<FlickerDecisionLight>() != null)
             nextInSequence.gameObject.GetComponent<FlickerDecisionLight>().objectToDestroy = spinningObject; 
