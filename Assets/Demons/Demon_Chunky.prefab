@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8696591128482607082
+--- !u!1 &5053088892144336849
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8357466096507598160}
-  - component: {fileID: 4502728380821621417}
-  - component: {fileID: 3115467781276025976}
+  - component: {fileID: 5578831013272642923}
+  - component: {fileID: 66627682209208978}
+  - component: {fileID: 5199005396291082706}
+  - component: {fileID: 1521433929451754116}
   m_Layer: 0
   m_Name: Demon_Chunky
   m_TagString: Untagged
@@ -18,28 +19,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8357466096507598160
+--- !u!4 &5578831013272642923
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8696591128482607082}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000019371507}
-  m_LocalPosition: {x: -0.00000017881393, y: -0.5, z: -0.5}
+  m_GameObject: {fileID: 5053088892144336849}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: -0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!137 &4502728380821621417
+--- !u!137 &66627682209208978
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8696591128482607082}
+  m_GameObject: {fileID: 5053088892144336849}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -53,7 +54,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 5b3315cd9d1ab19498f8e9f319ff5be8, type: 3}
+  - {fileID: 2100000, guid: 2bf067c3f3730be44a2012c51ba68f80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,7 +79,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -8657395080598125312, guid: 5b3315cd9d1ab19498f8e9f319ff5be8, type: 3}
+  m_Mesh: {fileID: -8657395080598125312, guid: eec99f443a4ca9349a7738fe9e3bea25, type: 3}
   m_Bones: []
   m_BlendShapeWeights:
   - 0
@@ -110,17 +111,17 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.25860298, y: 1.3027931, z: -0.08497828}
     m_Extent: {x: 1.0732039, y: 1.3654269, z: 1.3074589}
   m_DirtyAABB: 0
---- !u!95 &3115467781276025976
+--- !u!95 &5199005396291082706
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8696591128482607082}
+  m_GameObject: {fileID: 5053088892144336849}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d8d7cdfb24acd60408a8e29116a7d4fc, type: 2}
+  m_Controller: {fileID: 9100000, guid: ee45feaa22583f840ac8f5ec998bce23, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -130,3 +131,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1521433929451754116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053088892144336849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8811725b3dff1c34da093b25dd8eb1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

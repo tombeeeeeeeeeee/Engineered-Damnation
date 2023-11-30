@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/WorldspaceCanvasTest.unity
     guid: 3606a1f65284b3e4399ed8f7ffd36755
   - enabled: 1
