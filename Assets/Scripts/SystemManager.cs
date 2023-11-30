@@ -50,7 +50,7 @@ public class SystemManager : MonoBehaviour
         bool DemonType = false; do 
         {
             int index = UnityEngine.Random.Range(1, DemonTypeLengthIndex);
-            if (DemonTypes[index].TimePercentageUnlocked < clock.playthroughPercentage)
+            if (DemonTypes[index].TimePercentageUnlocked <= clock.playthroughPercentage)
             {
                 demonKey += DemonTypes[index].KeyIndex * 10;
                 DemonDescription += DemonTypes[index].DemonDescription;
@@ -64,7 +64,7 @@ public class SystemManager : MonoBehaviour
         bool DemonBlood = false; do
         {
             int index = UnityEngine.Random.Range(0, LiquidTypeLengthIndex);
-            if (LiquidTypes[index].TimePercentageUnlocked < clock.playthroughPercentage)
+            if (LiquidTypes[index].TimePercentageUnlocked <= clock.playthroughPercentage)
             {
                 demonKey += LiquidTypes[index].KeyIndex;
                 DemonDescription = LiquidTypes[index].PotionDescription + "\n" + DemonDescription; 
