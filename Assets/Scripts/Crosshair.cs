@@ -24,7 +24,7 @@ public class Crosshair : MonoBehaviour
     private void Update()
     {
         RaycastHit hit;
-        crosshair.enabled = Gameplay.gameplayActive;
+        crosshair.enabled = playerCamera.GetComponent<Camera>().enabled;
         
 
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickUpRange, 115))

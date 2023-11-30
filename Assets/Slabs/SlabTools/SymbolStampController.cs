@@ -33,13 +33,13 @@ public class SymbolStampController : Focusable
 
     public override void Right()
     {
-        rings[currentRing].TurnDial(1);
+        rings[currentRing].TurnDial(-1);
         planes[currentRing].material = rings[currentRing].symbol;
     }
 
     public override void Left()
     {
-        rings[currentRing].TurnDial(-1);
+        rings[currentRing].TurnDial(1);
         planes[currentRing].material = rings[currentRing].symbol;
     }
 
