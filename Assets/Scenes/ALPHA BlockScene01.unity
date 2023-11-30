@@ -5162,6 +5162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0373a2c5f3e727f4b82dc411bde078d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &534317858 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6674357819207890214, guid: 53303a1cc45829546867b47f233858bb, type: 3}
+  m_PrefabInstance: {fileID: 860317485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &557330965
 GameObject:
   m_ObjectHideFlags: 0
@@ -7879,6 +7884,14 @@ PrefabInstance:
     - target: {fileID: 7773235275535280462, guid: 53303a1cc45829546867b47f233858bb, type: 3}
       propertyPath: m_Name
       value: Demon_ArmsChainsHelmut_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8836446201052441312, guid: 53303a1cc45829546867b47f233858bb, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 534317858}
+    - target: {fileID: 8836446201052441312, guid: 53303a1cc45829546867b47f233858bb, type: 3}
+      propertyPath: animationName
+      value: TakeFix
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53303a1cc45829546867b47f233858bb, type: 3}
@@ -18389,6 +18402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8811725b3dff1c34da093b25dd8eb1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnOffset: {x: 0, y: 0, z: 0}
+  animationName: 
 --- !u!114 &2121109241
 MonoBehaviour:
   m_ObjectHideFlags: 0
