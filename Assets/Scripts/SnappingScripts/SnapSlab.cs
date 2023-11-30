@@ -25,6 +25,6 @@ public class SnapSlab : SnappingGameObject
     /// <returns>true if the object has a objectToDestroy manager</returns>
     public override bool SnapType(GameObject obj)
     {
-        return obj.GetComponent<SlabManager>() != null;
+        return obj.GetComponent<SlabManager>() != null && obj.GetComponent<SlabManager>().getInner() == 0;
     }
 }

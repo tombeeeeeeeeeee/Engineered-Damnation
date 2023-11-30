@@ -65,7 +65,7 @@ public class InteractionController : MonoBehaviour
     void MoveObject()
     {
         // Apply force to move the held object towards the holdParent.
-        heldObj.transform.position = Vector3.SmoothDamp(heldObj.transform.position, holdParent.position, ref moveVelocity, smoothTime);
+        heldObj.GetComponent<Rigidbody>().MovePosition(Vector3.SmoothDamp(heldObj.transform.position, holdParent.position, ref moveVelocity, smoothTime));
     }
 
     public void PickupObject(GameObject obj)

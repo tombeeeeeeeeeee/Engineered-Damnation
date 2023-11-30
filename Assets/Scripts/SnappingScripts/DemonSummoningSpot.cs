@@ -74,5 +74,10 @@ public class DemonSummoningSpot : SnapSlab
         return demonToSummon != null;
     }
 
+    public override bool SnapType(GameObject obj)
+    {
+        return obj.GetComponent<SlabManager>() != null;
+    }
+
 }
 
