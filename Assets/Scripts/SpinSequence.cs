@@ -22,7 +22,7 @@ public class SpinSequence : SequenceObject
         if (inSequence)
             spinningObject.transform.position = transform.position;
 
-        particleEffects.startLifetime = timeInOperation * 3.5f /  lengthOfOperation;
+        //particleEffects.startLifetime = timeInOperation * 3 /  lengthOfOperation;
 
         base.Update();
     }
@@ -35,14 +35,12 @@ public class SpinSequence : SequenceObject
             GetComponent<AudioSource>().clip = (decision ? SummoningSongWin : SummoningSongLose);
             GetComponent<AudioSource>().Play();
             particleEffects.gameObject.SetActive(true);
-            particleEffects.transform.SetParent(spinningObject.transform);
         }
     }
 
     public override void End()
     {
         particleEffects.gameObject.SetActive(false);
-        particleEffects.transform.SetParent(transform);
         spinningObject.GetComponent<AudioSource>().Stop();
         if (nextInSequence.gameObject.GetComponent<FlickerDecisionLight>() != null)
             nextInSequence.gameObject.GetComponent<FlickerDecisionLight>().objectToDestroy = spinningObject; 

@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -13,6 +14,11 @@ public class SymbolStampController : Focusable
     [SerializeField] GameObject outerUI;
     private AudioSource aS;
     [SerializeField] AudioClip[] slabBurnInSounds;
+    [SerializeField] AudioClip burningSound;
+    [SerializeField] AudioClip calmBurning;
+    [SerializeField] SnapSlab slabSnap;
+    [SerializeField] float lengthOfBurnIn;
+    private float burnInTime = 0;
 
     int currentRing = 0; // 0=outer 1=inner
 
@@ -29,6 +35,31 @@ public class SymbolStampController : Focusable
         ui.SetActive(false);
 
         aS = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if(!player.controls.Focused.Action2.IsPressed() && aS.isPlaying && aS.clip == burningSound)
+        {
+            aS.Stop();
+            aS.PlayOneShot(calmBurning);
+        }
+        burnInTime += player.controls.Focused.Action2.IsPressed() ? Gameplay.deltaTime : -Gameplay.deltaTime;
+        burnInTime = burnInTime < 0 ? 0 : burnInTime;
+
+        planes[0].material.SetFloat("_Burnin", burnInTime / lengthOfBurnIn);
+        planes[1].material.SetFloat("_Burnin", burnInTime / lengthOfBurnIn);
+        
+        if(slabSnap.ExpectedObject != null && player.controls.Focused.Action2.IsPressed())
+            slabSnap.ExpectedObject.GetComponent<SlabManager>().AddToFlames(Gameplay.deltaTime * 2);
+
+
+        if (burnInTime > lengthOfBurnIn)
+        {
+            PressStamp();
+            Exit(new InputAction.CallbackContext());
+            burnInTime = 0;
+        }
     }
 
     public override void Right()
@@ -61,14 +92,15 @@ public class SymbolStampController : Focusable
 
     public override void Action2(InputAction.CallbackContext context)
     {
-        // stamp
-        Exit(context);
+        aS.Stop();
+        aS.clip = burningSound;
+        aS.loop = true;
+        aS.Play();
     }
 
     public override void Exit(InputAction.CallbackContext context)
     {
         outerUI.SetActive(false);
-        PressStamp();
         base.Exit(context);
     }
 

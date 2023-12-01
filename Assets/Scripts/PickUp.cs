@@ -37,10 +37,10 @@ public class PickUp : MonoBehaviour
         defaultLayer = gameObject.layer = 6;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (!hasBeenAlt && idealParent != null)
-            transform.rotation = Quaternion.LookRotation(idealParent.up, -idealParent.forward);
+            transform.rotation = Quaternion.LookRotation(-idealParent.forward, idealParent.up);
     }
 
     public virtual void PickedUp()

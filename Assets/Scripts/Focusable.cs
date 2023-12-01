@@ -69,6 +69,7 @@ public class Focusable : MonoBehaviour
     virtual public void Action2(InputAction.CallbackContext context)
     {
         // override if you want this to do something
+        Exit(context);
     }
 
     public virtual void Exit(InputAction.CallbackContext context)

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class InteractionController : MonoBehaviour
         if (heldObj == null)
         {
             RaycastHit hit;
-            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, 115);
+            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, 115); //Mask: 01110011
 
             // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
             if(hit.collider != null)
@@ -56,7 +57,7 @@ public class InteractionController : MonoBehaviour
     {
         //Move the hold position based off of how far away a collison is.
         RaycastHit hit;
-        holdParent.transform.localPosition = new Vector3(0, 0, (Physics.Raycast(transform.position, transform.forward, out hit, startingZ, 51) ? hit.distance : startingZ));
+        holdParent.transform.localPosition = new Vector3(0, 0, (Physics.Raycast(transform.position, transform.forward, out hit, startingZ, 179) ? hit.distance : startingZ)); //Mask: 10110011
         //Update position of the held obj
         if (heldObj)
             MoveObject();
