@@ -3436,7 +3436,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 1950401198}
   focusImage: {fileID: 1940808033}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: 971ad2f245e76794bb5f6491ea9ffbfd, type: 3}
+  vLine: {fileID: 8300000, guid: 690083928859ec649bddbe935cbbd651, type: 3}
   player: {fileID: 1342585517}
 --- !u!4 &308758451
 Transform:
@@ -7201,6 +7201,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0e7c44e2383f3c640a62cf34bd305066, type: 3}
   - {fileID: 8300000, guid: d7d6709f580a8184dbea75b23e1ec1ad, type: 3}
   - {fileID: 8300000, guid: 29ebd06ed3cea34429d547ae0711972b, type: 3}
+  - {fileID: 8300000, guid: 5c53387d0bed58640b22f83d07b80e3d, type: 3}
+  - {fileID: 8300000, guid: 2be79991a943b7c4fae3467803bb4324, type: 3}
   hasBeenAlt: 0
   idealParent: {fileID: 0}
 --- !u!82 &645145214
@@ -7702,7 +7704,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 597522078}
   focusImage: {fileID: 1488012328}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: fa715c01766f84249b6c7757ab9a0179, type: 3}
+  vLine: {fileID: 8300000, guid: 4024cea126d773940b6d1404a8e3e58f, type: 3}
   player: {fileID: 1342585517}
 --- !u!114 &658499779
 MonoBehaviour:
@@ -10029,7 +10031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8605356820213014592, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.1621263
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605356820213014592, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10037,15 +10039,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8605356820213014592, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605356820213014592, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605356820213014592, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605356820213014592, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -10078,6 +10080,10 @@ PrefabInstance:
     - target: {fileID: 8605356820213014596, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
       propertyPath: m_Name
       value: FinishUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605356820213014596, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb9269c168cd1084fbf383eca0c30375, type: 3}
@@ -11776,7 +11782,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 336626857}
   focusImage: {fileID: 67013875}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: 7011e9b452e6ae643a87ba1e20dd83b1, type: 3}
+  vLine: {fileID: 8300000, guid: 934847f3010132e41bd02871721af0e6, type: 3}
   player: {fileID: 1342585517}
 --- !u!4 &1095602407
 Transform:
@@ -12822,7 +12828,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 1569732208}
   focusImage: {fileID: 1786715755}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: 895c8fe7905a2054187f63bea8da70d8, type: 3}
+  vLine: {fileID: 8300000, guid: 7433dd908a176a546a2474e06e46fbac, type: 3}
   player: {fileID: 1342585517}
 --- !u!4 &1180335051
 Transform:
@@ -12861,7 +12867,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 1569732208}
   focusImage: {fileID: 1786715755}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: f9e713848651dd74181a6ac7bf9bee01, type: 3}
+  vLine: {fileID: 8300000, guid: 57106a81afb25c14f90663fc1cffc3b3, type: 3}
   player: {fileID: 1342585517}
 --- !u!1001 &1189200466
 PrefabInstance:
@@ -16774,7 +16780,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 506784021}
   focusImage: {fileID: 401321987}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: c945e74f603cdaf45977ef4e55509de4, type: 3}
+  vLine: {fileID: 8300000, guid: 9dbb468f792a07d4c827767a722d12f5, type: 3}
   player: {fileID: 1342585517}
 --- !u!114 &1616398713
 MonoBehaviour:
@@ -16798,7 +16804,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 506784021}
   focusImage: {fileID: 401321987}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: ac48079e0aa943748889b62576453371, type: 3}
+  vLine: {fileID: 8300000, guid: 2ab4aeb41a30bcd49a7328aa960af805, type: 3}
   player: {fileID: 1342585517}
 --- !u!4 &1616398714
 Transform:
@@ -17010,7 +17016,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 2055666902}
   focusImage: {fileID: 1488012328}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: a7e74de57177a2c4295bd40d76ceb6df, type: 3}
+  vLine: {fileID: 8300000, guid: a685217890bf4254b9d8c02e2d2689bb, type: 3}
   player: {fileID: 1342585517}
 --- !u!114 &1643213959
 MonoBehaviour:
@@ -17034,7 +17040,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 2055666902}
   focusImage: {fileID: 1488012328}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: a6159f2a66cd788419d0665b6e4a7ccd, type: 3}
+  vLine: {fileID: 8300000, guid: d25401f359b17b74ab5b90bc85760820, type: 3}
   player: {fileID: 1342585517}
 --- !u!114 &1643213960
 MonoBehaviour:
@@ -17058,7 +17064,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 2055666902}
   focusImage: {fileID: 1488012328}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: 1edd400e8f2165c45a2c091fc3861151, type: 3}
+  vLine: {fileID: 8300000, guid: 5b74dc5c6fb6ef64691f9975c3c3604a, type: 3}
   player: {fileID: 1342585517}
 --- !u!114 &1643213961
 MonoBehaviour:
@@ -17081,7 +17087,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 2055666902}
   focusImage: {fileID: 1488012328}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: 2a29302f7caca9f4caa4beb349f9267a, type: 3}
+  vLine: {fileID: 8300000, guid: 7b734c19af8ca9449abeb9c289de012e, type: 3}
   player: {fileID: 1342585517}
 --- !u!114 &1643213962
 MonoBehaviour:
@@ -17104,7 +17110,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 2055666902}
   focusImage: {fileID: 1488012328}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: cc3857a7de5679447b0538f0c7470b15, type: 3}
+  vLine: {fileID: 8300000, guid: 1bb4b401017b16146911779dc47da314, type: 3}
   player: {fileID: 1342585517}
 --- !u!1 &1658355134
 GameObject:
@@ -20285,7 +20291,7 @@ MonoBehaviour:
   subtitleBackground: {fileID: 633498786}
   focusImage: {fileID: 1693492061}
   intercom: {fileID: 1396811086}
-  vLine: {fileID: 8300000, guid: 23817e3273989914a9b791d7830df21b, type: 3}
+  vLine: {fileID: 8300000, guid: dbe119fd28a1fda47a745c9fbd0da1eb, type: 3}
   player: {fileID: 1342585517}
 --- !u!4 &2029995407
 Transform:
