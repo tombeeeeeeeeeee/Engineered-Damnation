@@ -22,8 +22,6 @@ public class SpinSequence : SequenceObject
         if (inSequence)
             spinningObject.transform.position = transform.position;
 
-        //particleEffects.startLifetime = timeInOperation * 3 /  lengthOfOperation;
-
         base.Update();
     }
 
