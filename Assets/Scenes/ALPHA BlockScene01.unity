@@ -13041,7 +13041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   militaryTime: 1
   manager: {fileID: 1609533226}
-  gameLengthInMinutes: 7
+  gameLengthInMinutes: 0.1
   startingTime: 9
   shiftLength: 8
   endingSequenceStarter: {fileID: 523182205}
@@ -17697,10 +17697,10 @@ AudioSource:
   m_GameObject: {fileID: 1838382387}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4337013507177455561, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.217
+  m_Volume: 0.086
   m_Pitch: 1
   Loop: 0
   Mute: 0

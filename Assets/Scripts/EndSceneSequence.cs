@@ -17,6 +17,6 @@ public class EndSceneSequence : SequenceObject
     public override void End()
     {
         base.End();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

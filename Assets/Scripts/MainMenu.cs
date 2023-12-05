@@ -65,6 +65,10 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Gameplay.gameplayActive = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         buttonPlay.onClick.AddListener(TutorialSkip);
         buttonSettings.onClick.AddListener(Settings);
         buttonQuit.onClick.AddListener(Quit);
