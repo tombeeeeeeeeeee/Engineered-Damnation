@@ -31,20 +31,27 @@ public class InteractionController : MonoBehaviour
         if (heldObj == null)
         {
             RaycastHit hit;
-            Physics.Raycast(transform.position, transform.forward, out hit, pickUpRange, 115); //Mask: 01110011
+            Physics.Raycast(transform.position, transform.forward, out hit, 10 , 115); //Mask: 01110011
 
             // Raycast to detect objects with the "CanPickUp" tag within the pickup range.
             if(hit.collider != null)
             {
-                if (hit.transform.gameObject.tag == "CanPickUp")
-                    PickupObject(hit.transform.gameObject);
+                //Cylindrical PickUp range
+                Vector3 distanceToCollider = hit.transform.position - transform.position;
+                Vector2 distanceIgnoringY = new Vector2(distanceToCollider.x, distanceToCollider.z);
 
-                else if (hit.transform.gameObject.tag == "Button")
-                    hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
+                if (distanceIgnoringY.magnitude <= pickUpRange)
+                {
+                    if (hit.transform.gameObject.tag == "CanPickUp")
+                        PickupObject(hit.transform.gameObject);
+
+                    else if (hit.transform.gameObject.tag == "Button")
+                        hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
 
 
-                else if (hit.transform.gameObject.tag == "Focus")
-                    Focus(hit.transform.gameObject);
+                    else if (hit.transform.gameObject.tag == "Focus")
+                        Focus(hit.transform.gameObject);
+                }
             }
         }
         else
