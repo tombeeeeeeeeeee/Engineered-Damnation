@@ -10,13 +10,16 @@ public class SlabManager : PickUp
     private MeshRenderer[] meshRenderers;
     private float burnStrength = 0;
     [SerializeField] float burnDecreasePercent = 1;
-    [SerializeField] GameObject[] burnParticles;
+    [SerializeField] ParticleSystem[] burnParticles;
     [SerializeField] ParticleSystem smoke;
+    private bool burning;
 
     protected override void Start()
     {
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         base.Start();
+        foreach (ParticleSystem fire in burnParticles)
+            fire.gameObject.SetActive(false);
     }
 
 
@@ -29,18 +32,24 @@ public class SlabManager : PickUp
 
         for(int i = 1; i < 3; i++)
             meshRenderers[i].material.SetFloat("_Burnin", burnStrength);
-        Debug.Log(burnStrength);
 
-        foreach(GameObject fire in burnParticles)
-        {
-            fire.gameObject.SetActive(burnStrength > 0);
-            fire.transform.localScale = Vector3.one * burnStrength;
-        }
+        foreach(ParticleSystem fire in burnParticles)
+            fire.loop = burning;
+
+
+        burning = false;
     }
 
 
     public void AddToFlames(float increase)
     {
+        burning = true;
+        foreach (ParticleSystem fire in burnParticles)
+        {
+            fire.gameObject.SetActive(true);
+            if(fire.isPaused) fire.Play();
+            fire.playbackSpeed = burnStrength + burnStrength * 0.5f;
+        }
         burnStrength += increase * burnDecreasePercent / 100;
     }
 
