@@ -91,6 +91,7 @@ public class Beaker : Potion
             LiquidKey = 0;
             liquid.SetActive(false);
             hasBeenAlt = false;
+            aS.Stop();
         }
     }
 
@@ -106,8 +107,6 @@ public class Beaker : Potion
     {
         yield return new WaitForSeconds(Mathf.Sqrt(6 * distance / 9.81f));
         if(LiquidKey != 0) slab.ChangeLiquid(LiquidColour, LiquidKey);
-
-        base.AlternateInteraction(new InputAction.CallbackContext());
     }
 
     public override void Respawn()

@@ -8,7 +8,7 @@ public class LightFlickerOffSequence : SequenceObject
     public float timeBetweenFlicker = 0.3f;
     private float timeSinceLastFlicker = 0;
     protected Light lightToFlicker;
-
+    [SerializeField] AudioClip flickerNoise;
     private void Start()
     {
         lightToFlicker = GetComponent<Light>();
@@ -32,6 +32,8 @@ public class LightFlickerOffSequence : SequenceObject
                 timeSinceLastFlicker = 0;
                 lightToFlicker.enabled = !lightToFlicker.enabled;
                 numberOfFlickers--;
+                if (numberOfFlickers % 2 == 0 && flickerNoise != null) 
+                    gameObject.GetComponent<AudioSource>().PlayOneShot(flickerNoise);
                 lengthOfOperation = 0;
             }
         }

@@ -10,6 +10,7 @@ public class DemonBook : Focusable
     [SerializeField] AudioClip PagemoveSound;
     [SerializeField] Image LeftArrow;
     [SerializeField] Image RightArrow;
+    [SerializeField] AudioClip[] pageTurnSounds;
 
     MeshRenderer page;
     int pageNumber = 0;
@@ -44,7 +45,7 @@ public class DemonBook : Focusable
         Material[] mats = page.materials;
         if (pages[pageNumber])
             mats[1] = pages[pageNumber];
-
+        GetComponent<AudioSource>().PlayOneShot(pageTurnSounds[Random.Range(0,pageTurnSounds.Length)]);
         LeftArrow.enabled = !(pageNumber == 0);
         RightArrow.enabled = !(pageNumber == pages.Count - 1);
 

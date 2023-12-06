@@ -41,7 +41,6 @@ public class SymbolStampController : Focusable
         if(!player.controls.Focused.Action2.IsPressed() && aS.isPlaying && aS.clip == burningSound)
         {
             aS.Stop();
-            aS.PlayOneShot(calmBurning);
         }
 
         burnInTime += player.controls.Focused.Action2.IsPressed() ? Gameplay.deltaTime : -Gameplay.deltaTime;
@@ -114,7 +113,8 @@ public class SymbolStampController : Focusable
         SlabManager slab = slabSnap.ExpectedObject.GetComponent<SlabManager>();
         if (slab != null)
         {
-
+            aS.Stop();
+            aS.clip = null;
             aS.PlayOneShot(slabBurnInSounds[Random.Range(0,slabBurnInSounds.Length)]);
 
             slab.ChangeInner(rings[0].symbol, (uint)rings[0].symbolIndex);
@@ -125,8 +125,6 @@ public class SymbolStampController : Focusable
             slab.ChangeLiquid(new Color(0, 0, 0, 50), 0);
 
             playerPickUpScript.PickupObject(slab.gameObject);
-
-            aS.PlayOneShot(slabBurnInSounds[0]);
         }
     }
 }
