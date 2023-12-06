@@ -2809,7 +2809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: CompletetionPercentageForWin
-      value: 0.66
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[1].Demon
@@ -3013,27 +3013,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[1].DemonDescription
-      value: Blades
+      value: "M\xFAramasa"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[2].DemonDescription
-      value: Chained
+      value: "Xol-R\xE1"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[3].DemonDescription
-      value: Spider
+      value: Arax
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[4].DemonDescription
-      value: Big Arm
+      value: "Gord\xE1sh"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[5].DemonDescription
-      value: Twins
+      value: Veraxx
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[6].DemonDescription
-      value: Snake
+      value: "Ny\u015B\u015Ba"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[0].PotionDescription
@@ -3053,11 +3053,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[4].PotionDescription
-      value: Brutal
+      value: Ferocious
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[5].PotionDescription
-      value: Ferocious
+      value: Curious
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: ExpectedDemonCount.m_Curve.Array.data[0].time
@@ -15091,7 +15091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330378244}
   m_LocalRotation: {x: 0.85330576, y: -0.13174573, z: 0.20059745, w: 0.46289638}
-  m_LocalPosition: {x: -1.2995, y: 1.3145, z: 1.2065}
+  m_LocalPosition: {x: -1.1951, y: 1.3544, z: 1.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
