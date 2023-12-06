@@ -29,11 +29,24 @@ public class Crosshair : MonoBehaviour
 
         if(Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, pickUpRange, 115))
         {
-            if (hit.transform.gameObject.tag == "CanPickUp")
+            switch (hit.transform.gameObject.tag)
             {
-                crosshair.sprite = grab;
+                default:
+                    crosshair.sprite = normal;
+                    break;
+
+                case "CanPickUp":
+                    crosshair.sprite = grab;
+                    break;
+
+                case "Focus":
+                    crosshair.sprite = book;
+                    break;
             }
-            else crosshair.sprite = normal;
+
+
+
+
         }
         else crosshair.sprite = normal;
         Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.red);
