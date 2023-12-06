@@ -22,11 +22,7 @@ public class DemonListSpawner : MonoBehaviour
         if (curList != null)
         {
             if((curList.transform.position - curList.attachPosition.position).magnitude * ticketsOnList > (OrderSpawnTransform.position - curList.transform.position).magnitude)
-            {
-                Debug.Log("Printing");
                 curList.transform.position += curList.transform.up * ticketSpeed * Gameplay.deltaTime;
-                    
-            }
         }
 
         if(OrderSpawnTransform.GetComponentInChildren<OrderList>() == null)
@@ -38,19 +34,15 @@ public class DemonListSpawner : MonoBehaviour
 
     public void AddToList(uint demonKey, string demonDescription)
     {
-        Debug.Log("Summoning Request On Ticket Machine");
         if (curList == null)
         {
-            Debug.Log("Adding Header to Ticket");
             curList = Instantiate(ListHeaderPrefab, OrderSpawnTransform, false);
             ticketsOnList++;
         }
-
         curList.AddToList(demonKey, demonDescription, childOrderPrefab);
         ticketsOnList++;
 
         curList.ExpandGrabArea();
-
     }
 
     public bool CheckOffDemon(uint demonKey)

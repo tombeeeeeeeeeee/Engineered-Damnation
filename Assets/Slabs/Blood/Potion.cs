@@ -110,7 +110,7 @@ public class Potion : PickUp
         base.Dropped();
     }
 
-    public void Respawn()
+    public virtual void Respawn()
     {
         cork.SetActive(true);
         particle1.SetActive(false);

@@ -27,10 +27,10 @@ public class MainMenu : MonoBehaviour
     public GameObject settingsMenu;
     public GameObject creditsMenu;
     public GameObject tutorialSkipMenu;
+    public GameObject pauseMenu;
 
     // main menu
     public Button buttonPlay;
-    public Button buttonResume;
     public Button buttonSettings;
     public Button buttonQuit;
     public Button buttonCredits;
@@ -60,6 +60,14 @@ public class MainMenu : MonoBehaviour
     public Button buttonSkipYes;
     public Button buttonSkipNo;
 
+    //Pause Menu
+    [SerializeField] Button pauseResume;
+    [SerializeField] Button pauseSettings;
+    [SerializeField] Button pauseTutorial;
+    [SerializeField] Button pauseMaineMenu;
+    [SerializeField] Button pauseQuit;
+
+
     [HideInInspector] public bool hasStartedGame;
 
     // Start is called before the first frame update
@@ -74,82 +82,83 @@ public class MainMenu : MonoBehaviour
         buttonQuit.onClick.AddListener(Quit);
         buttonCredits.onClick.AddListener(Credits);
 
-        buttonResume.onClick.AddListener(Resume);
         buttonBack.onClick.AddListener(Back);
 
         buttonAudioSettings.onClick.AddListener(AudioSettings);
         buttonVideoSettings.onClick.AddListener(VideoSettings);
         buttonBack2.onClick.AddListener(Back);
 
-        buttonSkipNo.onClick.AddListener(StartTutorial);
-        buttonSkipYes.onClick.AddListener(Play);
+        buttonSkipYes.onClick.AddListener(StartTutorial);
+        buttonSkipNo.onClick.AddListener(Play);
 
         sliderMasterVolume.onValueChanged.AddListener(MasterVolume);
         sliderMusicVolume.onValueChanged.AddListener(MusicVolume);
         sliderSFXVolume.onValueChanged.AddListener(SFXVolume);
         sliderDialogueVolume.onValueChanged.AddListener(DialogueVolume);
 
+        pauseResume.onClick.AddListener(Resume);
+        pauseSettings.onClick.AddListener(Settings);
+        pauseTutorial.onClick.AddListener(StartTutorial);
+        pauseMaineMenu.onClick.AddListener(Restart);
+        pauseQuit.onClick.AddListener(Quit);
+
         hasStartedGame = false;
 
-        pixels.heightPixelation = 500;
-        pixels.widthPixelation = 500;
+        pixels.heightPixelation = 666;
+        pixels.widthPixelation = 666;
     }
 
 
     void Play()
     {
-        if (!hasStartedGame)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            titleGraphic.SetActive(false);
-            mainMenuCamera.GetComponent<CameraTransition>().MoveToPlayer();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        titleGraphic.SetActive(false);
+        mainMenuCamera.GetComponent<CameraTransition>().MoveToPlayer();
 
-            buttonPlay.gameObject.SetActive(false);
-            buttonResume.gameObject.SetActive(true);
-            PauseScreenReset();
+        PauseScreenReset();
 
-            GetComponent<Canvas>().worldCamera = pauseCamera;
+        GetComponent<Canvas>().worldCamera = pauseCamera;
 
-            gameObject.SetActive(false);
-        }
+        hasStartedGame = true;
+        gameObject.SetActive(false);
     }
 
     void StartTutorial()
     {
-        if(!hasStartedGame)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            titleGraphic.SetActive(false);
-            buttonPlay.gameObject.SetActive(false);
-            buttonResume.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        titleGraphic.SetActive(false);
 
-            GetComponent<Canvas>().worldCamera = pauseCamera;
+        Debug.Log("Starting Tutorial");
+        GetComponent<Canvas>().worldCamera = pauseCamera;
 
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
-            PauseScreenReset();
-            mainMenuCamera.enabled = false;
-            firstTutorialSequence.Begin(true);
-        }
+        PauseScreenReset();
+        mainMenuCamera.enabled = false;
+        hasStartedGame = true;
+        firstTutorialSequence.Begin(true);
     }
 
 
     void TutorialSkip()
     {
+        pauseMenu.SetActive(false);
         mainMenu.SetActive(false);
         tutorialSkipMenu.SetActive(true);
     }
     void PauseScreenReset()
     {
-        mainMenu.SetActive(true);
+        mainMenu.SetActive(false);
+        pauseMenu.SetActive(true);
         tutorialSkipMenu.SetActive(false);
     }
 
     void Settings()
     {
         mainMenu.SetActive(false);
+        pauseMenu.SetActive(false);
         settingsMenu.SetActive(true);
     }
 
@@ -157,7 +166,8 @@ public class MainMenu : MonoBehaviour
     {
         settingsMenu.SetActive(false);
         creditsMenu.SetActive(false);
-        mainMenu.SetActive(true);
+        mainMenu.SetActive(!hasStartedGame);
+        pauseMenu.SetActive(hasStartedGame);
     }
 
     void Quit()
@@ -169,6 +179,11 @@ public class MainMenu : MonoBehaviour
     {
         mainMenu.SetActive(false);
         creditsMenu.SetActive(true);
+    }
+
+    void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void Resume()
@@ -212,4 +227,5 @@ public class MainMenu : MonoBehaviour
         Gameplay.dialogueVolume = f;
         textDialogueVolume.text = (f * 100).ToString("0");
     }
+
 }

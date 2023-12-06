@@ -10,11 +10,10 @@ public class CameraTransition : MonoBehaviour
     public FPSController playerController;
     public Transform playerCameraTransform;
     public float duration;
-    public float depixilationPercentage;
+    public float initialPixelHeight;
+    public float initialPixelWidth;
 
     [SerializeReference] PixelationController pixels;
-    private float startingPixelHeight;
-    private float startingPixelWidth;
 
     Vector3 initialPosition;
     Quaternion initialRotation;
@@ -23,10 +22,14 @@ public class CameraTransition : MonoBehaviour
     Vector3 targetPosition;
     Quaternion targetRotation;
     float targetFOV;
+    float targetPixelHeight;
+    float targetPixelWidth;
 
     Vector3 fromPosition;
     Quaternion fromRotation;
     float fromFOV;
+    float fromPixelHeight;
+    float fromPixelWidth;
 
 
     float elapsed;
@@ -40,11 +43,6 @@ public class CameraTransition : MonoBehaviour
         initialPosition = transform.position;
         initialRotation = transform.rotation;
         initialFOV = GetComponent<Camera>().fieldOfView;
-        if(pixels)
-        {
-            startingPixelHeight = pixels.heightPixelation;
-            startingPixelWidth = pixels.widthPixelation;
-        }  
     }
 
     public void MoveToTarget(InputActionMap controlsForFocus)
@@ -56,12 +54,14 @@ public class CameraTransition : MonoBehaviour
         targetPosition = initialPosition;
         targetRotation = initialRotation;
         targetFOV = initialFOV;
+        targetPixelHeight = initialPixelHeight;
+        targetPixelWidth = initialPixelWidth;
 
         fromPosition = playerCameraTransform.position;
         fromRotation = playerCameraTransform.rotation;
         fromFOV = playerController.playerCamera.fieldOfView;
-
-        depixilationPercentage = -depixilationPercentage;
+        fromPixelHeight = playerController.pixelHeight;
+        fromPixelWidth = playerController.pixelWidth;
 
         elapsed = 0;
         moving = true;
@@ -75,12 +75,14 @@ public class CameraTransition : MonoBehaviour
         targetPosition = playerCameraTransform.position;
         targetRotation = playerCameraTransform.rotation;
         targetFOV = playerController.playerCamera.fieldOfView;
+        targetPixelHeight = playerController.pixelHeight;
+        targetPixelWidth = playerController.pixelWidth;
 
         fromPosition = initialPosition;
         fromRotation = initialRotation;
         fromFOV = initialFOV;
-
-        depixilationPercentage = -depixilationPercentage;
+        fromPixelHeight = initialPixelHeight;
+        fromPixelWidth = initialPixelWidth;
 
         elapsed = 0;
         moving = true;
@@ -98,9 +100,9 @@ public class CameraTransition : MonoBehaviour
             transform.position = interpolatedPosition;
             transform.rotation = interpolatedRotation;
 
-            if(pixels) pixels.heightPixelation += interpolationRatio * depixilationPercentage;
-            if(pixels) pixels.widthPixelation += interpolationRatio * depixilationPercentage;
-            
+            if(pixels) pixels.heightPixelation = Mathf.Lerp(fromPixelHeight, targetPixelHeight, interpolationRatio);
+            if(pixels) pixels.widthPixelation = Mathf.Lerp(fromPixelWidth, targetPixelWidth, interpolationRatio);
+
 
             GetComponent<Camera>().fieldOfView = fromFOV - interpolationRatio * (fromFOV - targetFOV);
 
@@ -121,8 +123,6 @@ public class CameraTransition : MonoBehaviour
                 else
                 {
                     Gameplay.gameplayActive = true;
-                    if (pixels) pixels.heightPixelation = startingPixelHeight;
-                    if (pixels) pixels.widthPixelation = startingPixelWidth;
                     playerController.controls.Player.Enable();
                     playerController.playerCamera.enabled = true;
                     GetComponent<Camera>().enabled = false;

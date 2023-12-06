@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Computer : Focusable
 {
@@ -25,5 +26,10 @@ public class Computer : Focusable
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public override void Action2(InputAction.CallbackContext context)
+    {
+        
     }
 }

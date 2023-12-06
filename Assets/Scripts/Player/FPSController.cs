@@ -16,6 +16,9 @@ public class FPSController : MonoBehaviour
     public float CameraZoomFOV = 15;
     public Camera playerCamera;
     [SerializeField] Canvas pauseMenuCanvas;
+    public float pixelWidth;
+    public float pixelHeight;
+
 
     //Input System
     private Vector2 lookInput;

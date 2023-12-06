@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 public class SymbolStampController : Focusable
 {
     [SerializeField] SymbolRing[] rings;
-    [SerializeField] Transform raycastPos;
     [SerializeField] MeshRenderer[] planes;
     [SerializeField] InteractionController playerPickUpScript;
     [SerializeField] GameObject outerUI;
@@ -44,6 +43,7 @@ public class SymbolStampController : Focusable
             aS.Stop();
             aS.PlayOneShot(calmBurning);
         }
+
         burnInTime += player.controls.Focused.Action2.IsPressed() ? Gameplay.deltaTime : -Gameplay.deltaTime;
         burnInTime = burnInTime < 0 ? 0 : burnInTime;
 
@@ -92,11 +92,16 @@ public class SymbolStampController : Focusable
 
     public override void Action2(InputAction.CallbackContext context)
     {
-        aS.Stop();
-        aS.clip = burningSound;
-        aS.loop = true;
-        aS.Play();
+        if (slabSnap.ExpectedObject != null)
+        {
+            aS.Stop();
+            aS.clip = burningSound;
+            aS.loop = true;
+            aS.Play();
+        }
+        else Exit(new InputAction.CallbackContext());
     }
+
 
     public override void Exit(InputAction.CallbackContext context)
     {
@@ -106,17 +111,7 @@ public class SymbolStampController : Focusable
 
     public void PressStamp()
     {
-        SlabManager slab = null;
-
-        RaycastHit[] hits = Physics.RaycastAll(raycastPos.position, -transform.up, 1);
-
-        foreach (RaycastHit hit in hits)
-        {
-            slab = hit.collider.gameObject.GetComponentInChildren<SlabManager>();
-            if (slab != null)
-                break;
-        }
-
+        SlabManager slab = slabSnap.ExpectedObject.GetComponent<SlabManager>();
         if (slab != null)
         {
 
@@ -130,6 +125,8 @@ public class SymbolStampController : Focusable
             slab.ChangeLiquid(new Color(0, 0, 0, 50), 0);
 
             playerPickUpScript.PickupObject(slab.gameObject);
+
+            aS.PlayOneShot(slabBurnInSounds[0]);
         }
     }
 }
