@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: c4eb7c69631e4024eb7eaa51411e627e, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2998,6 +2998,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[0].shaderColor.b
       value: 0.12963781
       objectReference: {fileID: 0}
@@ -3071,27 +3075,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[1].DemonDescription
-      value: Blades
+      value: "M\xFAramasa"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[2].DemonDescription
-      value: Chained
+      value: "Xol-R\xE1"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[3].DemonDescription
-      value: Spider
+      value: Arax
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[4].DemonDescription
-      value: Big Arm
+      value: "Gord\xE1sh"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[5].DemonDescription
-      value: Twins
+      value: "Gord\xE1sh"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[6].DemonDescription
-      value: Snake
+      value: "Ny\u015B\u015Ba"
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[0].PotionDescription
@@ -3103,7 +3107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[2].PotionDescription
-      value: Curious
+      value: Wicked
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[3].PotionDescription
@@ -3111,11 +3115,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[4].PotionDescription
-      value: Brutal
+      value: Ferocious
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[5].PotionDescription
-      value: Ferocious
+      value: Curious
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: ExpectedDemonCount.m_Curve.Array.data[0].time
@@ -3123,11 +3127,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: ExpectedDemonCount.m_Curve.Array.data[1].time
-      value: 0.39999998
+      value: 0.11467915
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: ExpectedDemonCount.m_Curve.Array.data[2].time
-      value: 0.49864978
+      value: 0.35117185
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[3].time
+      value: 0.48033923
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[4].time
+      value: 0.7943613
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[5].time
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: ExpectedDemonCount.m_Curve.Array.data[0].value
@@ -3135,11 +3151,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: ExpectedDemonCount.m_Curve.Array.data[1].value
-      value: 0.29998657
+      value: 0.2359114
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: ExpectedDemonCount.m_Curve.Array.data[2].value
-      value: 0.39917865
+      value: 0.41003296
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[3].value
+      value: 0.43146625
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[4].value
+      value: 0.8497602
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[5].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[6].TimePercentageUnlocked
@@ -3148,6 +3176,26 @@ PrefabInstance:
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: DemonTypes.Array.data[7].TimePercentageUnlocked
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[1].inSlope
+      value: 0.65756476
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[2].inSlope
+      value: 0.21996528
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[3].inSlope
+      value: 0.83607435
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[4].inSlope
+      value: 1.3182592
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[5].inSlope
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[3].TimePercentageUnlocked
@@ -3160,6 +3208,34 @@ PrefabInstance:
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: LiquidTypes.Array.data[5].TimePercentageUnlocked
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[1].outSlope
+      value: 0.65756476
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[2].outSlope
+      value: 0.21996528
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[3].outSlope
+      value: 0.83607435
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[4].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[4].outSlope
+      value: 1.3182592
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[5].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: ExpectedDemonCount.m_Curve.Array.data[4].outWeight
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 4304153800092461343, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_Name
@@ -8077,7 +8153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683553996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.744, y: 1.279, z: 2.44}
+  m_LocalPosition: {x: -0.744, y: 1.348, z: 2.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13738,7 +13814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   militaryTime: 1
   manager: {fileID: 1609533226}
-  gameLengthInMinutes: 7
+  gameLengthInMinutes: 5
   startingTime: 9
   shiftLength: 8
   endingSequenceStarter: {fileID: 523182205}
@@ -14642,7 +14718,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330378244}
   m_LocalRotation: {x: 0.85330576, y: -0.13174573, z: 0.20059745, w: 0.46289638}
-  m_LocalPosition: {x: -1.2995, y: 1.3145, z: 1.2065}
+  m_LocalPosition: {x: -1.1977, y: 1.363, z: 1.134}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
