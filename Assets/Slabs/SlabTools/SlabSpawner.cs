@@ -50,7 +50,7 @@ public class SlabSpawner : ToolSpawner
         queued = false;
         if(toolSoundSpot.isPlaying)
             toolSoundSpot.Stop();
-        if(Gameplay.gameplayActive) toolSoundSpot.PlayOneShot(SlabSpawnSound);
+        if(Gameplay.active) toolSoundSpot.PlayOneShot(SlabSpawnSound);
 
         base.SpawnTool();
     }

@@ -106,9 +106,9 @@ public class CameraTransition : MonoBehaviour
 
             GetComponent<Camera>().fieldOfView = fromFOV - interpolationRatio * (fromFOV - targetFOV);
 
-            if (elapsed < duration && Gameplay.gameplayActive)
+            if (elapsed < duration && Gameplay.active)
                 elapsed += Gameplay.deltaTime;
-            else if (elapsed < duration && !Gameplay.gameplayActive)
+            else if (elapsed < duration && !Gameplay.active)
                 elapsed += Time.deltaTime;
 
             else
@@ -122,7 +122,7 @@ public class CameraTransition : MonoBehaviour
 
                 else
                 {
-                    Gameplay.gameplayActive = true;
+                    Gameplay.active = true;
                     playerController.controls.Player.Enable();
                     playerController.playerCamera.enabled = true;
                     GetComponent<Camera>().enabled = false;

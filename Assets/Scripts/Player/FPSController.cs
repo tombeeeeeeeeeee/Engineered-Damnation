@@ -72,7 +72,7 @@ public class FPSController : MonoBehaviour
     {
         pauseCamera.MoveToTarget(controls.Focused);
         pauseComputer.Init();
-        Gameplay.gameplayActive = !pause;
+        Gameplay.active = !pause;
     }
 
     public void CameraZoom(InputAction.CallbackContext context)

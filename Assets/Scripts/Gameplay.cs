@@ -5,7 +5,7 @@ public static class Gameplay
 {
     public static float deltaTime;
     public static float timeSinceStart;
-    public static bool gameplayActive = false;
+    public static bool active = false;
     public static float masterVolume;
     public static float sfxVolume;
     public static float musicVolume;

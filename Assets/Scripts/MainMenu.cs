@@ -73,7 +73,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Gameplay.gameplayActive = false;
+        Gameplay.active = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -189,7 +189,7 @@ public class MainMenu : MonoBehaviour
     {
         // create a useless CallbackContext just to get the function to run
         computer.Exit(new InputAction.CallbackContext());
-        Gameplay.gameplayActive = true;
+        Gameplay.active = true;
     }
 
     void AudioSettings()

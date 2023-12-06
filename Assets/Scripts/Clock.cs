@@ -29,7 +29,7 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Gameplay.deltaTime = Time.deltaTime * (Gameplay.gameplayActive ? 1 : 0);
+        Gameplay.deltaTime = Time.deltaTime * (Gameplay.active ? 1 : 0);
         Gameplay.timeSinceStart += Gameplay.deltaTime;
 
         //breakTimesIndex %= breakTimes.Length;  
