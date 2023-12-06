@@ -40,16 +40,16 @@ public class DemonListSpawner : MonoBehaviour
             else aS.loop = false;
         }
 
-        if (!torn && curList != null)
-        {
-            torn = true;
-            if(Gameplay.active) aS.PlayOneShot(tornSound);
-        }
-
         if (OrderSpawnTransform.GetComponentInChildren<OrderList>() == null)
         {
             curList = null;
             ticketsOnList = 0;
+        }
+
+        if (!torn && curList == null)
+        {
+            torn = true;
+            if (Gameplay.active) aS.PlayOneShot(tornSound);
         }
     }
 

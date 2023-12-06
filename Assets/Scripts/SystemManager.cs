@@ -16,11 +16,23 @@ public class SystemManager : MonoBehaviour
     public PotionTypeInfo[] LiquidTypes;
     [SerializeField] float CompletetionPercentageForWin = 0.5f;
     [SerializeField] Clock clock;
- 
+
+    [SerializeField] AudioClip[] musics;
+    private int musicIndex = 0;
+    private AudioSource aS;
+
     public int DemonsSummoned = 0;
     [HideInInspector]
     public List<uint> AwaitingSummon;
 
+    private void Start()
+    {
+        aS = GetComponent<AudioSource>();
+
+        aS.loop = true;
+        aS.clip = musics[0];
+        aS.Play();
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,6 +48,17 @@ public class SystemManager : MonoBehaviour
                 demonListSpawner.AddToList(newDemon, newDemonDescription);
                 AwaitingSummon.Add(newDemon);
             }
+        }
+
+
+        if ((float)(musicIndex + 1) / musics.Length > clock.playthroughPercentage)
+        {
+            musicIndex++;
+            float musicStartTime = aS.time;
+            aS.Stop();
+            aS.clip = musics[musicIndex];
+            aS.Play();
+            aS.time = musicStartTime;
         }
     }
 
