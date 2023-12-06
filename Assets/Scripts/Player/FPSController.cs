@@ -15,7 +15,8 @@ public class FPSController : MonoBehaviour
     public float CameraDefaultFOV = 60;
     public float CameraZoomFOV = 15;
     public Camera playerCamera;
-    [SerializeField] Canvas pauseMenuCanvas;
+    [SerializeField] CameraTransition pauseCamera;
+    [SerializeField] Computer pauseComputer;
     public float pixelWidth;
     public float pixelHeight;
 
@@ -34,8 +35,6 @@ public class FPSController : MonoBehaviour
 
         controls.Player.Zoom.performed += CameraZoom;
         controls.Player.Pause.performed += Pause;
-        controls.PauseMenu.Unpause.performed += Unpause;
-
     }
 
     void Update() 
@@ -66,20 +65,13 @@ public class FPSController : MonoBehaviour
 
     private void Pause(InputAction.CallbackContext context)
     {
-        controls.Player.Disable();
-        controls.PauseMenu.Enable();
         PauseToggle(true);
     }
-    private void Unpause(InputAction.CallbackContext context)
-    {
-        controls.Player.Enable();
-        controls.PauseMenu.Disable();
-        PauseToggle(false);
-    } 
     
     private void PauseToggle(bool pause)
     {
-        pauseMenuCanvas.gameObject.SetActive(pause);
+        pauseCamera.MoveToTarget(controls.Focused);
+        pauseComputer.Init();
         Gameplay.gameplayActive = !pause;
     }
 

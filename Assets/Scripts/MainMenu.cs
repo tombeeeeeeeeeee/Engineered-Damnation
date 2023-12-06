@@ -130,7 +130,6 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = false;
         titleGraphic.SetActive(false);
 
-        Debug.Log("Starting Tutorial");
         GetComponent<Canvas>().worldCamera = pauseCamera;
 
         gameObject.SetActive(false);
@@ -186,10 +185,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void Resume()
+    public void Resume()
     {
         // create a useless CallbackContext just to get the function to run
         computer.Exit(new InputAction.CallbackContext());
+        Gameplay.gameplayActive = true;
     }
 
     void AudioSettings()
