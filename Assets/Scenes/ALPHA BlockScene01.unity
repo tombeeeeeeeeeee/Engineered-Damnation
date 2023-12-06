@@ -973,7 +973,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2bf067c3f3730be44a2012c51ba68f80, type: 2}
     - target: {fileID: 919132149155446097, guid: dfc0ad31e5ba6114c9c535b1baaa2d42, type: 3}
       propertyPath: m_Name
-      value: Demon_TwinheadsOld
+      value: Demon_TwinheadsNew
       objectReference: {fileID: 0}
     - target: {fileID: 1808528157541451432, guid: dfc0ad31e5ba6114c9c535b1baaa2d42, type: 3}
       propertyPath: m_DirtyAABB
@@ -1074,8 +1074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8811725b3dff1c34da093b25dd8eb1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: {x: 0, y: -1, z: 0}
-  animationName: 
+  spawnOffset: {x: 0, y: -1, z: -0.75}
+  animationName: Take 001
 --- !u!95 &102449379
 Animator:
   serializedVersion: 4
@@ -9485,6 +9485,10 @@ PrefabInstance:
       propertyPath: spawnOffset.y
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 8836446201052441312, guid: 53303a1cc45829546867b47f233858bb, type: 3}
+      propertyPath: spawnOffset.z
+      value: -0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53303a1cc45829546867b47f233858bb, type: 3}
 --- !u!1001 &865938124
@@ -12683,7 +12687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8811725b3dff1c34da093b25dd8eb1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnOffset: {x: 0, y: -1, z: 0}
+  spawnOffset: {x: 0.25, y: -1.25, z: -0.1}
   animationName: Take 001
 --- !u!95 &1153456334
 Animator:
@@ -22595,6 +22599,10 @@ PrefabInstance:
       propertyPath: spawnOffset.y
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 1405253463197467765, guid: bba5e1dc038a720459d2d33609730697, type: 3}
+      propertyPath: spawnOffset.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1444195230897709952, guid: bba5e1dc038a720459d2d33609730697, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -22728,6 +22736,10 @@ PrefabInstance:
     - target: {fileID: 2965168253421092266, guid: 8f1ea45037332c54397cecfe26569bf5, type: 3}
       propertyPath: spawnOffset.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2965168253421092266, guid: 8f1ea45037332c54397cecfe26569bf5, type: 3}
+      propertyPath: spawnOffset.z
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3363306759032707655, guid: 8f1ea45037332c54397cecfe26569bf5, type: 3}
       propertyPath: m_RootOrder
@@ -22876,8 +22888,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 2c7cd74da7b18cc4e9417f100fcc2222, type: 2}
     - target: {fileID: 1521433929451754116, guid: 3a63cc8f87adc4944ae20659c63dfd46, type: 3}
+      propertyPath: animationName
+      value: Take 001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521433929451754116, guid: 3a63cc8f87adc4944ae20659c63dfd46, type: 3}
       propertyPath: spawnOffset.y
-      value: -1
+      value: -0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521433929451754116, guid: 3a63cc8f87adc4944ae20659c63dfd46, type: 3}
+      propertyPath: spawnOffset.z
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5053088892144336849, guid: 3a63cc8f87adc4944ae20659c63dfd46, type: 3}
       propertyPath: m_Name
