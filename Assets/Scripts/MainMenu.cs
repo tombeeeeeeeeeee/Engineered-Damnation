@@ -77,9 +77,9 @@ public class MainMenu : MonoBehaviour
 
     [HideInInspector] public bool hasStartedGame;
 
-    private int screenWidth = 640;
-    private int screenHeight = 480;
-    private FullScreenMode fullScreenMode = FullScreenMode.Windowed;
+    private int screenWidth = 1920;
+    private int screenHeight = 1080;
+    private FullScreenMode fullScreenMode = FullScreenMode.ExclusiveFullScreen;
     private int refreshRate = 25;
 
     // Start is called before the first frame update
