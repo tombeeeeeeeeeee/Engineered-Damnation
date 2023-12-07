@@ -56,7 +56,6 @@ public class Beaker : Potion
 
             float fill = liquidLevel == 1 ? -shallowDepth : deepDepth;
             liquidMesh.material.SetFloat("_Fill", fill);
-            Debug.Log(fill);
 
             aS.PlayOneShot(fillSounds[Random.Range(0, fillSounds.Length)]);
         }

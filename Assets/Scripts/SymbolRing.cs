@@ -33,6 +33,7 @@ public class SymbolRing : MonoBehaviour
     {
         if (!moving)
         {
+            aS.Stop();
             aS.PlayOneShot(dialTurnSound[Random.Range(0, dialTurnSound.Length)]);
             direction = (int)Mathf.Sign(direction); // argument should be either -1 or 1, but just to make sure
 

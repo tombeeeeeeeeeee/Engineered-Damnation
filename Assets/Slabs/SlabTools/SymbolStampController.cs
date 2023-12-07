@@ -41,6 +41,7 @@ public class SymbolStampController : Focusable
         if(!player.controls.Focused.Action2.IsPressed() && aS.isPlaying && aS.clip == burningSound)
         {
             aS.Stop();
+            aS.clip = null;
         }
 
         burnInTime += player.controls.Focused.Action2.IsPressed() ? Gameplay.deltaTime : -Gameplay.deltaTime;
