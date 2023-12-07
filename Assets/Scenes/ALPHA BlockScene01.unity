@@ -3863,7 +3863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: pickUpRange
-      value: 1.95
+      value: 1.71
       objectReference: {fileID: 0}
     - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: lookSpeed
@@ -3916,6 +3916,14 @@ PrefabInstance:
     - target: {fileID: 7775050711131565877, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117950974017878980, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
+      propertyPath: duration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117950974017878980, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
+      propertyPath: strength
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2319770245778000097, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
@@ -6393,11 +6401,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5680396138017492043, guid: 7f21aac0adb568c44a0cf08db5f5f45f, type: 3}
   m_PrefabInstance: {fileID: 672326463}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &576582687 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 252751700111850580, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
-  m_PrefabInstance: {fileID: 326844714}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &577744430
 GameObject:
   m_ObjectHideFlags: 0
@@ -7728,7 +7731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88aba1e3fbca6784fa34cce2955dff16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 576582687}
   playerCamera: {fileID: 1860690332}
   crosshair: {fileID: 124793447}
   normal: {fileID: 21300000, guid: d56be58f016e8124498ca15a79439cec, type: 3}
@@ -14992,7 +14994,6 @@ GameObject:
   - component: {fileID: 1330378245}
   - component: {fileID: 1330378249}
   - component: {fileID: 1330378248}
-  - component: {fileID: 1330378250}
   m_Layer: 0
   m_Name: Book Lamp (Light)
   m_TagString: Untagged
@@ -15131,24 +15132,12 @@ MonoBehaviour:
   lengthOfOperation: 0
   numberOfFlickers: 0
   timeBetweenFlicker: 0.1
---- !u!114 &1330378250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330378244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2843e422d3037b40987b553ec5f766d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1342585517 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7167117088997535387, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
   m_PrefabInstance: {fileID: 326844714}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576582687}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55182f56cdf43224a9b0f286f7b186f5, type: 3}

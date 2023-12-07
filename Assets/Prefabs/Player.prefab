@@ -95,6 +95,7 @@ MonoBehaviour:
   CameraZoomFOV: 15
   playerCamera: {fileID: 2031173083566962053}
   pauseMenuCanvas: {fileID: 0}
+  cameraShakeSequence: {fileID: 9117950974017878980}
 --- !u!1 &446208686804959002
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +108,7 @@ GameObject:
   - component: {fileID: 2031173083566962053}
   - component: {fileID: 3235140159900309844}
   - component: {fileID: 3834912412706881172}
+  - component: {fileID: 9117950974017878980}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -224,6 +226,22 @@ MonoBehaviour:
   heldObj: {fileID: 0}
   rotateSpeed: 20
   controller: {fileID: 7167117088997535387}
+  throwForce: 0
+--- !u!114 &9117950974017878980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446208686804959002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a98ed0e64cbdf44bd57fbf81c96f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inSequence: 0
+  nextInSequence: {fileID: 0}
+  lengthOfOperation: 2
 --- !u!1 &1782825043819594980
 GameObject:
   m_ObjectHideFlags: 0

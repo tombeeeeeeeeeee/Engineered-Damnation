@@ -16,6 +16,7 @@ public class FPSController : MonoBehaviour
     public float CameraZoomFOV = 15;
     public Camera playerCamera;
     [SerializeField] Canvas pauseMenuCanvas;
+    [SerializeField] SequenceObject cameraShakeSequence;
 
     //Input System
     private Vector2 lookInput;
@@ -32,7 +33,6 @@ public class FPSController : MonoBehaviour
         controls.Player.Zoom.performed += CameraZoom;
         controls.Player.Pause.performed += Pause;
         controls.PauseMenu.Unpause.performed += Unpause;
-
     }
 
     void Update() 

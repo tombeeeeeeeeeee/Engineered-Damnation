@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
-    public GameObject player;
     public GameObject playerCamera;
     public Image crosshair;
 
@@ -17,7 +16,7 @@ public class Crosshair : MonoBehaviour
 
     private void Start()
     {
-        pickUpRange = player.GetComponent<InteractionController>().pickUpRange;
+        pickUpRange = playerCamera.GetComponent<InteractionController>().pickUpRange;
     }
 
     private void Update()
