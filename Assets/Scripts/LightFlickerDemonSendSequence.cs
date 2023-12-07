@@ -16,7 +16,8 @@ public class LightFlickerDemonSendSequence:LightFlickerOffSequence
             if (gameObject.GetComponent<Demon>())
                 gameObject.GetComponent<Demon>().Vanish();
             else
-                Destroy(objectToDestroy);
+                objectToDestroy.GetComponent<Demon>().Vanish();
+                //Destroy(objectToDestroy);
         }
         base.Update();
     }

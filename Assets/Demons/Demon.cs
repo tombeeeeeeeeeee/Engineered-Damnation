@@ -23,6 +23,7 @@ public class Demon : MonoBehaviour
 
     public void Summon(Vector3 summonLocation)
     {
+        Debug.Log("summoned onscreen");
         transform.position = summonLocation + spawnOffset;
         
         if(animator)
@@ -31,6 +32,7 @@ public class Demon : MonoBehaviour
 
     public void Vanish()
     {
+        Debug.Log("vanished offscreen");
         transform.position = offscreenPosition;
     }
 }

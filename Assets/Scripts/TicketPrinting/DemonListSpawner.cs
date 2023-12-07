@@ -23,7 +23,7 @@ public class DemonListSpawner : MonoBehaviour
         {
             if((curList.transform.position - curList.attachPosition.position).magnitude * ticketsOnList > (OrderSpawnTransform.position - curList.transform.position).magnitude)
             {
-                Debug.Log("Printing");
+                //Debug.Log("Printing");
                 curList.transform.position += curList.transform.up * ticketSpeed * Gameplay.deltaTime;
                     
             }
@@ -38,10 +38,10 @@ public class DemonListSpawner : MonoBehaviour
 
     public void AddToList(uint demonKey, string demonDescription)
     {
-        Debug.Log("Summoning Request On Ticket Machine");
+        //Debug.Log("Summoning Request On Ticket Machine");
         if (curList == null)
         {
-            Debug.Log("Adding Header to Ticket");
+            //Debug.Log("Adding Header to Ticket");
             curList = Instantiate(ListHeaderPrefab, OrderSpawnTransform, false);
             ticketsOnList++;
         }
