@@ -1501,7 +1501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &147822261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8389,7 +8389,7 @@ MonoBehaviour:
   cutsceneCamera: {fileID: 658499777}
   subtitlesString: Repeat it all until the end of the work day, and if you've summoned
     enough demons you'll have the satisfaction of being the one to who started the
-    apocolypse!
+    apocalypse!
   subtitles: {fileID: 1914873376}
   subtitleBackground: {fileID: 597522078}
   focusImage: {fileID: 1488012328}
@@ -13930,7 +13930,7 @@ MonoBehaviour:
   nextInSequence: {fileID: 1180335052}
   lengthOfOperation: 0
   cutsceneCamera: {fileID: 1208064550}
-  subtitlesString: 3. Create the rne with the dial
+  subtitlesString: 3. Create the rune with the dial
   subtitles: {fileID: 684007008}
   subtitleBackground: {fileID: 1569732208}
   focusImage: {fileID: 1786715755}
@@ -18541,7 +18541,7 @@ MonoBehaviour:
   lengthOfOperation: 0
   cutsceneCamera: {fileID: 163163459}
   subtitlesString: You see, Infero-Corp is not an ordinary company. We have ambition,
-    and want to change the world... literaly!
+    and want to change the world... literally!
   subtitles: {fileID: 805837743}
   subtitleBackground: {fileID: 2055666902}
   focusImage: {fileID: 1488012328}
@@ -18565,7 +18565,7 @@ MonoBehaviour:
   lengthOfOperation: 0
   cutsceneCamera: {fileID: 163163459}
   subtitlesString: 'We need you to summon demons from the depths of Hell, and bring
-    forth the apocolypse today. '
+    forth the apocalypse today. '
   subtitles: {fileID: 805837743}
   subtitleBackground: {fileID: 2055666902}
   focusImage: {fileID: 1488012328}
