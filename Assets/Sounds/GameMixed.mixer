@@ -45,11 +45,13 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 8c9d1ee435fd5554ea26236792613688
-    name: MyExposedParam 2
+    name: intercom
+  - guid: 01bf5e1f860866741a4c868b262c1363
+    name: master
   - guid: faeb23054182a7247925be10116d1ea8
-    name: MyExposedParam 1
+    name: music
   - guid: a02be75525571d24c8e24cb2791a23c8
-    name: MyExposedParam
+    name: sfx
   m_AudioMixerGroupViews:
   - guids:
     - 539ef0ae0a9ca9c498dc8462feca1d49

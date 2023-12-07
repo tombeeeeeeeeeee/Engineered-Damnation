@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour
     public Camera pauseCamera;
     public GameObject titleGraphic;
     public TutorialSequence firstTutorialSequence;
+    public GameObject effectsControllerParent;
 
     public GameObject mainMenu;
     public GameObject settingsMenu;
@@ -45,7 +46,7 @@ public class MainMenu : MonoBehaviour
     // credits menu
     public Button buttonBack2;
 
-    // settings control
+    // Audio settings control
     public Slider sliderMasterVolume;
     public TMP_Text textMasterVolume;
     public Slider sliderMusicVolume;
@@ -54,6 +55,12 @@ public class MainMenu : MonoBehaviour
     public TMP_Text textSFXVolume;
     public Slider sliderDialogueVolume;
     public TMP_Text textDialogueVolume;
+
+    //Video settings control
+    public TMP_Dropdown fullscreen;
+    public TMP_Dropdown resolution;
+    public TMP_Dropdown fps;
+    public Toggle filter;
 
 
     //TutorialSkip
@@ -69,6 +76,11 @@ public class MainMenu : MonoBehaviour
 
 
     [HideInInspector] public bool hasStartedGame;
+
+    private int screenWidth = 640;
+    private int screenHeight = 480;
+    private FullScreenMode fullScreenMode = FullScreenMode.Windowed;
+    private int refreshRate = 25;
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +108,11 @@ public class MainMenu : MonoBehaviour
         sliderSFXVolume.onValueChanged.AddListener(SFXVolume);
         sliderDialogueVolume.onValueChanged.AddListener(DialogueVolume);
 
+        fullscreen.onValueChanged.AddListener(delegate { FullscreenChange(); });
+        resolution.onValueChanged.AddListener(delegate { ResolutioinChange(); });
+        fps.onValueChanged.AddListener(delegate { FPSChange(); });
+        filter.onValueChanged.AddListener(delegate { FilterToggle(); });
+
         pauseResume.onClick.AddListener(Resume);
         pauseSettings.onClick.AddListener(Settings);
         pauseTutorial.onClick.AddListener(StartTutorial);
@@ -106,8 +123,9 @@ public class MainMenu : MonoBehaviour
 
         pixels.heightPixelation = 666;
         pixels.widthPixelation = 666;
-    }
 
+        Screen.SetResolution(screenWidth, screenHeight, fullScreenMode, refreshRate);
+    }
 
     void Play()
     {
@@ -227,5 +245,39 @@ public class MainMenu : MonoBehaviour
         Gameplay.dialogueVolume = f;
         textDialogueVolume.text = (f * 100).ToString("0");
     }
+
+    private void FullscreenChange()
+    {
+        switch (fullscreen.itemText.text)
+        {
+            case "Fullscreen":
+                fullScreenMode = FullScreenMode.ExclusiveFullScreen; break;
+            case "Windowed":
+                fullScreenMode = FullScreenMode.Windowed; break;
+            case "Borderless":
+                fullScreenMode = FullScreenMode.FullScreenWindow; break;
+        }
+
+        Screen.SetResolution(screenWidth, screenHeight, fullScreenMode, refreshRate);
+    }
+    private void ResolutioinChange()
+    {
+        string[] resolution = fullscreen.itemText.text.Split("x");
+        screenWidth = int.Parse(resolution[0]); screenHeight = int.Parse(resolution[1]);
+
+        Screen.SetResolution(screenWidth, screenHeight, fullScreenMode, refreshRate);
+    }
+
+    private void FPSChange()
+    {
+        refreshRate = int.Parse(fps.itemText.text.Replace(" fps", ""));
+        Screen.SetResolution(screenWidth, screenHeight, fullScreenMode, refreshRate);
+    }
+
+    private void FilterToggle()
+    {
+        effectsControllerParent.SetActive(!effectsControllerParent.activeSelf);
+    }
+
 
 }
