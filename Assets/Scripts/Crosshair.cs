@@ -11,8 +11,7 @@ public class Crosshair : MonoBehaviour
 
     public Sprite normal;
     public Sprite grab;
-    public Sprite book;
-    public Sprite dial;
+    public Sprite interact;
 
     public float pickUpRange;
 
@@ -40,13 +39,9 @@ public class Crosshair : MonoBehaviour
                     break;
 
                 case "Focus":
-                    crosshair.sprite = book;
+                    crosshair.sprite = interact;
                     break;
             }
-
-
-
-
         }
         else crosshair.sprite = normal;
         Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.red);
