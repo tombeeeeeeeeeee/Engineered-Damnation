@@ -8908,21 +8908,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747814334}
   m_CullTransparentMesh: 1
---- !u!114 &762285081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148708061511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc49e169133298545b0e04c8abdc2cc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionSounds: []
-  hasBeenAlt: 0
-  idealParent: {fileID: 0}
 --- !u!82 &762285082
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9019,22 +9004,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!54 &762285084
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148708061511}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &762285087
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9466,7 +9435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &805837742
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24297,13 +24266,11 @@ GameObject:
   - component: {fileID: 543450652979948541}
   - component: {fileID: 3469287836897633368}
   - component: {fileID: 1711813856391401618}
-  - component: {fileID: 762285084}
   - component: {fileID: 762285087}
   - component: {fileID: 762285082}
-  - component: {fileID: 762285081}
   m_Layer: 0
   m_Name: Night Light
-  m_TagString: CanPickUp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
