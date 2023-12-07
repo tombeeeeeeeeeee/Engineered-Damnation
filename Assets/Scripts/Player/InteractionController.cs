@@ -15,6 +15,9 @@ public class InteractionController : MonoBehaviour
     [SerializeReference] FPSController controller;
     [SerializeField] float throwForce;
 
+    public int pixelHeight;
+    public int pixelWidth;
+
     public void Start()
     {
         if(controller.controls == null)
