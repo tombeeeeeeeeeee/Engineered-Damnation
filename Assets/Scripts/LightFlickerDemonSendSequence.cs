@@ -13,8 +13,8 @@ public class LightFlickerDemonSendSequence:LightFlickerOffSequence
     {
         if (numberOfFlickers == 1 && objectToDestroy)
         {
-            if (gameObject.GetComponent<Demon>())
-                gameObject.GetComponent<Demon>().Vanish();
+            if (objectToDestroy.GetComponent<Demon>())
+                objectToDestroy.GetComponent<Demon>().Vanish();
             else
                 Destroy(objectToDestroy);
         }
