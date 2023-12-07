@@ -206,7 +206,7 @@ public class MainMenu : MonoBehaviour
 
     void MasterVolume(float f)
     {
-        Gameplay.masterVolume = f;
+        Gameplay.masterVolume = f * 100;
         textMasterVolume.text = (f * 100).ToString("0");
     }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 
@@ -24,6 +25,8 @@ public class SystemManager : MonoBehaviour
     public int DemonsSummoned = 0;
     [HideInInspector]
     public List<uint> AwaitingSummon;
+
+    [SerializeField] AudioMixerGroup[] mixers;
 
     private void Start()
     {
@@ -51,7 +54,8 @@ public class SystemManager : MonoBehaviour
         }
 
 
-        if ((float)(musicIndex + 1) / musics.Length > clock.playthroughPercentage)
+        //Music
+        if (clock.playthroughPercentage > (float)(musicIndex + 1) / musics.Length)
         {
             musicIndex++;
             float musicStartTime = aS.time;
@@ -60,6 +64,11 @@ public class SystemManager : MonoBehaviour
             aS.Play();
             aS.time = musicStartTime;
         }
+
+        mixers[0].audioMixer.SetFloat("master", Mathf.Log10(Gameplay.masterVolume) * 20);
+        mixers[1].audioMixer.SetFloat("sfx", Mathf.Log10(Gameplay.sfxVolume) * 20);
+        mixers[2].audioMixer.SetFloat("music", Mathf.Log10(Gameplay.musicVolume) * 20);
+        mixers[3].audioMixer.SetFloat("intercom", Mathf.Log10(Gameplay.dialogueVolume) * 20);
     }
 
     public uint GetDemonKey(out string DemonDescription)

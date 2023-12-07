@@ -3239,9 +3239,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1212679548}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: mixers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: musics.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: mixers.Array.data[0]
+      value: 
+      objectReference: {fileID: 24300002, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: mixers.Array.data[1]
+      value: 
+      objectReference: {fileID: 4337013507177455561, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: mixers.Array.data[2]
+      value: 
+      objectReference: {fileID: 645956812240444347, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
+    - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: mixers.Array.data[3]
+      value: 
+      objectReference: {fileID: 487362250153631750, guid: c83dfdaa659a397489af7293f905d0c2, type: 2}
     - target: {fileID: 3997512851346110411, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: musics.Array.data[0]
       value: 
