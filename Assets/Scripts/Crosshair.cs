@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class Crosshair : MonoBehaviour
 {
-    public GameObject player;
     public GameObject playerCamera;
     public Image crosshair;
 
     public Sprite normal;
     public Sprite grab;
-    public Sprite book;
-    public Sprite dial;
+    public Sprite interact;
 
     public SpriteAlternate rotationUI;
 
@@ -20,7 +18,7 @@ public class Crosshair : MonoBehaviour
 
     private void Start()
     {
-        pickUpRange = player.GetComponent<InteractionController>().pickUpRange;
+        pickUpRange = playerCamera.GetComponent<InteractionController>().pickUpRange;
     }
 
     private void Update()
@@ -37,13 +35,21 @@ public class Crosshair : MonoBehaviour
 
             if (distanceIgnoringY.magnitude <= pickUpRange)
             {
-                if (hit.transform.gameObject.tag == "CanPickUp")
-                {
-                    crosshair.sprite = grab;
-                }
-                else crosshair.sprite = normal;
+            	switch (hit.transform.gameObject.tag)
+            	{
+                	case "CanPickUp":
+                    	crosshair.sprite = grab;
+                    	break;
+
+                	case "Focus":
+                    	crosshair.sprite = interact;
+                    	break;
+
+                	default:
+                   		crosshair.sprite = normal;
+                    	break;
+				}
             }
-            else crosshair.sprite = normal;
         }
         else crosshair.sprite = normal;
         Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.red);

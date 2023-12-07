@@ -15,11 +15,11 @@ public class FPSController : MonoBehaviour
     public float CameraDefaultFOV = 60;
     public float CameraZoomFOV = 15;
     public Camera playerCamera;
-    [SerializeField] CameraTransition pauseCamera;
+	[SerializeField] CameraTransition pauseCamera;
     [SerializeField] Computer pauseComputer;
     public float pixelWidth;
     public float pixelHeight;
-
+    [SerializeField] SequenceObject cameraShakeSequence;
 
     //Input System
     private Vector2 lookInput;

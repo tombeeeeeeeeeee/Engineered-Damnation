@@ -11,10 +11,15 @@ public class OrderList : PickUp
 
     private void Update()
     {
-        if (!hasBeenAlt && idealParent != null)
+        if (!hasBeenAlt && idealParent != null)         
             transform.rotation = Quaternion.LookRotation(idealParent.forward, idealParent.up);
-        else if(hasBeenPinned)
+         else if (hasBeenPinned) 
+        {
             transform.position = pinnedPosition;
+            this.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
+           
+
     }
 
     /// <summary>
