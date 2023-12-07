@@ -19,7 +19,7 @@ public class PlaceholderUi : MonoBehaviour
     // This method will be called when the button is pressed
     void TaskOnClick()
     {
-        Debug.Log("Button pressed!");
+        //Debug.Log("Button pressed!");
         if (buttonType == 0) 
         {
             SceneManager.LoadScene(sceneName);

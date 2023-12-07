@@ -8082,11 +8082,10 @@ MonoBehaviour:
   player: {fileID: 576582687}
   playerCamera: {fileID: 1860690332}
   crosshair: {fileID: 124793447}
-  normal: {fileID: 21300000, guid: c7b14df61e00c3f45af8722be941b5ee, type: 3}
+  normal: {fileID: 21300000, guid: d56be58f016e8124498ca15a79439cec, type: 3}
   grab: {fileID: 21300000, guid: efdf6672ad5e3504bbb1036321b608ce, type: 3}
-  book: {fileID: 21300000, guid: 87a0f46e3bdc4b54a8754ae895184b67, type: 3}
-  dial: {fileID: 21300000, guid: ff30d2304a6f25f469e1d73e4f50b918, type: 3}
-  pickUpRange: 1.71
+  interact: {fileID: 21300000, guid: 249b53e274df7e043b76b8936e1257eb, type: 3}
+  pickUpRange: 1.85
 --- !u!1 &654679010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9156303070034614876, guid: a095d7052d721f74a80cb121fa0853cb, type: 3}
@@ -21349,15 +21348,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2586722560422337383, guid: cda622d2efb16754ebe61914f2874bbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.677
+      value: -0.491
       objectReference: {fileID: 0}
     - target: {fileID: 2586722560422337383, guid: cda622d2efb16754ebe61914f2874bbc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.456
+      value: 1.482
       objectReference: {fileID: 0}
     - target: {fileID: 2586722560422337383, guid: cda622d2efb16754ebe61914f2874bbc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.382
+      value: 2.208
       objectReference: {fileID: 0}
     - target: {fileID: 2586722560422337383, guid: cda622d2efb16754ebe61914f2874bbc, type: 3}
       propertyPath: m_LocalRotation.w
