@@ -29,7 +29,8 @@ public class SystemManager : MonoBehaviour
     [SerializeField] AudioMixerGroup[] mixers;
 
     //Outside effects
-    [SerializeField] ParticleSystem outsideFireParticle;
+    [SerializeField] List<ParticleSystem> outsideFireParticlesOFF;
+    [SerializeField] List<ParticleSystem> outsideFireParticlesON;
     [SerializeField] float fireParticleHeight = 8;
     [SerializeField] Material outsideFirePlane;
     [SerializeField] float firePlaneHeight = 3;
@@ -85,7 +86,8 @@ public class SystemManager : MonoBehaviour
         {
             float currentSummoningRate = ExpectedDemonCount.Evaluate(clock.playthroughPercentage) * DemonsSummoned / TotalDemons;
             Debug.Log(currentSummoningRate);
-            outsideFireParticle.startLifetime = currentSummoningRate * fireParticleHeight;
+            foreach(ParticleSystem fire in outsideFireParticlesON)
+                fire.startLifetime = currentSummoningRate * fireParticleHeight;
             outsideFirePlane.SetFloat("_FireHeight", currentSummoningRate * firePlaneHeight);
             skybox.SetColor("_Tint",Color.Lerp(startSkyColour, endSkyColour, currentSummoningRate));
         }
@@ -138,6 +140,10 @@ public class SystemManager : MonoBehaviour
                 AwaitingSummon.Remove(demon);
                 demonListSpawner.CheckOffDemon(demon);
                 DemonsSummoned++;
+
+                outsideFireParticlesON.Insert(0,outsideFireParticlesOFF[0]);
+                outsideFireParticlesON[0].gameObject.SetActive(true);
+                outsideFireParticlesOFF.RemoveAt(0);
                 return true;
             }
         }
