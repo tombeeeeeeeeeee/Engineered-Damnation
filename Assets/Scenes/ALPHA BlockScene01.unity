@@ -4128,7 +4128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: smoothTime
-      value: 0.06
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: throwForce
@@ -4141,6 +4141,10 @@ PrefabInstance:
     - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: pixelHeight
       value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834912412706881172, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
+      propertyPath: interactRange
+      value: 1.71
       objectReference: {fileID: 0}
     - target: {fileID: 4278455459969372492, guid: c6bd4c907ec0b874daa8cc2e4d394820, type: 3}
       propertyPath: lookSpeed
@@ -7664,12 +7668,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88aba1e3fbca6784fa34cce2955dff16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1860690332}
+  playerCameraObject: {fileID: 1860690332}
   crosshair: {fileID: 124793447}
   normal: {fileID: 21300000, guid: d56be58f016e8124498ca15a79439cec, type: 3}
   grab: {fileID: 21300000, guid: efdf6672ad5e3504bbb1036321b608ce, type: 3}
+  grabbed: {fileID: 21300000, guid: 5141841bc3afd04489e5ce18fc14de1c, type: 3}
   interact: {fileID: 21300000, guid: 249b53e274df7e043b76b8936e1257eb, type: 3}
-  rotationUI: {fileID: 1510596077}
   pickUpRange: 1.85
 --- !u!1 &654679010 stripped
 GameObject:
