@@ -28,6 +28,15 @@ public class SystemManager : MonoBehaviour
 
     [SerializeField] AudioMixerGroup[] mixers;
 
+    //Outside effects
+    [SerializeField] ParticleSystem outsideFireParticle;
+    [SerializeField] float fireParticleHeight = 8;
+    [SerializeField] Material outsideFirePlane;
+    [SerializeField] float firePlaneHeight = 3;
+    [SerializeField] Material skybox;
+    [SerializeField] Color startSkyColour;
+    [SerializeField] Color endSkyColour;
+
     private void Start()
     {
         aS = GetComponent<AudioSource>();
@@ -69,6 +78,16 @@ public class SystemManager : MonoBehaviour
         mixers[1].audioMixer.SetFloat("sfx", Mathf.Log10(Gameplay.sfxVolume) * 20);
         mixers[2].audioMixer.SetFloat("music", Mathf.Log10(Gameplay.musicVolume) * 20);
         mixers[3].audioMixer.SetFloat("intercom", Mathf.Log10(Gameplay.dialogueVolume) * 20);
+
+
+        //Outside world effects
+        if (clock.playthroughPercentage < 1)
+        {
+            float currentSummoningRate = DemonsSummoned * clock.playthroughPercentage / (TotalDemons * ExpectedDemonCount.Evaluate(clock.playthroughPercentage));
+            outsideFireParticle.startLifetime = currentSummoningRate * fireParticleHeight;
+            outsideFirePlane.SetFloat("FireHeight", currentSummoningRate * firePlaneHeight);
+            skybox.color = Color.Lerp(startSkyColour, endSkyColour, currentSummoningRate);
+        }
     }
 
     public uint GetDemonKey(out string DemonDescription)
