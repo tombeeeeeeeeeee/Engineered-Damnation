@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Fire01
+  m_Name: MAT_Fire01 1
   m_Shader: {fileID: -6465566751694194690, guid: b67f6ded023d32d4b8b9081974618247, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -102,7 +102,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FireHeight: 0.13153373
+    - _FireHeight: 2.17
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

@@ -83,10 +83,11 @@ public class SystemManager : MonoBehaviour
         //Outside world effects
         if (clock.playthroughPercentage < 1)
         {
-            float currentSummoningRate = DemonsSummoned * clock.playthroughPercentage / (TotalDemons * ExpectedDemonCount.Evaluate(clock.playthroughPercentage));
+            float currentSummoningRate = ExpectedDemonCount.Evaluate(clock.playthroughPercentage) * DemonsSummoned / TotalDemons;
+            Debug.Log(currentSummoningRate);
             outsideFireParticle.startLifetime = currentSummoningRate * fireParticleHeight;
-            outsideFirePlane.SetFloat("FireHeight", currentSummoningRate * firePlaneHeight);
-            skybox.color = Color.Lerp(startSkyColour, endSkyColour, currentSummoningRate);
+            outsideFirePlane.SetFloat("_FireHeight", currentSummoningRate * firePlaneHeight);
+            skybox.SetColor("_Tint",Color.Lerp(startSkyColour, endSkyColour, currentSummoningRate));
         }
     }
 
