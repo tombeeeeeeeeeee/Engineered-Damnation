@@ -135,7 +135,6 @@ public class SystemManager : MonoBehaviour
             if(demon == demonKey)
             {
                 AwaitingSummon.Remove(demon);
-                demonListSpawner.CheckOffDemon(demon);
                 DemonsSummoned++;
 
                 //Turn on two fires outside!
@@ -146,7 +145,7 @@ public class SystemManager : MonoBehaviour
                 }
                
 
-                return true;
+                return demonListSpawner.CheckOffDemon(demon);
             }
         }
 

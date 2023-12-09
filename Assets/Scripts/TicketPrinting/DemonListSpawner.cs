@@ -28,28 +28,32 @@ public class DemonListSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (curList != null)
-        {
-            if((curList.transform.position - curList.attachPosition.position).magnitude * ticketsOnList 
-                > (OrderSpawnTransform.position - curList.transform.position).magnitude)
-            {
-                curList.transform.position += curList.transform.up * ticketSpeed * Gameplay.deltaTime;
-                if(!aS.isPlaying && Gameplay.active) aS.Play();
-                aS.loop = true;
-            }
-            else aS.loop = false;
-        }
-
         if (OrderSpawnTransform.GetComponentInChildren<OrderList>() == null)
         {
             curList = null;
             ticketsOnList = 0;
+
+            if (!torn)
+            {
+                torn = true;
+                aS.loop = false;
+                if (Gameplay.active) aS.PlayOneShot(tornSound);
+            }
         }
 
-        if (!torn && curList == null)
+        if (curList != null)
         {
-            torn = true;
-            if (Gameplay.active) aS.PlayOneShot(tornSound);
+            if ((curList.transform.position - curList.attachPosition.position).magnitude * ticketsOnList
+                > (OrderSpawnTransform.position - curList.transform.position).magnitude)
+            {
+                curList.transform.position += curList.transform.up * ticketSpeed * Gameplay.deltaTime;
+                if (!aS.isPlaying && Gameplay.active) aS.Play();
+                aS.loop = true;
+            }
+            else
+            {
+                aS.loop = false;
+            }
         }
     }
 

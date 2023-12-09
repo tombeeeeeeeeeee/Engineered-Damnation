@@ -3113,7 +3113,7 @@ PrefabInstance:
     - target: {fileID: 334117966374296639, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: pixels
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 544646548}
     - target: {fileID: 334117966374296639, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: pauseMenu
       value: 
@@ -3381,6 +3381,14 @@ PrefabInstance:
     - target: {fileID: 334117966966921236, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_Options.m_Options.Array.data[2].m_Image
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 334117967061524610, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 334117967061524610, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334117967061524611, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_IsActive
@@ -4649,6 +4657,7 @@ MonoBehaviour:
   objectToDestroy: {fileID: 0}
   trueSequence: {fileID: 577744435}
   falseSequence: {fileID: 577744434}
+  dSS: {fileID: 897248102}
 --- !u!114 &307671095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4665,7 +4674,7 @@ MonoBehaviour:
   nextInSequence: {fileID: 0}
   lengthOfOperation: 0.1
   numberOfFlickers: 0
-  timeBetweenFlicker: 0.01
+  timeBetweenFlicker: 0.03
   flickerNoise: {fileID: 0}
   objectToDestroy: {fileID: 0}
   dSS: {fileID: 897248102}
@@ -14016,7 +14025,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109140984}
   m_LocalRotation: {x: -0.000000007450579, y: -0.000000029802315, z: -0.0000000037252894, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.00003406932}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1.0014343, y: 1.0014341, z: 1.0014341}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14028,7 +14037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000014156103, y: 0.00006619096}
+  m_AnchoredPosition: {x: -4.1, y: 0}
   m_SizeDelta: {x: 194.145, y: 216.63344}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1119919503
@@ -16672,7 +16681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: -43.5}
+  m_AnchoredPosition: {x: 54.9, y: -40.8}
   m_SizeDelta: {x: 69, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370189136
@@ -28229,6 +28238,7 @@ MonoBehaviour:
   objectToDestroy: {fileID: 0}
   trueSequence: {fileID: 0}
   falseSequence: {fileID: 0}
+  dSS: {fileID: 0}
 --- !u!114 &4527335984843800045
 MonoBehaviour:
   m_ObjectHideFlags: 0

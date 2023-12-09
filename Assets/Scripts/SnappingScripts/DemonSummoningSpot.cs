@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class DemonSummoningSpot : SnapSlab
@@ -46,10 +47,11 @@ public class DemonSummoningSpot : SnapSlab
     {
         SlabManager slab = ExpectedObject.GetComponent<SlabManager>();
         int demonIndex = 0;
+        bool correctSummon = false;
 
         if(slab && slab.getLiquid() != 0)
         {
-            sysManager.SummonedDemon(slab.DemonKey);
+            correctSummon = sysManager.SummonedDemon(slab.DemonKey);
             for(int i = 0; i < sysManager.DemonTypes.Length; i++)
             {
                 if (sysManager.DemonTypes[i].KeyIndex == slab.getType())
@@ -71,7 +73,7 @@ public class DemonSummoningSpot : SnapSlab
         else demonToSummon = null;
 
         GetComponent<AudioSource>().PlayOneShot(Whispers[Random.Range(0,Whispers.Length)]);
-        return demonToSummon != null;
+        return correctSummon;
     }
 
     public override bool SnapType(GameObject obj)

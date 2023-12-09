@@ -79,7 +79,7 @@ public class PickUp : MonoBehaviour
     protected void OnCollisionEnter(Collision collision)
     {
         int index = Random.Range(0, collisionSounds.Length);
-        if (collisionSounds[index] && Gameplay.active)
+        if (collisionSounds.Length > 0 && Gameplay.active)
             aS.PlayOneShot(collisionSounds[index]);
     }
 
