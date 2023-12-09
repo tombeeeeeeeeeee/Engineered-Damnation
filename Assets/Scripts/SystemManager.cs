@@ -30,8 +30,6 @@ public class SystemManager : MonoBehaviour
 
     //Outside effects
     [SerializeField] List<ParticleSystem> outsideFireParticlesOFF;
-    [SerializeField] List<ParticleSystem> outsideFireParticlesON;
-    [SerializeField] float fireParticleHeight = 8;
     [SerializeField] Material outsideFirePlane;
     [SerializeField] float firePlaneHeight = 3;
     [SerializeField] Material skybox;
@@ -84,10 +82,9 @@ public class SystemManager : MonoBehaviour
         //Outside world effects
         if (clock.playthroughPercentage < 1)
         {
-            float currentSummoningRate = ExpectedDemonCount.Evaluate(clock.playthroughPercentage) * DemonsSummoned / TotalDemons;
+            float currentSummoningRate = DemonsSummoned / (ExpectedDemonCount.Evaluate(clock.playthroughPercentage) * TotalDemons * CompletetionPercentageForWin) ;
             Debug.Log(currentSummoningRate);
-            foreach(ParticleSystem fire in outsideFireParticlesON)
-                fire.startLifetime = currentSummoningRate * fireParticleHeight;
+            Gameplay.completionRate = currentSummoningRate;
             outsideFirePlane.SetFloat("_FireHeight", currentSummoningRate * firePlaneHeight);
             skybox.SetColor("_Tint",Color.Lerp(startSkyColour, endSkyColour, currentSummoningRate));
         }
@@ -141,9 +138,14 @@ public class SystemManager : MonoBehaviour
                 demonListSpawner.CheckOffDemon(demon);
                 DemonsSummoned++;
 
-                outsideFireParticlesON.Insert(0,outsideFireParticlesOFF[0]);
-                outsideFireParticlesON[0].gameObject.SetActive(true);
-                outsideFireParticlesOFF.RemoveAt(0);
+                //Turn on two fires outside!
+                for(int i = 0; i < 2; i++)
+                {
+                    outsideFireParticlesOFF[0].gameObject.SetActive(true);
+                    outsideFireParticlesOFF.RemoveAt(0);
+                }
+               
+
                 return true;
             }
         }

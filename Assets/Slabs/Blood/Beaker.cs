@@ -22,7 +22,7 @@ public class Beaker : Potion
         liquid.SetActive(false);
     }
 
-    void Update()
+    protected override void Update()
     {
         if(hasBeenAlt && liquidLevel > 0) Pour();
 

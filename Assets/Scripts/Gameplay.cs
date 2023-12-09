@@ -35,6 +35,8 @@ public static class Gameplay
         set { _dialogueVolume = value <= 0 ? 0.001f : value; }
     }
 
+    public static float completionRate = 0;
+
     public static void ChildrenLayerSet(GameObject obj, int layer)
     {
         obj.layer = layer;

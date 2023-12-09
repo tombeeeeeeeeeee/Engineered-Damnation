@@ -36,7 +36,7 @@ public class Potion : PickUp
 
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (Vector3.Dot(transform.up, Vector3.up) < 0) Pour();
         else
