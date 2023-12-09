@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c7b14df61e00c3f45af8722be941b5ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b4de8e1c8b5e00419005992438f11cb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8787,9 +8787,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1860690332}
   crosshair: {fileID: 124793447}
-  normal: {fileID: 21300000, guid: d56be58f016e8124498ca15a79439cec, type: 3}
-  grab: {fileID: 21300000, guid: efdf6672ad5e3504bbb1036321b608ce, type: 3}
-  interact: {fileID: 21300000, guid: 249b53e274df7e043b76b8936e1257eb, type: 3}
   rotationUI: {fileID: 1510596077}
   pickUpRange: 1.85
 --- !u!1 &654679010 stripped

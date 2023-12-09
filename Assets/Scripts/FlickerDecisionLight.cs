@@ -13,7 +13,7 @@ public class FlickerDecisionLight : LightFlickerOffSequence
     {
         base.Update();
         if (numberOfFlickers == 3) Destroy(objectToDestroy);
-        else if (numberOfFlickers == 1) nextInSequence.Begin(decision);
+        else if (numberOfFlickers == 1 && nextInSequence != null) nextInSequence.Begin(decision);
     }
 
 
