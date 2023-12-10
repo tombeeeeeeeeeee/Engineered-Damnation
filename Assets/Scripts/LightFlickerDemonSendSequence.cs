@@ -11,13 +11,10 @@ public class LightFlickerDemonSendSequence:LightFlickerOffSequence
 
     protected override void Update()
     {
-        if (numberOfFlickers == 1 && objectToDestroy)
+        if (numberOfFlickers == 1 && objectToDestroy && !Gameplay.isFinished)
         {
             if (objectToDestroy.GetComponent<Demon>())
                 objectToDestroy.GetComponent<Demon>().Vanish();
-            else
-                objectToDestroy.GetComponent<Demon>().Vanish();
-                //Destroy(objectToDestroy);
         }
         base.Update();
     }

@@ -29,7 +29,7 @@ public class DemonSummoningSpot : SnapSlab
         if (SnapType(other.gameObject) && ExpectedObject == null)
             ExpectedObject = other.gameObject;
 
-        if (other.gameObject == ExpectedObject && !summoning)
+        if (other.gameObject == ExpectedObject && !summoning && !Gameplay.isFinished)
         {
             //Stop moving the object to the correct spot
             summoning = true;

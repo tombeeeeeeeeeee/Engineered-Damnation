@@ -32,11 +32,12 @@ public class BossWinOrLoseSequence : SequenceObject
         base.Begin(decision);
         nextInSequence = decision ? winStateSequence : losingStateSequence;
 
-        if(!inSequence)
+        if(inSequence)
         {
             AudioClip clip = decision ? winningVLine : losingVLine;
             lengthOfOperation = clip.length;
-            intercom.PlayOneShot(clip);
+            intercom.clip = clip;
+            intercom.Play();
         }
     }
 }
