@@ -49,10 +49,9 @@ public class InteractionController : MonoBehaviour
                         PickupObject(hit.transform.gameObject);
 
                     else if (hit.transform.gameObject.tag == "Button")
-                        hit.transform.gameObject.GetComponent<WorldSpaceButton>().Press();
+                        hit.transform.gameObject.GetComponent<SequenceObject>().Begin(true);
 
-
-                    else if (hit.transform.gameObject.tag == "Focus")
+                    else if (hit.transform.gameObject.tag == "Focus" && !Gameplay.isFinished)
                         Focus(hit.transform.gameObject);
                 }
             }

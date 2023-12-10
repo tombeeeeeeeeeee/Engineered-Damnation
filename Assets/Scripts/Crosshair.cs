@@ -35,6 +35,7 @@ public class Crosshair : MonoBehaviour
             {
             	switch (hit.transform.gameObject.tag)
             	{
+                    case "Button":
                 	case "CanPickUp":
                 	case "Focus":
                         crosshairON = true;

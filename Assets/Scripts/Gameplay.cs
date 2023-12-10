@@ -37,6 +37,8 @@ public static class Gameplay
 
     public static float completionRate = 0;
 
+    public static bool isFinished = false;
+
     public static void ChildrenLayerSet(GameObject obj, int layer)
     {
         obj.layer = layer;

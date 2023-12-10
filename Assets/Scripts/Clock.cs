@@ -32,7 +32,6 @@ public class Clock : MonoBehaviour
         Gameplay.deltaTime = Time.deltaTime * (Gameplay.active ? 1 : 0);
         Gameplay.timeSinceStart += Gameplay.deltaTime;
 
-        //breakTimesIndex %= breakTimes.Length;  
 
         //Calculate the hours and minutes for the clock
         hours = playthroughPercentage * shiftLength + (militaryTime ? startingTime : startingTime - 1);
@@ -47,9 +46,9 @@ public class Clock : MonoBehaviour
 
         if(playthroughPercentage >= 1 && !gameFinished)
         {
+            Gameplay.isFinished = true;
             gameFinished = true;
-            endingSequenceStarter.Begin(
-                manager.winState);
+            endingSequenceStarter.Begin(manager.winState);
         }
 
     }

@@ -8,6 +8,7 @@ TagManager:
   - CanInteract
   - ToolSpawner
   - Focus
+  - Button
   layers:
   - Default
   - TransparentFX

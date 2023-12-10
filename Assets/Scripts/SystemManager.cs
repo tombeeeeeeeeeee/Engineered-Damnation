@@ -33,7 +33,7 @@ public class SystemManager : MonoBehaviour
     [SerializeField] Material outsideFirePlane;
     [SerializeField] float firePlaneHeight = 3;
     [SerializeField] Material skybox;
-    [SerializeField] Color startSkyColour;
+    private Color startSkyColour;
     [SerializeField] Color endSkyColour;
 
     private void Start()
@@ -43,6 +43,10 @@ public class SystemManager : MonoBehaviour
         aS.loop = true;
         aS.clip = musics[0];
         aS.Play();
+
+        DemonsSummoned = 0;
+
+        startSkyColour = skybox.GetColor("_Tint");
     }
 
     // Update is called once per frame
@@ -143,7 +147,6 @@ public class SystemManager : MonoBehaviour
                     outsideFireParticlesOFF[0].gameObject.SetActive(true);
                     outsideFireParticlesOFF.RemoveAt(0);
                 }
-               
 
                 return demonListSpawner.CheckOffDemon(demon);
             }
