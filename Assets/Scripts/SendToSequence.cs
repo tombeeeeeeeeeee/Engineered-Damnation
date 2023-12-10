@@ -31,7 +31,8 @@ public class SendToSequence : SequenceObject
         { 
             movingObject.layer = 2;
             movingObject.transform.LookAt(destination);
-            movingObject.GetComponent<Rigidbody>().useGravity = false;
+            if(movingObject.GetComponent<Rigidbody>() != null)
+                movingObject.GetComponent<Rigidbody>().useGravity = false;
         }
     }
 

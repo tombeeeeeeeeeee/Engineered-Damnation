@@ -67,7 +67,7 @@ public class SystemManager : MonoBehaviour
 
 
         //Music
-        if (clock.playthroughPercentage > (float)(musicIndex  + 1) / (musics.Length - 1))
+        if (clock.playthroughPercentage > (float)(musicIndex  + 1) / (musics.Length - 1) && clock.playthroughPercentage < 1.1)
         {
             musicIndex++;
             float musicStartTime = aS.time;

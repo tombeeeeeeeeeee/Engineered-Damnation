@@ -7,13 +7,6 @@ public class EndSceneSequence : SequenceObject
 {
     [SerializeField] FPSController player;
 
-    public override void Begin(bool decision)
-    {
-        base.Begin(decision);
-        if(inSequence)
-            player.controls.Disable();
-    }
-
     public override void End()
     {
         base.End();

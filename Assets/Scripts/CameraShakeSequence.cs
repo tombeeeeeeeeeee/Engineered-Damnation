@@ -14,14 +14,12 @@ public class CameraShakeSequence : SequenceObject
 
     public override void Begin(bool decision)
     {
-        Debug.Log("begin");
         base.Begin(decision);
     }
 
     public override void End()
     {
         transform.localPosition = initialPositionRelativeToPlayer;
-        Debug.Log("end");
         base.End();
     }
 
