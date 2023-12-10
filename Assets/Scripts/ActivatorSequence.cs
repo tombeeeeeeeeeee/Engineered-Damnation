@@ -12,8 +12,8 @@ public class ActivatorSequence : SequenceObject
         base.Begin(decision);
         if(inSequence)
         {
-            foreach (GameObject go in turnOnObjects) go.SetActive(true);
-            foreach (GameObject go in turnOffObjects) go.SetActive(false);
+            foreach (GameObject go in turnOnObjects) if(go) go.SetActive(true);
+            foreach (GameObject go in turnOffObjects) if(go) go.SetActive(false);
         }
     }
 }

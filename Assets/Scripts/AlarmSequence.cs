@@ -21,8 +21,7 @@ public class AlarmSequence : SequenceObject
         base.Begin(decision);
         if(inSequence)
         { 
-            foreach(Light light in lightsToTurnOff)
-                Destroy(light);
+            foreach(Light light in lightsToTurnOff) light.enabled = false;
             GetComponent<AudioSource>().clip = alarmSound;
             GetComponent<AudioSource>().loop = true;
             GetComponent<AudioSource>().Play();

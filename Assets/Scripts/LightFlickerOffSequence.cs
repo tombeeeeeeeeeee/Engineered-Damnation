@@ -24,7 +24,7 @@ public class LightFlickerOffSequence : SequenceObject
             timeSinceLastFlicker += Gameplay.deltaTime;
 
             //If finished flickering
-            if(numberOfFlickers <= 0 )  End(); 
+            if(numberOfFlickers <= 0  || Gameplay.isFinished)  End(); 
 
             //flicker!
             else if(timeSinceLastFlicker > timeBetweenFlicker)
