@@ -33,8 +33,10 @@ public class SystemManager : MonoBehaviour
     [SerializeField] Material outsideFirePlane;
     [SerializeField] float firePlaneHeight = 3;
     [SerializeField] Material skybox;
-    private Color startSkyColour;
+    [SerializeField] Color startSkyColour;
     [SerializeField] Color endSkyColour;
+    [SerializeField] Color startFogColour;
+    [SerializeField] Color endFogColour;
 
     private void Start()
     {
@@ -45,8 +47,6 @@ public class SystemManager : MonoBehaviour
         aS.Play();
 
         DemonsSummoned = 0;
-
-        startSkyColour = skybox.GetColor("_Tint");
     }
 
     // Update is called once per frame
@@ -91,6 +91,7 @@ public class SystemManager : MonoBehaviour
             Gameplay.completionRate = currentSummoningRate;
             outsideFirePlane.SetFloat("_FireHeight", currentSummoningRate * firePlaneHeight);
             skybox.SetColor("_Tint",Color.Lerp(startSkyColour, endSkyColour, currentSummoningRate));
+            RenderSettings.fogColor = Color.Lerp(startFogColour, endFogColour, currentSummoningRate);
         }
     }
 
