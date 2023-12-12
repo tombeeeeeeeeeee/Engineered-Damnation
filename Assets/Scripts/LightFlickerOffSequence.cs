@@ -32,7 +32,7 @@ public class LightFlickerOffSequence : SequenceObject
                 timeSinceLastFlicker = 0;
                 lightToFlicker.enabled = !lightToFlicker.enabled;
                 numberOfFlickers--;
-                if (numberOfFlickers % 2 == 0 && flickerNoise != null) 
+                if (numberOfFlickers % 2 == 0 && flickerNoise != null) //Play the flicker noise.
                     gameObject.GetComponent<AudioSource>().PlayOneShot(flickerNoise);
                 lengthOfOperation = 0;
             }
