@@ -87,7 +87,7 @@ public class SystemManager : MonoBehaviour
         if (clock.playthroughPercentage < 1)
         {
             float currentSummoningRate = DemonsSummoned / (ExpectedDemonCount.Evaluate(clock.playthroughPercentage) * TotalDemons * CompletetionPercentageForWin) ;
-            Debug.Log(currentSummoningRate);
+            //Debug.Log(currentSummoningRate);
             Gameplay.completionRate = currentSummoningRate;
             outsideFirePlane.SetFloat("_FireHeight", currentSummoningRate * firePlaneHeight);
             skybox.SetColor("_Tint",Color.Lerp(startSkyColour, endSkyColour, currentSummoningRate));

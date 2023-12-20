@@ -248,7 +248,7 @@ public class MainMenu : MonoBehaviour
 
     private void FullscreenChange()
     {
-        switch (fullscreen.itemText.text)
+        switch (fullscreen.options[fullscreen.value].text)
         {
             case "Fullscreen":
                 fullScreenMode = FullScreenMode.ExclusiveFullScreen; break;
@@ -262,16 +262,27 @@ public class MainMenu : MonoBehaviour
     }
     private void ResolutioinChange()
     {
-        string[] resolution = fullscreen.itemText.text.Split("x");
-        screenWidth = int.Parse(resolution[0]); screenHeight = int.Parse(resolution[1]);
+        string[] newResolution = resolution.options[resolution.value].text.Split("x");
+
+        Debug.Log(newResolution[0]);
+        Debug.Log(newResolution[1]);
+
+        screenWidth = int.Parse(newResolution[0]);
+        screenHeight = int.Parse(newResolution[1]);
 
         Screen.SetResolution(screenWidth, screenHeight, fullScreenMode, refreshRate);
+
+        Debug.Log("tried res: " + screenWidth + "x" + screenHeight);
+        Debug.Log("current res: " + Screen.currentResolution);
     }
 
     private void FPSChange()
     {
-        refreshRate = int.Parse(fps.itemText.text.Replace(" fps", ""));
-        Screen.SetResolution(screenWidth, screenHeight, fullScreenMode, refreshRate);
+        refreshRate = int.Parse(fps.options[fps.value].text.Replace(" fps", ""));
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, fullScreenMode, refreshRate);
+
+        Debug.Log("tried fps: " + refreshRate);
+        Debug.Log("current res: " + Screen.currentResolution);
     }
 
     private void FilterToggle()

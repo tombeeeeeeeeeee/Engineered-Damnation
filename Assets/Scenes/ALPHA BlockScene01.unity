@@ -8787,6 +8787,10 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 334117966966921236, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 334117966966921236, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_Options.m_Options.Array.data[0].m_Text
       value: 25 fps
       objectReference: {fileID: 0}
@@ -8900,7 +8904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 334117967244781836, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_text
-      value: 25 fps
+      value: 60 fps
       objectReference: {fileID: 0}
     - target: {fileID: 334117967244781838, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -9017,6 +9021,10 @@ PrefabInstance:
     - target: {fileID: 334117967447089428, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 334117967462968112, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 334117967462968112, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -9137,19 +9145,6 @@ PrefabInstance:
     - target: {fileID: 334117967779335785, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 334117967779335799, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
-      propertyPath: m_text
-      value: "Engineered Damnation\r\n\r\n By Team Fourtrees\r\n\r\n Association
-        with AIE\r\n\r\n\r\nMentions \r\n\r\nURP-PSX Shader by Kodrin\r\n\r\nMusic
-        and Sound effects by Jay Viola\r\n\r\nSound Engineer: Tom Elia\r\n\r\n\r\nDesigners\r\n\r\nProducer:
-        Riley Trotter\r\n\r\nLead Designer: Austin Lanyon\r\n\r\nTechnical Designer:
-        Brodie Malyszko\r\n\r\n\r\nProgrammers \r\n\r\nLead Programmer: Thomas O'Brien\r\n\r\nUI
-        Progrmmer: Declan Elliott\r\n\r\nTechnical Programmer: Lachlan Mitchell\r\n\r\n\r\nArtists\r\nEnvironment
-        & technical Artist: Josh Smith\r\n\r\nCharacter Artist: Kimberley Munro\r\n\r\nCharacter
-        & UI Artist: Chloe Dye\r\n\r\nCharacter animator & Environment Artist: Ronan
-        O'Connor\r\n\r\nEnvironment & UI Artist: Sam Woods\r\n \r\n\r\n\n\n\r\n\r\nThank
-        you for playing!\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 334117967779335799, guid: 800f0fe97c0f87540af184fc819f61e0, type: 3}
       propertyPath: m_margin.w
@@ -37024,6 +37019,10 @@ PrefabInstance:
     - target: {fileID: 6189757100442115057, guid: 97fcebf8edd594844933adef0c5c53b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6189757100442115058, guid: 97fcebf8edd594844933adef0c5c53b9, type: 3}
+      propertyPath: isEnabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6189757100442115058, guid: 97fcebf8edd594844933adef0c5c53b9, type: 3}
       propertyPath: m_Enabled
